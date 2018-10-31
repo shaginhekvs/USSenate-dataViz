@@ -1,0 +1,973 @@
+,api_uri,begin_date,id,name,note,party,rank_in_party,side,state,subcomitee,comitee
+0,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,1,majority,AR,SSAF13,SSAF
+1,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,1,minority,ND,SSAF13,SSAF
+2,https://api.propublica.org/congress/v1/members/B000944.json,,B000944,Sherrod Brown,,D,2,minority,OH,SSAF13,SSAF
+3,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,3,majority,ND,SSAF13,SSAF
+4,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,3,minority,CO,SSAF13,SSAF
+5,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,4,majority,IA,SSAF13,SSAF
+6,https://api.propublica.org/congress/v1/members/G000555.json,,G000555,Kirsten E. Gillibrand,,D,4,minority,NY,SSAF13,SSAF
+7,https://api.propublica.org/congress/v1/members/T000250.json,,T000250,John Thune,,R,5,majority,SD,SSAF13,SSAF
+8,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,5,minority,IN,SSAF13,SSAF
+9,https://api.propublica.org/congress/v1/members/S001203.json,,S001203,Tina Smith,,D,6,minority,MN,SSAF13,SSAF
+10,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,6,majority,MT,SSAF13,SSAF
+11,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,6,minority,MD,SSAF13,SSAF
+12,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,7,majority,GA,SSAF13,SSAF
+0,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,1,minority,CO,SSAF14,SSAF
+1,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,1,majority,MT,SSAF14,SSAF
+2,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,2,minority,VT,SSAF14,SSAF
+3,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,3,majority,KY,SSAF14,SSAF
+4,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,3,minority,MN,SSAF14,SSAF
+5,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,4,majority,AR,SSAF14,SSAF
+6,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,4,minority,IN,SSAF14,SSAF
+7,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,5,majority,IA,SSAF14,SSAF
+8,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,5,minority,PA,SSAF14,SSAF
+9,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,6,majority,GA,SSAF14,SSAF
+0,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,1,majority,IA,SSAF15,SSAF
+1,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,1,minority,MD,SSAF15,SSAF
+2,https://api.propublica.org/congress/v1/members/S001203.json,,S001203,Tina Smith,,D,1,minority,MN,SSAF15,SSAF
+3,https://api.propublica.org/congress/v1/members/B000944.json,,B000944,Sherrod Brown,,D,1,minority,OH,SSAF15,SSAF
+4,https://api.propublica.org/congress/v1/members/B000944.json,,B000944,Sherrod Brown,,D,2,minority,OH,SSAF15,SSAF
+5,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,2,minority,MN,SSAF15,SSAF
+6,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,3,majority,AR,SSAF15,SSAF
+7,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,3,minority,MN,SSAF15,SSAF
+8,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,3,minority,CO,SSAF15,SSAF
+9,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,4,majority,ND,SSAF15,SSAF
+10,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,4,minority,CO,SSAF15,SSAF
+11,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,4,minority,IN,SSAF15,SSAF
+12,https://api.propublica.org/congress/v1/members/T000250.json,,T000250,John Thune,,R,5,majority,SD,SSAF15,SSAF
+13,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,5,minority,IN,SSAF15,SSAF
+14,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,5,minority,ND,SSAF15,SSAF
+15,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,6,majority,MT,SSAF15,SSAF
+16,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,6,minority,ND,SSAF15,SSAF
+17,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,7,majority,NE,SSAF15,SSAF
+0,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,1,majority,GA,SSAF17,SSAF
+1,https://api.propublica.org/congress/v1/members/G000555.json,,G000555,Kirsten E. Gillibrand,,D,1,minority,NY,SSAF17,SSAF
+2,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,1,majority,NE,SSAF17,SSAF
+3,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,2,majority,KY,SSAF17,SSAF
+4,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,2,minority,VT,SSAF17,SSAF
+5,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,3,majority,IA,SSAF17,SSAF
+6,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,3,minority,MN,SSAF17,SSAF
+7,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,4,majority,IA,SSAF17,SSAF
+8,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,4,minority,ND,SSAF17,SSAF
+9,https://api.propublica.org/congress/v1/members/T000250.json,,T000250,John Thune,,R,5,majority,SD,SSAF17,SSAF
+10,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,5,minority,PA,SSAF17,SSAF
+11,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,6,majority,MT,SSAF17,SSAF
+0,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,1,minority,PA,SSAF16,SSAF
+1,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,1,majority,GA,SSAF16,SSAF
+2,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,1,majority,KY,SSAF16,SSAF
+3,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,2,majority,KY,SSAF16,SSAF
+4,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,2,minority,VT,SSAF16,SSAF
+5,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,2,majority,AR,SSAF16,SSAF
+6,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,3,majority,AR,SSAF16,SSAF
+7,https://api.propublica.org/congress/v1/members/B000944.json,,B000944,Sherrod Brown,,D,3,minority,OH,SSAF16,SSAF
+8,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,3,majority,ND,SSAF16,SSAF
+9,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,4,majority,ND,SSAF16,SSAF
+10,https://api.propublica.org/congress/v1/members/G000555.json,,G000555,Kirsten E. Gillibrand,,D,4,minority,NY,SSAF16,SSAF
+11,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,4,majority,IA,SSAF16,SSAF
+12,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,5,majority,IA,SSAF16,SSAF
+13,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,5,minority,MD,SSAF16,SSAF
+14,https://api.propublica.org/congress/v1/members/S001203.json,,S001203,Tina Smith,,D,5,minority,MN,SSAF16,SSAF
+15,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,5,majority,GA,SSAF16,SSAF
+16,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,6,majority,GA,SSAF16,SSAF
+17,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,6,majority,NE,SSAF16,SSAF
+0,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,1,majority,MO,SSAP18,SSAP
+1,https://api.propublica.org/congress/v1/members/M001111.json,,M001111,Patty Murray,,D,1,minority,WA,SSAP18,SSAP
+2,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,2,minority,IL,SSAP18,SSAP
+3,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,3,majority,AL,SSAP18,SSAP
+4,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,3,minority,RI,SSAP18,SSAP
+5,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,4,majority,TN,SSAP18,SSAP
+6,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,4,minority,NH,SSAP18,SSAP
+7,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,5,majority,SC,SSAP18,SSAP
+8,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,5,minority,OR,SSAP18,SSAP
+9,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,6,majority,KS,SSAP18,SSAP
+10,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,6,minority,HI,SSAP18,SSAP
+11,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,7,majority,WV,SSAP18,SSAP
+12,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,7,minority,WI,SSAP18,SSAP
+13,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,8,majority,OK,SSAP18,SSAP
+14,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,8,minority,CT,SSAP18,SSAP
+15,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,9,majority,LA,SSAP18,SSAP
+16,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,9,minority,WV,SSAP18,SSAP
+17,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,10,majority,FL,SSAP18,SSAP
+0,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,1,majority,AL,SSAP16,SSAP
+1,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,1,minority,NH,SSAP16,SSAP
+2,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,2,majority,TN,SSAP16,SSAP
+3,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,2,minority,VT,SSAP16,SSAP
+4,https://api.propublica.org/congress/v1/members/M001153.json,,M001153,Lisa Murkowski,,R,3,majority,AK,SSAP16,SSAP
+5,https://api.propublica.org/congress/v1/members/F000062.json,,F000062,Dianne Feinstein,,D,3,minority,CA,SSAP16,SSAP
+6,https://api.propublica.org/congress/v1/members/C001035.json,,C001035,Susan Collins,,R,4,majority,ME,SSAP16,SSAP
+7,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,4,minority,RI,SSAP16,SSAP
+8,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,5,majority,SC,SSAP16,SSAP
+9,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,5,minority,DE,SSAP16,SSAP
+10,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,6,majority,AR,SSAP16,SSAP
+11,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,6,minority,HI,SSAP16,SSAP
+12,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,7,majority,WV,SSAP16,SSAP
+13,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,7,minority,WV,SSAP16,SSAP
+14,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,8,majority,OK,SSAP16,SSAP
+15,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,8,minority,MD,SSAP16,SSAP
+16,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,9,majority,LA,SSAP16,SSAP
+0,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,1,majority,TN,SSAP22,SSAP
+1,https://api.propublica.org/congress/v1/members/F000062.json,,F000062,Dianne Feinstein,,D,1,minority,CA,SSAP22,SSAP
+2,https://api.propublica.org/congress/v1/members/M001111.json,,M001111,Patty Murray,,D,2,minority,WA,SSAP22,SSAP
+3,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,3,majority,KY,SSAP22,SSAP
+4,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,3,minority,MT,SSAP22,SSAP
+5,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,4,majority,AL,SSAP22,SSAP
+6,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,4,minority,IL,SSAP22,SSAP
+7,https://api.propublica.org/congress/v1/members/C001035.json,,C001035,Susan Collins,,R,5,majority,ME,SSAP22,SSAP
+8,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,5,minority,NM,SSAP22,SSAP
+9,https://api.propublica.org/congress/v1/members/M001153.json,,M001153,Lisa Murkowski,,R,6,majority,AK,SSAP22,SSAP
+10,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,6,minority,NH,SSAP22,SSAP
+11,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,7,majority,SC,SSAP22,SSAP
+12,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,7,minority,OR,SSAP22,SSAP
+13,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,8,majority,ND,SSAP22,SSAP
+14,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,8,minority,DE,SSAP22,SSAP
+15,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,9,majority,LA,SSAP22,SSAP
+0,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,1,majority,SC,SSAP20,SSAP
+1,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,1,minority,VT,SSAP20,SSAP
+2,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,2,majority,KY,SSAP20,SSAP
+3,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,2,minority,IL,SSAP20,SSAP
+4,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,3,majority,MO,SSAP20,SSAP
+5,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,3,minority,NH,SSAP20,SSAP
+6,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,4,majority,AR,SSAP20,SSAP
+7,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,4,minority,DE,SSAP20,SSAP
+8,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,5,majority,KS,SSAP20,SSAP
+9,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,5,minority,OR,SSAP20,SSAP
+10,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,6,majority,OK,SSAP20,SSAP
+11,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,6,minority,CT,SSAP20,SSAP
+12,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,7,majority,MT,SSAP20,SSAP
+13,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,7,minority,MD,SSAP20,SSAP
+14,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,8,majority,FL,SSAP20,SSAP
+0,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,1,majority,AR,SSAP14,SSAP
+1,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,1,minority,MT,SSAP14,SSAP
+2,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,2,minority,NH,SSAP14,SSAP
+3,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,3,majority,AL,SSAP14,SSAP
+4,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,3,minority,VT,SSAP14,SSAP
+5,https://api.propublica.org/congress/v1/members/M001153.json,,M001153,Lisa Murkowski,,R,4,majority,AK,SSAP14,SSAP
+6,https://api.propublica.org/congress/v1/members/M001111.json,,M001111,Patty Murray,,D,4,minority,WA,SSAP14,SSAP
+7,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,5,majority,ND,SSAP14,SSAP
+8,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,5,minority,WI,SSAP14,SSAP
+9,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,6,majority,OK,SSAP14,SSAP
+10,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,6,minority,WV,SSAP14,SSAP
+11,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,7,majority,LA,SSAP14,SSAP
+0,https://api.propublica.org/congress/v1/members/M001153.json,,M001153,Lisa Murkowski,,R,1,majority,AK,SSAP17,SSAP
+1,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,1,minority,NM,SSAP17,SSAP
+2,https://api.propublica.org/congress/v1/members/F000062.json,,F000062,Dianne Feinstein,,D,2,minority,CA,SSAP17,SSAP
+3,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,3,majority,TN,SSAP17,SSAP
+4,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,3,minority,VT,SSAP17,SSAP
+5,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,4,majority,MO,SSAP17,SSAP
+6,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,4,minority,RI,SSAP17,SSAP
+7,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,5,majority,ND,SSAP17,SSAP
+8,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,5,minority,MT,SSAP17,SSAP
+9,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,6,majority,KY,SSAP17,SSAP
+10,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,6,minority,OR,SSAP17,SSAP
+11,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,7,majority,MT,SSAP17,SSAP
+12,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,7,minority,MD,SSAP17,SSAP
+13,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,8,majority,WV,SSAP17,SSAP
+0,https://api.propublica.org/congress/v1/members/C001035.json,,C001035,Susan Collins,,R,1,majority,ME,SSAP24,SSAP
+1,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,1,minority,RI,SSAP24,SSAP
+2,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,2,majority,AL,SSAP24,SSAP
+3,https://api.propublica.org/congress/v1/members/M001111.json,,M001111,Patty Murray,,D,2,minority,WA,SSAP24,SSAP
+4,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,3,majority,TN,SSAP24,SSAP
+5,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,3,minority,IL,SSAP24,SSAP
+6,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,4,majority,MO,SSAP24,SSAP
+7,https://api.propublica.org/congress/v1/members/F000062.json,,F000062,Dianne Feinstein,,D,4,minority,CA,SSAP24,SSAP
+8,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,5,majority,AR,SSAP24,SSAP
+9,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,5,minority,DE,SSAP24,SSAP
+10,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,6,majority,WV,SSAP24,SSAP
+11,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,6,minority,HI,SSAP24,SSAP
+12,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,7,majority,MT,SSAP24,SSAP
+13,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,7,minority,CT,SSAP24,SSAP
+14,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,8,majority,SC,SSAP24,SSAP
+15,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,8,minority,WV,SSAP24,SSAP
+16,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,9,majority,ND,SSAP24,SSAP
+0,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,1,majority,OK,SSAP08,SSAP
+1,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,1,minority,CT,SSAP08,SSAP
+2,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,2,majority,LA,SSAP08,SSAP
+3,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,2,minority,MD,SSAP08,SSAP
+4,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,3,majority,FL,SSAP08,SSAP
+0,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,1,majority,ND,SSAP01,SSAP
+1,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,1,minority,OR,SSAP01,SSAP
+2,https://api.propublica.org/congress/v1/members/F000062.json,,F000062,Dianne Feinstein,,D,2,minority,CA,SSAP01,SSAP
+3,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,3,majority,KY,SSAP01,SSAP
+4,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,3,minority,MT,SSAP01,SSAP
+5,https://api.propublica.org/congress/v1/members/C001035.json,,C001035,Susan Collins,,R,4,majority,ME,SSAP01,SSAP
+6,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,4,minority,NM,SSAP01,SSAP
+7,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,5,majority,MO,SSAP01,SSAP
+8,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,5,minority,VT,SSAP01,SSAP
+9,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,6,majority,KS,SSAP01,SSAP
+10,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,6,minority,WI,SSAP01,SSAP
+11,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,7,majority,FL,SSAP01,SSAP
+0,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,1,minority,IL,SSAP02,SSAP
+1,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,2,majority,KY,SSAP02,SSAP
+2,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,2,minority,VT,SSAP02,SSAP
+3,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,3,majority,AL,SSAP02,SSAP
+4,https://api.propublica.org/congress/v1/members/F000062.json,,F000062,Dianne Feinstein,,D,3,minority,CA,SSAP02,SSAP
+5,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,4,majority,TN,SSAP02,SSAP
+6,https://api.propublica.org/congress/v1/members/M001111.json,,M001111,Patty Murray,,D,4,minority,WA,SSAP02,SSAP
+7,https://api.propublica.org/congress/v1/members/C001035.json,,C001035,Susan Collins,,R,5,majority,ME,SSAP02,SSAP
+8,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,5,minority,RI,SSAP02,SSAP
+9,https://api.propublica.org/congress/v1/members/M001153.json,,M001153,Lisa Murkowski,,R,6,majority,AK,SSAP02,SSAP
+10,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,6,minority,MT,SSAP02,SSAP
+11,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,7,majority,SC,SSAP02,SSAP
+12,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,7,minority,NM,SSAP02,SSAP
+13,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,8,majority,MO,SSAP02,SSAP
+14,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,8,minority,HI,SSAP02,SSAP
+15,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,9,majority,MT,SSAP02,SSAP
+16,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,9,minority,WI,SSAP02,SSAP
+17,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,10,majority,KS,SSAP02,SSAP
+0,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,1,majority,KS,SSAP19,SSAP
+1,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,1,minority,HI,SSAP19,SSAP
+2,https://api.propublica.org/congress/v1/members/M000355.json,,M000355,Mitch McConnell,,R,2,majority,KY,SSAP19,SSAP
+3,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,2,minority,MT,SSAP19,SSAP
+4,https://api.propublica.org/congress/v1/members/M001153.json,,M001153,Lisa Murkowski,,R,3,majority,AK,SSAP19,SSAP
+5,https://api.propublica.org/congress/v1/members/M001111.json,,M001111,Patty Murray,,D,3,minority,WA,SSAP19,SSAP
+6,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,4,majority,ND,SSAP19,SSAP
+7,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,4,minority,RI,SSAP19,SSAP
+8,https://api.propublica.org/congress/v1/members/C001035.json,,C001035,Susan Collins,,R,5,majority,ME,SSAP19,SSAP
+9,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,5,minority,NM,SSAP19,SSAP
+10,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,6,majority,AR,SSAP19,SSAP
+11,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,6,minority,WI,SSAP19,SSAP
+12,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,7,majority,WV,SSAP19,SSAP
+13,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,7,minority,CT,SSAP19,SSAP
+14,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,8,majority,FL,SSAP19,SSAP
+0,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,1,majority,WV,SSAP23,SSAP
+1,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,1,minority,DE,SSAP23,SSAP
+2,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,2,majority,KS,SSAP23,SSAP
+3,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,2,minority,IL,SSAP23,SSAP
+4,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,3,majority,AR,SSAP23,SSAP
+5,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,3,minority,WV,SSAP23,SSAP
+6,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,4,majority,OK,SSAP23,SSAP
+7,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,4,minority,MD,SSAP23,SSAP
+8,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,5,majority,MT,SSAP23,SSAP
+0,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,1,majority,NE,SSAS16,SSAS
+1,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,1,minority,IN,SSAS16,SSAS
+2,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,2,majority,OK,SSAS16,SSAS
+3,https://api.propublica.org/congress/v1/members/H001046.json,,H001046,Martin Heinrich,,D,2,minority,NM,SSAS16,SSAS
+4,https://api.propublica.org/congress/v1/members/C001095.json,,C001095,Tom Cotton,,R,3,majority,AR,SSAS16,SSAS
+5,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,3,minority,MA,SSAS16,SSAS
+6,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,4,majority,AK,SSAS16,SSAS
+7,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,4,minority,MI,SSAS16,SSAS
+8,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,5,majority,TX,SSAS16,SSAS
+9,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,6,majority,SC,SSAS16,SSAS
+0,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,1,majority,IA,SSAS20,SSAS
+1,https://api.propublica.org/congress/v1/members/H001046.json,,H001046,Martin Heinrich,,D,1,minority,NM,SSAS20,SSAS
+2,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,2,majority,MS,SSAS20,SSAS
+3,https://api.propublica.org/congress/v1/members/N000032.json,,N000032,Bill Nelson,,D,2,minority,FL,SSAS20,SSAS
+4,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,3,majority,NE,SSAS20,SSAS
+5,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,3,minority,NH,SSAS20,SSAS
+6,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,4,majority,GA,SSAS20,SSAS
+7,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,4,minority,MI,SSAS20,SSAS
+8,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,5,majority,TX,SSAS20,SSAS
+9,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,6,majority,SC,SSAS20,SSAS
+0,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,1,majority,NC,SSAS17,SSAS
+1,https://api.propublica.org/congress/v1/members/G000555.json,,G000555,Kirsten E. Gillibrand,,D,1,minority,NY,SSAS17,SSAS
+2,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,2,majority,IA,SSAS17,SSAS
+3,https://api.propublica.org/congress/v1/members/M001170.json,,M001170,Claire McCaskill,,D,2,minority,MO,SSAS17,SSAS
+4,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,3,majority,SC,SSAS17,SSAS
+5,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,3,minority,MA,SSAS17,SSAS
+6,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,4,majority,NE,SSAS17,SSAS
+0,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,1,majority,MS,SSAS13,SSAS
+1,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,1,minority,HI,SSAS13,SSAS
+2,https://api.propublica.org/congress/v1/members/C001095.json,,C001095,Tom Cotton,,R,2,majority,AR,SSAS13,SSAS
+3,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,2,minority,NH,SSAS13,SSAS
+4,https://api.propublica.org/congress/v1/members/R000605.json,,R000605,Mike Rounds,,R,3,majority,SD,SSAS13,SSAS
+5,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,3,minority,CT,SSAS13,SSAS
+6,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,4,majority,NC,SSAS13,SSAS
+7,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,4,minority,VA,SSAS13,SSAS
+8,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,5,majority,AK,SSAS13,SSAS
+9,https://api.propublica.org/congress/v1/members/K000383.json,,K000383,Angus King,,I,5,minority,ME,SSAS13,SSAS
+10,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,6,majority,SC,SSAS13,SSAS
+0,https://api.propublica.org/congress/v1/members/C001095.json,,C001095,Tom Cotton,,R,1,majority,AR,SSAS14,SSAS
+1,https://api.propublica.org/congress/v1/members/K000383.json,,K000383,Angus King,,I,1,minority,ME,SSAS14,SSAS
+2,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,2,majority,OK,SSAS14,SSAS
+3,https://api.propublica.org/congress/v1/members/M001170.json,,M001170,Claire McCaskill,,D,2,minority,MO,SSAS14,SSAS
+4,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,3,majority,MS,SSAS14,SSAS
+5,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,3,minority,CT,SSAS14,SSAS
+6,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,4,majority,NC,SSAS14,SSAS
+7,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,4,minority,IN,SSAS14,SSAS
+8,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,5,majority,AK,SSAS14,SSAS
+9,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,5,minority,MA,SSAS14,SSAS
+10,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,6,majority,TX,SSAS14,SSAS
+11,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,6,minority,MI,SSAS14,SSAS
+12,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,7,majority,NE,SSAS14,SSAS
+0,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,1,majority,OK,SSAS15,SSAS
+1,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,1,minority,VA,SSAS15,SSAS
+2,https://api.propublica.org/congress/v1/members/R000605.json,,R000605,Mike Rounds,,R,2,majority,SD,SSAS15,SSAS
+3,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,2,minority,NH,SSAS15,SSAS
+4,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,3,majority,IA,SSAS15,SSAS
+5,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,3,minority,HI,SSAS15,SSAS
+6,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,4,majority,GA,SSAS15,SSAS
+7,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,5,majority,SC,SSAS15,SSAS
+0,https://api.propublica.org/congress/v1/members/R000605.json,,R000605,Mike Rounds,,R,1,majority,SD,SSAS21,SSAS
+1,https://api.propublica.org/congress/v1/members/N000032.json,,N000032,Bill Nelson,,D,1,minority,FL,SSAS21,SSAS
+2,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,2,majority,NE,SSAS21,SSAS
+3,https://api.propublica.org/congress/v1/members/M001170.json,,M001170,Claire McCaskill,,D,2,minority,MO,SSAS21,SSAS
+4,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,3,majority,GA,SSAS21,SSAS
+5,https://api.propublica.org/congress/v1/members/G000555.json,,G000555,Kirsten E. Gillibrand,,D,3,minority,NY,SSAS21,SSAS
+6,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,4,majority,SC,SSAS21,SSAS
+7,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,4,minority,CT,SSAS21,SSAS
+8,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,5,majority,NE,SSAS21,SSAS
+0,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,1,majority,NV,SSBK04,SSBK
+1,https://api.propublica.org/congress/v1/members/W000805.json,,W000805,Mark Warner,,D,1,minority,VA,SSBK04,SSBK
+2,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,2,majority,AL,SSBK04,SSBK
+3,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,2,minority,RI,SSBK04,SSBK
+4,https://api.propublica.org/congress/v1/members/C001071.json,,C001071,Bob Corker,,R,3,majority,TN,SSBK04,SSBK
+5,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,3,minority,NJ,SSBK04,SSBK
+6,https://api.propublica.org/congress/v1/members/T000461.json,,T000461,Patrick J. Toomey,,R,4,majority,PA,SSBK04,SSBK
+7,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,4,minority,MT,SSBK04,SSBK
+8,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,5,majority,SC,SSBK04,SSBK
+9,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,5,minority,MA,SSBK04,SSBK
+10,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,6,majority,NE,SSBK04,SSBK
+11,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,6,minority,MD,SSBK04,SSBK
+12,https://api.propublica.org/congress/v1/members/R000605.json,,R000605,Mike Rounds,,R,7,majority,SD,SSBK04,SSBK
+13,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,7,minority,NV,SSBK04,SSBK
+14,https://api.propublica.org/congress/v1/members/J000300.json,,J000300,Doug Jones,,D,8,minority,AL,SSBK04,SSBK
+15,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,8,majority,NC,SSBK04,SSBK
+16,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,9,majority,KS,SSBK04,SSBK
+0,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,1,majority,SC,SSBK09,SSBK
+1,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,1,minority,NJ,SSBK09,SSBK
+2,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,2,majority,AL,SSBK09,SSBK
+3,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,2,minority,RI,SSBK09,SSBK
+4,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,3,majority,NV,SSBK09,SSBK
+5,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,3,minority,ND,SSBK09,SSBK
+6,https://api.propublica.org/congress/v1/members/R000605.json,,R000605,Mike Rounds,,R,4,majority,SD,SSBK09,SSBK
+7,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,4,minority,HI,SSBK09,SSBK
+8,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,5,majority,NC,SSBK09,SSBK
+9,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,5,minority,MD,SSBK09,SSBK
+10,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,6,majority,LA,SSBK09,SSBK
+11,https://api.propublica.org/congress/v1/members/J000300.json,,J000300,Doug Jones,,D,6,minority,AL,SSBK09,SSBK
+12,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,7,majority,KS,SSBK09,SSBK
+0,https://api.propublica.org/congress/v1/members/C001095.json,,C001095,Tom Cotton,,R,1,majority,AR,SSBK12,SSBK
+1,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,1,minority,ND,SSBK12,SSBK
+2,https://api.propublica.org/congress/v1/members/T000461.json,,T000461,Patrick J. Toomey,,R,2,majority,PA,SSBK12,SSBK
+3,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,2,minority,NJ,SSBK12,SSBK
+4,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,3,majority,GA,SSBK12,SSBK
+5,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,3,minority,MA,SSBK12,SSBK
+6,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,4,majority,NC,SSBK12,SSBK
+7,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,4,minority,IN,SSBK12,SSBK
+8,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,5,majority,LA,SSBK12,SSBK
+9,https://api.propublica.org/congress/v1/members/J000300.json,,J000300,Doug Jones,,D,5,minority,AL,SSBK12,SSBK
+10,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,6,majority,KS,SSBK12,SSBK
+0,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,1,majority,NE,SSBK05,SSBK
+1,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,1,minority,IN,SSBK05,SSBK
+2,https://api.propublica.org/congress/v1/members/C001071.json,,C001071,Bob Corker,,R,2,majority,TN,SSBK05,SSBK
+3,https://api.propublica.org/congress/v1/members/W000805.json,,W000805,Mark Warner,,D,2,minority,VA,SSBK05,SSBK
+4,https://api.propublica.org/congress/v1/members/C001095.json,,C001095,Tom Cotton,,R,3,majority,AR,SSBK05,SSBK
+5,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,3,minority,ND,SSBK05,SSBK
+6,https://api.propublica.org/congress/v1/members/R000605.json,,R000605,Mike Rounds,,R,4,majority,SD,SSBK05,SSBK
+7,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,4,minority,HI,SSBK05,SSBK
+8,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,5,majority,GA,SSBK05,SSBK
+0,https://api.propublica.org/congress/v1/members/T000461.json,,T000461,Patrick J. Toomey,,R,1,majority,PA,SSBK08,SSBK
+1,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,1,minority,MA,SSBK08,SSBK
+2,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,2,majority,AL,SSBK08,SSBK
+3,https://api.propublica.org/congress/v1/members/R000122.json,,R000122,Jack Reed,,D,2,minority,RI,SSBK08,SSBK
+4,https://api.propublica.org/congress/v1/members/C001071.json,,C001071,Bob Corker,,R,3,majority,TN,SSBK08,SSBK
+5,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,3,minority,MT,SSBK08,SSBK
+6,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,4,majority,NV,SSBK08,SSBK
+7,https://api.propublica.org/congress/v1/members/W000805.json,,W000805,Mark Warner,,D,4,minority,VA,SSBK08,SSBK
+8,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,5,majority,SC,SSBK08,SSBK
+9,https://api.propublica.org/congress/v1/members/D000607.json,,D000607,Joe Donnelly,,D,5,minority,IN,SSBK08,SSBK
+10,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,6,majority,NE,SSBK08,SSBK
+11,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,6,minority,HI,SSBK08,SSBK
+12,https://api.propublica.org/congress/v1/members/C001095.json,,C001095,Tom Cotton,,R,7,majority,AR,SSBK08,SSBK
+13,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,7,minority,MD,SSBK08,SSBK
+14,https://api.propublica.org/congress/v1/members/P000612.json,,P000612,David Perdue,,R,8,majority,GA,SSBK08,SSBK
+15,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,8,minority,NV,SSBK08,SSBK
+16,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,9,majority,LA,SSBK08,SSBK
+0,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,1,majority,TX,SSCM24,SSCM
+1,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,1,minority,MA,SSCM24,SSCM
+2,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,2,majority,KS,SSCM24,SSCM
+3,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,2,minority,HI,SSCM24,SSCM
+4,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,3,majority,AK,SSCM24,SSCM
+5,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,3,minority,NM,SSCM24,SSCM
+6,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,4,majority,UT,SSCM24,SSCM
+7,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,4,minority,MI,SSCM24,SSCM
+8,https://api.propublica.org/congress/v1/members/J000293.json,,J000293,Ron Johnson,,R,5,majority,WI,SSCM24,SSCM
+9,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,5,minority,WI,SSCM24,SSCM
+10,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,6,majority,WV,SSCM24,SSCM
+11,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,6,minority,NH,SSCM24,SSCM
+12,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,7,majority,CO,SSCM24,SSCM
+0,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,1,majority,MO,SSCM01,SSCM
+1,https://api.propublica.org/congress/v1/members/C000127.json,,C000127,Maria Cantwell,,D,1,minority,WA,SSCM01,SSCM
+2,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,2,majority,MS,SSCM01,SSCM
+3,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,2,minority,MN,SSCM01,SSCM
+4,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,3,majority,TX,SSCM01,SSCM
+5,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,3,minority,CT,SSCM01,SSCM
+6,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,4,majority,NE,SSCM01,SSCM
+7,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,4,minority,HI,SSCM01,SSCM
+8,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,5,majority,KS,SSCM01,SSCM
+9,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,5,minority,MA,SSCM01,SSCM
+10,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,6,majority,AK,SSCM01,SSCM
+11,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,6,minority,NJ,SSCM01,SSCM
+12,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,6,minority,NM,SSCM01,SSCM
+13,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,7,majority,NV,SSCM01,SSCM
+14,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,7,minority,NM,SSCM01,SSCM
+15,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,7,minority,MI,SSCM01,SSCM
+16,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,8,majority,OK,SSCM01,SSCM
+17,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,8,minority,MI,SSCM01,SSCM
+18,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,8,minority,WI,SSCM01,SSCM
+19,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,9,majority,UT,SSCM01,SSCM
+20,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,9,minority,WI,SSCM01,SSCM
+21,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,9,minority,IL,SSCM01,SSCM
+22,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,10,majority,WV,SSCM01,SSCM
+23,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,10,minority,IL,SSCM01,SSCM
+24,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,10,minority,NH,SSCM01,SSCM
+25,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,11,majority,CO,SSCM01,SSCM
+26,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,11,minority,NH,SSCM01,SSCM
+27,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,11,minority,MT,SSCM01,SSCM
+28,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,12,majority,IN,SSCM01,SSCM
+0,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,1,minority,WI,SSCM22,SSCM
+1,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,1,majority,AK,SSCM22,SSCM
+2,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,1,minority,MI,SSCM22,SSCM
+3,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,2,majority,MS,SSCM22,SSCM
+4,https://api.propublica.org/congress/v1/members/C000127.json,,C000127,Maria Cantwell,,D,2,minority,WA,SSCM22,SSCM
+5,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,3,majority,NE,SSCM22,SSCM
+6,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,3,minority,CT,SSCM22,SSCM
+7,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,4,majority,OK,SSCM22,SSCM
+8,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,4,minority,HI,SSCM22,SSCM
+9,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,5,majority,UT,SSCM22,SSCM
+10,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,5,minority,MA,SSCM22,SSCM
+11,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,6,minority,MI,SSCM22,SSCM
+12,https://api.propublica.org/congress/v1/members/J000293.json,,J000293,Ron Johnson,,R,6,majority,WI,SSCM22,SSCM
+13,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,6,minority,NJ,SSCM22,SSCM
+14,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,6,minority,WI,SSCM22,SSCM
+15,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,7,majority,CO,SSCM22,SSCM
+16,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,7,minority,WI,SSCM22,SSCM
+17,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,8,majority,IN,SSCM22,SSCM
+0,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,1,majority,KS,SSCM20,SSCM
+1,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,1,minority,CT,SSCM20,SSCM
+2,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,2,majority,MO,SSCM20,SSCM
+3,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,2,minority,MN,SSCM20,SSCM
+4,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,3,majority,TX,SSCM20,SSCM
+5,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,3,minority,MA,SSCM20,SSCM
+6,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,4,majority,NE,SSCM20,SSCM
+7,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,4,minority,NJ,SSCM20,SSCM
+8,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,4,minority,NM,SSCM20,SSCM
+9,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,5,majority,NV,SSCM20,SSCM
+10,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,5,minority,NM,SSCM20,SSCM
+11,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,5,minority,IL,SSCM20,SSCM
+12,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,6,majority,OK,SSCM20,SSCM
+13,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,6,minority,IL,SSCM20,SSCM
+14,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,6,minority,NH,SSCM20,SSCM
+15,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,7,majority,UT,SSCM20,SSCM
+16,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,7,minority,NH,SSCM20,SSCM
+17,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,7,minority,NV,SSCM20,SSCM
+18,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,8,majority,WV,SSCM20,SSCM
+19,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,8,minority,NV,SSCM20,SSCM
+20,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,9,majority,IN,SSCM20,SSCM
+0,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,1,majority,MS,SSCM26,SSCM
+1,https://api.propublica.org/congress/v1/members/S001194.json,,S001194,Brian Schatz,,D,1,minority,HI,SSCM26,SSCM
+2,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,2,majority,MO,SSCM26,SSCM
+3,https://api.propublica.org/congress/v1/members/C000127.json,,C000127,Maria Cantwell,,D,2,minority,WA,SSCM26,SSCM
+4,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,3,majority,TX,SSCM26,SSCM
+5,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,3,minority,MN,SSCM26,SSCM
+6,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,4,majority,NE,SSCM26,SSCM
+7,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,4,minority,CT,SSCM26,SSCM
+8,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,5,majority,KS,SSCM26,SSCM
+9,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,5,minority,MA,SSCM26,SSCM
+10,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,6,majority,AK,SSCM26,SSCM
+11,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,6,minority,NJ,SSCM26,SSCM
+12,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,6,minority,NM,SSCM26,SSCM
+13,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,7,majority,NV,SSCM26,SSCM
+14,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,7,minority,NM,SSCM26,SSCM
+15,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,7,minority,MI,SSCM26,SSCM
+16,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,8,majority,OK,SSCM26,SSCM
+17,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,8,minority,MI,SSCM26,SSCM
+18,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,8,minority,WI,SSCM26,SSCM
+19,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,9,majority,UT,SSCM26,SSCM
+20,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,9,minority,WI,SSCM26,SSCM
+21,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,9,minority,IL,SSCM26,SSCM
+22,https://api.propublica.org/congress/v1/members/J000293.json,,J000293,Ron Johnson,,R,10,majority,WI,SSCM26,SSCM
+23,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,10,minority,IL,SSCM26,SSCM
+24,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,10,minority,NH,SSCM26,SSCM
+25,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,11,majority,WV,SSCM26,SSCM
+26,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,11,minority,NH,SSCM26,SSCM
+27,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,11,minority,NV,SSCM26,SSCM
+28,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,12,minority,MT,SSCM26,SSCM
+29,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,12,majority,CO,SSCM26,SSCM
+30,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,12,minority,NV,SSCM26,SSCM
+31,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,13,majority,IN,SSCM26,SSCM
+0,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,1,minority,MI,SSCM25,SSCM
+1,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,1,majority,NE,SSCM25,SSCM
+2,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,1,minority,NJ,SSCM25,SSCM
+3,https://api.propublica.org/congress/v1/members/C000127.json,,C000127,Maria Cantwell,,D,1,minority,WA,SSCM25,SSCM
+4,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,2,majority,MS,SSCM25,SSCM
+5,https://api.propublica.org/congress/v1/members/C000127.json,,C000127,Maria Cantwell,,D,2,minority,WA,SSCM25,SSCM
+6,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,2,minority,MN,SSCM25,SSCM
+7,https://api.propublica.org/congress/v1/members/B000575.json,,B000575,Roy Blunt,,R,3,majority,MO,SSCM25,SSCM
+8,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,3,minority,MN,SSCM25,SSCM
+9,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,3,minority,CT,SSCM25,SSCM
+10,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,4,majority,NV,SSCM25,SSCM
+11,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,4,minority,CT,SSCM25,SSCM
+12,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,4,minority,NM,SSCM25,SSCM
+13,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,5,majority,OK,SSCM25,SSCM
+14,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,5,minority,NM,SSCM25,SSCM
+15,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,5,minority,WI,SSCM25,SSCM
+16,https://api.propublica.org/congress/v1/members/J000293.json,,J000293,Ron Johnson,,R,6,majority,WI,SSCM25,SSCM
+17,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,6,minority,WI,SSCM25,SSCM
+18,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,6,minority,IL,SSCM25,SSCM
+19,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,7,majority,WV,SSCM25,SSCM
+20,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,7,minority,IL,SSCM25,SSCM
+21,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,7,minority,NH,SSCM25,SSCM
+22,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,8,majority,CO,SSCM25,SSCM
+23,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,8,minority,NH,SSCM25,SSCM
+24,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,9,majority,IN,SSCM25,SSCM
+0,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,1,majority,UT,SSEG03,SSEG
+1,https://api.propublica.org/congress/v1/members/W000779.json,,W000779,Ron Wyden,,D,1,minority,OR,SSEG03,SSEG
+2,https://api.propublica.org/congress/v1/members/B001261.json,,B001261,John Barrasso,,R,2,majority,WY,SSEG03,SSEG
+3,https://api.propublica.org/congress/v1/members/S000770.json,,S000770,Debbie Stabenow,,D,2,minority,MI,SSEG03,SSEG
+4,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,3,minority,WV,SSEG03,SSEG
+5,https://api.propublica.org/congress/v1/members/R000584.json,,R000584,Jim Risch,,R,3,majority,ID,SSEG03,SSEG
+6,https://api.propublica.org/congress/v1/members/H001046.json,,H001046,Martin Heinrich,,D,4,minority,NM,SSEG03,SSEG
+7,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,4,majority,AZ,SSEG03,SSEG
+8,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,4,minority,WV,SSEG03,SSEG
+9,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,5,minority,HI,SSEG03,SSEG
+10,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,5,majority,MT,SSEG03,SSEG
+11,https://api.propublica.org/congress/v1/members/H001046.json,,H001046,Martin Heinrich,,D,5,minority,NM,SSEG03,SSEG
+12,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,6,minority,NV,SSEG03,SSEG
+13,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,6,majority,CO,SSEG03,SSEG
+14,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,6,minority,HI,SSEG03,SSEG
+15,https://api.propublica.org/congress/v1/members/S001203.json,,S001203,Tina Smith,,D,7,minority,MN,SSEG03,SSEG
+16,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,7,majority,TN,SSEG03,SSEG
+17,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,7,minority,NV,SSEG03,SSEG
+18,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,8,majority,ND,SSEG03,SSEG
+19,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,9,majority,LA,SSEG03,SSEG
+20,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,10,majority,WV,SSEG03,SSEG
+0,https://api.propublica.org/congress/v1/members/K000383.json,,K000383,Angus King,,I,1,minority,ME,SSEG04,SSEG
+1,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,1,majority,MT,SSEG04,SSEG
+2,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,1,minority,HI,SSEG04,SSEG
+3,https://api.propublica.org/congress/v1/members/B001261.json,,B001261,John Barrasso,,R,2,majority,WY,SSEG04,SSEG
+4,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,2,minority,VT,SSEG04,SSEG
+5,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,3,majority,UT,SSEG04,SSEG
+6,https://api.propublica.org/congress/v1/members/S000770.json,,S000770,Debbie Stabenow,,D,3,minority,MI,SSEG04,SSEG
+7,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,4,majority,CO,SSEG04,SSEG
+8,https://api.propublica.org/congress/v1/members/H001046.json,,H001046,Martin Heinrich,,D,4,minority,NM,SSEG04,SSEG
+9,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,5,minority,HI,SSEG04,SSEG
+10,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,5,majority,TN,SSEG04,SSEG
+11,https://api.propublica.org/congress/v1/members/K000383.json,,K000383,Angus King,,I,5,minority,ME,SSEG04,SSEG
+12,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,6,majority,ND,SSEG04,SSEG
+13,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,6,minority,IL,SSEG04,SSEG
+14,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,7,majority,OH,SSEG04,SSEG
+0,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,1,minority,NV,SSEG07,SSEG
+1,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,1,majority,AZ,SSEG07,SSEG
+2,https://api.propublica.org/congress/v1/members/K000383.json,,K000383,Angus King,,I,1,minority,ME,SSEG07,SSEG
+3,https://api.propublica.org/congress/v1/members/B001261.json,,B001261,John Barrasso,,R,2,majority,WY,SSEG07,SSEG
+4,https://api.propublica.org/congress/v1/members/W000779.json,,W000779,Ron Wyden,,D,2,minority,OR,SSEG07,SSEG
+5,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,3,minority,VT,SSEG07,SSEG
+6,https://api.propublica.org/congress/v1/members/R000584.json,,R000584,Jim Risch,,R,3,majority,ID,SSEG07,SSEG
+7,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,4,minority,WV,SSEG07,SSEG
+8,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,4,majority,UT,SSEG07,SSEG
+9,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,5,minority,WV,SSEG07,SSEG
+10,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,5,minority,IL,SSEG07,SSEG
+11,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,5,majority,LA,SSEG07,SSEG
+12,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,6,minority,IL,SSEG07,SSEG
+13,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,6,majority,OH,SSEG07,SSEG
+14,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,7,majority,WV,SSEG07,SSEG
+0,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,1,majority,CO,SSEG01,SSEG
+1,https://api.propublica.org/congress/v1/members/M001183.json,,M001183,Joe Manchin III,,D,1,minority,WV,SSEG01,SSEG
+2,https://api.propublica.org/congress/v1/members/R000584.json,,R000584,Jim Risch,,R,2,majority,ID,SSEG01,SSEG
+3,https://api.propublica.org/congress/v1/members/W000779.json,,W000779,Ron Wyden,,D,2,minority,OR,SSEG01,SSEG
+4,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,3,majority,AZ,SSEG01,SSEG
+5,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,3,minority,VT,SSEG01,SSEG
+6,https://api.propublica.org/congress/v1/members/H001046.json,,H001046,Martin Heinrich,,D,4,minority,NM,SSEG01,SSEG
+7,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,4,majority,MT,SSEG01,SSEG
+8,https://api.propublica.org/congress/v1/members/K000383.json,,K000383,Angus King,,I,5,minority,ME,SSEG01,SSEG
+9,https://api.propublica.org/congress/v1/members/A000360.json,,A000360,Lamar Alexander,,R,5,majority,TN,SSEG01,SSEG
+10,https://api.propublica.org/congress/v1/members/H001046.json,,H001046,Martin Heinrich,,D,5,minority,NM,SSEG01,SSEG
+11,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,6,minority,IL,SSEG01,SSEG
+12,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,6,majority,ND,SSEG01,SSEG
+13,https://api.propublica.org/congress/v1/members/K000383.json,,K000383,Angus King,,I,6,minority,ME,SSEG01,SSEG
+14,https://api.propublica.org/congress/v1/members/S001203.json,,S001203,Tina Smith,,D,7,minority,MN,SSEG01,SSEG
+15,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,7,minority,NV,SSEG01,SSEG
+16,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,7,majority,LA,SSEG01,SSEG
+17,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,7,minority,IL,SSEG01,SSEG
+18,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,8,majority,OH,SSEG01,SSEG
+19,https://api.propublica.org/congress/v1/members/C001113.json,,C001113,Catherine Cortez Masto,,D,8,minority,NV,SSEG01,SSEG
+20,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,9,majority,WV,SSEG01,SSEG
+0,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,1,majority,AR,SSEV15,SSEV
+1,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,1,minority,IL,SSEV15,SSEV
+2,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,2,majority,OK,SSEV15,SSEV
+3,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,2,minority,MD,SSEV15,SSEV
+4,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,3,majority,WV,SSEV15,SSEV
+5,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,3,minority,RI,SSEV15,SSEV
+6,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,4,majority,MS,SSEV15,SSEV
+7,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,4,minority,OR,SSEV15,SSEV
+8,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,5,majority,NE,SSEV15,SSEV
+9,https://api.propublica.org/congress/v1/members/G000555.json,,G000555,Kirsten E. Gillibrand,,D,5,minority,NY,SSEV15,SSEV
+10,https://api.propublica.org/congress/v1/members/R000605.json,,R000605,Mike Rounds,,R,6,majority,SD,SSEV15,SSEV
+11,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,6,minority,NJ,SSEV15,SSEV
+12,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,6,minority,MA,SSEV15,SSEV
+13,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,7,majority,AK,SSEV15,SSEV
+14,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,7,minority,MA,SSEV15,SSEV
+15,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,7,minority,MD,SSEV15,SSEV
+16,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,8,majority,AL,SSEV15,SSEV
+0,https://api.propublica.org/congress/v1/members/R000605.json,,R000605,Mike Rounds,,R,1,majority,SD,SSEV09,SSEV
+1,https://api.propublica.org/congress/v1/members/H001075.json,,H001075,Kamala Harris,,D,1,minority,CA,SSEV09,SSEV
+2,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,1,minority,NJ,SSEV09,SSEV
+3,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,1,minority,VT,SSEV09,SSEV
+4,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,2,majority,KS,SSEV09,SSEV
+5,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,2,minority,VT,SSEV09,SSEV
+6,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,2,minority,NJ,SSEV09,SSEV
+7,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,3,majority,IA,SSEV09,SSEV
+8,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,3,minority,NJ,SSEV09,SSEV
+9,https://api.propublica.org/congress/v1/members/V000128.json,,V000128,Chris Van Hollen,,D,3,minority,MD,SSEV09,SSEV
+10,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,4,majority,AK,SSEV09,SSEV
+0,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,1,majority,WV,SSEV10,SSEV
+1,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,1,minority,RI,SSEV10,SSEV
+2,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,2,majority,OK,SSEV10,SSEV
+3,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,2,minority,MD,SSEV10,SSEV
+4,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,3,majority,AR,SSEV10,SSEV
+5,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,3,minority,VT,SSEV10,SSEV
+6,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,4,majority,MS,SSEV10,SSEV
+7,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,4,minority,OR,SSEV10,SSEV
+8,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,5,majority,NE,SSEV10,SSEV
+9,https://api.propublica.org/congress/v1/members/G000555.json,,G000555,Kirsten E. Gillibrand,,D,5,minority,NY,SSEV10,SSEV
+10,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,6,majority,KS,SSEV10,SSEV
+11,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,6,minority,MA,SSEV10,SSEV
+12,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,7,majority,IA,SSEV10,SSEV
+13,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,7,minority,IL,SSEV10,SSEV
+14,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,8,majority,AL,SSEV10,SSEV
+0,https://api.propublica.org/congress/v1/members/I000024.json,,I000024,James M. Inhofe,,R,1,majority,OK,SSEV08,SSEV
+1,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,1,minority,MD,SSEV08,SSEV
+2,https://api.propublica.org/congress/v1/members/C001047.json,,C001047,Shelley Moore Capito,,R,2,majority,WV,SSEV08,SSEV
+3,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,2,minority,VT,SSEV08,SSEV
+4,https://api.propublica.org/congress/v1/members/B001236.json,,B001236,John Boozman,,R,3,majority,AR,SSEV08,SSEV
+5,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,3,minority,RI,SSEV08,SSEV
+6,https://api.propublica.org/congress/v1/members/W000437.json,,W000437,Roger Wicker,,R,4,majority,MS,SSEV08,SSEV
+7,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,4,minority,OR,SSEV08,SSEV
+8,https://api.propublica.org/congress/v1/members/F000463.json,,F000463,Deb Fischer,,R,5,majority,NE,SSEV08,SSEV
+9,https://api.propublica.org/congress/v1/members/G000555.json,,G000555,Kirsten E. Gillibrand,,D,5,minority,NY,SSEV08,SSEV
+10,https://api.propublica.org/congress/v1/members/M000934.json,,M000934,Jerry Moran,,R,6,majority,KS,SSEV08,SSEV
+11,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,6,minority,MA,SSEV08,SSEV
+12,https://api.propublica.org/congress/v1/members/E000295.json,,E000295,Joni Ernst,,R,7,majority,IA,SSEV08,SSEV
+13,https://api.propublica.org/congress/v1/members/D000622.json,,D000622,Tammy Duckworth,,D,7,minority,IL,SSEV08,SSEV
+14,https://api.propublica.org/congress/v1/members/S001198.json,,S001198,Dan Sullivan,,R,8,majority,AK,SSEV08,SSEV
+15,https://api.propublica.org/congress/v1/members/H001075.json,,H001075,Kamala Harris,,D,8,minority,CA,SSEV08,SSEV
+16,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,8,minority,NJ,SSEV08,SSEV
+17,https://api.propublica.org/congress/v1/members/S000320.json,,S000320,Richard C. Shelby,,R,9,majority,AL,SSEV08,SSEV
+0,https://api.propublica.org/congress/v1/members/C001056.json,,C001056,John Cornyn,,R,1,majority,TX,SSFI13,SSFI
+1,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,1,minority,PA,SSFI13,SSFI
+2,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,2,majority,IA,SSFI13,SSFI
+3,https://api.propublica.org/congress/v1/members/S000770.json,,S000770,Debbie Stabenow,,D,2,minority,MI,SSFI13,SSFI
+4,https://api.propublica.org/congress/v1/members/R000307.json,,R000307,Pat Roberts,,R,3,majority,KS,SSFI13,SSFI
+5,https://api.propublica.org/congress/v1/members/N000032.json,,N000032,Bill Nelson,,D,3,minority,FL,SSFI13,SSFI
+6,https://api.propublica.org/congress/v1/members/I000055.json,,I000055,Johnny Isakson,,R,4,majority,GA,SSFI13,SSFI
+7,https://api.propublica.org/congress/v1/members/M001170.json,,M001170,Claire McCaskill,,D,4,minority,MO,SSFI13,SSFI
+8,https://api.propublica.org/congress/v1/members/T000250.json,,T000250,John Thune,,R,5,majority,SD,SSFI13,SSFI
+9,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,5,minority,MD,SSFI13,SSFI
+10,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,6,majority,NV,SSFI13,SSFI
+0,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,1,majority,NV,SSFI12,SSFI
+1,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,1,minority,CO,SSFI12,SSFI
+2,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,2,majority,IA,SSFI12,SSFI
+3,https://api.propublica.org/congress/v1/members/C000127.json,,C000127,Maria Cantwell,,D,2,minority,WA,SSFI12,SSFI
+4,https://api.propublica.org/congress/v1/members/C000880.json,,C000880,Michael D. Crapo,,R,3,majority,ID,SSFI12,SSFI
+5,https://api.propublica.org/congress/v1/members/N000032.json,,N000032,Bill Nelson,,D,3,minority,FL,SSFI12,SSFI
+6,https://api.propublica.org/congress/v1/members/E000285.json,,E000285,Michael B. Enzi,,R,4,majority,WY,SSFI12,SSFI
+7,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,4,minority,NJ,SSFI12,SSFI
+8,https://api.propublica.org/congress/v1/members/C001056.json,,C001056,John Cornyn,,R,5,majority,TX,SSFI12,SSFI
+9,https://api.propublica.org/congress/v1/members/C000174.json,,C000174,Thomas R. Carper,,D,5,minority,DE,SSFI12,SSFI
+10,https://api.propublica.org/congress/v1/members/B001135.json,,B001135,Richard M. Burr,,R,6,majority,NC,SSFI12,SSFI
+11,https://api.propublica.org/congress/v1/members/W000805.json,,W000805,Mark Warner,,D,6,minority,VA,SSFI12,SSFI
+12,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,7,majority,SC,SSFI12,SSFI
+13,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,7,minority,RI,SSFI12,SSFI
+14,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,8,majority,LA,SSFI12,SSFI
+0,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,1,majority,SC,SSFI14,SSFI
+1,https://api.propublica.org/congress/v1/members/W000779.json,,W000779,Ron Wyden,,D,1,minority,OR,SSFI14,SSFI
+2,https://api.propublica.org/congress/v1/members/H000338.json,,H000338,Orrin G. Hatch,,R,2,majority,UT,SSFI14,SSFI
+0,https://api.propublica.org/congress/v1/members/T000461.json,,T000461,Patrick J. Toomey,,R,1,majority,PA,SSFI10,SSFI
+1,https://api.propublica.org/congress/v1/members/S000770.json,,S000770,Debbie Stabenow,,D,1,minority,MI,SSFI10,SSFI
+2,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,2,majority,IA,SSFI10,SSFI
+3,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,2,minority,NJ,SSFI10,SSFI
+4,https://api.propublica.org/congress/v1/members/R000307.json,,R000307,Pat Roberts,,R,3,majority,KS,SSFI10,SSFI
+5,https://api.propublica.org/congress/v1/members/C000127.json,,C000127,Maria Cantwell,,D,3,minority,WA,SSFI10,SSFI
+6,https://api.propublica.org/congress/v1/members/E000285.json,,E000285,Michael B. Enzi,,R,4,majority,WY,SSFI10,SSFI
+7,https://api.propublica.org/congress/v1/members/C000174.json,,C000174,Thomas R. Carper,,D,4,minority,DE,SSFI10,SSFI
+8,https://api.propublica.org/congress/v1/members/T000250.json,,T000250,John Thune,,R,5,majority,SD,SSFI10,SSFI
+9,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,5,minority,MD,SSFI10,SSFI
+10,https://api.propublica.org/congress/v1/members/B001135.json,,B001135,Richard M. Burr,,R,6,majority,NC,SSFI10,SSFI
+11,https://api.propublica.org/congress/v1/members/B000944.json,,B000944,Sherrod Brown,,D,6,minority,OH,SSFI10,SSFI
+12,https://api.propublica.org/congress/v1/members/I000055.json,,I000055,Johnny Isakson,,R,7,majority,GA,SSFI10,SSFI
+13,https://api.propublica.org/congress/v1/members/W000805.json,,W000805,Mark Warner,,D,7,minority,VA,SSFI10,SSFI
+14,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,8,majority,OH,SSFI10,SSFI
+15,https://api.propublica.org/congress/v1/members/W000779.json,,W000779,Ron Wyden,,D,8,minority,OR,SSFI10,SSFI
+16,https://api.propublica.org/congress/v1/members/H001041.json,,H001041,Dean Heller,,R,9,majority,NV,SSFI10,SSFI
+17,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,9,minority,RI,SSFI10,SSFI
+18,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,10,majority,LA,SSFI10,SSFI
+0,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,1,majority,LA,SSFI02,SSFI
+1,https://api.propublica.org/congress/v1/members/B000944.json,,B000944,Sherrod Brown,,D,1,minority,OH,SSFI02,SSFI
+2,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,2,majority,OH,SSFI02,SSFI
+3,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,2,minority,PA,SSFI02,SSFI
+4,https://api.propublica.org/congress/v1/members/C000880.json,,C000880,Michael D. Crapo,,R,3,majority,ID,SSFI02,SSFI
+5,https://api.propublica.org/congress/v1/members/T000461.json,,T000461,Patrick J. Toomey,,R,4,majority,PA,SSFI02,SSFI
+0,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,1,majority,OH,SSFI11,SSFI
+1,https://api.propublica.org/congress/v1/members/W000805.json,,W000805,Mark Warner,,D,1,minority,VA,SSFI11,SSFI
+2,https://api.propublica.org/congress/v1/members/C000880.json,,C000880,Michael D. Crapo,,R,2,majority,ID,SSFI11,SSFI
+3,https://api.propublica.org/congress/v1/members/C000174.json,,C000174,Thomas R. Carper,,D,2,minority,DE,SSFI11,SSFI
+4,https://api.propublica.org/congress/v1/members/R000307.json,,R000307,Pat Roberts,,R,3,majority,KS,SSFI11,SSFI
+5,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,3,minority,MD,SSFI11,SSFI
+6,https://api.propublica.org/congress/v1/members/E000285.json,,E000285,Michael B. Enzi,,R,4,majority,WY,SSFI11,SSFI
+7,https://api.propublica.org/congress/v1/members/M001170.json,,M001170,Claire McCaskill,,D,4,minority,MO,SSFI11,SSFI
+8,https://api.propublica.org/congress/v1/members/C001056.json,,C001056,John Cornyn,,R,5,majority,TX,SSFI11,SSFI
+9,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,5,minority,NJ,SSFI11,SSFI
+10,https://api.propublica.org/congress/v1/members/T000250.json,,T000250,John Thune,,R,6,majority,SD,SSFI11,SSFI
+11,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,6,minority,CO,SSFI11,SSFI
+12,https://api.propublica.org/congress/v1/members/B001135.json,,B001135,Richard M. Burr,,R,7,majority,NC,SSFI11,SSFI
+13,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,7,minority,PA,SSFI11,SSFI
+14,https://api.propublica.org/congress/v1/members/I000055.json,,I000055,Johnny Isakson,,R,8,majority,GA,SSFI11,SSFI
+15,https://api.propublica.org/congress/v1/members/C000127.json,,C000127,Maria Cantwell,,D,8,minority,WA,SSFI11,SSFI
+16,https://api.propublica.org/congress/v1/members/T000461.json,,T000461,Patrick J. Toomey,,R,9,majority,PA,SSFI11,SSFI
+17,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,9,minority,RI,SSFI11,SSFI
+18,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,10,majority,SC,SSFI11,SSFI
+0,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,1,majority,AZ,SSFR09,SSFR
+1,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,1,minority,NJ,SSFR09,SSFR
+2,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,2,majority,IN,SSFR09,SSFR
+3,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,2,minority,DE,SSFR09,SSFR
+4,https://api.propublica.org/congress/v1/members/B001261.json,,B001261,John Barrasso,,R,3,majority,WY,SSFR09,SSFR
+5,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,3,minority,NM,SSFR09,SSFR
+6,https://api.propublica.org/congress/v1/members/I000055.json,,I000055,Johnny Isakson,,R,4,majority,GA,SSFR09,SSFR
+7,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,4,minority,OR,SSFR09,SSFR
+8,https://api.propublica.org/congress/v1/members/P000603.json,,P000603,Rand Paul,,R,5,majority,KY,SSFR09,SSFR
+0,https://api.propublica.org/congress/v1/members/J000293.json,,J000293,Ron Johnson,,R,1,majority,WI,SSFR01,SSFR
+1,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,1,minority,CT,SSFR01,SSFR
+2,https://api.propublica.org/congress/v1/members/R000584.json,,R000584,Jim Risch,,R,2,majority,ID,SSFR01,SSFR
+3,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,2,minority,MA,SSFR01,SSFR
+4,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,3,minority,MD,SSFR01,SSFR
+5,https://api.propublica.org/congress/v1/members/B001261.json,,B001261,John Barrasso,,R,3,majority,WY,SSFR01,SSFR
+6,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,3,minority,NJ,SSFR01,SSFR
+7,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,4,majority,OH,SSFR01,SSFR
+8,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,4,minority,NH,SSFR01,SSFR
+9,https://api.propublica.org/congress/v1/members/P000603.json,,P000603,Rand Paul,,R,5,majority,KY,SSFR01,SSFR
+0,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,1,majority,CO,SSFR02,SSFR
+1,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,1,minority,MA,SSFR02,SSFR
+2,https://api.propublica.org/congress/v1/members/R000584.json,,R000584,Jim Risch,,R,2,majority,ID,SSFR02,SSFR
+3,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,2,minority,OR,SSFR02,SSFR
+4,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,3,majority,FL,SSFR02,SSFR
+5,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,3,minority,CT,SSFR02,SSFR
+6,https://api.propublica.org/congress/v1/members/B001261.json,,B001261,John Barrasso,,R,4,majority,WY,SSFR02,SSFR
+7,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,4,minority,VA,SSFR02,SSFR
+8,https://api.propublica.org/congress/v1/members/I000055.json,,I000055,Johnny Isakson,,R,5,majority,GA,SSFR02,SSFR
+0,https://api.propublica.org/congress/v1/members/R000584.json,,R000584,Jim Risch,,R,1,majority,ID,SSFR07,SSFR
+1,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,1,minority,VA,SSFR07,SSFR
+2,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,2,minority,MD,SSFR07,SSFR
+3,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,2,majority,FL,SSFR07,SSFR
+4,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,2,minority,NJ,SSFR07,SSFR
+5,https://api.propublica.org/congress/v1/members/J000293.json,,J000293,Ron Johnson,,R,3,majority,WI,SSFR07,SSFR
+6,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,3,minority,CT,SSFR07,SSFR
+7,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,4,majority,IN,SSFR07,SSFR
+8,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,4,minority,NJ,SSFR07,SSFR
+9,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,5,majority,OH,SSFR07,SSFR
+0,https://api.propublica.org/congress/v1/members/C000141.json,,C000141,Benjamin L. Cardin,,D,1,minority,MD,SSFR06,SSFR
+1,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,1,majority,FL,SSFR06,SSFR
+2,https://api.propublica.org/congress/v1/members/M000639.json,,M000639,Robert Menendez,,D,1,minority,NJ,SSFR06,SSFR
+3,https://api.propublica.org/congress/v1/members/J000293.json,,J000293,Ron Johnson,,R,2,majority,WI,SSFR06,SSFR
+4,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,2,minority,NM,SSFR06,SSFR
+5,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,3,majority,AZ,SSFR06,SSFR
+6,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,3,minority,NH,SSFR06,SSFR
+7,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,4,majority,CO,SSFR06,SSFR
+8,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,4,minority,VA,SSFR06,SSFR
+9,https://api.propublica.org/congress/v1/members/I000055.json,,I000055,Johnny Isakson,,R,5,majority,GA,SSFR06,SSFR
+0,https://api.propublica.org/congress/v1/members/I000055.json,,I000055,Johnny Isakson,,R,1,majority,GA,SSFR14,SSFR
+1,https://api.propublica.org/congress/v1/members/S001181.json,,S001181,Jeanne Shaheen,,D,1,minority,NH,SSFR14,SSFR
+2,https://api.propublica.org/congress/v1/members/R000584.json,,R000584,Jim Risch,,R,2,majority,ID,SSFR14,SSFR
+3,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,2,minority,DE,SSFR14,SSFR
+4,https://api.propublica.org/congress/v1/members/R000595.json,,R000595,Marco Rubio,,R,3,majority,FL,SSFR14,SSFR
+5,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,3,minority,NJ,SSFR14,SSFR
+6,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,4,majority,OH,SSFR14,SSFR
+7,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,4,minority,NM,SSFR14,SSFR
+8,https://api.propublica.org/congress/v1/members/P000603.json,,P000603,Rand Paul,,R,5,majority,KY,SSFR14,SSFR
+0,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,1,majority,IN,SSFR15,SSFR
+1,https://api.propublica.org/congress/v1/members/M001176.json,,M001176,Jeff Merkley,,D,1,minority,OR,SSFR15,SSFR
+2,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,2,majority,AZ,SSFR15,SSFR
+3,https://api.propublica.org/congress/v1/members/U000039.json,,U000039,Tom Udall,,D,2,minority,NM,SSFR15,SSFR
+4,https://api.propublica.org/congress/v1/members/G000562.json,,G000562,Cory Gardner,,R,3,majority,CO,SSFR15,SSFR
+5,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,3,minority,DE,SSFR15,SSFR
+6,https://api.propublica.org/congress/v1/members/B001261.json,,B001261,John Barrasso,,R,4,majority,WY,SSFR15,SSFR
+7,https://api.propublica.org/congress/v1/members/M000133.json,,M000133,Edward J. Markey,,D,4,minority,MA,SSFR15,SSFR
+8,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,5,majority,OH,SSFR15,SSFR
+0,https://api.propublica.org/congress/v1/members/P000603.json,,P000603,Rand Paul,,R,1,majority,KY,SSHR09,SSHR
+1,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,1,minority,PA,SSHR09,SSHR
+2,https://api.propublica.org/congress/v1/members/M001153.json,,M001153,Lisa Murkowski,,R,2,majority,AK,SSHR09,SSHR
+3,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,2,minority,VT,SSHR09,SSHR
+4,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,3,minority,CO,SSHR09,SSHR
+5,https://api.propublica.org/congress/v1/members/B001135.json,,B001135,Richard M. Burr,,R,3,majority,NC,SSHR09,SSHR
+6,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,4,minority,VA,SSHR09,SSHR
+7,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,4,majority,LA,SSHR09,SSHR
+8,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,4,minority,CO,SSHR09,SSHR
+9,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,5,minority,NH,SSHR09,SSHR
+10,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,5,majority,IN,SSHR09,SSHR
+11,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,5,minority,VA,SSHR09,SSHR
+12,https://api.propublica.org/congress/v1/members/H000338.json,,H000338,Orrin G. Hatch,,R,6,majority,UT,SSHR09,SSHR
+13,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,6,minority,NH,SSHR09,SSHR
+14,https://api.propublica.org/congress/v1/members/S001203.json,,S001203,Tina Smith,,D,6,minority,MN,SSHR09,SSHR
+15,https://api.propublica.org/congress/v1/members/R000307.json,,R000307,Pat Roberts,,R,7,majority,KS,SSHR09,SSHR
+0,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,1,minority,PA,SSHR11,SSHR
+1,https://api.propublica.org/congress/v1/members/I000055.json,,I000055,Johnny Isakson,,R,1,majority,GA,SSHR11,SSHR
+2,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,1,minority,WI,SSHR11,SSHR
+3,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,2,minority,RI,SSHR11,SSHR
+4,https://api.propublica.org/congress/v1/members/R000307.json,,R000307,Pat Roberts,,R,2,majority,KS,SSHR11,SSHR
+5,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,2,minority,WI,SSHR11,SSHR
+6,https://api.propublica.org/congress/v1/members/C001070.json,,C001070,Bob Casey,,D,2,minority,PA,SSHR11,SSHR
+7,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,3,minority,WI,SSHR11,SSHR
+8,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,3,majority,SC,SSHR11,SSHR
+9,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,3,minority,CT,SSHR11,SSHR
+10,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,3,minority,RI,SSHR11,SSHR
+11,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,4,minority,CT,SSHR11,SSHR
+12,https://api.propublica.org/congress/v1/members/B001135.json,,B001135,Richard M. Burr,,R,4,majority,NC,SSHR11,SSHR
+13,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,4,minority,MA,SSHR11,SSHR
+14,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,4,minority,WI,SSHR11,SSHR
+15,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,5,minority,MA,SSHR11,SSHR
+16,https://api.propublica.org/congress/v1/members/P000603.json,,P000603,Rand Paul,,R,5,majority,KY,SSHR11,SSHR
+17,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,5,minority,CT,SSHR11,SSHR
+18,https://api.propublica.org/congress/v1/members/S001203.json,,S001203,Tina Smith,,D,5,minority,MN,SSHR11,SSHR
+19,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,6,majority,LA,SSHR11,SSHR
+20,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,6,minority,MA,SSHR11,SSHR
+21,https://api.propublica.org/congress/v1/members/J000300.json,,J000300,Doug Jones,,D,6,minority,AL,SSHR11,SSHR
+22,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,7,majority,IN,SSHR11,SSHR
+0,https://api.propublica.org/congress/v1/members/E000285.json,,E000285,Michael B. Enzi,,R,1,majority,WY,SSHR12,SSHR
+1,https://api.propublica.org/congress/v1/members/S000033.json,,S000033,Bernard Sanders,,I,1,minority,VT,SSHR12,SSHR
+2,https://api.propublica.org/congress/v1/members/B001135.json,,B001135,Richard M. Burr,,R,2,majority,NC,SSHR12,SSHR
+3,https://api.propublica.org/congress/v1/members/B001267.json,,B001267,Michael Bennet,,D,2,minority,CO,SSHR12,SSHR
+4,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,3,minority,WI,SSHR12,SSHR
+5,https://api.propublica.org/congress/v1/members/C001035.json,,C001035,Susan Collins,,R,3,majority,ME,SSHR12,SSHR
+6,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,3,minority,RI,SSHR12,SSHR
+7,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,4,minority,CT,SSHR12,SSHR
+8,https://api.propublica.org/congress/v1/members/C001075.json,,C001075,Bill Cassidy,,R,4,majority,LA,SSHR12,SSHR
+9,https://api.propublica.org/congress/v1/members/B001230.json,,B001230,Tammy Baldwin,,D,4,minority,WI,SSHR12,SSHR
+10,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,5,minority,MA,SSHR12,SSHR
+11,https://api.propublica.org/congress/v1/members/Y000064.json,,Y000064,Todd Young,,R,5,majority,IN,SSHR12,SSHR
+12,https://api.propublica.org/congress/v1/members/M001169.json,,M001169,Christopher S. Murphy,,D,5,minority,CT,SSHR12,SSHR
+13,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,6,minority,VA,SSHR12,SSHR
+14,https://api.propublica.org/congress/v1/members/H000338.json,,H000338,Orrin G. Hatch,,R,6,majority,UT,SSHR12,SSHR
+15,https://api.propublica.org/congress/v1/members/W000817.json,,W000817,Elizabeth Warren,,D,6,minority,MA,SSHR12,SSHR
+16,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,7,minority,NH,SSHR12,SSHR
+17,https://api.propublica.org/congress/v1/members/R000307.json,,R000307,Pat Roberts,,R,7,majority,KS,SSHR12,SSHR
+18,https://api.propublica.org/congress/v1/members/K000384.json,,K000384,Tim Kaine,,D,7,minority,VA,SSHR12,SSHR
+19,https://api.propublica.org/congress/v1/members/S001184.json,,S001184,Tim Scott,,R,8,majority,SC,SSHR12,SSHR
+20,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,8,minority,NH,SSHR12,SSHR
+21,https://api.propublica.org/congress/v1/members/J000300.json,,J000300,Doug Jones,,D,8,minority,AL,SSHR12,SSHR
+22,https://api.propublica.org/congress/v1/members/M001153.json,,M001153,Lisa Murkowski,,R,9,majority,AK,SSHR12,SSHR
+0,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,1,majority,OH,SSGA01,SSGA
+1,https://api.propublica.org/congress/v1/members/C000174.json,,C000174,Thomas R. Carper,,D,1,minority,DE,SSGA01,SSGA
+2,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,2,minority,ND,SSGA01,SSGA
+3,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,2,majority,OK,SSGA01,SSGA
+4,https://api.propublica.org/congress/v1/members/T000464.json,,T000464,Jon Tester,,D,2,minority,MT,SSGA01,SSGA
+5,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,3,minority,MI,SSGA01,SSGA
+6,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,3,minority,ND,SSGA01,SSGA
+7,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,4,minority,NH,SSGA01,SSGA
+8,https://api.propublica.org/congress/v1/members/P000603.json,,P000603,Rand Paul,,R,4,majority,KY,SSGA01,SSGA
+9,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,4,minority,MI,SSGA01,SSGA
+10,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,5,majority,MT,SSGA01,SSGA
+0,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,1,majority,OK,SSGA19,SSGA
+1,https://api.propublica.org/congress/v1/members/H001069.json,,H001069,Heidi Heitkamp,,D,1,minority,ND,SSGA19,SSGA
+2,https://api.propublica.org/congress/v1/members/C000174.json,,C000174,Thomas R. Carper,,D,2,minority,DE,SSGA19,SSGA
+3,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,3,minority,NH,SSGA19,SSGA
+4,https://api.propublica.org/congress/v1/members/P000449.json,,P000449,Rob Portman,,R,3,majority,OH,SSGA19,SSGA
+5,https://api.propublica.org/congress/v1/members/H001075.json,,H001075,Kamala Harris,,D,4,minority,CA,SSGA19,SSGA
+6,https://api.propublica.org/congress/v1/members/E000285.json,,E000285,Michael B. Enzi,,R,4,majority,WY,SSGA19,SSGA
+7,https://api.propublica.org/congress/v1/members/D000618.json,,D000618,Steve Daines,,R,5,majority,MT,SSGA19,SSGA
+0,https://api.propublica.org/congress/v1/members/P000603.json,,P000603,Rand Paul,,R,1,majority,KY,SSGA18,SSGA
+1,https://api.propublica.org/congress/v1/members/P000595.json,,P000595,Gary Peters,,D,1,minority,MI,SSGA18,SSGA
+2,https://api.propublica.org/congress/v1/members/H001075.json,,H001075,Kamala Harris,,D,2,minority,CA,SSGA18,SSGA
+3,https://api.propublica.org/congress/v1/members/L000575.json,,L000575,James Lankford,,R,2,majority,OK,SSGA18,SSGA
+4,https://api.propublica.org/congress/v1/members/H001076.json,,H001076,Margaret Hassan,,D,2,minority,NH,SSGA18,SSGA
+5,https://api.propublica.org/congress/v1/members/J000300.json,,J000300,Doug Jones,,D,3,minority,AL,SSGA18,SSGA
+6,https://api.propublica.org/congress/v1/members/E000285.json,,E000285,Michael B. Enzi,,R,3,majority,WY,SSGA18,SSGA
+7,https://api.propublica.org/congress/v1/members/H001075.json,,H001075,Kamala Harris,,D,3,minority,CA,SSGA18,SSGA
+8,https://api.propublica.org/congress/v1/members/H001061.json,,H001061,John Hoeven,,R,4,majority,ND,SSGA18,SSGA
+0,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,1,majority,UT,SSJU01,SSJU
+1,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,1,minority,MN,SSJU01,SSJU
+2,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,2,majority,IA,SSJU01,SSJU
+3,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,2,minority,VT,SSJU01,SSJU
+4,https://api.propublica.org/congress/v1/members/H000338.json,,H000338,Orrin G. Hatch,,R,3,majority,UT,SSJU01,SSJU
+5,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,3,minority,CT,SSJU01,SSJU
+6,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,4,majority,SC,SSJU01,SSJU
+7,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,4,minority,CT,SSJU01,SSJU
+8,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,4,minority,NJ,SSJU01,SSJU
+9,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,5,majority,NC,SSJU01,SSJU
+0,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,1,minority,DE,SSJU23,SSJU
+1,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,1,majority,AZ,SSJU23,SSJU
+2,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,1,minority,VT,SSJU23,SSJU
+3,https://api.propublica.org/congress/v1/members/H000338.json,,H000338,Orrin G. Hatch,,R,2,majority,UT,SSJU23,SSJU
+4,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,2,minority,VT,SSJU23,SSJU
+5,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,2,minority,RI,SSJU23,SSJU
+6,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,3,majority,UT,SSJU23,SSJU
+7,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,3,minority,RI,SSJU23,SSJU
+8,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,3,minority,DE,SSJU23,SSJU
+9,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,4,minority,CT,SSJU23,SSJU
+10,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,4,majority,NC,SSJU23,SSJU
+11,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,4,minority,DE,SSJU23,SSJU
+12,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,4,minority,HI,SSJU23,SSJU
+13,https://api.propublica.org/congress/v1/members/C000880.json,,C000880,Michael D. Crapo,,R,5,majority,ID,SSJU23,SSJU
+14,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,5,minority,HI,SSJU23,SSJU
+15,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,6,majority,NE,SSJU23,SSJU
+16,https://api.propublica.org/congress/v1/members/H001075.json,,H001075,Kamala Harris,,D,6,minority,CA,SSJU23,SSJU
+17,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,6,majority,LA,SSJU23,SSJU
+18,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,7,majority,LA,SSJU23,SSJU
+0,https://api.propublica.org/congress/v1/members/C001056.json,,C001056,John Cornyn,,R,1,majority,TX,SSJU04,SSJU
+1,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,1,minority,IL,SSJU04,SSJU
+2,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,2,majority,NC,SSJU04,SSJU
+3,https://api.propublica.org/congress/v1/members/F000062.json,,F000062,Dianne Feinstein,,D,2,minority,CA,SSJU04,SSJU
+4,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,3,majority,LA,SSJU04,SSJU
+5,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,3,minority,VT,SSJU04,SSJU
+6,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,4,majority,IA,SSJU04,SSJU
+7,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,4,minority,MN,SSJU04,SSJU
+8,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,5,majority,TX,SSJU04,SSJU
+9,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,5,minority,CT,SSJU04,SSJU
+10,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,6,majority,AZ,SSJU04,SSJU
+11,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,6,minority,CT,SSJU04,SSJU
+12,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,6,minority,HI,SSJU04,SSJU
+13,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,7,minority,NJ,SSJU04,SSJU
+14,https://api.propublica.org/congress/v1/members/C000880.json,,C000880,Michael D. Crapo,,R,7,majority,ID,SSJU04,SSJU
+15,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,7,minority,HI,SSJU04,SSJU
+16,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,8,majority,UT,SSJU04,SSJU
+0,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,1,majority,SC,SSJU22,SSJU
+1,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,1,minority,RI,SSJU22,SSJU
+2,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,2,majority,IA,SSJU22,SSJU
+3,https://api.propublica.org/congress/v1/members/F000062.json,,F000062,Dianne Feinstein,,D,2,minority,CA,SSJU22,SSJU
+4,https://api.propublica.org/congress/v1/members/C001056.json,,C001056,John Cornyn,,R,2,majority,TX,SSJU22,SSJU
+5,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,2,minority,IL,SSJU22,SSJU
+6,https://api.propublica.org/congress/v1/members/H000338.json,,H000338,Orrin G. Hatch,,R,3,majority,UT,SSJU22,SSJU
+7,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,3,minority,IL,SSJU22,SSJU
+8,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,3,majority,TX,SSJU22,SSJU
+9,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,3,minority,MN,SSJU22,SSJU
+10,https://api.propublica.org/congress/v1/members/C001056.json,,C001056,John Cornyn,,R,4,majority,TX,SSJU22,SSJU
+11,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,4,minority,MN,SSJU22,SSJU
+12,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,4,majority,NE,SSJU22,SSJU
+13,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,4,minority,DE,SSJU22,SSJU
+14,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,5,majority,TX,SSJU22,SSJU
+15,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,5,minority,DE,SSJU22,SSJU
+16,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,5,majority,LA,SSJU22,SSJU
+17,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,6,majority,NE,SSJU22,SSJU
+18,https://api.propublica.org/congress/v1/members/B001288.json,,B001288,Cory Booker,,D,6,minority,NJ,SSJU22,SSJU
+19,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,7,majority,LA,SSJU22,SSJU
+0,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,1,minority,HI,SSJU21,SSJU
+1,https://api.propublica.org/congress/v1/members/C001098.json,,C001098,Ted Cruz,,R,1,majority,TX,SSJU21,SSJU
+2,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,1,minority,CT,SSJU21,SSJU
+3,https://api.propublica.org/congress/v1/members/C001056.json,,C001056,John Cornyn,,R,2,majority,TX,SSJU21,SSJU
+4,https://api.propublica.org/congress/v1/members/D000563.json,,D000563,Richard J. Durbin,,D,2,minority,IL,SSJU21,SSJU
+5,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,3,minority,RI,SSJU21,SSJU
+6,https://api.propublica.org/congress/v1/members/C000880.json,,C000880,Michael D. Crapo,,R,3,majority,ID,SSJU21,SSJU
+7,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,3,minority,DE,SSJU21,SSJU
+8,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,4,majority,NE,SSJU21,SSJU
+9,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,4,minority,DE,SSJU21,SSJU
+10,https://api.propublica.org/congress/v1/members/H001075.json,,H001075,Kamala Harris,,D,5,minority,CA,SSJU21,SSJU
+11,https://api.propublica.org/congress/v1/members/G000359.json,,G000359,Lindsey Graham,,R,5,majority,SC,SSJU21,SSJU
+12,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,6,majority,LA,SSJU21,SSJU
+0,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,1,minority,CT,SSJU25,SSJU
+1,https://api.propublica.org/congress/v1/members/S001197.json,,S001197,Ben Sasse,,R,1,majority,NE,SSJU25,SSJU
+2,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,1,minority,DE,SSJU25,SSJU
+3,https://api.propublica.org/congress/v1/members/G000386.json,,G000386,Charles E. Grassley,,R,2,majority,IA,SSJU25,SSJU
+4,https://api.propublica.org/congress/v1/members/L000174.json,,L000174,Patrick J. Leahy,,D,2,minority,VT,SSJU25,SSJU
+5,https://api.propublica.org/congress/v1/members/C000880.json,,C000880,Michael D. Crapo,,R,3,majority,ID,SSJU25,SSJU
+6,https://api.propublica.org/congress/v1/members/W000802.json,,W000802,Sheldon Whitehouse,,D,3,minority,RI,SSJU25,SSJU
+7,https://api.propublica.org/congress/v1/members/K000393.json,,K000393,John Kennedy,,R,4,majority,LA,SSJU25,SSJU
+8,https://api.propublica.org/congress/v1/members/K000367.json,,K000367,Amy Klobuchar,,D,4,minority,MN,SSJU25,SSJU
+9,https://api.propublica.org/congress/v1/members/C001088.json,,C001088,Christopher A. Coons,,D,5,minority,DE,SSJU25,SSJU
+10,https://api.propublica.org/congress/v1/members/H000338.json,,H000338,Orrin G. Hatch,,R,5,majority,UT,SSJU25,SSJU
+11,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,5,minority,CT,SSJU25,SSJU
+12,https://api.propublica.org/congress/v1/members/L000577.json,,L000577,Mike Lee,,R,6,majority,UT,SSJU25,SSJU
+13,https://api.propublica.org/congress/v1/members/B001277.json,,B001277,Richard Blumenthal,,D,6,minority,CT,SSJU25,SSJU
+14,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,6,minority,HI,SSJU25,SSJU
+15,https://api.propublica.org/congress/v1/members/H001075.json,,H001075,Kamala Harris,,D,7,minority,CA,SSJU25,SSJU
+16,https://api.propublica.org/congress/v1/members/F000444.json,,F000444,Jeff Flake,,R,7,majority,AZ,SSJU25,SSJU
+17,https://api.propublica.org/congress/v1/members/H001042.json,,H001042,Mazie K. Hirono,,D,7,minority,HI,SSJU25,SSJU
+18,https://api.propublica.org/congress/v1/members/T000476.json,,T000476,Thom Tillis,,R,8,majority,NC,SSJU25,SSJU
