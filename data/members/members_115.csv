@@ -1,0 +1,560 @@
+id,first_name,last_name,middle_name,party,state,title,url,in_office,chamber
+A000360,Lamar,Alexander,,R,TN,"Senator, 2nd Class",https://www.alexander.senate.gov/public,True,s
+B001230,Tammy,Baldwin,,D,WI,"Senator, 1st Class",https://www.baldwin.senate.gov,True,s
+B001261,John,Barrasso,,R,WY,"Senator, 1st Class",https://www.barrasso.senate.gov,True,s
+B001267,Michael,Bennet,,D,CO,"Senator, 3rd Class",https://www.bennet.senate.gov,True,s
+B001277,Richard,Blumenthal,,D,CT,"Senator, 3rd Class",https://www.blumenthal.senate.gov,True,s
+B000575,Roy,Blunt,,R,MO,"Senator, 3rd Class",https://www.blunt.senate.gov/public,True,s
+B001288,Cory,Booker,,D,NJ,"Senator, 2nd Class",https://www.booker.senate.gov,True,s
+B001236,John,Boozman,,R,AR,"Senator, 3rd Class",https://www.boozman.senate.gov/public,True,s
+B000944,Sherrod,Brown,,D,OH,"Senator, 1st Class",https://www.brown.senate.gov,True,s
+B001135,Richard,Burr,M.,R,NC,"Senator, 3rd Class",https://www.burr.senate.gov,True,s
+C000127,Maria,Cantwell,,D,WA,"Senator, 1st Class",https://www.cantwell.senate.gov,True,s
+C001047,Shelley,Capito,Moore,R,WV,"Senator, 2nd Class",https://www.capito.senate.gov,True,s
+C000141,Benjamin,Cardin,L.,D,MD,"Senator, 1st Class",https://www.cardin.senate.gov,True,s
+C000174,Thomas,Carper,R.,D,DE,"Senator, 1st Class",https://www.carper.senate.gov/public,True,s
+C001070,Bob,Casey,,D,PA,"Senator, 1st Class",https://www.casey.senate.gov,True,s
+C001075,Bill,Cassidy,,R,LA,"Senator, 2nd Class",https://www.cassidy.senate.gov,True,s
+C000567,Thad,Cochran,,R,MS,"Senator, 2nd Class",https://www.cochran.senate.gov,False,s
+C001035,Susan,Collins,,R,ME,"Senator, 2nd Class",https://www.collins.senate.gov,True,s
+C001088,Christopher,Coons,A.,D,DE,"Senator, 2nd Class",https://www.coons.senate.gov,True,s
+C001071,Bob,Corker,,R,TN,"Senator, 1st Class",https://www.corker.senate.gov,True,s
+C001056,John,Cornyn,,R,TX,"Senator, 2nd Class",https://www.cornyn.senate.gov,True,s
+C001113,Catherine,Cortez Masto,,D,NV,"Senator, 3rd Class",https://www.cortezmasto.senate.gov,True,s
+C001095,Tom,Cotton,,R,AR,"Senator, 2nd Class",https://www.cotton.senate.gov,True,s
+C000880,Michael,Crapo,D.,R,ID,"Senator, 3rd Class",https://www.crapo.senate.gov,True,s
+C001098,Ted,Cruz,,R,TX,"Senator, 1st Class",https://www.cruz.senate.gov,True,s
+D000618,Steve,Daines,,R,MT,"Senator, 2nd Class",https://www.daines.senate.gov,True,s
+D000607,Joe,Donnelly,,D,IN,"Senator, 1st Class",https://www.donnelly.senate.gov,True,s
+D000622,Tammy,Duckworth,,D,IL,"Senator, 3rd Class",https://www.duckworth.senate.gov,True,s
+D000563,Richard,Durbin,J.,D,IL,"Senator, 2nd Class",https://www.durbin.senate.gov,True,s
+E000285,Michael,Enzi,B.,R,WY,"Senator, 2nd Class",https://www.enzi.senate.gov,True,s
+E000295,Joni,Ernst,,R,IA,"Senator, 2nd Class",https://www.ernst.senate.gov/public,True,s
+F000062,Dianne,Feinstein,,D,CA,"Senator, 1st Class",https://www.feinstein.senate.gov,True,s
+F000463,Deb,Fischer,,R,NE,"Senator, 1st Class",https://www.fischer.senate.gov,True,s
+F000444,Jeff,Flake,,R,AZ,"Senator, 1st Class",https://www.flake.senate.gov/public,True,s
+F000457,Al,Franken,,D,MN,"Senator, 2nd Class",https://www.franken.senate.gov/,False,s
+G000562,Cory,Gardner,,R,CO,"Senator, 2nd Class",https://www.gardner.senate.gov,True,s
+G000555,Kirsten,Gillibrand,E.,D,NY,"Senator, 1st Class",https://www.gillibrand.senate.gov,True,s
+G000359,Lindsey,Graham,,R,SC,"Senator, 2nd Class",https://www.lgraham.senate.gov/public,True,s
+G000386,Charles,Grassley,E.,R,IA,"Senator, 3rd Class",https://www.grassley.senate.gov,True,s
+H001075,Kamala,Harris,,D,CA,"Senator, 3rd Class",https://www.harris.senate.gov,True,s
+H001076,Margaret,Hassan,,D,NH,"Senator, 3rd Class",https://www.hassan.senate.gov,True,s
+H000338,Orrin,Hatch,G.,R,UT,"Senator, 1st Class",https://www.hatch.senate.gov,True,s
+H001046,Martin,Heinrich,,D,NM,"Senator, 1st Class",https://www.heinrich.senate.gov,True,s
+H001069,Heidi,Heitkamp,,D,ND,"Senator, 1st Class",https://www.heitkamp.senate.gov/public,True,s
+H001041,Dean,Heller,,R,NV,"Senator, 1st Class",https://www.heller.senate.gov/public,True,s
+H001042,Mazie,Hirono,K.,D,HI,"Senator, 1st Class",https://www.hirono.senate.gov,True,s
+H001061,John,Hoeven,,R,ND,"Senator, 3rd Class",https://www.hoeven.senate.gov,True,s
+H001079,Cindy,Hyde-Smith,,R,MS,"Senator, 2nd Class",https://www.hydesmith.senate.gov/,True,s
+I000024,James,Inhofe,M.,R,OK,"Senator, 2nd Class",https://www.inhofe.senate.gov,True,s
+I000055,Johnny,Isakson,,R,GA,"Senator, 3rd Class",https://www.isakson.senate.gov,True,s
+J000293,Ron,Johnson,,R,WI,"Senator, 3rd Class",https://www.ronjohnson.senate.gov,True,s
+J000300,Doug,Jones,,D,AL,"Senator, 2nd Class",https://www.jones.senate.gov,True,s
+K000384,Tim,Kaine,,D,VA,"Senator, 1st Class",https://www.kaine.senate.gov,True,s
+K000393,John,Kennedy,,R,LA,"Senator, 3rd Class",https://www.kennedy.senate.gov/public,True,s
+K000383,Angus,King,,I,ME,"Senator, 1st Class",https://www.king.senate.gov,True,s
+K000367,Amy,Klobuchar,,D,MN,"Senator, 1st Class",https://www.klobuchar.senate.gov,True,s
+K000352,Jon,Kyl,,R,AZ,"Senator, 3rd Class",,True,s
+L000575,James,Lankford,,R,OK,"Senator, 3rd Class",https://www.lankford.senate.gov,True,s
+L000174,Patrick,Leahy,J.,D,VT,"Senator, 3rd Class",https://www.leahy.senate.gov,True,s
+L000577,Mike,Lee,,R,UT,"Senator, 3rd Class",https://www.lee.senate.gov/public,True,s
+M001183,Joe,Manchin,,D,WV,"Senator, 1st Class",https://www.manchin.senate.gov,True,s
+M000133,Edward,Markey,J.,D,MA,"Senator, 2nd Class",https://www.markey.senate.gov,True,s
+M000303,John,McCain,,R,AZ,"Senator, 3rd Class",https://www.mccain.senate.gov,False,s
+M001170,Claire,McCaskill,,D,MO,"Senator, 1st Class",https://www.mccaskill.senate.gov,True,s
+M000355,Mitch,McConnell,,R,KY,"Senator, 2nd Class",https://www.mcconnell.senate.gov,True,s
+M000639,Robert,Menendez,,D,NJ,"Senator, 1st Class",https://www.menendez.senate.gov,True,s
+M001176,Jeff,Merkley,,D,OR,"Senator, 2nd Class",https://www.merkley.senate.gov,True,s
+M000934,Jerry,Moran,,R,KS,"Senator, 3rd Class",https://www.moran.senate.gov,True,s
+M001153,Lisa,Murkowski,,R,AK,"Senator, 3rd Class",https://www.murkowski.senate.gov,True,s
+M001169,Christopher,Murphy,S.,D,CT,"Senator, 1st Class",https://www.murphy.senate.gov,True,s
+M001111,Patty,Murray,,D,WA,"Senator, 3rd Class",https://www.murray.senate.gov/public,True,s
+N000032,Bill,Nelson,,D,FL,"Senator, 1st Class",https://www.billnelson.senate.gov,True,s
+P000603,Rand,Paul,,R,KY,"Senator, 3rd Class",https://www.paul.senate.gov,True,s
+P000612,David,Perdue,,R,GA,"Senator, 2nd Class",https://www.perdue.senate.gov,True,s
+P000595,Gary,Peters,,D,MI,"Senator, 2nd Class",https://www.peters.senate.gov,True,s
+P000449,Rob,Portman,,R,OH,"Senator, 3rd Class",https://www.portman.senate.gov,True,s
+R000122,Jack,Reed,,D,RI,"Senator, 2nd Class",https://www.reed.senate.gov,True,s
+R000584,Jim,Risch,,R,ID,"Senator, 2nd Class",https://www.risch.senate.gov,True,s
+R000307,Pat,Roberts,,R,KS,"Senator, 2nd Class",https://www.roberts.senate.gov,True,s
+R000605,Mike,Rounds,,R,SD,"Senator, 2nd Class",https://www.rounds.senate.gov,True,s
+R000595,Marco,Rubio,,R,FL,"Senator, 3rd Class",https://www.rubio.senate.gov,True,s
+S000033,Bernard,Sanders,,I,VT,"Senator, 1st Class",https://www.sanders.senate.gov,True,s
+S001197,Ben,Sasse,,R,NE,"Senator, 2nd Class",https://www.sasse.senate.gov/public,True,s
+S001194,Brian,Schatz,,D,HI,"Senator, 3rd Class",https://www.schatz.senate.gov,True,s
+S000148,Charles,Schumer,E.,D,NY,"Senator, 3rd Class",https://www.schumer.senate.gov,True,s
+S001184,Tim,Scott,,R,SC,"Senator, 3rd Class",https://www.scott.senate.gov,True,s
+S001141,Jeff,Sessions,,R,AL,"Senator, 2nd Class",http://www.sessions.senate.gov/public,False,s
+S001181,Jeanne,Shaheen,,D,NH,"Senator, 2nd Class",https://www.shaheen.senate.gov,True,s
+S000320,Richard,Shelby,C.,R,AL,"Senator, 3rd Class",https://www.shelby.senate.gov,True,s
+S001203,Tina,Smith,,D,MN,"Senator, 2nd Class",https://www.smith.senate.gov/,True,s
+S000770,Debbie,Stabenow,,D,MI,"Senator, 1st Class",https://www.stabenow.senate.gov,True,s
+S001202,Luther,Strange,,R,AL,"Senator, 2nd Class",https://www.strange.senate.gov/,False,s
+S001198,Dan,Sullivan,,R,AK,"Senator, 2nd Class",https://www.sullivan.senate.gov,True,s
+T000464,Jon,Tester,,D,MT,"Senator, 1st Class",https://www.tester.senate.gov,True,s
+T000250,John,Thune,,R,SD,"Senator, 3rd Class",https://www.thune.senate.gov,True,s
+T000476,Thom,Tillis,,R,NC,"Senator, 2nd Class",https://www.tillis.senate.gov/public,True,s
+T000461,Patrick,Toomey,J.,R,PA,"Senator, 3rd Class",https://www.toomey.senate.gov,True,s
+U000039,Tom,Udall,,D,NM,"Senator, 2nd Class",https://www.tomudall.senate.gov,True,s
+V000128,Chris,Van Hollen,,D,MD,"Senator, 3rd Class",https://www.vanhollen.senate.gov,True,s
+W000805,Mark,Warner,,D,VA,"Senator, 2nd Class",https://www.warner.senate.gov,True,s
+W000817,Elizabeth,Warren,,D,MA,"Senator, 1st Class",https://www.warren.senate.gov,True,s
+W000802,Sheldon,Whitehouse,,D,RI,"Senator, 1st Class",https://www.whitehouse.senate.gov,True,s
+W000437,Roger,Wicker,,R,MS,"Senator, 1st Class",https://www.wicker.senate.gov,True,s
+W000779,Ron,Wyden,,D,OR,"Senator, 3rd Class",https://www.wyden.senate.gov,True,s
+Y000064,Todd,Young,,R,IN,"Senator, 3rd Class",https://www.young.senate.gov,True,s
+A000374,Ralph,Abraham,,R,LA,Representative,https://abraham.house.gov,True,h
+A000370,Alma,Adams,,D,NC,Representative,https://adams.house.gov,True,h
+A000055,Robert,Aderholt,B.,R,AL,Representative,https://aderholt.house.gov,True,h
+A000371,Pete,Aguilar,,D,CA,Representative,https://aguilar.house.gov,True,h
+A000372,Rick,Allen,,R,GA,Representative,https://allen.house.gov,True,h
+A000367,Justin,Amash,,R,MI,Representative,https://amash.house.gov,True,h
+A000369,Mark,Amodei,,R,NV,Representative,https://amodei.house.gov,True,h
+A000375,Jodey,Arrington,,R,TX,Representative,https://arrington.house.gov,True,h
+B001291,Brian,Babin,,R,TX,Representative,https://babin.house.gov,True,h
+B001298,Don,Bacon,,R,NE,Representative,https://bacon.house.gov,True,h
+B001306,Troy,Balderson,,R,OH,Representative,https://balderson.house.gov/,True,h
+B001299,Jim,Banks,,R,IN,Representative,https://banks.house.gov,True,h
+B001269,Lou,Barletta,,R,PA,Representative,https://barletta.house.gov,True,h
+B001282,Andy,Barr,,R,KY,Representative,https://barr.house.gov,True,h
+B001300,Nanette,Barragán,,D,CA,Representative,https://barragan.house.gov,True,h
+B000213,Joe,Barton,L.,R,TX,Representative,https://joebarton.house.gov,True,h
+B001270,Karen,Bass,,D,CA,Representative,https://bass.house.gov,True,h
+B001281,Joyce,Beatty,,D,OH,Representative,https://beatty.house.gov,True,h
+B000287,Xavier,Becerra,,D,CA,Representative,http://becerra.house.gov,False,h
+B001287,Ami,Bera,,D,CA,Representative,https://bera.house.gov,True,h
+B001301,Jack,Bergman,,R,MI,Representative,https://bergman.house.gov,True,h
+B001292,Donald,Beyer,,D,VA,Representative,https://beyer.house.gov,True,h
+B001302,Andy,Biggs,,R,AZ,Representative,https://biggs.house.gov,True,h
+B001257,Gus,Bilirakis,,R,FL,Representative,https://bilirakis.house.gov,True,h
+B000490,Sanford,Bishop,D.,D,GA,Representative,https://bishop.house.gov,True,h
+B001293,Mike,Bishop,,R,MI,Representative,https://mikebishop.house.gov,True,h
+B001250,Rob,Bishop,,R,UT,Representative,https://robbishop.house.gov,True,h
+B001273,Diane,Black,,R,TN,Representative,https://black.house.gov,True,h
+B001243,Marsha,Blackburn,,R,TN,Representative,https://blackburn.house.gov,True,h
+B001294,Rod,Blum,,R,IA,Representative,https://blum.house.gov,True,h
+B000574,Earl,Blumenauer,,D,OR,Representative,https://blumenauer.house.gov,True,h
+B001303,Lisa,Blunt Rochester,,D,DE,Representative,https://bluntrochester.house.gov,True,h
+B001278,Suzanne,Bonamici,,D,OR,Representative,https://bonamici.house.gov,True,h
+B001245,Madeleine,Bordallo,Z.,D,GU,Delegate,https://bordallo.house.gov,True,h
+B001295,Mike,Bost,,R,IL,Representative,https://bost.house.gov,True,h
+B001296,Brendan,Boyle,,D,PA,Representative,https://boyle.house.gov,True,h
+B000755,Kevin,Brady,,R,TX,Representative,https://kevinbrady.house.gov,True,h
+B001227,Robert,Brady,A.,D,PA,Representative,https://brady.house.gov,True,h
+B001290,David,Brat,A.,R,VA,Representative,https://brat.house.gov,True,h
+B001283,Jim,Bridenstine,,R,OK,Representative,https://bridenstine.house.gov,False,h
+B001284,Susan,Brooks,,R,IN,Representative,https://susanwbrooks.house.gov,True,h
+B001274,Mo,Brooks,,R,AL,Representative,https://brooks.house.gov,True,h
+B001304,Anthony,Brown,,D,MD,Representative,https://anthonybrown.house.gov,True,h
+B001285,Julia,Brownley,,D,CA,Representative,https://juliabrownley.house.gov,True,h
+B001260,Vern,Buchanan,,R,FL,Representative,https://buchanan.house.gov,True,h
+B001297,Ken,Buck,,R,CO,Representative,https://buck.house.gov,True,h
+B001275,Larry,Bucshon,,R,IN,Representative,https://bucshon.house.gov,True,h
+B001305,Ted,Budd,,R,NC,Representative,https://budd.house.gov,True,h
+B001248,Michael,Burgess,C.,R,TX,Representative,https://burgess.house.gov,True,h
+B001286,Cheri,Bustos,,D,IL,Representative,https://bustos.house.gov,True,h
+B001251,G.,Butterfield,K.,D,NC,Representative,https://butterfield.house.gov,True,h
+B001289,Bradley,Byrne,,R,AL,Representative,https://byrne.house.gov,True,h
+C000059,Ken,Calvert,,R,CA,Representative,https://calvert.house.gov,True,h
+C001037,Michael,Capuano,E.,D,MA,Representative,http://capuano.house.gov,True,h
+C001112,Salud,Carbajal,,D,CA,Representative,https://carbajal.house.gov,True,h
+C001097,Tony,Cárdenas,,D,CA,Representative,https://cardenas.house.gov,True,h
+C001072,André,Carson,,D,IN,Representative,https://carson.house.gov,True,h
+C001051,John,Carter,,R,TX,Representative,https://carter.house.gov,True,h
+C001103,Buddy,Carter,,R,GA,Representative,https://buddycarter.house.gov,True,h
+C001090,Matt,Cartwright,,D,PA,Representative,https://cartwright.house.gov,True,h
+C001066,Kathy,Castor,,D,FL,Representative,https://castor.house.gov,True,h
+C001091,Joaquín,Castro,,D,TX,Representative,https://castro.house.gov,True,h
+C000266,Steven,Chabot,J.,R,OH,Representative,https://chabot.house.gov,True,h
+C001076,Jason,Chaffetz,,R,UT,Representative,http://clerk.house.gov/member_info/vacancies_pr.aspx?pr=house&amp;vid=111,False,h
+C001109,Liz,Cheney,,R,WY,Representative,https://cheney.house.gov,True,h
+C001080,Judy,Chu,,D,CA,Representative,https://chu.house.gov,True,h
+C001084,David,Cicilline,,D,RI,Representative,https://cicilline.house.gov,True,h
+C001101,Katherine,Clark,,D,MA,Representative,https://katherineclark.house.gov,True,h
+C001067,Yvette,Clarke,D.,D,NY,Representative,https://clarke.house.gov,True,h
+C001049,William,Clay,Lacy,D,MO,Representative,https://lacyclay.house.gov,True,h
+C001061,Emanuel,Cleaver,,D,MO,Representative,https://cleaver.house.gov,True,h
+C001115,Michael,Cloud,,R,TX,Representative,https://cloud.house.gov/,True,h
+C000537,James,Clyburn,E.,D,SC,Representative,https://clyburn.house.gov,True,h
+C001077,Mike,Coffman,,R,CO,Representative,https://coffman.house.gov,True,h
+C001068,Steve,Cohen,,D,TN,Representative,https://cohen.house.gov,True,h
+C001053,Tom,Cole,,R,OK,Representative,https://cole.house.gov,True,h
+C001092,Chris,Collins,,R,NY,Representative,https://chriscollins.house.gov,True,h
+C001093,Doug,Collins,,R,GA,Representative,https://dougcollins.house.gov,True,h
+C001108,James,Comer,,R,KY,Representative,https://comer.house.gov,True,h
+C001105,Barbara,Comstock,,R,VA,Representative,https://comstock.house.gov,True,h
+C001062,K.,Conaway,Michael,R,TX,Representative,https://conaway.house.gov,True,h
+C001078,Gerald,Connolly,E.,D,VA,Representative,https://connolly.house.gov,True,h
+C000714,John,Conyers,,D,MI,Representative,https://conyers.house.gov/,False,h
+C001094,Paul,Cook,,R,CA,Representative,https://cook.house.gov,True,h
+C000754,Jim,Cooper,,D,TN,Representative,https://cooper.house.gov,True,h
+C001110,J.,Correa,Luis,D,CA,Representative,https://correa.house.gov,True,h
+C001059,Jim,Costa,,D,CA,Representative,https://costa.house.gov,True,h
+C001106,Ryan,Costello,,R,PA,Representative,https://costello.house.gov,True,h
+C001069,Joe,Courtney,,D,CT,Representative,https://courtney.house.gov,True,h
+C001096,Kevin,Cramer,,R,ND,Representative,https://cramer.house.gov,True,h
+C001087,Rick,Crawford,,R,AR,Representative,https://crawford.house.gov,True,h
+C001111,Charlie,Crist,,D,FL,Representative,https://crist.house.gov,True,h
+C001038,Joseph,Crowley,,D,NY,Representative,https://crowley.house.gov,True,h
+C001063,Henry,Cuellar,,D,TX,Representative,https://cuellar.house.gov,True,h
+C001048,John,Culberson,,R,TX,Representative,https://culberson.house.gov,True,h
+C000984,Elijah,Cummings,E.,D,MD,Representative,https://cummings.house.gov,True,h
+C001107,Carlos,Curbelo,,R,FL,Representative,https://curbelo.house.gov,True,h
+C001114,John,Curtis,,R,UT,Representative,https://curtis.house.gov,True,h
+D000626,Warren,Davidson,,R,OH,Representative,https://davidson.house.gov,True,h
+D000619,Rodney,Davis,,R,IL,Representative,https://rodneydavis.house.gov,True,h
+D000096,Danny,Davis,K.,D,IL,Representative,https://davis.house.gov,True,h
+D000598,Susan,Davis,A.,D,CA,Representative,https://susandavis.house.gov,True,h
+D000191,Peter,DeFazio,A.,D,OR,Representative,https://defazio.house.gov,True,h
+D000197,Diana,DeGette,,D,CO,Representative,https://degette.house.gov,True,h
+D000620,John,Delaney,,D,MD,Representative,https://delaney.house.gov,True,h
+D000216,Rosa,DeLauro,,D,CT,Representative,https://delauro.house.gov,True,h
+D000617,Suzan,DelBene,K.,D,WA,Representative,https://delbene.house.gov,True,h
+D000627,Val,Demings,,D,FL,Representative,https://demings.house.gov,True,h
+D000612,Jeffrey,Denham,,R,CA,Representative,https://denham.house.gov,True,h
+D000604,Charlie,Dent,,R,PA,Representative,https://dent.house.gov,False,h
+D000621,Ron,DeSantis,,R,FL,Representative,https://desantis.house.gov,False,h
+D000623,Mark,DeSaulnier,,D,CA,Representative,https://desaulnier.house.gov,True,h
+D000616,Scott,DesJarlais,,R,TN,Representative,https://desjarlais.house.gov,True,h
+D000610,Ted,Deutch,,D,FL,Representative,https://teddeutch.house.gov,True,h
+D000600,Mario,Diaz-Balart,,R,FL,Representative,https://mariodiazbalart.house.gov,True,h
+D000624,Debbie,Dingell,,D,MI,Representative,https://debbiedingell.house.gov,True,h
+D000399,Lloyd,Doggett,,D,TX,Representative,https://doggett.house.gov,True,h
+D000625,Daniel,Donovan,M.,R,NY,Representative,https://donovan.house.gov,True,h
+D000482,Mike,Doyle,,D,PA,Representative,https://doyle.house.gov,True,h
+D000614,Sean,Duffy,,R,WI,Representative,https://duffy.house.gov,True,h
+D000533,John,Duncan,J.,R,TN,Representative,https://duncan.house.gov,True,h
+D000615,Jeffrey,Duncan,,R,SC,Representative,https://jeffduncan.house.gov,True,h
+D000628,Neal,Dunn,,R,FL,Representative,https://dunn.house.gov,True,h
+E000288,Keith,Ellison,,D,MN,Representative,https://ellison.house.gov,True,h
+E000294,Tom,Emmer,,R,MN,Representative,https://emmer.house.gov,True,h
+E000179,Eliot,Engel,L.,D,NY,Representative,https://engel.house.gov,True,h
+E000215,Anna,Eshoo,G.,D,CA,Representative,http://eshoo.house.gov,True,h
+E000297,Adriano,Espaillat,,D,NY,Representative,https://espaillat.house.gov,True,h
+E000298,Ron,Estes,,R,KS,Representative,https://estes.house.gov,True,h
+E000293,Elizabeth,Esty,,D,CT,Representative,https://esty.house.gov,True,h
+E000296,Dwight,Evans,,D,PA,Representative,https://evans.house.gov,True,h
+F000460,Blake,Farenthold,,R,TX,Representative,https://farenthold.house.gov,False,h
+F000464,John,Faso,,R,NY,Representative,https://faso.house.gov,True,h
+F000465,A.,Ferguson,Drew,R,GA,Representative,https://ferguson.house.gov,True,h
+F000466,Brian,Fitzpatrick,,R,PA,Representative,https://fitzpatrick.house.gov,True,h
+F000459,Chuck,Fleischmann,,R,TN,Representative,https://fleischmann.house.gov,True,h
+F000461,Bill,Flores,,R,TX,Representative,https://flores.house.gov,True,h
+F000449,Jeff,Fortenberry,,R,NE,Representative,https://fortenberry.house.gov,True,h
+F000454,Bill,Foster,,D,IL,Representative,https://foster.house.gov,True,h
+F000450,Virginia,Foxx,,R,NC,Representative,https://foxx.house.gov,True,h
+F000462,Lois,Frankel,,D,FL,Representative,https://frankel.house.gov,True,h
+F000448,Trent,Franks,,R,AZ,Representative,https://franks.house.gov/,False,h
+F000372,Rodney,Frelinghuysen,,R,NJ,Representative,https://frelinghuysen.house.gov,True,h
+F000455,Marcia,Fudge,L.,D,OH,Representative,https://fudge.house.gov,True,h
+G000571,Tulsi,Gabbard,,D,HI,Representative,https://gabbard.house.gov,True,h
+G000578,Matt,Gaetz,,R,FL,Representative,https://gaetz.house.gov,True,h
+G000579,Mike,Gallagher,,R,WI,Representative,https://gallagher.house.gov,True,h
+G000574,Ruben,Gallego,,D,AZ,Representative,https://rubengallego.house.gov,True,h
+G000559,John,Garamendi,,D,CA,Representative,https://garamendi.house.gov,True,h
+G000580,Thomas,Garrett,,R,VA,Representative,https://tomgarrett.house.gov,True,h
+G000584,Greg,Gianforte,,R,MT,Representative,https://gianforte.house.gov,True,h
+G000563,Bob,Gibbs,,R,OH,Representative,https://gibbs.house.gov,True,h
+G000552,Louie,Gohmert,,R,TX,Representative,https://gohmert.house.gov,True,h
+G000585,Jimmy,Gomez,,D,CA,Representative,https://gomez.house.gov,True,h
+G000581,Vicente,Gonzalez,,D,TX,Representative,https://gonzalez.house.gov,True,h
+G000582,Jenniffer,González-Colón,,R,PR,Resident Commissioner,https://gonzalez-colon.house.gov,True,h
+G000289,Robert,Goodlatte,W.,R,VA,Representative,https://goodlatte.house.gov,True,h
+G000565,Paul,Gosar,,R,AZ,Representative,https://gosar.house.gov,True,h
+G000583,Josh,Gottheimer,,D,NJ,Representative,https://gottheimer.house.gov,True,h
+G000566,Trey,Gowdy,,R,SC,Representative,https://gowdy.house.gov,True,h
+G000377,Kay,Granger,,R,TX,Representative,https://kaygranger.house.gov,True,h
+G000560,Tom,Graves,,R,GA,Representative,https://tomgraves.house.gov,True,h
+G000546,Sam,Graves,,R,MO,Representative,https://graves.house.gov,True,h
+G000577,Garret,Graves,,R,LA,Representative,https://garretgraves.house.gov,True,h
+G000410,Gene,Green,,D,TX,Representative,https://green.house.gov,True,h
+G000553,Al,Green,,D,TX,Representative,https://algreen.house.gov,True,h
+G000568,Morgan,Griffith,,R,VA,Representative,https://morgangriffith.house.gov,True,h
+G000551,Raúl,Grijalva,M.,D,AZ,Representative,https://grijalva.house.gov,True,h
+G000576,Glenn,Grothman,,R,WI,Representative,https://grothman.house.gov,True,h
+G000558,Brett,Guthrie,,R,KY,Representative,https://guthrie.house.gov,True,h
+G000535,Luis,Gutiérrez,V.,D,IL,Representative,https://gutierrez.house.gov,True,h
+H001050,Colleen,Hanabusa,,D,HI,Representative,https://hanabusa.house.gov,True,h
+H001078,Karen,Handel,,R,GA,Representative,https://handel.house.gov,True,h
+H001045,Gregg,Harper,,R,MS,Representative,https://harper.house.gov,True,h
+H001052,Andy,Harris,,R,MD,Representative,https://harris.house.gov,True,h
+H001053,Vicky,Hartzler,,R,MO,Representative,https://hartzler.house.gov,True,h
+H000324,Alcee,Hastings,L.,D,FL,Representative,https://alceehastings.house.gov,True,h
+H001064,Denny,Heck,,D,WA,Representative,https://dennyheck.house.gov,True,h
+H001036,Jeb,Hensarling,,R,TX,Representative,https://hensarling.house.gov,True,h
+H001082,Kevin,Hern,,R,OK,Representative,https://hern.house.gov/,True,h
+H001056,Jaime,Herrera Beutler,,R,WA,Representative,https://herrerabeutler.house.gov,True,h
+H001071,Jody,Hice,,R,GA,Representative,https://hice.house.gov,True,h
+H001038,Brian,Higgins,,D,NY,Representative,https://higgins.house.gov,True,h
+H001077,Clay,Higgins,,R,LA,Representative,https://clayhiggins.house.gov,True,h
+H001072,French,Hill,,R,AR,Representative,https://hill.house.gov,True,h
+H001047,Jim,Himes,,D,CT,Representative,https://himes.house.gov,True,h
+H001065,George,Holding,,R,NC,Representative,https://holding.house.gov,True,h
+H001074,Trey,Hollingsworth,,R,IN,Representative,https://hollingsworth.house.gov,True,h
+H000874,Steny,Hoyer,H.,D,MD,Representative,https://hoyer.house.gov,True,h
+H001067,Richard,Hudson,,R,NC,Representative,https://hudson.house.gov,True,h
+H001068,Jared,Huffman,,D,CA,Representative,https://huffman.house.gov,True,h
+H001058,Bill,Huizenga,,R,MI,Representative,https://huizenga.house.gov,True,h
+H001059,Randy,Hultgren,,R,IL,Representative,https://hultgren.house.gov,True,h
+H001048,Duncan,Hunter,D.,R,CA,Representative,https://hunter.house.gov,True,h
+H001073,Will,Hurd,,R,TX,Representative,https://hurd.house.gov,True,h
+I000056,Darrell,Issa,,R,CA,Representative,https://issa.house.gov,True,h
+J000032,Sheila,Jackson Lee,,D,TX,Representative,https://jacksonlee.house.gov,True,h
+J000298,Pramila,Jayapal,,D,WA,Representative,https://jayapal.house.gov,True,h
+J000294,Hakeem,Jeffries,,D,NY,Representative,https://jeffries.house.gov,True,h
+J000297,Evan,Jenkins,,R,WV,Representative,https://evanjenkins.house.gov,False,h
+J000290,Lynn,Jenkins,,R,KS,Representative,https://lynnjenkins.house.gov,True,h
+J000288,Hank,Johnson,,D,GA,Representative,https://hankjohnson.house.gov,True,h
+J000299,Mike,Johnson,,R,LA,Representative,https://mikejohnson.house.gov,True,h
+J000174,Sam,Johnson,,R,TX,Representative,https://samjohnson.house.gov,True,h
+J000126,Eddie,Johnson,Bernice,D,TX,Representative,https://ebjohnson.house.gov,True,h
+J000292,Bill,Johnson,,R,OH,Representative,https://billjohnson.house.gov,True,h
+J000255,Walter,Jones,B.,R,NC,Representative,https://jones.house.gov,True,h
+J000289,Jim,Jordan,,R,OH,Representative,https://jordan.house.gov,True,h
+J000295,Dave,Joyce,,R,OH,Representative,https://joyce.house.gov,True,h
+K000009,Marcy,Kaptur,,D,OH,Representative,https://kaptur.house.gov,True,h
+K000386,John,Katko,,R,NY,Representative,https://katko.house.gov,True,h
+K000375,Bill,Keating,,D,MA,Representative,https://keating.house.gov,True,h
+K000388,Trent,Kelly,,R,MS,Representative,https://trentkelly.house.gov,True,h
+K000385,Robin,Kelly,,D,IL,Representative,https://robinkelly.house.gov,True,h
+K000376,Mike,Kelly,,R,PA,Representative,https://kelly.house.gov,True,h
+K000379,Joseph,Kennedy,P.,D,MA,Representative,https://kennedy.house.gov,True,h
+K000389,Ro,Khanna,,D,CA,Representative,https://khanna.house.gov,True,h
+K000390,Ruben,Kihuen,,D,NV,Representative,https://kihuen.house.gov,True,h
+K000380,Dan,Kildee,,D,MI,Representative,https://dankildee.house.gov,True,h
+K000381,Derek,Kilmer,,D,WA,Representative,https://kilmer.house.gov,True,h
+K000188,Ron,Kind,,D,WI,Representative,https://kind.house.gov,True,h
+K000362,Steve,King,,R,IA,Representative,https://steveking.house.gov,True,h
+K000210,Peter,King,T.,R,NY,Representative,https://peteking.house.gov,True,h
+K000378,Adam,Kinzinger,,R,IL,Representative,https://kinzinger.house.gov,True,h
+K000387,Steve,Knight,,R,CA,Representative,https://knight.house.gov,True,h
+K000391,Raja,Krishnamoorthi,,D,IL,Representative,https://krishnamoorthi.house.gov,True,h
+K000382,Ann,Kuster,McLane,D,NH,Representative,https://kuster.house.gov,True,h
+K000392,David,Kustoff,,R,TN,Representative,https://kustoff.house.gov,True,h
+L000573,Raúl,Labrador,,R,ID,Representative,https://labrador.house.gov,True,h
+L000585,Darin,LaHood,M.,R,IL,Representative,https://lahood.house.gov,True,h
+L000578,Doug,LaMalfa,,R,CA,Representative,https://lamalfa.house.gov,True,h
+L000588,Conor,Lamb,,D,PA,Representative,https://lamb.house.gov/,True,h
+L000564,Doug,Lamborn,,R,CO,Representative,https://lamborn.house.gov,True,h
+L000567,Leonard,Lance,,R,NJ,Representative,https://lance.house.gov,True,h
+L000559,Jim,Langevin,,D,RI,Representative,https://langevin.house.gov,True,h
+L000560,Rick,Larsen,,D,WA,Representative,https://larsen.house.gov,True,h
+L000557,John,Larson,B.,D,CT,Representative,https://larson.house.gov,True,h
+L000566,Robert,Latta,E.,R,OH,Representative,https://latta.house.gov,True,h
+L000581,Brenda,Lawrence,,D,MI,Representative,https://lawrence.house.gov,True,h
+L000586,Al,Lawson,,D,FL,Representative,https://lawson.house.gov,True,h
+L000551,Barbara,Lee,,D,CA,Representative,https://lee.house.gov,True,h
+L000589,Debbie,Lesko,,R,AZ,Representative,https://lesko.house.gov/,True,h
+L000263,Sander,Levin,M.,D,MI,Representative,https://levin.house.gov,True,h
+L000587,Jason,Lewis,,R,MN,Representative,https://jasonlewis.house.gov,True,h
+L000287,John,Lewis,,D,GA,Representative,https://johnlewis.house.gov,True,h
+L000582,Ted,Lieu,,D,CA,Representative,https://lieu.house.gov,True,h
+L000563,Daniel,Lipinski,,D,IL,Representative,https://lipinski.house.gov,True,h
+L000554,Frank,LoBiondo,A.,R,NJ,Representative,https://lobiondo.house.gov,True,h
+L000565,Dave,Loebsack,,D,IA,Representative,https://loebsack.house.gov,True,h
+L000397,Zoe,Lofgren,,D,CA,Representative,https://lofgren.house.gov,True,h
+L000576,Billy,Long,,R,MO,Representative,https://long.house.gov,True,h
+L000583,Barry,Loudermilk,,R,GA,Representative,https://loudermilk.house.gov,True,h
+L000584,Mia,Love,,R,UT,Representative,https://love.house.gov,True,h
+L000579,Alan,Lowenthal,,D,CA,Representative,https://lowenthal.house.gov,True,h
+L000480,Nita,Lowey,M.,D,NY,Representative,https://lowey.house.gov,True,h
+L000491,Frank,Lucas,D.,R,OK,Representative,https://lucas.house.gov,True,h
+L000569,Blaine,Luetkemeyer,,R,MO,Representative,https://luetkemeyer.house.gov,True,h
+L000570,Ben,Luján,Ray,D,NM,Representative,https://lujan.house.gov,True,h
+L000580,Michelle,Lujan Grisham,,D,NM,Representative,https://lujangrisham.house.gov,True,h
+L000562,Stephen,Lynch,F.,D,MA,Representative,https://lynch.house.gov,True,h
+M001193,Tom,MacArthur,,R,NJ,Representative,https://macarthur.house.gov,True,h
+M001185,Sean,Maloney,Patrick,D,NY,Representative,https://seanmaloney.house.gov,True,h
+M000087,Carolyn,Maloney,B.,D,NY,Representative,https://maloney.house.gov,True,h
+M001158,Kenny,Marchant,,R,TX,Representative,https://marchant.house.gov,True,h
+M001179,Tom,Marino,,R,PA,Representative,https://marino.house.gov,True,h
+M001198,Roger,Marshall,,R,KS,Representative,https://marshall.house.gov,True,h
+M001184,Thomas,Massie,,R,KY,Representative,https://massie.house.gov,True,h
+M001199,Brian,Mast,,R,FL,Representative,https://mast.house.gov,True,h
+M001163,Doris,Matsui,,D,CA,Representative,http://matsui.house.gov,True,h
+M001165,Kevin,McCarthy,,R,CA,Representative,https://kevinmccarthy.house.gov,True,h
+M001157,Michael,McCaul,,R,TX,Representative,https://mccaul.house.gov,True,h
+M001177,Tom,McClintock,,R,CA,Representative,https://mcclintock.house.gov,True,h
+M001143,Betty,McCollum,,D,MN,Representative,https://mccollum.house.gov,True,h
+M001200,A.,McEachin,Donald,D,VA,Representative,https://mceachin.house.gov,True,h
+M000312,Jim,McGovern,,D,MA,Representative,https://mcgovern.house.gov,True,h
+M001156,Patrick,McHenry,T.,R,NC,Representative,https://mchenry.house.gov,True,h
+M001180,David,McKinley,,R,WV,Representative,https://mckinley.house.gov,True,h
+M001159,Cathy,McMorris Rodgers,,R,WA,Representative,https://mcmorris.house.gov,True,h
+M001166,Jerry,McNerney,,D,CA,Representative,https://mcnerney.house.gov,True,h
+M001197,Martha,McSally,,R,AZ,Representative,https://mcsally.house.gov,True,h
+M001187,Mark,Meadows,,R,NC,Representative,https://meadows.house.gov,True,h
+M001181,Pat,Meehan,,R,PA,Representative,https://meehan.house.gov,False,h
+M001137,Gregory,Meeks,W.,D,NY,Representative,https://meeks.house.gov,True,h
+M001188,Grace,Meng,,D,NY,Representative,https://meng.house.gov,True,h
+M001189,Luke,Messer,,R,IN,Representative,https://messer.house.gov,True,h
+M001201,Paul,Mitchell,,R,MI,Representative,https://mitchell.house.gov,True,h
+M001194,John,Moolenaar,,R,MI,Representative,https://moolenaar.house.gov,True,h
+M001195,Alex,Mooney,,R,WV,Representative,https://mooney.house.gov,True,h
+M001160,Gwen,Moore,,D,WI,Representative,https://gwenmoore.house.gov,True,h
+M001206,Joe,Morelle,,D,NY,Representative,https://morelle.house.gov/,True,h
+M001196,Seth,Moulton,,D,MA,Representative,https://moulton.house.gov,True,h
+M001190,Markwayne,Mullin,,R,OK,Representative,https://mullin.house.gov,True,h
+M001182,Mick,Mulvaney,,R,SC,Representative,https://mulvaney.house.gov,False,h
+M001151,Tim,Murphy,,R,PA,Representative,https://murphy.house.gov/,False,h
+M001202,Stephanie,Murphy,,D,FL,Representative,https://stephaniemurphy.house.gov,True,h
+N000002,Jerrold,Nadler,,D,NY,Representative,https://nadler.house.gov,True,h
+N000179,Grace,Napolitano,F.,D,CA,Representative,https://napolitano.house.gov,True,h
+N000015,Richard,Neal,E.,D,MA,Representative,https://neal.house.gov,True,h
+N000189,Dan,Newhouse,,R,WA,Representative,https://newhouse.house.gov,True,h
+N000184,Kristi,Noem,,R,SD,Representative,https://noem.house.gov,True,h
+N000127,Rick,Nolan,,D,MN,Representative,https://nolan.house.gov,True,h
+N000188,Donald,Norcross,W.,D,NJ,Representative,https://norcross.house.gov,True,h
+N000190,Ralph,Norman,,R,SC,Representative,https://norman.house.gov,True,h
+N000147,Eleanor,Norton,Holmes,D,DC,Delegate,https://norton.house.gov,True,h
+N000181,Devin,Nunes,,R,CA,Representative,https://nunes.house.gov,True,h
+O000171,Tom,O'Halleran,,D,AZ,Representative,https://ohalleran.house.gov,True,h
+O000170,Beto,O'Rourke,,D,TX,Representative,https://orourke.house.gov,True,h
+O000168,Pete,Olson,,R,TX,Representative,https://olson.house.gov,True,h
+P000601,Steven,Palazzo,,R,MS,Representative,https://palazzo.house.gov,True,h
+P000034,Frank,Pallone,,D,NJ,Representative,https://pallone.house.gov,True,h
+P000609,Gary,Palmer,,R,AL,Representative,https://palmer.house.gov,True,h
+P000613,Jimmy,Panetta,,D,CA,Representative,https://panetta.house.gov,True,h
+P000096,Bill,Pascrell,,D,NJ,Representative,https://pascrell.house.gov,True,h
+P000594,Erik,Paulsen,,R,MN,Representative,https://paulsen.house.gov,True,h
+P000604,Donald,Payne,M.,D,NJ,Representative,https://payne.house.gov,True,h
+P000588,Steve,Pearce,,R,NM,Representative,https://pearce.house.gov,True,h
+P000197,Nancy,Pelosi,,D,CA,Representative,https://pelosi.house.gov,True,h
+P000593,Ed,Perlmutter,,D,CO,Representative,https://perlmutter.house.gov,True,h
+P000605,Scott,Perry,,R,PA,Representative,https://perry.house.gov,True,h
+P000608,Scott,Peters,,D,CA,Representative,https://scottpeters.house.gov,True,h
+P000258,Collin,Peterson,C.,D,MN,Representative,https://collinpeterson.house.gov,True,h
+P000597,Chellie,Pingree,,D,ME,Representative,https://pingree.house.gov,True,h
+P000606,Robert,Pittenger,,R,NC,Representative,https://pittenger.house.gov,True,h
+P000610,Stacey,Plaskett,,D,VI,Delegate,https://plaskett.house.gov,True,h
+P000607,Mark,Pocan,,D,WI,Representative,https://pocan.house.gov,True,h
+P000592,Ted,Poe,,R,TX,Representative,https://poe.house.gov,True,h
+P000611,Bruce,Poliquin,,R,ME,Representative,https://poliquin.house.gov,True,h
+P000598,Jared,Polis,,D,CO,Representative,https://polis.house.gov,True,h
+P000602,Mike,Pompeo,,R,KS,Representative,http://pompeo.house.gov,False,h
+P000599,Bill,Posey,,R,FL,Representative,https://posey.house.gov,True,h
+P000523,David,Price,E.,D,NC,Representative,https://price.house.gov,True,h
+P000591,Tom,Price,,R,GA,Representative,https://tomprice.house.gov,False,h
+Q000023,Mike,Quigley,,D,IL,Representative,https://quigley.house.gov,True,h
+R000600,Amata,Radewagen,Coleman,R,AS,Delegate,https://radewagen.house.gov,True,h
+R000606,Jamie,Raskin,,D,MD,Representative,https://raskin.house.gov,True,h
+R000601,John,Ratcliffe,,R,TX,Representative,https://ratcliffe.house.gov,True,h
+R000585,Tom,Reed,,R,NY,Representative,https://reed.house.gov,True,h
+R000578,Dave,Reichert,,R,WA,Representative,https://reichert.house.gov,True,h
+R000586,Jim,Renacci,,R,OH,Representative,https://renacci.house.gov,True,h
+R000597,Tom,Rice,,R,SC,Representative,https://rice.house.gov,True,h
+R000602,Kathleen,Rice,,D,NY,Representative,https://kathleenrice.house.gov,True,h
+R000588,Cedric,Richmond,,D,LA,Representative,https://richmond.house.gov,True,h
+R000591,Martha,Roby,,R,AL,Representative,https://roby.house.gov,True,h
+R000582,Phil,Roe,,R,TN,Representative,https://roe.house.gov,True,h
+R000395,Harold,Rogers,,R,KY,Representative,https://halrogers.house.gov,True,h
+R000575,Mike,Rogers,D.,R,AL,Representative,https://mikerogers.house.gov,True,h
+R000409,Dana,Rohrabacher,,R,CA,Representative,https://rohrabacher.house.gov,True,h
+R000592,Todd,Rokita,,R,IN,Representative,http://rokita.house.gov,True,h
+R000607,Francis,Rooney,,R,FL,Representative,https://francisrooney.house.gov,True,h
+R000583,Tom,Rooney,,R,FL,Representative,https://rooney.house.gov,True,h
+R000435,Ileana,Ros-Lehtinen,,R,FL,Representative,https://ros-lehtinen.house.gov,True,h
+R000608,Jacky,Rosen,,D,NV,Representative,https://rosen.house.gov,True,h
+R000580,Peter,Roskam,,R,IL,Representative,https://roskam.house.gov,True,h
+R000593,Dennis,Ross,,R,FL,Representative,https://dennisross.house.gov,True,h
+R000598,Keith,Rothfus,,R,PA,Representative,https://rothfus.house.gov,True,h
+R000603,David,Rouzer,,R,NC,Representative,https://rouzer.house.gov,True,h
+R000486,Lucille,Roybal-Allard,,D,CA,Representative,https://roybal-allard.house.gov,True,h
+R000487,Edward,Royce,,R,CA,Representative,https://royce.house.gov,True,h
+R000599,Raul,Ruiz,,D,CA,Representative,https://ruiz.house.gov,True,h
+R000576,C.A. Dutch,Ruppersberger,,D,MD,Representative,https://ruppersberger.house.gov,True,h
+R000515,Bobby,Rush,L.,D,IL,Representative,https://rush.house.gov,True,h
+R000604,Steve,Russell,,R,OK,Representative,https://russell.house.gov,True,h
+R000609,John,Rutherford,,R,FL,Representative,https://rutherford.house.gov,True,h
+R000577,Tim,Ryan,,D,OH,Representative,https://timryan.house.gov,True,h
+R000570,Paul,Ryan,D.,R,WI,Representative,https://paulryan.house.gov,True,h
+S001177,Gregorio,Sablan,Kilili Camacho,D,MP,Delegate,https://sablan.house.gov,True,h
+S001156,Linda,Sánchez,T.,D,CA,Representative,https://lindasanchez.house.gov,True,h
+S000051,Mark,Sanford,,R,SC,Representative,https://sanford.house.gov,True,h
+S001168,John,Sarbanes,,D,MD,Representative,https://sarbanes.house.gov,True,h
+S001176,Steve,Scalise,,R,LA,Representative,https://scalise.house.gov,True,h
+S001205,Mary,Scanlon,Gay,D,PA,Representative,https://scanlon.house.gov/,True,h
+S001145,Jan,Schakowsky,,D,IL,Representative,https://schakowsky.house.gov,True,h
+S001150,Adam,Schiff,B.,D,CA,Representative,https://schiff.house.gov,True,h
+S001190,Brad,Schneider,,D,IL,Representative,https://schneider.house.gov,True,h
+S001180,Kurt,Schrader,,D,OR,Representative,https://schrader.house.gov,True,h
+S001183,David,Schweikert,,R,AZ,Representative,https://schweikert.house.gov,True,h
+S001157,David,Scott,,D,GA,Representative,https://davidscott.house.gov,True,h
+S000185,Robert,Scott,C.,D,VA,Representative,https://bobbyscott.house.gov,True,h
+S001189,Austin,Scott,,R,GA,Representative,https://austinscott.house.gov,True,h
+S000244,F.,Sensenbrenner,James,R,WI,Representative,https://sensenbrenner.house.gov,True,h
+S000248,José,Serrano,E.,D,NY,Representative,https://serrano.house.gov,True,h
+S000250,Pete,Sessions,,R,TX,Representative,https://sessions.house.gov,True,h
+S001185,Terri,Sewell,,D,AL,Representative,https://sewell.house.gov,True,h
+S001170,Carol,Shea-Porter,,D,NH,Representative,https://shea-porter.house.gov,True,h
+S000344,Brad,Sherman,,D,CA,Representative,https://sherman.house.gov,True,h
+S000364,John,Shimkus,,R,IL,Representative,https://shimkus.house.gov,True,h
+S001154,Bill,Shuster,,R,PA,Representative,https://shuster.house.gov,True,h
+S001148,Mike,Simpson,,R,ID,Representative,https://simpson.house.gov,True,h
+S001191,Kyrsten,Sinema,,D,AZ,Representative,https://sinema.house.gov,True,h
+S001165,Albio,Sires,,D,NJ,Representative,https://sires.house.gov,True,h
+S000480,Louise,Slaughter,M.,D,NY,Representative,https://louise.house.gov,False,h
+S000522,Christopher,Smith,H.,R,NJ,Representative,https://chrissmith.house.gov,True,h
+S001195,Jason,Smith,,R,MO,Representative,https://jasonsmith.house.gov,True,h
+S000583,Lamar,Smith,,R,TX,Representative,https://lamarsmith.house.gov,True,h
+S000510,Adam,Smith,,D,WA,Representative,https://adamsmith.house.gov,True,h
+S001172,Adrian,Smith,,R,NE,Representative,https://adriansmith.house.gov,True,h
+S001199,Lloyd,Smucker,,R,PA,Representative,https://smucker.house.gov,True,h
+S001200,Darren,Soto,,D,FL,Representative,https://soto.house.gov,True,h
+S001175,Jackie,Speier,,D,CA,Representative,https://speier.house.gov,True,h
+S001196,Elise,Stefanik,,R,NY,Representative,https://stefanik.house.gov,True,h
+S001192,Chris,Stewart,,R,UT,Representative,https://stewart.house.gov,True,h
+S001187,Steve,Stivers,,R,OH,Representative,https://stivers.house.gov,True,h
+S001201,Thomas,Suozzi,,D,NY,Representative,https://suozzi.house.gov,True,h
+S001193,Eric,Swalwell,,D,CA,Representative,https://swalwell.house.gov,True,h
+T000472,Mark,Takano,,D,CA,Representative,https://takano.house.gov,True,h
+T000477,Scott,Taylor,,R,VA,Representative,https://taylor.house.gov,True,h
+T000478,Claudia,Tenney,,R,NY,Representative,https://tenney.house.gov,True,h
+T000193,Bennie,Thompson,,D,MS,Representative,https://benniethompson.house.gov,True,h
+T000467,Glenn,Thompson,,R,PA,Representative,https://thompson.house.gov,True,h
+T000460,Mike,Thompson,,D,CA,Representative,https://mikethompson.house.gov,True,h
+T000238,William,Thornberry,M.,R,TX,Representative,https://thornberry.house.gov,True,h
+T000462,Pat,Tiberi,,R,OH,Representative,https://tiberi.house.gov/,False,h
+T000470,Scott,Tipton,,R,CO,Representative,https://tipton.house.gov,True,h
+T000468,Dina,Titus,,D,NV,Representative,https://titus.house.gov,True,h
+T000469,Paul,Tonko,,D,NY,Representative,https://tonko.house.gov,True,h
+T000474,Norma,Torres,,D,CA,Representative,https://torres.house.gov,True,h
+T000475,Dave,Trott,,R,MI,Representative,https://trott.house.gov,True,h
+T000465,Niki,Tsongas,,D,MA,Representative,https://tsongas.house.gov,True,h
+T000463,Michael,Turner,R.,R,OH,Representative,https://turner.house.gov,True,h
+U000031,Fred,Upton,,R,MI,Representative,https://upton.house.gov,True,h
+V000129,David,Valadao,,R,CA,Representative,https://valadao.house.gov,True,h
+V000130,Juan,Vargas,,D,CA,Representative,https://vargas.house.gov,True,h
+V000131,Marc,Veasey,,D,TX,Representative,https://veasey.house.gov,True,h
+V000132,Filemon,Vela,,D,TX,Representative,https://vela.house.gov,True,h
+V000081,Nydia,Velázquez,M.,D,NY,Representative,https://velazquez.house.gov,True,h
+V000108,Peter,Visclosky,J.,D,IN,Representative,https://visclosky.house.gov,True,h
+W000812,Ann,Wagner,,R,MO,Representative,https://wagner.house.gov,True,h
+W000798,Tim,Walberg,,R,MI,Representative,https://walberg.house.gov,True,h
+W000791,Greg,Walden,,R,OR,Representative,https://walden.house.gov,True,h
+W000819,Mark,Walker,,R,NC,Representative,https://walker.house.gov,True,h
+W000813,Jackie,Walorski,,R,IN,Representative,https://walorski.house.gov,True,h
+W000820,Mimi,Walters,,R,CA,Representative,https://walters.house.gov,True,h
+W000799,Tim,Walz,,D,MN,Representative,https://walz.house.gov,True,h
+W000797,Debbie,Wasserman Schultz,,D,FL,Representative,https://wassermanschultz.house.gov,True,h
+W000187,Maxine,Waters,,D,CA,Representative,https://waters.house.gov,True,h
+W000822,Bonnie,Watson Coleman,,D,NJ,Representative,https://watsoncoleman.house.gov,True,h
+W000814,Randy,Weber,,R,TX,Representative,https://weber.house.gov,True,h
+W000806,Daniel,Webster,,R,FL,Representative,https://webster.house.gov,True,h
+W000800,Peter,Welch,,D,VT,Representative,https://welch.house.gov,True,h
+W000815,Brad,Wenstrup,,R,OH,Representative,https://wenstrup.house.gov,True,h
+W000821,Bruce,Westerman,,R,AR,Representative,https://westerman.house.gov,True,h
+W000816,Roger,Williams,,R,TX,Representative,https://williams.house.gov,True,h
+W000808,Frederica,Wilson,,D,FL,Representative,https://wilson.house.gov,True,h
+W000795,Joe,Wilson,,R,SC,Representative,https://joewilson.house.gov,True,h
+W000804,Robert,Wittman,J.,R,VA,Representative,https://wittman.house.gov,True,h
+W000809,Steve,Womack,,R,AR,Representative,https://womack.house.gov,True,h
+W000810,Rob,Woodall,,R,GA,Representative,https://woodall.house.gov,True,h
+Y000062,John,Yarmuth,,D,KY,Representative,https://yarmuth.house.gov,True,h
+Y000063,Kevin,Yoder,,R,KS,Representative,https://yoder.house.gov,True,h
+Y000065,Ted,Yoho,,R,FL,Representative,https://yoho.house.gov,True,h
+Y000066,David,Young,,R,IA,Representative,https://davidyoung.house.gov,True,h
+Y000033,Don,Young,,R,AK,Representative,https://donyoung.house.gov,True,h
+Z000017,Lee,Zeldin,,R,NY,Representative,https://zeldin.house.gov,True,h
+Z000018,Ryan,Zinke,,R,MT,Representative,https://zinke.house.gov,False,h
