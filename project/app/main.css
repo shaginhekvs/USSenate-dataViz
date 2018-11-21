@@ -85,7 +85,8 @@ left: 0;
     background: lightsteelblue;   
     border: 1px;      
     border-radius: 2px;           
-    pointer-events: none;         
+    pointer-events: none;  
+    z-index: 1;       
 }
 #tooltip h4{
     margin:0;
@@ -116,7 +117,8 @@ left: 0;
 }
 
 .section_map{
-    position: relative;
+    position:absolute;
     vertical-align: middle; 
     margin: auto;
+    z-index: 0;
 }
