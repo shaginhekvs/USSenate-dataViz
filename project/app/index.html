@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="c3.css" rel="stylesheet" />
+    <title>Bills introduced in US Congress</title>
+</head>
+
+<body>
+    <table class='table-container'>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="party-bills">
+                        <div id="svg-R">
+                        </div>
+                        <div class="bills-R">
+                        </div>
+                    </div>
+                    <div class="party-bills">
+                        <div id="svg-D">
+                        </div>
+                        <div class="bills-D">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="bar-plot" id="evolution_chart">
+                    </div>
+                </td>
+                <td>
+                    <canvas class="majors-plot" id="majors-plot">
+                    </canvas>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div id="map"> </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class='section_barchart'>
+    </div>
+    <script type="text/javascript" src="bundle.js"></script>
+</body>
+
+</html>
