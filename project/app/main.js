@@ -14,19 +14,14 @@ let unfilteredData = null;
 //////////////////////////////////////////////////////////
 // Initialize filters and define filtering related functions
 //////////////////////////////////////////////////////////
-const allValuesFilter = {
-    'congress': [111,112,113,114],
-    'state': ['AK','AR','AZ','CA','CO','CT','DC','DE','FL','GA','HI','IA','IL','MA','MD','ME','MI','MN','NC','NH','NJ','NM','NV','NY','OH','OR','PA','RI','TN','TX','UT','VA','VT','WA','WI','WV','AR','CA','CO','CT','DC','DE','FL','GA','HI','IA','LA','MA','MD','MI','MN','MO','NH','NJ','NV','NY','OH','OR','PA','TN','TX','UT','VA','VT','WA','WI','WV'],
-    'party': ['D','R'],
-    'major': ['1.0','2.0','3.0','4.0','5.0','6.0','7.0','8.0','9.0','10.0','11.0','12.0','13.0','14.0','15.0','16.0','17.0','18.0','19.0','20.0','21.0','99.0']
+let allValuesFilter = {
+  'congress': [],
+  'party': [],
+  'state': [],
+  'major': []
 }
 
-const initialFilter = {
-    'congress': allValuesFilter['congress'][allValuesFilter['congress'].length - 1],
-    'state':  ['MN'],
-    'party':  allValuesFilter['party'],
-    'major':  allValuesFilter['major']
-}
+let initialFilter = null;
 
 let filter = initialFilter;
 
@@ -64,30 +59,30 @@ function resetFilter() {
 //////////////////////////////////////////////////////////
 // Define bar colors
 //////////////////////////////////////////////////////////
-let  wind = { };
+let wind = {};
 wind.palette = function (min, max) {
-let d = (max-min)/100;
+let d = (max - min) / 100;
 return d3.scaleThreshold()
     .range(['#ffffff','#fdfdfd','#fafafa','#f6f6f6','#f4f4f4','#f0f0f0','#ededed','#eaeaea','#e8e8e8','#e4e4e4','#e3e3e3','#dfdfdf','#dcdcdc','#dadada','#d7d7d7','#d3d3d3','#d1d1d1','#cecece','#cccccc','#c8c8c8','#c6c6c6','#c3c3c3','#c0c0c0','#bebebe','#bababa','#b7b7b7','#b6b6b6','#b3b3b3','#afafaf','#adadad','#aaaaaa','#a7a7a7','#a5a5a5','#a3a3a3','#9f9f9f','#9c9c9c','#9b9b9b','#979797','#949494','#929292','#909090','#8d8d8d','#8b8b8b','#888888','#858585','#828282','#7f7f7f','#7e7e7e','#7a7a7a','#787878','#757575','#747474','#717171','#6f6f6f','#6b6b6b','#696969','#676767','#656565','#616161','#606060','#5c5c5c','#5a5a5a','#575757','#555555','#545454','#505050','#4e4e4e','#4c4c4c','#494949','#474747','#454545','#434343','#404040','#3f3f3f','#3c3c3c','#3a3a3a','#373737','#353535','#333333','#313131','#2f2f2f','#2c2c2c','#2b2b2b','#292929','#262626','#242424','#212121','#1f1f1f','#1d1d1d','#1c1c1c','#191919','#181818','#151515','#131313','#101010','#0f0f0f','#0b0b0b','#070707','#040404','#000000'])
     .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
 }
 
 wind.R_palette = function (min, max) {
-let d = (max-min)/50;
+let d = (max - min) / 50;
 return d3.scaleThreshold()
     .range(['#ffffe0','#fffad6','#fff5cc','#ffefc2','#ffeaba','#ffe5b2','#ffe0ab','#ffdaa3','#ffd59c','#ffd095','#ffca90','#ffc58a','#ffbf85','#ffb880','#ffb27c','#ffad78','#ffa775','#ffa072','#ff9a6e','#ff936b','#fd8d6a','#fb8768','#f98266','#f87c64','#f57762','#f37160','#f06b5f','#ee655d','#eb5f5b','#e85959','#e55457','#e14e55','#de4952','#da4450','#d73e4d','#d3394a','#ce3347','#ca2e43','#c52940','#c1243c','#bc1f38','#b71a34','#b3152f','#ae112a','#a80b24','#a2071f','#9c0418','#970112','#92010b','#8b0000'])
     .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
 }
 
 wind.D_palette = function (min, max) {
-let d = (max-min)/50;
+let d = (max - min) / 50;
 return d3.scaleThreshold()
     .range(['#ffffe0','#fdfae1','#faf5e2','#f7f0e3','#f5ebe4','#f2e7e5','#f0e2e6','#eddde7','#ead9e8','#e7d4e9','#e5d0e9','#e2caea','#dfc5eb','#dcc1ec','#d9bced','#d6b7ed','#d3b2ee','#d0afef','#cdaaf0','#c9a5f0','#c6a1f1','#c39cf2','#bf97f2','#bc92f3','#b88df3','#b489f4','#b184f5','#ad7ff5','#a97bf6','#a676f6','#a171f7','#9d6df7','#9968f8','#9464f8','#8f5ff9','#8b5af9','#8656fa','#8151fa','#7c4bfb','#7646fb','#7041fc','#693cfc','#6337fc','#5c31fd','#542bfd','#4b25fe','#411ffe','#3517fe','#230dff','#0000ff'])
     .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
 }
 
 wind.I_palette = function I_palette(min, max) {
-let d = (max-min)/50;
+let d = (max - min) / 50;
 return d3.scaleThreshold()
     .range(['#ffffe0','#fbfcdc','#f6fad7','#f2f7d3','#edf5ce','#e9f2ca','#e4efc6','#dfedc0','#dceabd','#d7e7b8','#d2e5b4','#cee2b0','#c9e0ab','#c5dda7','#c1dba2','#bcd89d','#b8d69a','#b3d295','#afd192','#aace8d','#a6cb88','#a2c985','#9dc680','#99c37d','#94c078','#90be73','#8bbb70','#86b96b','#83b767','#7db363','#79b15f','#75af5b','#70ac56','#6caa52','#66a74e','#62a44a','#5da145','#589f42','#539c3d','#4e9938','#4a9835','#439430','#3f922c','#389027','#328d21','#2c8a1d','#248816','#1d8611','#108308','#008000'])
     .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
@@ -346,8 +341,6 @@ export function drawPlots(data = null) {
 }
 
 
-
-
  (function(){
     const uStatePaths = [
         {id:"HI",n:"Hawaii",d:"M233.08751,519.30948L235.02744,515.75293L237.2907,515.42961L237.61402,516.23791L235.51242,519.30948L233.08751,519.30948ZM243.27217,515.59127L249.4153,518.17784L251.51689,517.85452L253.1335,513.97465L252.48686,510.57977L248.28366,510.09479L244.24213,511.87306L243.27217,515.59127ZM273.9878,525.61427L277.706,531.11074L280.13092,530.78742L281.26255,530.30244L282.7175,531.59573L286.43571,531.43407L287.40568,529.97912L284.49577,528.20085L282.55584,524.48263L280.45424,520.92609L274.63444,523.83599L273.9878,525.61427ZM294.19545,534.50564L295.48874,532.5657L300.17691,533.53566L300.82356,533.05068L306.96668,533.69732L306.64336,534.99062L304.05678,536.44556L299.69193,536.12224L294.19545,534.50564ZM299.53027,539.67879L301.47021,543.55866L304.54176,542.42703L304.86509,540.81041L303.24848,538.70882L299.53027,538.3855L299.53027,539.67879ZM306.4817,538.54716L308.74496,535.63726L313.43313,538.06218L317.79798,539.19381L322.16284,541.94205L322.16284,543.88198L318.6063,545.66026L313.75645,546.63022L311.33154,545.17527L306.4817,538.54716ZM323.13281,554.06663L324.74942,552.77335L328.14431,554.38997L335.74238,557.94651L339.13727,560.0481L340.75387,562.47302L342.69381,566.83787L346.73534,569.42445L346.41202,570.71775L342.53215,573.95097L338.32896,575.40592L336.87401,574.75928L333.80244,576.53754L331.37753,579.77077L329.11427,582.68067L327.33599,582.51901L323.77945,579.93243L323.45613,575.40592L324.10277,572.981L322.48616,567.32286L320.38456,565.54458L320.2229,562.958L322.48616,561.98804L324.58776,558.91648L325.07274,557.94651L323.45613,556.16823L323.13281,554.06663Z"},
@@ -421,6 +414,7 @@ export function drawPlots(data = null) {
         function mouseOut(){
             d3.select("#tooltip").transition().duration(500).style("opacity", 0);      
         }
+
         function mouseclick(d){
             addFilterField('state', d.id);
             let width = '1';
@@ -429,7 +423,6 @@ export function drawPlots(data = null) {
             }
             d3.select(this)
                 .style('stroke-width', width);
-
         }
 
         let paths = d3.select(id).selectAll(".state")
@@ -443,6 +436,7 @@ export function drawPlots(data = null) {
 
         paths.exit().remove();
     }
+
     uStates.remove = function(id){
         Paths=[]
         d3.select(id).selectAll(".state")
@@ -477,12 +471,15 @@ function drawMapPlot(df){
         maxval = df_new.stat.max('count');
     }
     color_scale = wind[color](0,maxval+1)
-    let array1 = ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
-    "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
-    "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
-    "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
-    "WI", "MO", "AR", "OK", "KS", "LS", "VA"]
-    array1.forEach(function(d){ 
+    let array1 = [
+        "HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
+        "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
+        "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
+        "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
+        "WI", "MO", "AR", "OK", "KS", "LS", "VA"
+    ];
+
+    array1.forEach(function(d){
         data_dict[d]={count:0,color:color_scale(0)}
     });
 
@@ -491,11 +488,43 @@ function drawMapPlot(df){
     });
 
     uStatesFinal.draw("#statesvg", data_dict, tooltipHtml2);
-
 }
 
+//////////////////////////////////////////////////////////
+// Load data from csv and initialize filters
+//////////////////////////////////////////////////////////
 d3.csv("./data/grouped_bills.csv")
     .then(data => {
-        data.forEach(d => d['count'] = +d['count']);
+        // Declare arrays to store unique read values per variable
+        let congress = [];
+        let party = [];
+        let major = [];
+        let state = [];
+
+        // Iterate through the data
+        data.forEach(d => {
+            d['count'] = +d['count'];
+            congress.push(d["congress"]);
+            party.push(d["party"]);
+            major.push(d["major"]);
+            state.push(d["state"]);
+        });
+
+        // Set filters
+        allValuesFilter.congress = Array.from(new Set(congress));
+        allValuesFilter.party = Array.from(new Set(party));
+        allValuesFilter.major = Array.from(new Set(major));
+        allValuesFilter.state = Array.from(new Set(state));
+
+        initialFilter= {
+            'congress': allValuesFilter.congress[allValuesFilter.congress.length - 1],
+            'state':  allValuesFilter.state,
+            'party':  allValuesFilter.party,
+            'major':  allValuesFilter.major
+        }
+
+        filter = initialFilter;
+
+        // Draw plots
         drawPlots(data);
     });
