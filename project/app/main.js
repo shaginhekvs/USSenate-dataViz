@@ -11,14 +11,14 @@ let unfilteredData = null;
 
 // Initialize filters and define functions for modifying filtering
 const allValuesFilter = {
-    'congress': [113,114],
+    'congress': [111,112,113,114],
     'state': ['AK','AR','AZ','CA','CO','CT','DC','DE','FL','GA','HI','IA','IL','MA','MD','ME','MI','MN','NC','NH','NJ','NM','NV','NY','OH','OR','PA','RI','TN','TX','UT','VA','VT','WA','WI','WV','AR','CA','CO','CT','DC','DE','FL','GA','HI','IA','LA','MA','MD','MI','MN','MO','NH','NJ','NV','NY','OH','OR','PA','TN','TX','UT','VA','VT','WA','WI','WV'],
     'party': ['D','R'],
     'major': ['1.0','2.0','3.0','4.0','5.0','6.0','7.0','8.0','9.0','10.0','11.0','12.0','13.0','14.0','15.0','16.0','17.0','18.0','19.0','20.0','21.0','99.0']
 }
 
 export const initialFilter = {
-    'congress': allValuesFilter['congress'][0], // TODO: choose last one instead!
+    'congress': allValuesFilter['congress'][allValuesFilter['congress'].length - 1],
     'state':  allValuesFilter['state'],
     'party':  allValuesFilter['party'],
     'major':  allValuesFilter['major']
@@ -55,9 +55,42 @@ function resetFilter() {
 // Size/Resizing functions and definitions... (TODO)
 // TODO:  $(window).on('resize', function() {whatever happens when resizing the window}
 
+// Define color scales
+let  wind = { };
+wind.palette = function (min, max) {
+let d = (max-min)/100;
+return d3.scale.threshold()
+    .range(['#ffffff','#fdfdfd','#fafafa','#f6f6f6','#f4f4f4','#f0f0f0','#ededed','#eaeaea','#e8e8e8','#e4e4e4','#e3e3e3','#dfdfdf','#dcdcdc','#dadada','#d7d7d7','#d3d3d3','#d1d1d1','#cecece','#cccccc','#c8c8c8','#c6c6c6','#c3c3c3','#c0c0c0','#bebebe','#bababa','#b7b7b7','#b6b6b6','#b3b3b3','#afafaf','#adadad','#aaaaaa','#a7a7a7','#a5a5a5','#a3a3a3','#9f9f9f','#9c9c9c','#9b9b9b','#979797','#949494','#929292','#909090','#8d8d8d','#8b8b8b','#888888','#858585','#828282','#7f7f7f','#7e7e7e','#7a7a7a','#787878','#757575','#747474','#717171','#6f6f6f','#6b6b6b','#696969','#676767','#656565','#616161','#606060','#5c5c5c','#5a5a5a','#575757','#555555','#545454','#505050','#4e4e4e','#4c4c4c','#494949','#474747','#454545','#434343','#404040','#3f3f3f','#3c3c3c','#3a3a3a','#373737','#353535','#333333','#313131','#2f2f2f','#2c2c2c','#2b2b2b','#292929','#262626','#242424','#212121','#1f1f1f','#1d1d1d','#1c1c1c','#191919','#181818','#151515','#131313','#101010','#0f0f0f','#0b0b0b','#070707','#040404','#000000'])
+    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
+}
+
+wind.R_palette = function (min, max) {
+let d = (max-min)/50;
+return d3.scale.threshold()
+    .range(['#ffffe0','#fffad6','#fff5cc','#ffefc2','#ffeaba','#ffe5b2','#ffe0ab','#ffdaa3','#ffd59c','#ffd095','#ffca90','#ffc58a','#ffbf85','#ffb880','#ffb27c','#ffad78','#ffa775','#ffa072','#ff9a6e','#ff936b','#fd8d6a','#fb8768','#f98266','#f87c64','#f57762','#f37160','#f06b5f','#ee655d','#eb5f5b','#e85959','#e55457','#e14e55','#de4952','#da4450','#d73e4d','#d3394a','#ce3347','#ca2e43','#c52940','#c1243c','#bc1f38','#b71a34','#b3152f','#ae112a','#a80b24','#a2071f','#9c0418','#970112','#92010b','#8b0000'])
+    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+}
+
+wind.D_palette = function (min, max) {
+let d = (max-min)/50;
+return d3.scale.threshold()
+    .range(['#ffffe0','#fdfae1','#faf5e2','#f7f0e3','#f5ebe4','#f2e7e5','#f0e2e6','#eddde7','#ead9e8','#e7d4e9','#e5d0e9','#e2caea','#dfc5eb','#dcc1ec','#d9bced','#d6b7ed','#d3b2ee','#d0afef','#cdaaf0','#c9a5f0','#c6a1f1','#c39cf2','#bf97f2','#bc92f3','#b88df3','#b489f4','#b184f5','#ad7ff5','#a97bf6','#a676f6','#a171f7','#9d6df7','#9968f8','#9464f8','#8f5ff9','#8b5af9','#8656fa','#8151fa','#7c4bfb','#7646fb','#7041fc','#693cfc','#6337fc','#5c31fd','#542bfd','#4b25fe','#411ffe','#3517fe','#230dff','#0000ff'])
+    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+}
+
+wind.I_palette = function I_palette(min, max) {
+let d = (max-min)/50;
+return d3.scale.threshold()
+    .range(['#ffffe0','#fbfcdc','#f6fad7','#f2f7d3','#edf5ce','#e9f2ca','#e4efc6','#dfedc0','#dceabd','#d7e7b8','#d2e5b4','#cee2b0','#c9e0ab','#c5dda7','#c1dba2','#bcd89d','#b8d69a','#b3d295','#afd192','#aace8d','#a6cb88','#a2c985','#9dc680','#99c37d','#94c078','#90be73','#8bbb70','#86b96b','#83b767','#7db363','#79b15f','#75af5b','#70ac56','#6caa52','#66a74e','#62a44a','#5da145','#589f42','#539c3d','#4e9938','#4a9835','#439430','#3f922c','#389027','#328d21','#2c8a1d','#248816','#1d8611','#108308','#008000'])
+    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+}
+
+// Define bar colors
+const barColors = wind['palette'](0,4);
+
 // Plotting variables
 let barPlot = null;
-let horizontalBarPlot = null;
+let majorPlot = null;
 
 // Plotting functions (TODO: Save in separate files!)
 function drawCongressPlot(data) {
@@ -111,18 +144,34 @@ function drawCongressPlot(data) {
     }
 }
 
+function onclickMajorPlot(evt) {
+    let activeBar = majorPlot.getElementAtEvent(evt);
+    if (activeBar.length > 0) {
+        activeBar = activeBar[0]["_model"]["label"];
+        addFilterField("major", activeBar);
+    }
+}
+
+function onhoverMajorPlot(evt) {
+    let activeBar = majorPlot.getElementAtEvent(evt);
+    if (activeBar.length > 0) {
+        activeBar = activeBar[0]["_model"]["label"];
+        console.log(activeBar);
+        // addFilterField("major", activeBar);
+    }
+}
+
 function drawMajorPlot(data) {
     const billsPerMajor = _.groupBy(data, bg => bg['major']);
     let plotData = {
-        labels: [],
         datasets: [{
+            backgroundColor: barColors(1),
+            hoverBackgroundColor: barColors(2),
             label: 'Number of bills',
-            data: [],
-            backgroundColor: [],
-            hoverBackgroundColor: []
-        }]
+            data: []
+        }],
+        labels: []
     };
-
     allValuesFilter['major'].forEach(major => {
         const bills = billsPerMajor[major];
         if (bills != null) {
@@ -136,12 +185,33 @@ function drawMajorPlot(data) {
         //     plotData[1].push(0);
         // }
     });
-    if (horizontalBarPlot == null) {
+    if (majorPlot == null) {
         let ctx = document.getElementById('majors-plot');
-        horizontalBarPlot = new Chart(ctx, {
+        ctx.onclick = ((evt) => onclickMajorPlot(evt));
+        ctx.onhover = ((evt, item) => onhoverMajorPlot(evt, item));
+        majorPlot = new Chart(ctx, {
             type: 'horizontalBar',
             data: plotData,
             options: {
+                animation: {
+                    onProgress () {
+                        const chartInstance = this.chart;
+                        const ctx = chartInstance.ctx;
+                        const dataset = this.data.datasets[0];
+                        const meta = chartInstance.controller.getDatasetMeta(0);
+    
+                        Chart.helpers.each(meta.data.forEach((bar, index) => {
+                            const label = this.data.labels[index];
+                            const labelPositionX = 20;
+                            const labelWidth = ctx.measureText(label).width + labelPositionX;
+    
+                            ctx.textBaseline = 'middle';
+                            ctx.textAlign = 'left';
+                            ctx.fillStyle = '#333';
+                            ctx.fillText(label, labelPositionX, bar._model.y);
+                        }));
+                    }
+                },
                 maintainAspectRatio: false,
                 responsive: true,
                 scales: {
@@ -149,32 +219,32 @@ function drawMajorPlot(data) {
                         ticks: {
                             min: 0,
                             beginAtZero: true,
-
-                        },
-                        afterBuildTicks: function(chart) {}
+                        }//,
+                        //afterBuildTicks: function(chart) {}
                     }],
                     yAxes: [{
-                        gridLines: { display: false },
+                        gridLines: {
+                            display: false
+                        },
                         ticks: {
+                            // This puts the majors labels on top of bars
                             mirror: true,
                         }
-
                     }]
                 },
                 legend: {
                     display: false
                 },
-                tooltips: {
-                    callbacks: {
-
-                    }
-                }
+                // tooltips: {
+                //     callbacks: {
+                //     }
+                // }
             }
         });
     } else {
-        horizontalBarPlot.load({
-            columns: plotData
-        });
+        majorPlot.data.labels = plotData.labels;
+        majorPlot.data.datasets[0].data = plotData.datasets[0].data;
+        majorPlot.update();
     }
 }
 
@@ -323,7 +393,7 @@ let uStatesFinal;
         this.toolTip = toolTip;
         function mouseOver(d){
             d3.select("#tooltip").transition().duration(200).style("opacity", .9);      
-            console.log(d3.select("#tooltip").html(toolTip(d.n, data[d.id])))
+            // console.log(d3.select("#tooltip").html(toolTip(d.n, data[d.id])))
             d3.select("#tooltip").html(toolTip(d.n, data[d.id]))[0]  
                 .style("left", (d3.event.pageX) + "px")     
                 .style("top", (d3.event.pageY - 28) + "px");
@@ -333,7 +403,7 @@ let uStatesFinal;
             d3.select("#tooltip").transition().duration(500).style("opacity", 0);      
         }
         function mouseclick(d){
-            console.log(d)
+            // console.log(d)
             addFilterField('State',[d.id]);
             let width = '1';
             if(filter['State'].includes(d.id)){
@@ -368,38 +438,7 @@ let data;
 let policy_data;
 
 
-    
-    /* draw states on id #statesvg */   
-    //uStates.draw("#statesvg", sampleData, tooltipHtml);
-    
-    let  wind = { };
-    wind.palette = function (min, max) {
-    let d = (max-min)/100;
-    return d3.scale.threshold()
-        .range(['#ffffff','#fdfdfd','#fafafa','#f6f6f6','#f4f4f4','#f0f0f0','#ededed','#eaeaea','#e8e8e8','#e4e4e4','#e3e3e3','#dfdfdf','#dcdcdc','#dadada','#d7d7d7','#d3d3d3','#d1d1d1','#cecece','#cccccc','#c8c8c8','#c6c6c6','#c3c3c3','#c0c0c0','#bebebe','#bababa','#b7b7b7','#b6b6b6','#b3b3b3','#afafaf','#adadad','#aaaaaa','#a7a7a7','#a5a5a5','#a3a3a3','#9f9f9f','#9c9c9c','#9b9b9b','#979797','#949494','#929292','#909090','#8d8d8d','#8b8b8b','#888888','#858585','#828282','#7f7f7f','#7e7e7e','#7a7a7a','#787878','#757575','#747474','#717171','#6f6f6f','#6b6b6b','#696969','#676767','#656565','#616161','#606060','#5c5c5c','#5a5a5a','#575757','#555555','#545454','#505050','#4e4e4e','#4c4c4c','#494949','#474747','#454545','#434343','#404040','#3f3f3f','#3c3c3c','#3a3a3a','#373737','#353535','#333333','#313131','#2f2f2f','#2c2c2c','#2b2b2b','#292929','#262626','#242424','#212121','#1f1f1f','#1d1d1d','#1c1c1c','#191919','#181818','#151515','#131313','#101010','#0f0f0f','#0b0b0b','#070707','#040404','#000000'])
-        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
-    }
 
-    wind.R_palette = function (min, max) {
-    let d = (max-min)/50;
-    return d3.scale.threshold()
-        .range(['#ffffe0','#fffad6','#fff5cc','#ffefc2','#ffeaba','#ffe5b2','#ffe0ab','#ffdaa3','#ffd59c','#ffd095','#ffca90','#ffc58a','#ffbf85','#ffb880','#ffb27c','#ffad78','#ffa775','#ffa072','#ff9a6e','#ff936b','#fd8d6a','#fb8768','#f98266','#f87c64','#f57762','#f37160','#f06b5f','#ee655d','#eb5f5b','#e85959','#e55457','#e14e55','#de4952','#da4450','#d73e4d','#d3394a','#ce3347','#ca2e43','#c52940','#c1243c','#bc1f38','#b71a34','#b3152f','#ae112a','#a80b24','#a2071f','#9c0418','#970112','#92010b','#8b0000'])
-        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
-    }
-
-    wind.D_palette = function (min, max) {
-    let d = (max-min)/50;
-    return d3.scale.threshold()
-        .range(['#ffffe0','#fdfae1','#faf5e2','#f7f0e3','#f5ebe4','#f2e7e5','#f0e2e6','#eddde7','#ead9e8','#e7d4e9','#e5d0e9','#e2caea','#dfc5eb','#dcc1ec','#d9bced','#d6b7ed','#d3b2ee','#d0afef','#cdaaf0','#c9a5f0','#c6a1f1','#c39cf2','#bf97f2','#bc92f3','#b88df3','#b489f4','#b184f5','#ad7ff5','#a97bf6','#a676f6','#a171f7','#9d6df7','#9968f8','#9464f8','#8f5ff9','#8b5af9','#8656fa','#8151fa','#7c4bfb','#7646fb','#7041fc','#693cfc','#6337fc','#5c31fd','#542bfd','#4b25fe','#411ffe','#3517fe','#230dff','#0000ff'])
-        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
-    }
-
-    wind.I_palette = function I_palette(min, max) {
-    let d = (max-min)/50;
-    return d3.scale.threshold()
-        .range(['#ffffe0','#fbfcdc','#f6fad7','#f2f7d3','#edf5ce','#e9f2ca','#e4efc6','#dfedc0','#dceabd','#d7e7b8','#d2e5b4','#cee2b0','#c9e0ab','#c5dda7','#c1dba2','#bcd89d','#b8d69a','#b3d295','#afd192','#aace8d','#a6cb88','#a2c985','#9dc680','#99c37d','#94c078','#90be73','#8bbb70','#86b96b','#83b767','#7db363','#79b15f','#75af5b','#70ac56','#6caa52','#66a74e','#62a44a','#5da145','#589f42','#539c3d','#4e9938','#4a9835','#439430','#3f922c','#389027','#328d21','#2c8a1d','#248816','#1d8611','#108308','#008000'])
-        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
-    }
 
 
 
@@ -424,14 +463,14 @@ let policy_data;
     function on_data_loaded(df){
         data = df
         draw_map(data)
-        console.log(df.unique('congress').show());
+        // console.log(df.unique('congress').show());
         //drawList(df.unique('congress').toArray(),congressClick);
         //drawList(df.unique('party').toArray(),partyClick);
         //drawList(df.unique('major').toArray(),majorClick);
     }
 
     function draw_map(df){
-        console.log(df)
+        // console.log(df)
 
         let data_dict = {}
         let counts = df.select('count')
@@ -441,9 +480,9 @@ let policy_data;
         if(parties.length == 1){
             color = parties[0]+'_'+color;
         }
-        console.log(color)
-        df_new.show()
-        console.log(df_new.count())
+        // console.log(color)
+        // df_new.show()
+        // console.log(df_new.count())
         let maxval = 0
         if(df_new.count()>0) {
             maxval = df_new.stat.max('count');
@@ -464,7 +503,7 @@ let policy_data;
             data_dict [d.get('state')]={count:d.get('count'),color:color_scale(d.get('count'))}
         });
 
-        console.log(data_dict)
+        // console.log(data_dict)
         uStatesFinal.draw("#statesvg", data_dict, tooltipHtml2);
 
     }
@@ -481,6 +520,5 @@ read_data()
 // Load ISA data from csv
 d3.csv("./data/grouped_bills.csv", data => {
     data.forEach(d => d['count'] = +d['count']);
-    console.log('hello')
     drawPlots(data);
 });
