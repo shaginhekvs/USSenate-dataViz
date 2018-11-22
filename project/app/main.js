@@ -118,6 +118,9 @@ function initialize_icon(filename,svg_id,party_id,on_click_color){
     d3.svg("imgs/"+filename+'.svg').then((svg)=>{
         const gElement = d3.select(svg).select('g'); 
         d3.select(svg_id).node().appendChild(gElement.node());
+        if(filter['party'].includes(party_id)){
+            d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
+        }        
         d3.select(svg_id).on("click",()=>{
             addFilterField('party',party_id)
              if(filter['party'].includes(party_id)){
@@ -383,7 +386,7 @@ export function drawPlots(data = null) {
     // showYear()
     // showMajors()
     // showTitle()
-    drawPartyIcons();
+
 }
 
 
@@ -572,7 +575,7 @@ d3.csv("./data/grouped_bills.csv")
         }
 
         filter = initialFilter;
-
+        drawPartyIcons();
         // Draw plots
         drawPlots(data);
 
