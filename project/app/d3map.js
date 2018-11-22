@@ -123,7 +123,7 @@ let DataFrame = dfjs.DataFrame;
 		uStates.draw("#statesvg", data_dict, tooltipHtml2);
 
 	}
-	function read_data(){
+	export function read_data(){
 		DataFrame.fromCSV('data/policy_agenda.csv',header = false).then(function(df){
 			policy_data = df
 		}).then(df=>DataFrame.fromCSV('data/grouped_bills.csv')).then(df=>on_data_loaded(df));
