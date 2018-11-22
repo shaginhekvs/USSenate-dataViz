@@ -126,7 +126,7 @@ function drawMajorPlot(data) {
     allValuesFilter['major'].forEach(major => {
         const bills = billsPerMajor[major];
         if (bills != null) {
-            plotData.labels.push(major);
+            plotData.labels.push(data_df.filter(row=>row.get('major')==major).select('policy').toArray()[0][0]);
             let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
             plotData.datasets[0].data.push(numberBills);
         }
@@ -136,6 +136,9 @@ function drawMajorPlot(data) {
         //     plotData[1].push(0);
         // }
     });
+    console.log('chartjs')
+    console.log(plotData)
+
     if (horizontalBarPlot == null) {
         let ctx = document.getElementById('majors-plot');
         horizontalBarPlot = new Chart(ctx, {
@@ -368,7 +371,7 @@ let uStatesFinal;
 
 
 let color_scale ;
-let data;
+let data_df;
 let policy_data;
 
 
@@ -417,17 +420,20 @@ let policy_data;
     }
 
     function join2dfs(){
-        policy_data=policy_data.rename('0','major');
-        policy_data = policy_data.rename('1','policy')
-        policy_data = policy_data.map(row=>row.set('major',row.get('major')+'.0'))
-        data = data.join(policy_data,'major','full')
-        data = data.replace(undefined,'others','policy')
+        policy_data=policy_data.rename('0','policy');
+        policy_data = policy_data.rename('1','major')
 
+        policy_data = policy_data.map(row=>row.set('major',row.get('major')+'.0'))
+        policy_data.show()
+        data_df = data_df.join(policy_data,'major','full')
+        
+        data_df = data_df.replace(undefined,'others','policy')
     }
 
     function on_data_loaded(df){
-        data = df
-        draw_map(data)
+        data_df = df
+        join2dfs()
+        draw_map(data_df)
         console.log(df.unique('congress').show());
         //drawList(df.unique('congress').toArray(),congressClick);
         //drawList(df.unique('party').toArray(),partyClick);
@@ -475,17 +481,17 @@ let policy_data;
     export function read_data(){
         DataFrame.fromCSV('data/policy_agenda.csv',false).then(function(df){
             policy_data = df
-        }).then(df=>DataFrame.fromCSV('data/grouped_bills.csv')).then(df=>on_data_loaded(df));
+        }).then(df=>DataFrame.fromCSV('data/grouped_bills.csv')).then(df=>on_data_loaded(df)).then(df=>d3.csv("./data/grouped_bills.csv")).then(function(data) {
+        data.forEach(d => d['count'] = +d['count']);
+        console.log('hello')
+        drawPlots(data);
+        });
 
     }
     
 
-read_data()
 
+read_data()
 // Load ISA data from csv
 
-d3.csv("./data/grouped_bills.csv").then(function(data) {
-    data.forEach(d => d['count'] = +d['count']);
-    console.log('hello')
-    drawPlots(data);
-});
+
