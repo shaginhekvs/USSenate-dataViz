@@ -10,19 +10,14 @@ require("./main.css");
 let unfilteredData = null;
 
 // Initialize filters and define functions for modifying filtering
-const allValuesFilter = {
-    'congress': [111,112,113,114],
-    'state': ['AK','AR','AZ','CA','CO','CT','DC','DE','FL','GA','HI','IA','IL','MA','MD','ME','MI','MN','NC','NH','NJ','NM','NV','NY','OH','OR','PA','RI','TN','TX','UT','VA','VT','WA','WI','WV','AR','CA','CO','CT','DC','DE','FL','GA','HI','IA','LA','MA','MD','MI','MN','MO','NH','NJ','NV','NY','OH','OR','PA','TN','TX','UT','VA','VT','WA','WI','WV'],
-    'party': ['D','R'],
-    'major': ['1.0','2.0','3.0','4.0','5.0','6.0','7.0','8.0','9.0','10.0','11.0','12.0','13.0','14.0','15.0','16.0','17.0','18.0','19.0','20.0','21.0','99.0']
+let allValuesFilter = {
+  'congress':[],
+  'party':[],
+  'state':[],
+  'major':[]
 }
 
-const initialFilter = {
-    'congress': allValuesFilter['congress'][allValuesFilter['congress'].length - 1],
-    'state':  allValuesFilter['state'],
-    'party':  allValuesFilter['party'],
-    'major':  allValuesFilter['major']
-}
+let initialFilter ;
 
 let filter = initialFilter;
 
@@ -55,41 +50,9 @@ function resetFilter() {
 // Size/Resizing functions and definitions... (TODO)
 // TODO:  $(window).on('resize', function() {whatever happens when resizing the window}
 
-// Define bar colors
-let  wind = { };
-wind.palette = function (min, max) {
-let d = (max-min)/100;
-return d3.scaleThreshold()
-    .range(['#ffffff','#fdfdfd','#fafafa','#f6f6f6','#f4f4f4','#f0f0f0','#ededed','#eaeaea','#e8e8e8','#e4e4e4','#e3e3e3','#dfdfdf','#dcdcdc','#dadada','#d7d7d7','#d3d3d3','#d1d1d1','#cecece','#cccccc','#c8c8c8','#c6c6c6','#c3c3c3','#c0c0c0','#bebebe','#bababa','#b7b7b7','#b6b6b6','#b3b3b3','#afafaf','#adadad','#aaaaaa','#a7a7a7','#a5a5a5','#a3a3a3','#9f9f9f','#9c9c9c','#9b9b9b','#979797','#949494','#929292','#909090','#8d8d8d','#8b8b8b','#888888','#858585','#828282','#7f7f7f','#7e7e7e','#7a7a7a','#787878','#757575','#747474','#717171','#6f6f6f','#6b6b6b','#696969','#676767','#656565','#616161','#606060','#5c5c5c','#5a5a5a','#575757','#555555','#545454','#505050','#4e4e4e','#4c4c4c','#494949','#474747','#454545','#434343','#404040','#3f3f3f','#3c3c3c','#3a3a3a','#373737','#353535','#333333','#313131','#2f2f2f','#2c2c2c','#2b2b2b','#292929','#262626','#242424','#212121','#1f1f1f','#1d1d1d','#1c1c1c','#191919','#181818','#151515','#131313','#101010','#0f0f0f','#0b0b0b','#070707','#040404','#000000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
-}
-
-wind.R_palette = function (min, max) {
-let d = (max-min)/50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fffad6','#fff5cc','#ffefc2','#ffeaba','#ffe5b2','#ffe0ab','#ffdaa3','#ffd59c','#ffd095','#ffca90','#ffc58a','#ffbf85','#ffb880','#ffb27c','#ffad78','#ffa775','#ffa072','#ff9a6e','#ff936b','#fd8d6a','#fb8768','#f98266','#f87c64','#f57762','#f37160','#f06b5f','#ee655d','#eb5f5b','#e85959','#e55457','#e14e55','#de4952','#da4450','#d73e4d','#d3394a','#ce3347','#ca2e43','#c52940','#c1243c','#bc1f38','#b71a34','#b3152f','#ae112a','#a80b24','#a2071f','#9c0418','#970112','#92010b','#8b0000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
-}
-
-wind.D_palette = function (min, max) {
-let d = (max-min)/50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fdfae1','#faf5e2','#f7f0e3','#f5ebe4','#f2e7e5','#f0e2e6','#eddde7','#ead9e8','#e7d4e9','#e5d0e9','#e2caea','#dfc5eb','#dcc1ec','#d9bced','#d6b7ed','#d3b2ee','#d0afef','#cdaaf0','#c9a5f0','#c6a1f1','#c39cf2','#bf97f2','#bc92f3','#b88df3','#b489f4','#b184f5','#ad7ff5','#a97bf6','#a676f6','#a171f7','#9d6df7','#9968f8','#9464f8','#8f5ff9','#8b5af9','#8656fa','#8151fa','#7c4bfb','#7646fb','#7041fc','#693cfc','#6337fc','#5c31fd','#542bfd','#4b25fe','#411ffe','#3517fe','#230dff','#0000ff'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
-}
-
-wind.I_palette = function I_palette(min, max) {
-let d = (max-min)/50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fbfcdc','#f6fad7','#f2f7d3','#edf5ce','#e9f2ca','#e4efc6','#dfedc0','#dceabd','#d7e7b8','#d2e5b4','#cee2b0','#c9e0ab','#c5dda7','#c1dba2','#bcd89d','#b8d69a','#b3d295','#afd192','#aace8d','#a6cb88','#a2c985','#9dc680','#99c37d','#94c078','#90be73','#8bbb70','#86b96b','#83b767','#7db363','#79b15f','#75af5b','#70ac56','#6caa52','#66a74e','#62a44a','#5da145','#589f42','#539c3d','#4e9938','#4a9835','#439430','#3f922c','#389027','#328d21','#2c8a1d','#248816','#1d8611','#108308','#008000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
-}
-
-const barColors = wind['palette'](0,4);
-
 // Plotting variables
 let barPlot = null;
-let majorPlot = null;
+let horizontalBarPlot = null;
 
 // Plotting functions (TODO: Save in separate files!)
 function drawCongressPlot(data) {
@@ -143,39 +106,22 @@ function drawCongressPlot(data) {
     }
 }
 
-function onclickMajorPlot(evt) {
-    console.log(evt)
-    let activeBar = majorPlot.getElementAtEvent(evt);
-    if (activeBar.length > 0) {
-        activeBar = activeBar[0]["_model"]["label"];
-        console.log(activeBar)
-        addFilterField("major", activeBar);
-    }
-}
-
-// function onhoverMajorPlot(evt) {
-//     let activeBar = majorPlot.getElementAtEvent(evt);
-//     if (activeBar.length > 0) {
-//         activeBar = activeBar[0]["_model"]["label"];
-//         // addFilterField("major", activeBar);
-//     }
-// }
-
 function drawMajorPlot(data) {
     const billsPerMajor = _.groupBy(data, bg => bg['major']);
     let plotData = {
+        labels: [],
         datasets: [{
-            backgroundColor: barColors(1),
-            hoverBackgroundColor: barColors(2),
             label: 'Number of bills',
-            data: []
-        }],
-        labels: []
+            data: [],
+            backgroundColor: [],
+            hoverBackgroundColor: []
+        }]
     };
+
     allValuesFilter['major'].forEach(major => {
         const bills = billsPerMajor[major];
         if (bills != null) {
-            plotData.labels.push(data_df.filter(row => row.get('major') == major).select('policy').toArray()[0][0]);
+            plotData.labels.push(major);
             let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
             plotData.datasets[0].data.push(numberBills);
         }
@@ -185,33 +131,12 @@ function drawMajorPlot(data) {
         //     plotData[1].push(0);
         // }
     });
-    if (majorPlot == null) {
+    if (horizontalBarPlot == null) {
         let ctx = document.getElementById('majors-plot');
-        ctx.onclick = ((evt) => onclickMajorPlot(evt));
-        // ctx.onhover = ((evt, item) => onhoverMajorPlot(evt, item)); //TODO
-        majorPlot = new Chart(ctx, {
+        horizontalBarPlot = new Chart(ctx, {
             type: 'horizontalBar',
             data: plotData,
             options: {
-                animation: {
-                    onProgress () {
-                        const chartInstance = this.chart;
-                        const ctx = chartInstance.ctx;
-                        const dataset = this.data.datasets[0];
-                        const meta = chartInstance.controller.getDatasetMeta(0);
-    
-                        Chart.helpers.each(meta.data.forEach((bar, index) => {
-                            const label = this.data.labels[index];
-                            const labelPositionX = 20;
-                            const labelWidth = ctx.measureText(label).width + labelPositionX;
-    
-                            ctx.textBaseline = 'middle';
-                            ctx.textAlign = 'left';
-                            ctx.fillStyle = '#333';
-                            ctx.fillText(label, labelPositionX, bar._model.y);
-                        }));
-                    }
-                },
                 maintainAspectRatio: false,
                 responsive: true,
                 scales: {
@@ -219,32 +144,32 @@ function drawMajorPlot(data) {
                         ticks: {
                             min: 0,
                             beginAtZero: true,
-                        }//,
-                        //afterBuildTicks: function(chart) {}
+
+                        },
+                        afterBuildTicks: function(chart) {}
                     }],
                     yAxes: [{
-                        gridLines: {
-                            display: false
-                        },
+                        gridLines: { display: false },
                         ticks: {
-                            // This puts the majors labels on top of bars
                             mirror: true,
                         }
+
                     }]
                 },
                 legend: {
                     display: false
                 },
-                // tooltips: {
-                //     callbacks: {
-                //     }
-                // }
+                tooltips: {
+                    callbacks: {
+
+                    }
+                }
             }
         });
     } else {
-        majorPlot.data.labels = plotData.labels;
-        majorPlot.data.datasets[0].data = plotData.datasets[0].data;
-        majorPlot.update();
+        horizontalBarPlot.load({
+            columns: plotData
+        });
     }
 }
 
@@ -283,7 +208,7 @@ function displayPartyRatios(data) {
 
     d3.select('.bills-D').text(plotData[1][0] + " (" + plotData[2][0]) + "%)";
     d3.select('.bills-R').text(plotData[1][1] + " (" + plotData[2][1]) + "%)";
-    
+
     // TODO: Color svgs
 }
 
@@ -318,7 +243,7 @@ export function drawPlots(data = null) {
 
     // Filter the data for chosen states
     filteredData = _.filter(filteredData, d => filter['state'].includes(d['state']));
-    
+
     // Display percentages per party
     // displayPartyRatios(filteredData);
 
@@ -386,7 +311,7 @@ let uStatesFinal;
 {id:"CA",n:"California",d:"M144.69443,382.19813L148.63451,381.70951L150.12055,379.69807L150.66509,376.75698L147.11357,376.16686L146.5994,375.49864L147.0769,373.46633L146.91762,372.87666L148.84019,372.25707L151.88297,369.42439L152.46453,364.42929L153.84443,361.02718L155.78772,358.86092L159.30659,357.27125L160.96098,355.66642L161.02971,353.55758L160.03638,352.97757L159.01323,351.90484L157.85801,346.05639L155.17281,341.2263L155.73862,337.7213L153.31904,336.69199L84.257718,232.51359L103.15983,164.9121L36.079967,149.21414L34.573071,153.94738L34.41141,161.38376L29.238275,173.18497L26.166727,175.77154L25.843406,176.90316L24.06514,177.71147L22.610196,181.91464L21.801894,185.14785L24.550122,189.35102L26.166727,193.55419L27.29835,197.11072L26.975029,203.57714L25.196764,206.64869L24.550122,212.46847L23.580159,216.18666L25.358424,220.06651L28.106652,224.593L30.369899,229.44282L31.663182,233.48433L31.339862,236.71754L31.016541,237.20252L31.016541,239.3041L36.674657,245.60886L36.189676,248.03377L35.543034,250.29702L34.896392,252.23694L35.058052,260.48163L37.159638,264.19982L39.099564,266.78638L41.847792,267.27137L42.817755,270.01959L41.686132,273.57612L39.584545,275.19273L38.452922,275.19273L37.64462,279.07258L38.129601,281.98247L41.362811,286.3473L42.979415,291.6821L44.434359,296.37025L45.727643,299.4418L49.122513,305.26158L50.577457,307.84814L51.062439,310.75803L52.679043,311.72799L52.679043,314.1529L51.870741,316.09283L50.092476,323.20589L49.607494,325.14581L52.032402,327.89404L56.235574,328.37902L60.762067,330.15729L64.641918,332.25887L67.551807,332.25887L70.461695,335.33042L73.048262,340.18024L74.179886,342.44348L78.059737,344.54507L82.909551,345.35337L84.364495,347.45496L85.011137,350.68817L83.556193,351.33481L83.879514,352.30477L87.112725,353.11307L89.860953,353.27474L93.020842,351.58789L96.900696,355.79106L97.708998,358.05431L100.29557,362.25748L100.61889,365.49069L100.61889,374.867L101.10387,376.64526L111.12682,378.10021L130.84939,380.84843L144.69443,382.19813ZM56.559218,338.48145L57.852506,340.01723L57.690846,341.31052L54.457625,341.22969L53.891811,340.01723L53.245167,338.56228L56.559218,338.48145ZM58.49915,338.48145L59.711608,337.83481L63.268151,339.9364L66.339711,341.14885L65.450575,341.79551L60.924066,341.55301L59.307456,339.9364L58.49915,338.48145ZM79.191764,358.28493L80.970029,360.62901L81.778342,361.59898L83.314121,362.16479L83.879928,360.70984L82.909965,358.93157L80.242562,356.91081L79.191764,357.07247L79.191764,358.28493ZM77.736809,366.93379L79.515085,370.08618L80.727543,372.02612L79.272589,372.2686L77.979305,371.05615C77.979305,371.05615,77.251828,369.6012,77.251828,369.19704C77.251828,368.7929,77.251828,367.01462,77.251828,367.01462L77.736809,366.93379Z"}
     ];
     var uStates={};
-    var Paths = []; 
+    var Paths = [];
     var toolTip;
     uStates.draw = function(id, data, toolTip){
         Paths = uStatePaths;
@@ -395,17 +320,20 @@ let uStatesFinal;
             var coordinates= d3.mouse(this);
             var x = coordinates[0];
             var y = coordinates[1];
-            d3.select("#tooltip").transition().duration(200).style("opacity", .9);                 
+            d3.select("#tooltip").transition().duration(200).style("opacity", .9);
+
+            console.log(d3.event.pageX)
             d3.select("#tooltip").html(toolTip(d.n, data[d.id]))
-                .style("left", (d3.event.pageX) + "px")     
+                .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
         }
-        
+
         function mouseOut(){
-            d3.select("#tooltip").transition().duration(500).style("opacity", 0);      
+            d3.select("#tooltip").transition().duration(500).style("opacity", 0);
         }
         function mouseclick(d){
-            addFilterField('state', d.id);
+            console.log(d)
+            addFilterField('state',d.id);
             let width = '1';
             if(filter['state'].includes(d.id)){
                 width = '10';
@@ -435,76 +363,159 @@ let uStatesFinal;
 
 
 let color_scale ;
-let data_df;
+let data;
 let policy_data;
 
-/* draw states on id #statesvg */   
-//uStates.draw("#statesvg", sampleData, tooltipHtml);
 
-function tooltipHtml2(n, d){    /* function to create html content string in tooltip div. */
-    return "<h4>"+n+"</h4><table>"+
-        "<tr><td>Count</td><td>"+(d.count)+"</td></tr>"
-        "</table>";
-}
 
-function join2dfs(){
-    policy_data=policy_data.rename('0','policy');
-    policy_data = policy_data.rename('1','major')
-    policy_data = policy_data.map(row=>row.set('major',row.get('major')+'.0'))
-    data_df = data_df.join(policy_data,'major','full')
-    data_df = data_df.replace(undefined,'others','policy')
-}
+    /* draw states on id #statesvg */
+    //uStates.draw("#statesvg", sampleData, tooltipHtml);
 
-function on_data_loaded(df){
-    data_df = df
-    join2dfs()
-    draw_map(data_df)
-    //drawList(df.unique('congress').toArray(),congressClick);
-    //drawList(df.unique('party').toArray(),partyClick);
-    //drawList(df.unique('major').toArray(),majorClick);
-}
-
-function draw_map(df){
-    let data_dict = {}
-    let counts = df.select('count')
-    let df_new = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count'); 
-    let color = 'palette'
-    let parties= df.unique('party').toArray()
-    if(parties.length == 1){
-        color = parties[0]+'_'+color;
+    let  wind = { };
+    wind.palette = function (min, max) {
+    let d = (max-min)/100;
+    return d3.scaleThreshold()
+        .range(['#ffffff','#fdfdfd','#fafafa','#f6f6f6','#f4f4f4','#f0f0f0','#ededed','#eaeaea','#e8e8e8','#e4e4e4','#e3e3e3','#dfdfdf','#dcdcdc','#dadada','#d7d7d7','#d3d3d3','#d1d1d1','#cecece','#cccccc','#c8c8c8','#c6c6c6','#c3c3c3','#c0c0c0','#bebebe','#bababa','#b7b7b7','#b6b6b6','#b3b3b3','#afafaf','#adadad','#aaaaaa','#a7a7a7','#a5a5a5','#a3a3a3','#9f9f9f','#9c9c9c','#9b9b9b','#979797','#949494','#929292','#909090','#8d8d8d','#8b8b8b','#888888','#858585','#828282','#7f7f7f','#7e7e7e','#7a7a7a','#787878','#757575','#747474','#717171','#6f6f6f','#6b6b6b','#696969','#676767','#656565','#616161','#606060','#5c5c5c','#5a5a5a','#575757','#555555','#545454','#505050','#4e4e4e','#4c4c4c','#494949','#474747','#454545','#434343','#404040','#3f3f3f','#3c3c3c','#3a3a3a','#373737','#353535','#333333','#313131','#2f2f2f','#2c2c2c','#2b2b2b','#292929','#262626','#242424','#212121','#1f1f1f','#1d1d1d','#1c1c1c','#191919','#181818','#151515','#131313','#101010','#0f0f0f','#0b0b0b','#070707','#040404','#000000'])
+        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
     }
-    let maxval = 0
-    if(df_new.count()>0) {
-        maxval = df_new.stat.max('count');
+
+    wind.R_palette = function (min, max) {
+    let d = (max-min)/50;
+    return d3.scaleThreshold()
+        .range(['#ffffe0','#fffad6','#fff5cc','#ffefc2','#ffeaba','#ffe5b2','#ffe0ab','#ffdaa3','#ffd59c','#ffd095','#ffca90','#ffc58a','#ffbf85','#ffb880','#ffb27c','#ffad78','#ffa775','#ffa072','#ff9a6e','#ff936b','#fd8d6a','#fb8768','#f98266','#f87c64','#f57762','#f37160','#f06b5f','#ee655d','#eb5f5b','#e85959','#e55457','#e14e55','#de4952','#da4450','#d73e4d','#d3394a','#ce3347','#ca2e43','#c52940','#c1243c','#bc1f38','#b71a34','#b3152f','#ae112a','#a80b24','#a2071f','#9c0418','#970112','#92010b','#8b0000'])
+        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
     }
-    color_scale = wind[color](0,maxval+1)
-    var array1 = ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
-    "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
-    "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
-    "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
-    "WI", "MO", "AR", "OK", "KS", "LS", "VA"]
-    array1.forEach(function(d){ 
-        data_dict[d]={count:0,color:color_scale(0)}
-    });
 
-    
+    wind.D_palette = function (min, max) {
+    let d = (max-min)/50;
+    return d3.scaleThreshold()
+        .range(['#ffffe0','#fdfae1','#faf5e2','#f7f0e3','#f5ebe4','#f2e7e5','#f0e2e6','#eddde7','#ead9e8','#e7d4e9','#e5d0e9','#e2caea','#dfc5eb','#dcc1ec','#d9bced','#d6b7ed','#d3b2ee','#d0afef','#cdaaf0','#c9a5f0','#c6a1f1','#c39cf2','#bf97f2','#bc92f3','#b88df3','#b489f4','#b184f5','#ad7ff5','#a97bf6','#a676f6','#a171f7','#9d6df7','#9968f8','#9464f8','#8f5ff9','#8b5af9','#8656fa','#8151fa','#7c4bfb','#7646fb','#7041fc','#693cfc','#6337fc','#5c31fd','#542bfd','#4b25fe','#411ffe','#3517fe','#230dff','#0000ff'])
+        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+    }
 
-    df_new.map(function (d){
-        data_dict [d.get('state')]={count:d.get('count'),color:color_scale(d.get('count'))}
-    });
+    wind.I_palette = function I_palette(min, max) {
+    let d = (max-min)/50;
+    return d3.scaleThreshold()
+        .range(['#ffffe0','#fbfcdc','#f6fad7','#f2f7d3','#edf5ce','#e9f2ca','#e4efc6','#dfedc0','#dceabd','#d7e7b8','#d2e5b4','#cee2b0','#c9e0ab','#c5dda7','#c1dba2','#bcd89d','#b8d69a','#b3d295','#afd192','#aace8d','#a6cb88','#a2c985','#9dc680','#99c37d','#94c078','#90be73','#8bbb70','#86b96b','#83b767','#7db363','#79b15f','#75af5b','#70ac56','#6caa52','#66a74e','#62a44a','#5da145','#589f42','#539c3d','#4e9938','#4a9835','#439430','#3f922c','#389027','#328d21','#2c8a1d','#248816','#1d8611','#108308','#008000'])
+        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+    }
 
-    uStatesFinal.draw("#statesvg", data_dict, tooltipHtml2);
 
-}
-export function read_data(){
-    DataFrame.fromCSV('data/policy_agenda.csv',false).then(function(df){
-        policy_data = df
-    }).then(df=>DataFrame.fromCSV('data/grouped_bills.csv')).then(df=>on_data_loaded(df)).then(df=>d3.csv("./data/grouped_bills.csv")).then(function(data) {
-    data.forEach(d => d['count'] = +d['count']);
-    drawPlots(data);
-    });
 
-}
-    
-// Load ISA data from csv
+
+
+
+    function tooltipHtml2(n, d){    /* function to create html content string in tooltip div. */
+        return "<h4>"+n+"</h4><table>"+
+            "<tr><td>Count</td><td>"+(d.count)+"</td></tr>"
+            "</table>";
+    }
+
+    function join2dfs(){
+        policy_data=policy_data.rename('0','major');
+        policy_data = policy_data.rename('1','policy')
+        policy_data = policy_data.map(row=>row.set('major',row.get('major')+'.0'))
+        data = data.join(policy_data,'major','full')
+        data = data.replace(undefined,'others','policy')
+
+    }
+
+    function on_data_loaded(df){
+        data = df
+        draw_map(data)
+        console.log(df.unique('congress').show());
+        //drawList(df.unique('congress').toArray(),congressClick);
+        //drawList(df.unique('party').toArray(),partyClick);
+        //drawList(df.unique('major').toArray(),majorClick);
+    }
+
+    function draw_map(df){
+        console.log(df)
+
+        let data_dict = {}
+        let counts = df.select('count')
+        let df_new = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
+        let color = 'palette'
+        let parties= df.unique('party').toArray()
+        if(parties.length == 1){
+            color = parties[0]+'_'+color;
+        }
+        console.log(color)
+        df_new.show()
+        console.log(df_new.count())
+        let maxval = 0
+        if(df_new.count()>0) {
+            maxval = df_new.stat.max('count');
+        }
+        color_scale = wind[color](0,maxval+1)
+        var array1 = ["HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
+        "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
+        "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT",
+        "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
+        "WI", "MO", "AR", "OK", "KS", "LS", "VA"]
+        array1.forEach(function(d){
+            data_dict[d]={count:0,color:color_scale(0)}
+        });
+
+
+
+        df_new.map(function (d){
+            data_dict [d.get('state')]={count:d.get('count'),color:color_scale(d.get('count'))}
+        });
+
+        console.log(data_dict)
+        uStatesFinal.draw("#statesvg", data_dict, tooltipHtml2);
+
+    }
+    export function read_data(){
+        DataFrame.fromCSV('data/policy_agenda.csv',false).then(function(df){
+            policy_data = df
+        }).then(df=>DataFrame.fromCSV('data/grouped_bills.csv')).then(df=>on_data_loaded(df));
+
+    }
+
+
 read_data()
+
+// d3.csv("./data/grouped_bills.csv").then(function(data) {
+//
+//
+// data.forEach(d => {
+//
+// })
+//
+// });
+
+// Load ISA data from csv
+d3.csv("./data/grouped_bills.csv").then(function(data) {
+    let congress = [];
+    let party = [];
+    let major = [];
+    let state = [];
+
+    data.forEach(d =>{
+       d['count'] = +d['count'];
+       congress.push(d["congress"]);
+       party.push(d["party"]);
+       major.push(d["major"]);
+       state.push(d["state"]);
+     });
+
+    allValuesFilter.congress = Array.from(new Set(congress));
+    allValuesFilter.party = Array.from(new Set(party));
+    allValuesFilter.major = Array.from(new Set(major));
+    allValuesFilter.state = Array.from(new Set(state));
+
+    initialFilter= {
+         'congress': allValuesFilter['congress'][0], // TODO: choose last one instead!
+         'state':  allValuesFilter['state'],
+         'party':  allValuesFilter['party'],
+         'major':  allValuesFilter['major']
+     }
+     filter = initialFilter;
+    console.log('hello');
+    console.log(allValuesFilter.congress)
+    drawPlots(data);
+    console.log("congress:")
+    console.log(allValuesFilter)
+});
