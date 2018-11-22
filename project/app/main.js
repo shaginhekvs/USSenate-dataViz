@@ -24,6 +24,10 @@ const initialFilter = {
     'major':  allValuesFilter['major']
 }
 
+const rep_color = 'red';
+const demo_color = 'blue';
+const independent_color = 'green';
+const no_selection_color = 'black';
 let filter = initialFilter;
 
 function arrayRemove(array, value) {
@@ -58,6 +62,36 @@ function resetFilter() {
 // Plotting variables
 let barPlot = null;
 let horizontalBarPlot = null;
+
+
+function initialize_icon(filename,svg_id,party_id,on_click_color){
+    d3.svg("imgs/"+filename+'.svg').then((svg)=>{
+        const gElement = d3.select(svg).select('g'); 
+        d3.select(svg_id).node().appendChild(gElement.node());
+        d3.select(svg_id).on("click",()=>{
+            addFilterField('party',party_id)
+             if(filter['party'].includes(party_id)){
+                    d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
+             }
+             else{
+                d3.select(svg_id).select('g').select('path').attr("fill",no_selection_color);
+             }
+         });
+    });
+
+}
+
+function drawPartyIcons(data){
+    let dem = d3.select('#svg-D svg')
+        if(dem.empty()){
+            console.log('adding icon')
+            initialize_icon('donkey','#svg-D','D',demo_color);
+            initialize_icon('elephant','#svg-R','R',rep_color);
+            initialize_icon('penguin','#svg-I','I',independent_color);
+            
+        }
+       
+    }
 
 // Plotting functions (TODO: Save in separate files!)
 function drawCongressPlot(data) {
@@ -259,6 +293,7 @@ export function drawPlots(data = null) {
     // showYear()
     // showMajors()
     // showTitle()
+    drawPartyIcons();
 }
 
 
@@ -354,7 +389,10 @@ let uStatesFinal;
         let paths = d3.select(id).selectAll(".state")
             .data(Paths)
             paths.enter().append("path").attr("class","state").attr("d",function(d){ return d.d;})
-            .style("fill",function(d){ return data[d.id].color; })
+            .style("fill",function(d){ return data[d.id].color; }).style('stroke-width',function(d){ 
+                let width = '1';
+                if(filter['state'].includes(d.id)){width = '10';}
+                return width;})
             .on("mouseover", mouseOver).on("mouseout", mouseOut).on("click",mouseclick);
 
         paths.exit().remove();
@@ -486,6 +524,7 @@ let policy_data;
         console.log('hello')
         drawPlots(data);
         });
+
 
     }
     
