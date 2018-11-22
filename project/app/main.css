@@ -7,10 +7,16 @@ body {
 }
 
 canvas{
-  
+
   width :500px !important;
   height:800px !important;
 
+}
+
+.bar-plot{
+  width :800px !important;
+  height:400px !important;
+  margin: 100px;
 }
 
 .clear {
@@ -62,32 +68,32 @@ table {
 .state:click{
     stroke-width: 10;
 }
-.svg-container { 
+.svg-container {
 display: inline-block;
 position: relative;
 width: 100%;
-padding-bottom: 100%; 
-vertical-align: middle; 
-overflow: hidden; 
+padding-bottom: 100%;
+vertical-align: middle;
+overflow: hidden;
 }
-.svg-content { 
+.svg-content {
 display: inline-block;
 position: absolute;
 top: 0;
 left: 0;
 }
 
-#tooltip {   
-    position: absolute;           
+#tooltip {
+    position: absolute;
     text-align: center;
-    padding: 20px;             
+    padding: 20px;
     margin: 10px;
-    font: 12px sans-serif;        
-    background: lightsteelblue;   
-    border: 1px;      
-    border-radius: 2px;           
-    pointer-events: none;  
-    z-index: 1;       
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 1px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
 }
 #tooltip h4{
     margin:0;
@@ -119,7 +125,7 @@ left: 0;
 
 .section_map{
     position:relative;
-    vertical-align: middle; 
+    vertical-align: middle;
     margin: auto;
     z-index: 0;
 }
