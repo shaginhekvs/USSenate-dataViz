@@ -23,6 +23,10 @@ let allValuesFilter = {
 
 let initialFilter = null;
 
+const rep_color = 'red';
+const demo_color = 'blue';
+const independent_color = 'green';
+const no_selection_color = 'black';
 let filter = initialFilter;
 
 function arrayRemove(array, value) {
@@ -108,6 +112,42 @@ function onclickMajorPlot(evt) {
     }
 }
 
+
+
+function initialize_icon(filename,svg_id,party_id,on_click_color){
+    d3.svg("imgs/"+filename+'.svg').then((svg)=>{
+        const gElement = d3.select(svg).select('g'); 
+        d3.select(svg_id).node().appendChild(gElement.node());
+        if(filter['party'].includes(party_id)){
+            d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
+        }        
+        d3.select(svg_id).on("click",()=>{
+            addFilterField('party',party_id)
+             if(filter['party'].includes(party_id)){
+                    d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
+             }
+             else{
+                d3.select(svg_id).select('g').select('path').attr("fill",no_selection_color);
+             }
+         });
+    });
+
+}
+
+function drawPartyIcons(data){
+    let dem = d3.select('#svg-D svg')
+        if(dem.empty()){
+            console.log('adding icon')
+            initialize_icon('donkey','#svg-D','D',demo_color);
+            initialize_icon('elephant','#svg-R','R',rep_color);
+            initialize_icon('penguin','#svg-I','I',independent_color);
+            
+        }
+       
+    }
+
+// Plotting functions (TODO: Save in separate files!)
+
 // function onhoverMajorPlot(evt) {
 //     let activeBar = majorPlot.getElementAtEvent(evt);
 //     if (activeBar.length > 0) {
@@ -119,54 +159,66 @@ function onclickMajorPlot(evt) {
 //////////////////////////////////////////////////////////
 // Plotting functions (TODO: Move to separate files!)
 //////////////////////////////////////////////////////////
+
 function drawCongressPlot(data) {
     const billsPerCongress = _.groupBy(data, bg => bg['congress']);
-    let plotData = [['congress'], ['Number of bills introduced']];
+    // let plotData = [['congress'], ['Number of bills introduced']];
+    let plotData = {
+        datasets: [{
+            backgroundColor: barColors(3),
+            hoverBackgroundColor: barColors(2),
+            label: 'Number of bills',
+            data: []
+        }],
+        labels: []
+    };
+
     allValuesFilter['congress'].forEach(congress => {
-        plotData[0].push(congress);
         const bills = billsPerCongress[congress];
-        if (bills == null) {
-            plotData[1].push(0);
-        } else {
+        if (bills != null) {
+            plotData.labels.push(congress);
             let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
-            plotData[1].push(numberBills);
+            plotData.datasets[0].data.push(numberBills);
         }
     });
+
     if (barPlot == null) {
-        barPlot = c3.generate({
-            data: {
-                x: 'congress',
-                columns: plotData,
-                type: 'bar',
-                onclick: c => {
-                    addFilterField('congress', c.x);
-                }
-            },
-            axis: {
-                x: {
-                    show: true/*,
-                    min: Math.min(allValuesFilter['congress']),
-                    max: Math.max(allValuesFilter['congress'])*/
+        let ctx = document.getElementById('evolution_chart');
+        // ctx.onclick = ((evt) => onclickMajorPlot(evt));
+        // ctx.onhover = ((evt, item) => onhoverMajorPlot(evt, item)); //TODO
+        barPlot = new Chart(ctx, {
+            type: 'bar',
+            data: plotData,
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                      gridLines: {
+                          display: false
+                      },
+                        ticks: {
+                            min: 0,
+                            beginAtZero: true,
+                        }//,
+                        //afterBuildTicks: function(chart) {}
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            // This puts the majors labels on top of bars
+                            mirror: false,
+                        }
+                    }]
                 },
-                y: {
-                    tick: {
-                        // format: TODO: formatting function for numbers,
-                        count: 3
-                    }
-                }
-            },
-            legend: {
-                show: false
-            },
-            color: {
-                pattern: ['#888888']
-            },
-            bindto: '.bar-plot'
+                legend: {
+                    display: false
+                },
+            }
         });
     } else {
-        barPlot.load({
-            columns: plotData
-        });
+        barPlot.data.labels = plotData.labels;
+        barPlot.data.datasets[0].data = plotData.datasets[0].data;
+        barPlot.update();
     }
 }
 
@@ -214,12 +266,12 @@ function drawMajorPlot(data) {
                         const ctx = chartInstance.ctx;
                         const dataset = this.data.datasets[0];
                         const meta = chartInstance.controller.getDatasetMeta(0);
-    
+
                         Chart.helpers.each(meta.data.forEach((bar, index) => {
                             const label = this.data.labels[index];
                             const labelPositionX = 20;
                             const labelWidth = ctx.measureText(label).width + labelPositionX;
-    
+
                             ctx.textBaseline = 'middle';
                             ctx.textAlign = 'left';
                             ctx.fillStyle = '#333';
@@ -250,10 +302,6 @@ function drawMajorPlot(data) {
                 legend: {
                     display: false
                 },
-                // tooltips: {
-                //     callbacks: {
-                //     }
-                // }
             }
         });
     } else {
@@ -299,7 +347,7 @@ function displayPartyRatios(data) {
 
     d3.select('.bills-D').text(plotData[1][0] + " (" + plotData[2][0]) + "%)";
     d3.select('.bills-R').text(plotData[1][1] + " (" + plotData[2][1]) + "%)";
-    
+
     // TODO: Color svgs
 }
 
@@ -335,7 +383,7 @@ export function drawPlots(data = null) {
 
     // Filter the data for chosen states
     filteredData = _.filter(filteredData, d => filter['state'].includes(d['state']));
-    
+
     // Display percentages per party
     // displayPartyRatios(filteredData);
 
@@ -343,6 +391,7 @@ export function drawPlots(data = null) {
     // showYear()
     // showMajors()
     // showTitle()
+
 }
 
 
@@ -401,7 +450,7 @@ export function drawPlots(data = null) {
         {id:"CA",n:"California",d:"M144.69443,382.19813L148.63451,381.70951L150.12055,379.69807L150.66509,376.75698L147.11357,376.16686L146.5994,375.49864L147.0769,373.46633L146.91762,372.87666L148.84019,372.25707L151.88297,369.42439L152.46453,364.42929L153.84443,361.02718L155.78772,358.86092L159.30659,357.27125L160.96098,355.66642L161.02971,353.55758L160.03638,352.97757L159.01323,351.90484L157.85801,346.05639L155.17281,341.2263L155.73862,337.7213L153.31904,336.69199L84.257718,232.51359L103.15983,164.9121L36.079967,149.21414L34.573071,153.94738L34.41141,161.38376L29.238275,173.18497L26.166727,175.77154L25.843406,176.90316L24.06514,177.71147L22.610196,181.91464L21.801894,185.14785L24.550122,189.35102L26.166727,193.55419L27.29835,197.11072L26.975029,203.57714L25.196764,206.64869L24.550122,212.46847L23.580159,216.18666L25.358424,220.06651L28.106652,224.593L30.369899,229.44282L31.663182,233.48433L31.339862,236.71754L31.016541,237.20252L31.016541,239.3041L36.674657,245.60886L36.189676,248.03377L35.543034,250.29702L34.896392,252.23694L35.058052,260.48163L37.159638,264.19982L39.099564,266.78638L41.847792,267.27137L42.817755,270.01959L41.686132,273.57612L39.584545,275.19273L38.452922,275.19273L37.64462,279.07258L38.129601,281.98247L41.362811,286.3473L42.979415,291.6821L44.434359,296.37025L45.727643,299.4418L49.122513,305.26158L50.577457,307.84814L51.062439,310.75803L52.679043,311.72799L52.679043,314.1529L51.870741,316.09283L50.092476,323.20589L49.607494,325.14581L52.032402,327.89404L56.235574,328.37902L60.762067,330.15729L64.641918,332.25887L67.551807,332.25887L70.461695,335.33042L73.048262,340.18024L74.179886,342.44348L78.059737,344.54507L82.909551,345.35337L84.364495,347.45496L85.011137,350.68817L83.556193,351.33481L83.879514,352.30477L87.112725,353.11307L89.860953,353.27474L93.020842,351.58789L96.900696,355.79106L97.708998,358.05431L100.29557,362.25748L100.61889,365.49069L100.61889,374.867L101.10387,376.64526L111.12682,378.10021L130.84939,380.84843L144.69443,382.19813ZM56.559218,338.48145L57.852506,340.01723L57.690846,341.31052L54.457625,341.22969L53.891811,340.01723L53.245167,338.56228L56.559218,338.48145ZM58.49915,338.48145L59.711608,337.83481L63.268151,339.9364L66.339711,341.14885L65.450575,341.79551L60.924066,341.55301L59.307456,339.9364L58.49915,338.48145ZM79.191764,358.28493L80.970029,360.62901L81.778342,361.59898L83.314121,362.16479L83.879928,360.70984L82.909965,358.93157L80.242562,356.91081L79.191764,357.07247L79.191764,358.28493ZM77.736809,366.93379L79.515085,370.08618L80.727543,372.02612L79.272589,372.2686L77.979305,371.05615C77.979305,371.05615,77.251828,369.6012,77.251828,369.19704C77.251828,368.7929,77.251828,367.01462,77.251828,367.01462L77.736809,366.93379Z"}
     ];
     let uStates = {};
-    let Paths = []; 
+    let Paths = [];
     let toolTip;
     uStates.draw = function(id, data, toolTip){
         Paths = uStatePaths;
@@ -410,14 +459,14 @@ export function drawPlots(data = null) {
             let coordinates= d3.mouse(this);
             let x = coordinates[0];
             let y = coordinates[1];
-            d3.select("#tooltip").transition().duration(200).style("opacity", .9);                 
+            d3.select("#tooltip").transition().duration(200).style("opacity", .9);
             d3.select("#tooltip").html(toolTip(d.n, data[d.id]))
-                .style("left", (d3.event.pageX) + "px")     
+                .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
         }
-        
+
         function mouseOut(){
-            d3.select("#tooltip").transition().duration(500).style("opacity", 0);      
+            d3.select("#tooltip").transition().duration(500).style("opacity", 0);
         }
 
         function mouseclick(d){
@@ -433,7 +482,9 @@ export function drawPlots(data = null) {
         let paths = d3.select(id).selectAll(".state")
             .data(Paths)
             paths.enter().append("path").attr("class","state").attr("d",function(d){ return d.d;})
+
             .style("fill",function(d){ return data[d.id].color; }).style('stroke-width',function(d){ 
+
                 let width = '1';
                 if(filter['state'].includes(d.id)){width = '10';}
                 return width;})
@@ -453,7 +504,7 @@ export function drawPlots(data = null) {
 
 let color_scale;
 
-/* draw states on id #statesvg */   
+/* draw states on id #statesvg */
 //uStates.draw("#statesvg", sampleData, tooltipHtml);
 
 function tooltipHtml2(n, d){    /* function to create html content string in tooltip div. */
@@ -465,7 +516,7 @@ function tooltipHtml2(n, d){    /* function to create html content string in too
 function drawMapPlot(df){
     let data_dict = {}
     let counts = df.select('count')
-    let df_new = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count'); 
+    let df_new = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
     let color = 'palette'
     let parties= df.unique('party').toArray()
     if(parties.length == 1){
@@ -478,9 +529,9 @@ function drawMapPlot(df){
     color_scale = wind[color](0,maxval+1)
     let array1 = [
         "HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
-        "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH", 
-        "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT", 
-        "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN", 
+        "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
+        "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT",
+        "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
         "WI", "MO", "AR", "OK", "KS", "LS", "VA"
     ];
 
@@ -516,7 +567,7 @@ d3.csv("./data/grouped_bills.csv")
         });
 
         // Set filters
-        allValuesFilter.congress = Array.from(new Set(congress));
+        allValuesFilter.congress = Array.from(new Set(congress)).slice(-10);
         allValuesFilter.party = Array.from(new Set(party));
         allValuesFilter.major = Array.from(new Set(major)).slice(0,5);
         allValuesFilter.state = Array.from(new Set(state));
@@ -529,7 +580,9 @@ d3.csv("./data/grouped_bills.csv")
         }
 
         filter = initialFilter;
-
+        drawPartyIcons();
         // Draw plots
         drawPlots(data);
+
     });
+
