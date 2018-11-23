@@ -9,11 +9,13 @@ require("./main.css");
 //////////////////////////////////////////////////////////
 // Initial data
 //////////////////////////////////////////////////////////
+
 let unfilteredData = null;
 
 //////////////////////////////////////////////////////////
 // Initialize filters and define filtering related functions
 //////////////////////////////////////////////////////////
+
 let allValuesFilter = {
   'congress': [],
   'party': [],
@@ -22,11 +24,6 @@ let allValuesFilter = {
 }
 
 let initialFilter = null;
-
-const rep_color = 'red';
-const demo_color = 'blue';
-const independent_color = 'green';
-const no_selection_color = 'black';
 let filter = initialFilter;
 
 function arrayRemove(array, value) {
@@ -61,35 +58,43 @@ function resetFilter() {
 //////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////
-// Define bar colors
+// Define colors
 //////////////////////////////////////////////////////////
+
+let color_scale;
+
+const rep_color = 'red';
+const dem_color = 'blue';
+const ind_color = 'green';
+const none_color = 'black';
+
 let wind = {};
 wind.palette = function (min, max) {
-let d = (max - min) / 100;
-return d3.scaleThreshold()
-    .range(['#ffffff','#fdfdfd','#fafafa','#f6f6f6','#f4f4f4','#f0f0f0','#ededed','#eaeaea','#e8e8e8','#e4e4e4','#e3e3e3','#dfdfdf','#dcdcdc','#dadada','#d7d7d7','#d3d3d3','#d1d1d1','#cecece','#cccccc','#c8c8c8','#c6c6c6','#c3c3c3','#c0c0c0','#bebebe','#bababa','#b7b7b7','#b6b6b6','#b3b3b3','#afafaf','#adadad','#aaaaaa','#a7a7a7','#a5a5a5','#a3a3a3','#9f9f9f','#9c9c9c','#9b9b9b','#979797','#949494','#929292','#909090','#8d8d8d','#8b8b8b','#888888','#858585','#828282','#7f7f7f','#7e7e7e','#7a7a7a','#787878','#757575','#747474','#717171','#6f6f6f','#6b6b6b','#696969','#676767','#656565','#616161','#606060','#5c5c5c','#5a5a5a','#575757','#555555','#545454','#505050','#4e4e4e','#4c4c4c','#494949','#474747','#454545','#434343','#404040','#3f3f3f','#3c3c3c','#3a3a3a','#373737','#353535','#333333','#313131','#2f2f2f','#2c2c2c','#2b2b2b','#292929','#262626','#242424','#212121','#1f1f1f','#1d1d1d','#1c1c1c','#191919','#181818','#151515','#131313','#101010','#0f0f0f','#0b0b0b','#070707','#040404','#000000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
+    let d = (max - min) / 100;
+    return d3.scaleThreshold()
+        .range(['#ffffff','#fdfdfd','#fafafa','#f6f6f6','#f4f4f4','#f0f0f0','#ededed','#eaeaea','#e8e8e8','#e4e4e4','#e3e3e3','#dfdfdf','#dcdcdc','#dadada','#d7d7d7','#d3d3d3','#d1d1d1','#cecece','#cccccc','#c8c8c8','#c6c6c6','#c3c3c3','#c0c0c0','#bebebe','#bababa','#b7b7b7','#b6b6b6','#b3b3b3','#afafaf','#adadad','#aaaaaa','#a7a7a7','#a5a5a5','#a3a3a3','#9f9f9f','#9c9c9c','#9b9b9b','#979797','#949494','#929292','#909090','#8d8d8d','#8b8b8b','#888888','#858585','#828282','#7f7f7f','#7e7e7e','#7a7a7a','#787878','#757575','#747474','#717171','#6f6f6f','#6b6b6b','#696969','#676767','#656565','#616161','#606060','#5c5c5c','#5a5a5a','#575757','#555555','#545454','#505050','#4e4e4e','#4c4c4c','#494949','#474747','#454545','#434343','#404040','#3f3f3f','#3c3c3c','#3a3a3a','#373737','#353535','#333333','#313131','#2f2f2f','#2c2c2c','#2b2b2b','#292929','#262626','#242424','#212121','#1f1f1f','#1d1d1d','#1c1c1c','#191919','#181818','#151515','#131313','#101010','#0f0f0f','#0b0b0b','#070707','#040404','#000000'])
+        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
 }
 
 wind.R_palette = function (min, max) {
-let d = (max - min) / 50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fffad6','#fff5cc','#ffefc2','#ffeaba','#ffe5b2','#ffe0ab','#ffdaa3','#ffd59c','#ffd095','#ffca90','#ffc58a','#ffbf85','#ffb880','#ffb27c','#ffad78','#ffa775','#ffa072','#ff9a6e','#ff936b','#fd8d6a','#fb8768','#f98266','#f87c64','#f57762','#f37160','#f06b5f','#ee655d','#eb5f5b','#e85959','#e55457','#e14e55','#de4952','#da4450','#d73e4d','#d3394a','#ce3347','#ca2e43','#c52940','#c1243c','#bc1f38','#b71a34','#b3152f','#ae112a','#a80b24','#a2071f','#9c0418','#970112','#92010b','#8b0000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+    let d = (max - min) / 50;
+    return d3.scaleThreshold()
+        .range(['#ffffe0','#fffad6','#fff5cc','#ffefc2','#ffeaba','#ffe5b2','#ffe0ab','#ffdaa3','#ffd59c','#ffd095','#ffca90','#ffc58a','#ffbf85','#ffb880','#ffb27c','#ffad78','#ffa775','#ffa072','#ff9a6e','#ff936b','#fd8d6a','#fb8768','#f98266','#f87c64','#f57762','#f37160','#f06b5f','#ee655d','#eb5f5b','#e85959','#e55457','#e14e55','#de4952','#da4450','#d73e4d','#d3394a','#ce3347','#ca2e43','#c52940','#c1243c','#bc1f38','#b71a34','#b3152f','#ae112a','#a80b24','#a2071f','#9c0418','#970112','#92010b','#8b0000'])
+        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
 }
 
 wind.D_palette = function (min, max) {
-let d = (max - min) / 50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fdfae1','#faf5e2','#f7f0e3','#f5ebe4','#f2e7e5','#f0e2e6','#eddde7','#ead9e8','#e7d4e9','#e5d0e9','#e2caea','#dfc5eb','#dcc1ec','#d9bced','#d6b7ed','#d3b2ee','#d0afef','#cdaaf0','#c9a5f0','#c6a1f1','#c39cf2','#bf97f2','#bc92f3','#b88df3','#b489f4','#b184f5','#ad7ff5','#a97bf6','#a676f6','#a171f7','#9d6df7','#9968f8','#9464f8','#8f5ff9','#8b5af9','#8656fa','#8151fa','#7c4bfb','#7646fb','#7041fc','#693cfc','#6337fc','#5c31fd','#542bfd','#4b25fe','#411ffe','#3517fe','#230dff','#0000ff'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+    let d = (max - min) / 50;
+    return d3.scaleThreshold()
+        .range(['#ffffe0','#fdfae1','#faf5e2','#f7f0e3','#f5ebe4','#f2e7e5','#f0e2e6','#eddde7','#ead9e8','#e7d4e9','#e5d0e9','#e2caea','#dfc5eb','#dcc1ec','#d9bced','#d6b7ed','#d3b2ee','#d0afef','#cdaaf0','#c9a5f0','#c6a1f1','#c39cf2','#bf97f2','#bc92f3','#b88df3','#b489f4','#b184f5','#ad7ff5','#a97bf6','#a676f6','#a171f7','#9d6df7','#9968f8','#9464f8','#8f5ff9','#8b5af9','#8656fa','#8151fa','#7c4bfb','#7646fb','#7041fc','#693cfc','#6337fc','#5c31fd','#542bfd','#4b25fe','#411ffe','#3517fe','#230dff','#0000ff'])
+        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
 }
 
 wind.I_palette = function I_palette(min, max) {
-let d = (max - min) / 50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fbfcdc','#f6fad7','#f2f7d3','#edf5ce','#e9f2ca','#e4efc6','#dfedc0','#dceabd','#d7e7b8','#d2e5b4','#cee2b0','#c9e0ab','#c5dda7','#c1dba2','#bcd89d','#b8d69a','#b3d295','#afd192','#aace8d','#a6cb88','#a2c985','#9dc680','#99c37d','#94c078','#90be73','#8bbb70','#86b96b','#83b767','#7db363','#79b15f','#75af5b','#70ac56','#6caa52','#66a74e','#62a44a','#5da145','#589f42','#539c3d','#4e9938','#4a9835','#439430','#3f922c','#389027','#328d21','#2c8a1d','#248816','#1d8611','#108308','#008000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+    let d = (max - min) / 50;
+    return d3.scaleThreshold()
+        .range(['#ffffe0','#fbfcdc','#f6fad7','#f2f7d3','#edf5ce','#e9f2ca','#e4efc6','#dfedc0','#dceabd','#d7e7b8','#d2e5b4','#cee2b0','#c9e0ab','#c5dda7','#c1dba2','#bcd89d','#b8d69a','#b3d295','#afd192','#aace8d','#a6cb88','#a2c985','#9dc680','#99c37d','#94c078','#90be73','#8bbb70','#86b96b','#83b767','#7db363','#79b15f','#75af5b','#70ac56','#6caa52','#66a74e','#62a44a','#5da145','#589f42','#539c3d','#4e9938','#4a9835','#439430','#3f922c','#389027','#328d21','#2c8a1d','#248816','#1d8611','#108308','#008000'])
+        .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
 }
 
 const barColors = wind['palette'](0,9);
@@ -97,6 +102,7 @@ const barColors = wind['palette'](0,9);
 //////////////////////////////////////////////////////////
 // Plot variables
 //////////////////////////////////////////////////////////
+
 let barPlot = null;
 let majorPlot = null;
 let uStatesFinal;
@@ -104,6 +110,7 @@ let uStatesFinal;
 //////////////////////////////////////////////////////////
 // Event handlers
 //////////////////////////////////////////////////////////
+
 function onclickMajorPlot(evt) {
     let activeBar = majorPlot.getElementAtEvent(evt);
     if (activeBar.length > 0) {
@@ -112,60 +119,15 @@ function onclickMajorPlot(evt) {
     }
 }
 
-
-
-function initialize_icon(filename,svg_id,party_id,on_click_color){
-    d3.svg("imgs/"+filename+'.svg').then((svg)=>{
-        const gElement = d3.select(svg).select('g'); 
-        d3.select(svg_id).node().appendChild(gElement.node());
-        if(filter['party'].includes(party_id)){
-            d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
-        }        
-        d3.select(svg_id).on("click",()=>{
-            addFilterField('party',party_id)
-             if(filter['party'].includes(party_id)){
-                    d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
-             }
-             else{
-                d3.select(svg_id).select('g').select('path').attr("fill",no_selection_color);
-             }
-         });
-    });
-
-}
-
-function drawPartyIcons(data){
-    let dem = d3.select('#svg-D svg')
-        if(dem.empty()){
-            console.log('adding icon')
-            initialize_icon('donkey','#svg-D','D',demo_color);
-            initialize_icon('elephant','#svg-R','R',rep_color);
-            initialize_icon('penguin','#svg-I','I',independent_color);
-            
-        }
-       
-    }
-
-// Plotting functions (TODO: Save in separate files!)
-
-// function onhoverMajorPlot(evt) {
-//     let activeBar = majorPlot.getElementAtEvent(evt);
-//     if (activeBar.length > 0) {
-//         activeBar = activeBar[0]["_model"]["label"];
-//         // addFilterField("major", activeBar);
-//     }
-// }
-
 //////////////////////////////////////////////////////////
 // Plotting functions (TODO: Move to separate files!)
 //////////////////////////////////////////////////////////
 
 function drawCongressPlot(data) {
     const billsPerCongress = _.groupBy(data, bg => bg['congress']);
-    // let plotData = [['congress'], ['Number of bills introduced']];
     let plotData = {
         datasets: [{
-            backgroundColor: barColors(3),
+            backgroundColor: barColors(3), //TODO
             hoverBackgroundColor: barColors(2),
             label: 'Number of bills',
             data: []
@@ -312,90 +274,7 @@ function drawMajorPlot(data) {
     }
 }
 
-function displayPartyRatios(data) {
-    let plotData = [['party'], ['Number of bills introduced'], ['Percentage']];
-    if (filter['party'].length != 1) {
-        // Both parties are selected
-        // We need to groupBy and count separately, and save it in plotData
-        const billsPerParty = _.groupBy(data, bg => bg['party']);
-        allValuesFilter['party'].map(party => {
-            plotData[0].push(party);
-            let bills = billsPerMajor[party];
-            if (bills == null) {
-                plotData[1].push(0);
-                plotData[2].push(0);
-            } else {
-                let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
-                plotData[1].push(numberBills);
-                plotData[2].push(numberBills); //TODO: Compute percentage instead!
-            }
-        });
-    } else {
-        // Only one party is selected, and data contains bills only for this party
-        for (let party in allValuesFilter['party']) {
-            plotData[0].push(party);
-            if (party == filter['party'][0]) {
-                let numberBills = data.map(bg => bg['count']).reduce((a,b) => a+b, 0);
-                plotData[1].push(numberBills);
-                plotData[2].push(numberBills); //TODO: Compute percentage instead!
-            } else {
-                plotData[1].push(0);
-                plotData[2].push(0);
-            }
-        }
-    }
-
-    d3.select('.bills-D').text(plotData[1][0] + " (" + plotData[2][0]) + "%)";
-    d3.select('.bills-R').text(plotData[1][1] + " (" + plotData[2][1]) + "%)";
-
-    // TODO: Color svgs
-}
-
-export function drawPlots(data = null) {
-    // TODO: Keep track of what changed and what needs to be updated in the plots!
-    if (unfilteredData == null) {
-        unfilteredData = data;
-    }
-
-    // TODO: Don't reset filteredData to unfilteredData every time!
-    let filteredData = unfilteredData;
-    // Filter the data for chosen parties
-    if (filter['party'].length == 1)
-        filteredData = _.filter(filteredData, d => filter['party'].includes(d['party']));
-
-    // Draw bar plot
-    const congressPlotData = _.filter(filteredData, d => filter['major'].includes( d['major']) && filter['state'].includes(d['state']) );
-    drawCongressPlot(congressPlotData);
-
-    // Filter the data for chosen congress
-    filteredData = _.filter(filteredData, d => filter['congress'] == d['congress']);
-
-    // Draw horizontal bar plot
-    const majorPlotData = _.filter( filteredData, d => filter['state'].includes(d['state']) );
-    drawMajorPlot(majorPlotData);
-
-    // Filter the data for chosen majors
-    filteredData = _.filter(filteredData, d => filter['major'].includes(d['major']));
-
-    // Redraw map
-    uStatesFinal.remove("#statesvg");
-    drawMapPlot(new DataFrame(filteredData));
-
-    // Filter the data for chosen states
-    filteredData = _.filter(filteredData, d => filter['state'].includes(d['state']));
-
-    // Display percentages per party
-    // displayPartyRatios(filteredData);
-
-    // TODO: We need labels depending on info being shown?
-    // showYear()
-    // showMajors()
-    // showTitle()
-
-}
-
-
- (function(){
+(function(){
     const uStatePaths = [
         {id:"HI",n:"Hawaii",d:"M233.08751,519.30948L235.02744,515.75293L237.2907,515.42961L237.61402,516.23791L235.51242,519.30948L233.08751,519.30948ZM243.27217,515.59127L249.4153,518.17784L251.51689,517.85452L253.1335,513.97465L252.48686,510.57977L248.28366,510.09479L244.24213,511.87306L243.27217,515.59127ZM273.9878,525.61427L277.706,531.11074L280.13092,530.78742L281.26255,530.30244L282.7175,531.59573L286.43571,531.43407L287.40568,529.97912L284.49577,528.20085L282.55584,524.48263L280.45424,520.92609L274.63444,523.83599L273.9878,525.61427ZM294.19545,534.50564L295.48874,532.5657L300.17691,533.53566L300.82356,533.05068L306.96668,533.69732L306.64336,534.99062L304.05678,536.44556L299.69193,536.12224L294.19545,534.50564ZM299.53027,539.67879L301.47021,543.55866L304.54176,542.42703L304.86509,540.81041L303.24848,538.70882L299.53027,538.3855L299.53027,539.67879ZM306.4817,538.54716L308.74496,535.63726L313.43313,538.06218L317.79798,539.19381L322.16284,541.94205L322.16284,543.88198L318.6063,545.66026L313.75645,546.63022L311.33154,545.17527L306.4817,538.54716ZM323.13281,554.06663L324.74942,552.77335L328.14431,554.38997L335.74238,557.94651L339.13727,560.0481L340.75387,562.47302L342.69381,566.83787L346.73534,569.42445L346.41202,570.71775L342.53215,573.95097L338.32896,575.40592L336.87401,574.75928L333.80244,576.53754L331.37753,579.77077L329.11427,582.68067L327.33599,582.51901L323.77945,579.93243L323.45613,575.40592L324.10277,572.981L322.48616,567.32286L320.38456,565.54458L320.2229,562.958L322.48616,561.98804L324.58776,558.91648L325.07274,557.94651L323.45613,556.16823L323.13281,554.06663Z"},
         {id:"AK",n:"Alaska",d:"M158.07671,453.67502L157.75339,539.03215L159.36999,540.00211L162.44156,540.16377L163.8965,539.03215L166.48308,539.03215L166.64475,541.94205L173.59618,548.73182L174.08117,551.3184L177.47605,549.37846L178.1227,549.2168L178.44602,546.14524L179.90096,544.52863L181.0326,544.36697L182.97253,542.91201L186.04409,545.01361L186.69074,547.92352L188.63067,549.05514L189.7623,551.48006L193.64218,553.25833L197.03706,559.2398L199.78529,563.11966L202.04855,565.86791L203.50351,569.58611L208.515,571.36439L213.68817,573.46598L214.65813,577.83084L215.14311,580.9024L214.17315,584.29729L212.39487,586.56054L210.77826,585.75224L209.32331,582.68067L206.57507,581.22573L204.7968,580.09409L203.98849,580.9024L205.44344,583.65065L205.6051,587.36885L204.47347,587.85383L202.53354,585.9139L200.43195,584.62061L200.91693,586.23722L202.21021,588.0155L201.40191,588.8238C201.40191,588.8238,200.59361,588.50048,200.10863,587.85383C199.62363,587.20719,198.00703,584.45895,198.00703,584.45895L197.03706,582.19569C197.03706,582.19569,196.71374,583.48898,196.06709,583.16565C195.42044,582.84233,194.7738,581.71071,194.7738,581.71071L196.55207,579.77077L195.09712,578.31582L195.09712,573.30432L194.28882,573.30432L193.48052,576.6992L192.34888,577.1842L191.37892,573.46598L190.73227,569.74777L189.92396,569.26279L190.24729,574.92094L190.24729,576.05256L188.79233,574.75928L185.23579,568.77781L183.13419,568.29283L182.48755,564.57462L180.87094,561.66472L179.25432,560.53308L179.25432,558.26983L181.35592,556.97654L180.87094,556.65322L178.28436,557.29986L174.88947,554.87495L172.30289,551.96504L167.45306,549.37846L163.41152,546.79188L164.70482,543.55866L164.70482,541.94205L162.92654,543.55866L160.01664,544.69029L156.29843,543.55866L150.64028,541.13375L145.14381,541.13375L144.49717,541.61873L138.03072,537.73885L135.92912,537.41553L133.18088,531.59573L129.62433,531.91905L126.06778,533.374L126.55277,537.90052L127.68439,534.99062L128.65437,535.31394L127.19941,539.67879L130.43263,536.93055L131.07928,538.54716L127.19941,542.91201L125.90612,542.58869L125.42114,540.64875L124.12785,539.84045L122.83456,540.97208L120.08632,539.19381L117.01475,541.29541L115.23649,543.397L111.8416,545.4986L107.15342,545.33693L106.66844,543.23534L110.38664,542.58869L110.38664,541.29541L108.12338,540.64875L109.09336,538.22384L111.35661,534.34397L111.35661,532.5657L111.51827,531.75739L115.88313,529.49413L116.85309,530.78742L119.60134,530.78742L118.30805,528.20085L114.58983,527.87752L109.57834,530.62576L107.15342,534.02064L105.37515,536.60723L104.24352,538.87049L100.04033,540.32543L96.96876,542.91201L96.645439,544.52863L98.908696,545.4986L99.717009,547.60018L96.96876,550.83341L90.502321,555.03661L82.742574,559.2398L80.640977,560.37142L75.306159,561.50306L69.971333,563.76631L71.749608,565.0596L70.294654,566.51455L69.809672,567.64618L67.061434,566.67621L63.828214,566.83787L63.019902,569.10113L62.049939,569.10113L62.37326,566.67621L58.816709,567.96951L55.90681,568.93947L52.511924,567.64618L49.602023,569.58611L46.368799,569.58611L44.267202,570.87941L42.65059,571.68771L40.548995,571.36439L37.962415,570.23276L35.699158,570.87941L34.729191,571.84937L33.112578,570.71775L33.112578,568.77781L36.184142,567.48452L42.488929,568.13117L46.853782,566.51455L48.955378,564.41296L51.86528,563.76631L53.643553,562.958L56.391794,563.11966L58.008406,564.41296L58.978369,564.08964L61.241626,561.3414L64.313196,560.37142L67.708076,559.72478L69.00137,559.40146L69.648012,559.88644L70.456324,559.88644L71.749608,556.16823L75.791141,554.71329L77.731077,550.99508L79.994336,546.46856L81.610951,545.01361L81.934272,542.42703L80.317657,543.72032L76.922764,544.36697L76.276122,541.94205L74.982838,541.61873L74.012865,542.58869L73.851205,545.4986L72.39625,545.33693L70.941306,539.51713L69.648012,540.81041L68.516388,540.32543L68.193068,538.3855L64.151535,538.54716L62.049939,539.67879L59.463361,539.35547L60.918305,537.90052L61.403286,535.31394L60.756645,533.374L62.211599,532.40404L63.504883,532.24238L62.858241,530.4641L62.858241,526.09925L61.888278,525.12928L61.079966,526.58423L54.936843,526.58423L53.481892,525.29094L52.835247,521.41108L50.733651,517.85452L50.733651,516.88456L52.835247,516.07625L52.996908,513.97465L54.128536,512.84303L53.320231,512.35805L52.026941,512.84303L50.895313,510.09479L51.86528,505.08328L56.391794,501.85007L58.978369,500.23345L60.918305,496.51525L63.666554,495.22195L66.253132,496.35359L66.576453,498.77851L69.00137,498.45517L72.23459,496.03026L73.851205,496.67691L74.821167,497.32355L76.437782,497.32355L78.701041,496.03026L79.509354,491.6654C79.509354,491.6654,79.832675,488.75551,80.479317,488.27052C81.125959,487.78554,81.44928,487.30056,81.44928,487.30056L80.317657,485.36062L77.731077,486.16893L74.497847,486.97723L72.557911,486.49225L69.00137,484.71397L63.989875,484.55231L60.433324,480.83411L60.918305,476.95424L61.564957,474.52932L59.463361,472.75105L57.523423,469.03283L58.008406,468.22453L64.798177,467.73955L66.899773,467.73955L67.869736,468.70951L68.516388,468.70951L68.354728,467.0929L72.23459,466.44626L74.821167,466.76958L76.276122,467.90121L74.821167,470.00281L74.336186,471.45775L77.084435,473.07437L82.095932,474.85264L83.874208,473.88268L81.610951,469.51783L80.640977,466.2846L81.610951,465.47629L78.21606,463.53636L77.731077,462.40472L78.21606,460.78812L77.407756,456.90825L74.497847,452.22007L72.072929,448.01688L74.982838,446.07694L78.21606,446.07694L79.994336,446.72359L84.197528,446.56193L87.915733,443.00539L89.047366,439.93382L92.765578,437.5089L94.382182,438.47887L97.130421,437.83222L100.84863,435.73062L101.98027,435.56896L102.95023,436.37728L107.47674,436.21561L110.22498,433.14405L111.35661,433.14405L114.91316,435.56896L116.85309,437.67056L116.36811,438.80219L117.01475,439.93382L118.63137,438.31721L122.51124,438.64053L122.83456,442.35873L124.7745,443.81369L131.88759,444.46033L138.19238,448.66352L139.64732,447.69356L144.82049,450.28014L146.92208,449.6335L148.86202,448.82518L153.71185,450.76512L158.07671,453.67502ZM42.973913,482.61238L45.075509,487.9472L44.913847,488.91717L42.003945,488.59384L40.225672,484.55231L38.447399,483.09737L36.02248,483.09737L35.86082,480.51078L37.639093,478.08586L38.770722,480.51078L40.225672,481.96573L42.973913,482.61238ZM40.387333,516.07625L44.105542,516.88456L47.823749,517.85452L48.632056,518.8245L47.015444,522.5427L43.94388,522.38104L40.548995,518.8245L40.387333,516.07625ZM19.694697,502.01173L20.826327,504.5983L21.957955,506.21492L20.826327,507.02322L18.72473,503.95166L18.72473,502.01173L19.694697,502.01173ZM5.9534943,575.0826L9.3483796,572.81934L12.743265,571.84937L15.329845,572.17269L15.814828,573.7893L17.754763,574.27429L19.694697,572.33436L19.371375,570.71775L22.119616,570.0711L25.029518,572.65768L23.897889,574.43595L19.533037,575.56758L16.784795,575.0826L13.066588,573.95097L8.7017347,575.40592L7.0851227,575.72924L5.9534943,575.0826ZM54.936843,570.55609L56.553455,572.49602L58.655048,570.87941L57.2001,569.58611L54.936843,570.55609ZM57.846745,573.62764L58.978369,571.36439L61.079966,571.68771L60.271663,573.62764L57.846745,573.62764ZM81.44928,571.68771L82.904234,573.46598L83.874208,572.33436L83.065895,570.39442L81.44928,571.68771ZM90.17899,559.2398L91.310623,565.0596L94.220522,565.86791L99.232017,562.958L103.59687,560.37142L101.98027,557.94651L102.46525,555.52159L100.36365,556.81488L97.453752,556.00657L99.070357,554.87495L101.01029,555.68325L104.89016,553.90497L105.37515,552.45003L102.95023,551.64172L103.75853,549.70178L101.01029,551.64172L96.322118,555.19827L91.472284,558.10817L90.17899,559.2398ZM132.53423,539.35547L134.95915,537.90052L133.98918,536.12224L132.21091,537.09221L132.53423,539.35547Z"},
@@ -449,9 +328,11 @@ export function drawPlots(data = null) {
         {id:"WA",n:"Washington",d:"M102.07324,7.6117734L106.43807,9.0667177L116.1377,11.814946L124.7057,13.754871L144.7516,19.412988L167.70739,25.071104L182.93051,28.278277L169.29815,91.864088L156.85315,88.33877L141.34514,84.768091L126.11585,84.801329L125.66028,83.45663L120.06106,85.635923L115.46563,84.899179L113.31866,83.315125L112.00545,83.973101L107.26979,83.832858L105.57143,82.483225L100.30839,80.370922L99.573419,80.51784L95.184297,78.993392L93.290999,80.810771L87.025093,80.512038L81.099395,76.386336L81.878352,75.453573L81.999575,67.776121L79.717576,63.93642L75.602368,63.32938L74.924958,60.818764L72.649446,60.361832L69.094498,61.592408L66.831251,58.373161L67.154572,55.463272L69.9028,55.139951L71.519405,51.09844L68.932837,49.966816L69.094498,46.248625L73.459331,45.601984L70.711103,42.853756L69.256158,35.740695L69.9028,32.830807L69.9028,24.909444L68.124535,21.676234L70.387782,12.299927L72.489368,12.784908L74.914275,15.694797L77.662503,18.281364L80.895712,20.22129L85.422205,22.322876L88.493756,22.969518L91.403645,24.424462L94.798518,25.394425L97.061764,25.232765L97.061764,22.807857L98.355048,21.676234L100.45663,20.38295L100.77996,21.514574L101.10328,23.292839L98.840029,23.77782L98.516708,25.879406L100.29497,27.334351L101.4266,29.759258L102.07324,31.699183L103.52818,31.537523L103.68984,30.244239L102.71988,28.950955L102.2349,25.717746L103.0432,23.939481L102.39656,22.484537L102.39656,20.22129L104.17483,16.66476L103.0432,14.078192L100.61829,9.2283781L100.94162,8.4200758L102.07324,7.6117734ZM92.616548,13.590738L94.637312,13.429078L95.122294,14.803197L96.658073,13.186582L99.002155,13.186582L99.810458,14.722361L98.274678,16.419801L98.92133,17.228114L98.193853,19.248875L96.819734,19.653021C96.819734,19.653021,95.930596,19.733857,95.930596,19.410536C95.930596,19.087215,97.385551,16.823958,97.385551,16.823958L95.688111,16.258141L95.36479,17.713095L94.637312,18.359737L93.10153,16.09648L92.616548,13.590738Z"},
         {id:"CA",n:"California",d:"M144.69443,382.19813L148.63451,381.70951L150.12055,379.69807L150.66509,376.75698L147.11357,376.16686L146.5994,375.49864L147.0769,373.46633L146.91762,372.87666L148.84019,372.25707L151.88297,369.42439L152.46453,364.42929L153.84443,361.02718L155.78772,358.86092L159.30659,357.27125L160.96098,355.66642L161.02971,353.55758L160.03638,352.97757L159.01323,351.90484L157.85801,346.05639L155.17281,341.2263L155.73862,337.7213L153.31904,336.69199L84.257718,232.51359L103.15983,164.9121L36.079967,149.21414L34.573071,153.94738L34.41141,161.38376L29.238275,173.18497L26.166727,175.77154L25.843406,176.90316L24.06514,177.71147L22.610196,181.91464L21.801894,185.14785L24.550122,189.35102L26.166727,193.55419L27.29835,197.11072L26.975029,203.57714L25.196764,206.64869L24.550122,212.46847L23.580159,216.18666L25.358424,220.06651L28.106652,224.593L30.369899,229.44282L31.663182,233.48433L31.339862,236.71754L31.016541,237.20252L31.016541,239.3041L36.674657,245.60886L36.189676,248.03377L35.543034,250.29702L34.896392,252.23694L35.058052,260.48163L37.159638,264.19982L39.099564,266.78638L41.847792,267.27137L42.817755,270.01959L41.686132,273.57612L39.584545,275.19273L38.452922,275.19273L37.64462,279.07258L38.129601,281.98247L41.362811,286.3473L42.979415,291.6821L44.434359,296.37025L45.727643,299.4418L49.122513,305.26158L50.577457,307.84814L51.062439,310.75803L52.679043,311.72799L52.679043,314.1529L51.870741,316.09283L50.092476,323.20589L49.607494,325.14581L52.032402,327.89404L56.235574,328.37902L60.762067,330.15729L64.641918,332.25887L67.551807,332.25887L70.461695,335.33042L73.048262,340.18024L74.179886,342.44348L78.059737,344.54507L82.909551,345.35337L84.364495,347.45496L85.011137,350.68817L83.556193,351.33481L83.879514,352.30477L87.112725,353.11307L89.860953,353.27474L93.020842,351.58789L96.900696,355.79106L97.708998,358.05431L100.29557,362.25748L100.61889,365.49069L100.61889,374.867L101.10387,376.64526L111.12682,378.10021L130.84939,380.84843L144.69443,382.19813ZM56.559218,338.48145L57.852506,340.01723L57.690846,341.31052L54.457625,341.22969L53.891811,340.01723L53.245167,338.56228L56.559218,338.48145ZM58.49915,338.48145L59.711608,337.83481L63.268151,339.9364L66.339711,341.14885L65.450575,341.79551L60.924066,341.55301L59.307456,339.9364L58.49915,338.48145ZM79.191764,358.28493L80.970029,360.62901L81.778342,361.59898L83.314121,362.16479L83.879928,360.70984L82.909965,358.93157L80.242562,356.91081L79.191764,357.07247L79.191764,358.28493ZM77.736809,366.93379L79.515085,370.08618L80.727543,372.02612L79.272589,372.2686L77.979305,371.05615C77.979305,371.05615,77.251828,369.6012,77.251828,369.19704C77.251828,368.7929,77.251828,367.01462,77.251828,367.01462L77.736809,366.93379Z"}
     ];
+
     let uStates = {};
     let Paths = [];
     let toolTip;
+
     uStates.draw = function(id, data, toolTip){
         Paths = uStatePaths;
         this.toolTip = toolTip;
@@ -502,8 +383,6 @@ export function drawPlots(data = null) {
     uStatesFinal=uStates;
 })();
 
-let color_scale;
-
 /* draw states on id #statesvg */
 //uStates.draw("#statesvg", sampleData, tooltipHtml);
 
@@ -514,19 +393,19 @@ function tooltipHtml2(n, d){    /* function to create html content string in too
 }
 
 function drawMapPlot(df){
-    let data_dict = {}
-    let counts = df.select('count')
+    let data_dict = {};
+    let counts = df.select('count');
     let df_new = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
-    let color = 'palette'
-    let parties= df.unique('party').toArray()
+    let color = 'palette';
+    let parties= df.unique('party').toArray();
     if(parties.length == 1){
         color = parties[0]+'_'+color;
     }
-    let maxval = 0
+    let maxval = 0;
     if(df_new.count()>0) {
         maxval = df_new.stat.max('count');
     }
-    color_scale = wind[color](0,maxval+1)
+    color_scale = wind[color](0, maxval + 1);
     let array1 = [
         "HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
         "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
@@ -536,15 +415,86 @@ function drawMapPlot(df){
     ];
 
     array1.forEach(function(d){
-        data_dict[d]={count:0,color:color_scale(0)}
+        data_dict[d] = {
+            count: 0,
+            color: color_scale(0)
+        };
     });
 
     df_new.map(function (d){
-        data_dict [d.get('state')]={count:d.get('count'),color:color_scale(d.get('count'))}
+        data_dict[d.get('state')] = {
+            count: d.get('count'),
+            color: color_scale(d.get('count'))
+        };
     });
 
     uStatesFinal.draw("#statesvg", data_dict, tooltipHtml2);
 }
+
+export function drawPlots(data = null) {
+    // TODO: Keep track of what changed and what needs to be updated in the plots!
+    if (unfilteredData == null)
+        unfilteredData = data;
+
+    // TODO: Don't reset filteredData to unfilteredData every time?
+    let filteredData = unfilteredData;
+    // Filter the data for chosen parties
+    if (filter['party'].length == 1)
+        filteredData = _.filter(filteredData, d => filter['party'].includes(d['party']));
+
+    // Draw bar plot
+    const congressPlotData = _.filter(filteredData, d => filter['major'].includes( d['major']) && filter['state'].includes(d['state']) );
+    drawCongressPlot(congressPlotData);
+
+    // Filter the data for chosen congress
+    filteredData = _.filter(filteredData, d => filter['congress'] == d['congress']);
+
+    // Draw horizontal bar plot
+    const majorPlotData = _.filter( filteredData, d => filter['state'].includes(d['state']) );
+    drawMajorPlot(majorPlotData);
+
+    // Filter the data for chosen majors
+    filteredData = _.filter(filteredData, d => filter['major'].includes(d['major']));
+
+    // Redraw map
+    uStatesFinal.remove("#statesvg");
+    drawMapPlot(new DataFrame(filteredData));
+
+    // Filter the data for chosen states
+    filteredData = _.filter(filteredData, d => filter['state'].includes(d['state']));
+}
+
+
+function initialize_icon(filename,svg_id,party_id,on_click_color){
+    d3.svg("imgs/"+filename+'.svg').then((svg)=>{
+        const gElement = d3.select(svg).select('g'); 
+        d3.select(svg_id).node().appendChild(gElement.node());
+        if(filter['party'].includes(party_id)){
+            d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
+        }        
+        d3.select(svg_id).on("click",()=>{
+            addFilterField('party',party_id)
+             if(filter['party'].includes(party_id)){
+                    d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
+             }
+             else{
+                d3.select(svg_id).select('g').select('path').attr("fill",none_color);
+             }
+         });
+    });
+
+}
+
+function drawPartyIcons(data){
+    let dem = d3.select('#svg-D svg');
+    if(dem.empty()){
+        console.log('adding icon');
+        initialize_icon('donkey','#svg-D','D',dem_color);
+        initialize_icon('elephant','#svg-R','R',rep_color);
+        initialize_icon('penguin','#svg-I','I',ind_color);  
+    }  
+}
+
 
 //////////////////////////////////////////////////////////
 // Load data from csv and initialize filters
@@ -569,7 +519,7 @@ d3.csv("./data/grouped_bills.csv")
         // Set filters
         allValuesFilter.congress = Array.from(new Set(congress)).slice(-10);
         allValuesFilter.party = Array.from(new Set(party));
-        allValuesFilter.major = Array.from(new Set(major)).slice(0,5);
+        allValuesFilter.major = Array.from(new Set(major))//.slice(0,5);
         allValuesFilter.state = Array.from(new Set(state));
 
         initialFilter= {
