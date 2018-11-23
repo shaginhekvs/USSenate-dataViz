@@ -218,6 +218,20 @@ function drawMajorPlot(data) {
         //     plotData[1].push(0);
         // }
     });
+
+    var indexes = [];
+    for(let index in plotData.datasets[0].data){indexes.push(index);}
+    let sorted_indexes = indexes.sort(function(a,b){return plotData.datasets[0].data[b] - plotData.datasets[0].data[a]});
+
+    let sorted_labels = [];
+    let sorted_data = [];
+    for (let index of sorted_indexes){
+      sorted_data.push(plotData.datasets[0].data[parseInt(index)]);
+      sorted_labels.push(plotData.labels[parseInt(index)]);
+    }
+    plotData.datasets[0].data = sorted_data;
+    plotData.labels = sorted_labels;
+
     if (majorPlot == null) {
         let ctx = document.getElementById('majors-plot');
         ctx.onclick = ((evt) => onclickMajorPlot(evt));
