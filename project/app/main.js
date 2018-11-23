@@ -60,10 +60,6 @@ function resetFilter() {
 //////////////////////////////////////////////////////////
 // Define colors
 //////////////////////////////////////////////////////////
-
-let colorPaletteName = 'palette';
-let color_scale;
-
 const rep_color = 'red';
 const dem_color = 'blue';
 const ind_color = 'green';
@@ -98,7 +94,9 @@ wind.I_palette = function I_palette(min, max) {
         .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
 }
 
-const barColors = wind['palette'](0,9);
+const maxval = 1500;
+let colorPaletteName = 'palette';
+let colorScale = wind[colorPaletteName](0, maxval + 1);
 
 //////////////////////////////////////////////////////////
 // Plot variables
@@ -137,7 +135,7 @@ function drawCongressPlot(data) {
     let plotData = {
         datasets: [{
             backgroundColor: [],
-            hoverBackgroundColor: barColors(2),
+            hoverBackgroundColor: colorScale(Math.floor(7/10*maxval)),
             label: 'Number of bills',
             data: []
         }],
@@ -151,9 +149,9 @@ function drawCongressPlot(data) {
             let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
             plotData.datasets[0].data.push(numberBills);
             if (filter['congress'].includes(congress))
-                plotData.datasets[0].backgroundColor.push(barColors(4));
+                plotData.datasets[0].backgroundColor.push(colorScale(Math.floor(9/10*maxval)));
             else
-                plotData.datasets[0].backgroundColor.push(barColors(1));
+                plotData.datasets[0].backgroundColor.push(colorScale(Math.floor(5/10*maxval)));
         }
     });
 
@@ -193,6 +191,7 @@ function drawCongressPlot(data) {
         barPlot.data.labels = plotData.labels;
         barPlot.data.datasets[0].data = plotData.datasets[0].data;
         barPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
+        barPlot.data.datasets[0].hoverBackgroundColor = colorScale(Math.floor(7/10*maxval));
         barPlot.update();
     }
 }
@@ -202,7 +201,7 @@ function drawMajorPlot(data) {
     let plotData = {
         datasets: [{
             backgroundColor: [],
-            hoverBackgroundColor: barColors(2),
+            hoverBackgroundColor: colorScale(Math.floor(7/10*maxval)),
             label: 'Number of bills',
             data: []
         }],
@@ -216,9 +215,9 @@ function drawMajorPlot(data) {
             let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
             plotData.datasets[0].data.push(numberBills);
             if (filter['major'].includes(major))
-                plotData.datasets[0].backgroundColor.push(barColors(4));
+                plotData.datasets[0].backgroundColor.push(colorScale(Math.floor(9/10*maxval)));
             else
-                plotData.datasets[0].backgroundColor.push(barColors(1));
+                plotData.datasets[0].backgroundColor.push(colorScale(Math.floor(5/10*maxval)));
         }
         // TODO: Confirm that we don't want to show 0's in this plot
         // else {
@@ -283,6 +282,7 @@ function drawMajorPlot(data) {
         majorPlot.data.labels = plotData.labels;
         majorPlot.data.datasets[0].data = plotData.datasets[0].data;
         majorPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
+        majorPlot.data.datasets[0].hoverBackgroundColor = colorScale(Math.floor(7/10*maxval));
         majorPlot.update();
     }
 }
@@ -406,18 +406,14 @@ function tooltipHtml2(n, d){    /* function to create html content string in too
 }
 
 function drawMapPlot(df){
-    let data_dict = {};
+    let plotData = {};
     let counts = df.select('count');
-    let df_new = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
-    let parties= df.unique('party').toArray();
-    if(parties.length == 1){
-        colorPaletteName = parties[0] + '_palette';
-    }
-    let maxval = 0;
-    if(df_new.count()>0) {
-        maxval = df_new.stat.max('count');
-    }
-    color_scale = wind[colorPaletteName](0, maxval + 1);
+    let groupedDf = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
+    // let maxval = 0;
+    // if(groupedDf.count()>0) {
+    //     maxval = groupedDf.stat.max('count');
+    // }
+    
     let array1 = [
         "HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
         "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
@@ -425,21 +421,22 @@ function drawMapPlot(df){
         "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
         "WI", "MO", "AR", "OK", "KS", "LA", "VA"
     ];
+
     array1.forEach(function(d){
-        data_dict[d] = {
+        plotData[d] = {
             count: 0,
-            color: color_scale(0)
+            color: colorScale(0)
         };
     });
 
-    df_new.map(function (d){
-        data_dict[d.get('state')] = {
+    groupedDf.map(function (d){
+        plotData[d.get('state')] = {
             count: d.get('count'),
-            color: color_scale(d.get('count'))
+            color: colorScale(d.get('count'))
         };
     });
 
-    uStatesFinal.draw("#statesvg", data_dict, tooltipHtml2);
+    uStatesFinal.draw("#statesvg", plotData, tooltipHtml2);
 }
 
 export function drawPlots(data = null) {
@@ -449,9 +446,17 @@ export function drawPlots(data = null) {
 
     // TODO: Don't reset filteredData to unfilteredData every time?
     let filteredData = unfilteredData;
+    colorPaletteName = 'palette';
+
     // Filter the data for chosen parties
-    if (filter['party'].length == 1)
-        filteredData = _.filter(filteredData, d => filter['party'].includes(d['party']));
+    if (filter.party.length != allValuesFilter.party.length){
+        filteredData = _.filter(filteredData, d => filter.party.includes(d['party']));
+        if(filter.party.length == 1){
+            colorPaletteName = filter.party[0] + '_palette';
+        }
+    }
+    // Set colorScale to use
+    colorScale = wind[colorPaletteName](0, maxval + 1);
 
     // Draw bar plot
     const congressPlotData = _.filter(filteredData, d => filter['major'].includes( d['major']) && filter['state'].includes(d['state']) );
