@@ -174,7 +174,7 @@ function drawMajorPlot(data) {
     const billsPerMajor = _.groupBy(data, bg => bg['major']);
     let plotData = {
         datasets: [{
-            backgroundColor: barColors(3),
+            backgroundColor: [],
             hoverBackgroundColor: barColors(2),
             label: 'Number of bills',
             data: []
@@ -187,6 +187,11 @@ function drawMajorPlot(data) {
             plotData.labels.push(major);
             let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
             plotData.datasets[0].data.push(numberBills);
+            if (filter['major'].includes(major)) {
+                plotData.datasets[0].backgroundColor.push(barColors(4));
+            } else {
+                plotData.datasets[0].backgroundColor.push(barColors(1));
+            }
         }
         // TODO: Confirm that we don't want to show 0's in this plot
         // else {
@@ -254,6 +259,7 @@ function drawMajorPlot(data) {
     } else {
         majorPlot.data.labels = plotData.labels;
         majorPlot.data.datasets[0].data = plotData.datasets[0].data;
+        majorPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
         majorPlot.update();
     }
 }
@@ -322,7 +328,6 @@ export function drawPlots(data = null) {
 
     // Filter the data for chosen majors
     filteredData = _.filter(filteredData, d => filter['major'].includes(d['major']));
-    //console.log(filteredData);
 
     // Redraw map
     uStatesFinal.remove("#statesvg");
@@ -513,7 +518,7 @@ d3.csv("./data/grouped_bills.csv")
         // Set filters
         allValuesFilter.congress = Array.from(new Set(congress));
         allValuesFilter.party = Array.from(new Set(party));
-        allValuesFilter.major = Array.from(new Set(major));
+        allValuesFilter.major = Array.from(new Set(major)).slice(0,5);
         allValuesFilter.state = Array.from(new Set(state));
 
         initialFilter= {
