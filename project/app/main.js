@@ -31,19 +31,24 @@ function arrayRemove(array, value) {
     return array.filter(e => (e != value));
 }
 
-function addFilterField(field, value) {
+function addFilterField(field, value, addOnly = 0) {
+    console.log(addOnly);
     if (field == 'congress') {
         if (value != filter.congress) {
             filter.congress = value;
             drawPlots();
         }
-    }
-    else {
-        if (filter[field].includes(value))
-            filter[field] = arrayRemove(filter[field], value);
-        else
-            filter[field].push(value);
-        drawPlots();
+    } else {
+        if (addOnly == 0) {
+            if (filter[field].includes(value))
+                filter[field] = arrayRemove(filter[field], value);
+            else
+                filter[field].push(value);
+            drawPlots();
+        } else if (addOnly == 1 && filter[field] != [value]) {
+            filter[field] = [value];
+            drawPlots();
+        }
     }
 }
 
@@ -116,12 +121,12 @@ let colorPalette = {
     },
     palette: {
         gradient: wind.palette(0, maxval + 1),
-        barPlot: '#a37390',
+        barPlot: '#b38ca4',
         barPlotHover: '#a38998',
     },
     R_palette: {
         gradient: wind.R_palette(0, maxval + 1),
-        barPlot: '#ba7171',
+        barPlot: '#dc8b8b',
         barPlotHover: '#aa8a8a',
         partyIcon: '#b30000'
         // '#af4b3b'//**
@@ -130,7 +135,7 @@ let colorPalette = {
     },
     D_palette: {
         gradient: wind.D_palette(0, maxval + 1),
-        barPlot: '#757daf',
+        barPlot: '#a5b3d0',
         barPlotHover: '#9296af',
         partyIcon: '#3b5998'
         // '#477998'//*
@@ -139,7 +144,7 @@ let colorPalette = {
     },
     I_palette: {
         gradient: wind.I_palette(0, maxval + 1),
-        barPlot: '#68917e',
+        barPlot: '#8fc5ac',
         barPlotHover: '#879b91',
         partyIcon: '#09814a'
         // '#47725f'
@@ -160,11 +165,13 @@ let uStatesFinal;
 // Event handlers
 //////////////////////////////////////////////////////////
 
-function onclickBarPlot(plot, filterField, evt) {
+let isDoubleClick = 0;
+
+function onclickBarPlot(plot, filterField, evt, isDoubleClick = 1) {
     let activeBar = plot.getElementAtEvent(evt);
-    if (activeBar.length > 0) {
+    if (activeBar.length > 0 && isDoubleClick > 0) {
         activeBar = activeBar[0]._model.label;
-        addFilterField(filterField, activeBar);
+        addFilterField(filterField, activeBar, isDoubleClick - 1);
     }
 }
 
@@ -192,6 +199,9 @@ function drawCongressPlot(data) {
             plotData.datasets[0].data.push(numberBills);
             const paletteName = filter.congress.includes(congress) ? colorPaletteName : 'none_color';
             plotData.datasets[0].backgroundColor.push(colorPalette[paletteName].barPlot);
+        // } else {
+        //     plotData[0].push(congress);
+        //     plotData[1].push(0);
         }
     });
 
@@ -285,8 +295,13 @@ function drawMajorPlot(data) {
 
     if (majorPlot == null) {
         let ctx = document.getElementById('majors-plot');
-        ctx.onclick = (evt => onclickBarPlot(majorPlot, 'major', evt));
-        // ctx.onhover = ((evt, item) => onhoverMajorPlot(evt, item)); //TODO
+        ctx.onclick =  evt => {
+            isDoubleClick++;
+            setTimeout(function() {
+                onclickBarPlot(majorPlot, 'major', evt, isDoubleClick);
+                isDoubleClick = 0;
+            }, 300);
+        }
         majorPlot = new Chart(ctx, {
             type: 'horizontalBar',
             data: plotData,
@@ -446,7 +461,7 @@ function drawMajorPlot(data) {
             //     let width = '1';
             //     if(filter.state.includes(d.id)){width = '10';}
             //     return width;})
-            .style('stroke-width', '3')
+            .style('stroke-width', '1')
             .on("mouseover", mouseover)
             .on("mouseout", mouseout)
             .on("click", mouseclick);
@@ -545,15 +560,15 @@ export function drawPlots(data = null) {
 }
 
 
-function initializeIcon(filename, svgId, partyId, onClickColor){
+function initializeIcon(filename, svgId, partyId, onclickColor){
     d3.svg("img/"+filename+'.svg').then(svg => {
         const gElement = d3.select(svg).select('g');
         d3.select(svgId).node().appendChild(gElement.node());
-        let color = filter.party.includes(partyId) ? onClickColor : colorPalette.none_color.partyIcon;
+        let color = filter.party.includes(partyId) ? onclickColor : colorPalette.none_color.partyIcon;
         d3.select(svgId).select('path').attr("fill", color);
         d3.select(svgId).on("click", () => {
             addFilterField('party', partyId);
-            let color = filter.party.includes(partyId) ? onClickColor : colorPalette.none_color.partyIcon;
+            let color = filter.party.includes(partyId) ? onclickColor : colorPalette.none_color.partyIcon;
             d3.select(svgId).select('g').select('path').attr("fill", color);
         });
     });
@@ -603,8 +618,6 @@ d3.csv("./data/grouped_bills.csv")
         }
 
         filter = initialFilter;
-        filter.party = ['R'];
-
 
         let groupedData = _.groupBy(data, bg => bg['congress']);
         let billsArray = []
