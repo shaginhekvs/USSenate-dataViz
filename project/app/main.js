@@ -72,7 +72,8 @@ wind.palette = function (min, max) {
     //     .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
     let d = (max - min) / 6;
     return d3.scaleThreshold()
-        .range(['#ffffff','#f2f0f7','#bcbddc','#9e9ac8','#807dba','#6a51a3','#4a1486'])
+        // .range(['#ffffff','#f2f0f7','#bcbddc','#9e9ac8','#807dba','#6a51a3','#4a1486'])
+        .range(['#ffffff','#f2f0f7','#c1badb','#a899c6','#9e7cba','#7e51a3','#661487'])
         .domain([1, min+1*d ,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
 }
 
@@ -115,40 +116,30 @@ let colorPaletteName = 'palette';
 let colorPalette = {
     none_color: {
         barPlot: '#ccd1d0',
-        // barPlot: c2c7c7'
         partyIcon: '#909a99'
     },
     palette: {
         gradient: wind.palette(0, maxval + 1),
-        barPlot: '#b38ca4',
-        barPlotHover: '#a38998',
+        barPlot: '#a98fc0',
+        barPlotHover: '#b9adc6',
     },
     R_palette: {
         gradient: wind.R_palette(0, maxval + 1),
-        barPlot: '#dc8b8b',
-        barPlotHover: '#aa8a8a',
-        partyIcon: '#b30000'
-        // '#af4b3b'//**
-        // '#aa5042'
-        // '#9e2a2b'
+        barPlot: '#e28183',
+        barPlotHover: '#d5abab',
+        partyIcon: '#cb181d'
     },
     D_palette: {
         gradient: wind.D_palette(0, maxval + 1),
-        barPlot: '#a5b3d0',
-        barPlotHover: '#9296af',
-        partyIcon: '#3b5998'
-        // '#477998'//*
-        // '#4f7e9e'
-        // '#254e70'
+        barPlot: '#6d9ec6',
+        barPlotHover: '#a3b6c5',
+        partyIcon: '#2171b5'
     },
     I_palette: {
         gradient: wind.I_palette(0, maxval + 1),
-        barPlot: '#8fc5ac',
-        barPlotHover: '#879b91',
-        partyIcon: '#09814a'
-        // '#47725f'
-        // '#008080',
-        // '#3d725a'//*
+        barPlot: '#78b18a',
+        barPlotHover: '#9ebca8',
+        partyIcon: '#238b45'
     }
 };
 
