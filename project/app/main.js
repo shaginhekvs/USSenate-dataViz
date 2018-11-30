@@ -27,39 +27,36 @@ let allValuesFilter = {
 let initialFilter = null;
 let filter = initialFilter;
 
-function arrayRemove(array, value) {
-    return array.filter(e => (e != value));
-}
 
-function addFilterField(field, value, addOnly = 0) {
+// function arrayRemove(array, value) {
+//     return array.filter(e => (e != value));
+// }
+
+function changeFilterField(field, value) {
+    // if (value != filter[field]) {
+    //     filter[field] = value;
+    //     drawPlots();
+    // }
     if (field == 'congress') {
         if (value != filter.congress) {
             filter.congress = value;
             drawPlots();
         }
     } else {
-        if (addOnly == 0) {
-            if (filter[field].includes(value))
-                filter[field] = arrayRemove(filter[field], value);
-            else
-                filter[field].push(value);
-            drawPlots();
-        } else if (addOnly == 1 && filter[field] != [value]) {
+        if (value != filter[field]) {
             filter[field] = [value];
             drawPlots();
         }
     }
 }
 
-function resetFilter() {
-    filter = initialFilter;
+function resetFilter(field=null) {
+    if (field == null)
+        filter = initialFilter;
+    else
+        filter[field] = initialFilter[field];
     drawPlots();
 }
-
-//////////////////////////////////////////////////////////
-// Size/Resizing functions and definitions... (TODO)
-// TODO:  $(window).on('resize', function() {whatever happens when resizing the window}
-//////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////
 // Define colors
@@ -155,14 +152,22 @@ let uStatesFinal;
 // Event handlers
 //////////////////////////////////////////////////////////
 
-let isDoubleClick = 0;
-
-function onclickBarPlot(plot, filterField, evt, isDoubleClick = 1) {
+function onclickBarPlot(plot, filterField, evt) {
     let activeBar = plot.getElementAtEvent(evt);
-    if (activeBar.length > 0 && isDoubleClick > 0) {
+    if (activeBar.length > 0) {
         activeBar = activeBar[0]._model.label;
-        addFilterField(filterField, activeBar, isDoubleClick - 1);
+        changeFilterField(filterField, activeBar);
     }
+}
+
+function updateMaxvalGradients(data) {
+    console.log(data);
+    maxval = Math.max(...data);
+    console.log(maxval);
+    colorPalette.palette.gradient = wind.palette(0, maxval + 1);
+    colorPalette.R_palette.gradient = wind.R_palette(0, maxval + 1);
+    colorPalette.D_palette.gradient = wind.D_palette(0, maxval + 1);
+    colorPalette.I_palette.gradient = wind.I_palette(0, maxval + 1);
 }
 
 //////////////////////////////////////////////////////////
@@ -240,16 +245,6 @@ function drawCongressPlot(data) {
     }
 }
 
-function updateMaxvalGradients(data) {
-    console.log(data);
-    maxval = Math.max(...data);
-    console.log(maxval);
-    colorPalette.palette.gradient = wind.palette(0, maxval + 1);
-    colorPalette.R_palette.gradient = wind.R_palette(0, maxval + 1);
-    colorPalette.D_palette.gradient = wind.D_palette(0, maxval + 1);
-    colorPalette.I_palette.gradient = wind.I_palette(0, maxval + 1);
-}
-
 function drawMajorPlot(data) {
     const billsPerMajor = _.groupBy(data, bg => bg.major);
     let plotData = {
@@ -285,9 +280,9 @@ function drawMajorPlot(data) {
     let sorted_data = [];
     let sorted_colors = [];
     for (let index of sorted_indexes){
-      sorted_data.push(plotData.datasets[0].data[parseInt(index)]);
-      sorted_labels.push(plotData.labels[parseInt(index)]);
-      sorted_colors.push(plotData.datasets[0].backgroundColor[parseInt(index)]);
+        sorted_data.push(plotData.datasets[0].data[parseInt(index)]);
+        sorted_labels.push(plotData.labels[parseInt(index)]);
+        sorted_colors.push(plotData.datasets[0].backgroundColor[parseInt(index)]);
     }
     plotData.datasets[0].data = sorted_data;
     plotData.labels = sorted_labels;
@@ -295,13 +290,7 @@ function drawMajorPlot(data) {
 
     if (majorPlot == null) {
         let ctx = document.getElementById('majors-plot');
-        ctx.onclick =  evt => {
-            isDoubleClick++;
-            setTimeout(function() {
-                onclickBarPlot(majorPlot, 'major', evt, isDoubleClick);
-                isDoubleClick = 0;
-            }, 300);
-        }
+        ctx.onclick = (evt => onclickBarPlot(majorPlot, 'major', evt));
         majorPlot = new Chart(ctx, {
             type: 'horizontalBar',
             data: plotData,
@@ -439,7 +428,7 @@ function drawMajorPlot(data) {
         }
 
         function mouseclick(d){
-            addFilterField('state', d.id);
+            changeFilterField('state', d.id);
             let color = data[d.id].color;
             if(!filter.state.includes(d.id)){
                 color = colorPalette.none_color.barPlot;
@@ -457,10 +446,6 @@ function drawMajorPlot(data) {
                 }
                 return color;
             })
-            // .style('stroke-width', function(d){
-            //     let width = '1';
-            //     if(filter.state.includes(d.id)){width = '10';}
-            //     return width;})
             .style('stroke-width', '1')
             .on("mouseover", mouseover)
             .on("mouseout", mouseout)
@@ -478,9 +463,6 @@ function drawMajorPlot(data) {
     uStatesFinal = uStates;
 })();
 
-/* draw states on id #statesvg */
-//uStates.draw("#statesvg", sampleData, tooltipHtml);
-
 function tooltipHtml2(n, d){    /* function to create html content string in tooltip div. */
     return "<h4>" + n + "</h4><table>" +
         "<tr><td>Count</td><td>" + (d.count) + "</td></tr>"
@@ -492,15 +474,7 @@ function drawMapPlot(df){
     let counts = df.select('count');
     let groupedDf = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
 
-    let array1 = [
-        "HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
-        "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
-        "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT",
-        "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
-        "WI", "MO", "AR", "OK", "KS", "LA", "VA"
-    ];
-
-    array1.forEach(function(d){
+    allValuesFilter.state.forEach(function(d){
         plotData[d] = {
             count: 0,
             color: colorPalette[colorPaletteName].gradient(0)
@@ -518,15 +492,15 @@ function drawMapPlot(df){
 }
 
 export function drawPlots(data = null) {
-    // TODO: Keep track of what changed and what needs to be updated in the plots!
     if (unfilteredData == null)
+        // The first time we call the function, we save the original unfiltered data
         unfilteredData = data;
 
-    // TODO: Don't reset filteredData to unfilteredData every time?
-    let filteredData = unfilteredData;
+    // Define the default values
     colorPaletteName = 'palette';
+    let filteredData = unfilteredData;
 
-    // Filter the data for chosen parties
+    // Filter the data for the chosen parties
     if (filter.party.length != allValuesFilter.party.length){
         filteredData = _.filter(filteredData, d => filter.party.includes(d.party));
         if(filter.party.length == 1){
@@ -563,7 +537,7 @@ function initializeIcon(filename, svgId, partyId, onclickColor){
         let color = filter.party.includes(partyId) ? onclickColor : colorPalette.none_color.partyIcon;
         d3.select(svgId).select('path').attr("fill", color);
         d3.select(svgId).on("click", () => {
-            addFilterField('party', partyId);
+            changeFilterField('party', partyId);
             let color = filter.party.includes(partyId) ? onclickColor : colorPalette.none_color.partyIcon;
             d3.select(svgId).select('g').select('path').attr("fill", color);
         });
@@ -635,5 +609,4 @@ d3.csv("./data/grouped_bills.csv")
 
         drawPartyIcons();
         drawPlots(data);
-
     });
