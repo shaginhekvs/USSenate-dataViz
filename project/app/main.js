@@ -9,9 +9,13 @@ require("./main.css");
 //////////////////////////////////////////////////////////
 // Initial data
 //////////////////////////////////////////////////////////
-let maxVals = {
-    congress: 0,
-    major: 0,
+let maxMinVals = {
+    congress: {
+        max: 14000
+    },
+    major: {
+        max: 14000
+    },
     state: {
         min: 1,
         max: 1500
@@ -109,24 +113,24 @@ let colorPalette = {
         partyIcon: '#909a99'
     },
     palette: {
-        gradient: wind.palette(maxVals.state.min, maxVals.state.max),
+        gradient: wind.palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#a98fc0',
         barPlotHover: '#b9adc6',
     },
     R_palette: {
-        gradient: wind.R_palette(maxVals.state.min, maxVals.state.max),
+        gradient: wind.R_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#e28183',
         barPlotHover: '#d5abab',
         partyIcon: '#cb181d'
     },
     D_palette: {
-        gradient: wind.D_palette(maxVals.state.min, maxVals.state.max),
+        gradient: wind.D_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#6d9ec6',
         barPlotHover: '#a3b6c5',
         partyIcon: '#2171b5'
     },
     I_palette: {
-        gradient: wind.I_palette(maxVals.state.min, maxVals.state.max),
+        gradient: wind.I_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#78b18a',
         barPlotHover: '#9ebca8',
         partyIcon: '#238b45'
@@ -134,20 +138,20 @@ let colorPalette = {
 };
 
 function rescaleGradients(dataDf) {
-    maxVals.state.min = dataDf.stat.min('count');
-    maxVals.state.max = dataDf.stat.max('count');
-    const maxMinDiff = maxVals.state.max - maxVals.state.min;
+    maxMinVals.state.min = dataDf.stat.min('count');
+    maxMinVals.state.max = dataDf.stat.max('count');
+    const maxMinDiff = maxMinVals.state.max - maxMinVals.state.min;
     if (maxMinDiff > 0 && maxMinDiff < 4) {
-        console.log(maxVals.state.min);
-        maxVals.state.min -= 0.5;
-        console.log(maxVals.state.min);
-        console.log(maxVals.state.max);
+        console.log(maxMinVals.state.min);
+        maxMinVals.state.min -= 0.5;
+        console.log(maxMinVals.state.min);
+        console.log(maxMinVals.state.max);
     }
 
     if (filter.party.length == 1) 
-        colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](maxVals.state.min, maxVals.state.max);
+        colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](maxMinVals.state.min, maxMinVals.state.max);
     else
-        colorPalette.palette.gradient = wind.palette(maxVals.state.min, maxVals.state.max);
+        colorPalette.palette.gradient = wind.palette(maxMinVals.state.min, maxMinVals.state.max);
 }
 
 //////////////////////////////////////////////////////////
@@ -216,6 +220,8 @@ function drawCongressPlot(data) {
         }
     });
 
+    maxMinVals.congress.max = Math.max(...plotData.datasets[0].data);
+
     if (congressPlot == null) {
         let ctx = document.getElementById('evolution_chart');
         ctx.onclick = (evt => onclickBarPlot(congressPlot, 'congress', evt));
@@ -239,9 +245,7 @@ function drawCongressPlot(data) {
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            // TODO: add the maxVals.major value
-                            // fix the last interval of the chart
-                            max: 14000,
+                            // max: maxMinVals.congress.max,
                             // This puts the majors labels on top of bars
                             mirror: false,
                         }
@@ -257,6 +261,7 @@ function drawCongressPlot(data) {
         congressPlot.data.datasets[0].data = plotData.datasets[0].data;
         congressPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
         congressPlot.data.datasets[0].hoverBackgroundColor = colorPalette[colorPaletteName].barPlotHover;
+        // congressPlot.options.scales.yAxes[0].ticks.max = maxMinVals.congress.max;
         congressPlot.update();
     }
 }
@@ -312,10 +317,8 @@ function drawMajorPlot(data) {
                 // TODO: Find a way to avoid needing this chunk of code to "refloat" labels?
                 animation: {
                     onProgress () {
-                        const chartInstance = this.chart;
-                        const ctx = chartInstance.ctx;
-                        const dataset = this.data.datasets[0];
-                        const meta = chartInstance.controller.getDatasetMeta(0);
+                        const ctx = this.chart.ctx;
+                        const meta = this.chart.controller.getDatasetMeta(0);
 
                         Chart.helpers.each(meta.data.forEach((bar, index) => {
                             const label = this.data.labels[index];
@@ -344,8 +347,9 @@ function drawMajorPlot(data) {
                             display: false
                         },
                         ticks: {
+                            display: false,
                             min: 0,
-                            max: maxVals.major,
+                            // max: maxMinVals.major.max,
                             // This puts the majors labels on top of bars
                             mirror: true,
                         }
@@ -361,6 +365,7 @@ function drawMajorPlot(data) {
         majorPlot.data.datasets[0].data = plotData.datasets[0].data;
         majorPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
         majorPlot.data.datasets[0].hoverBackgroundColor = colorPalette[colorPaletteName].barPlotHover;
+        // majorPlot.options.scales.yAxes[0].ticks.max = maxMinVals.major.max;
         majorPlot.update();
     }
 }
@@ -611,7 +616,6 @@ d3.csv("./data/grouped_bills.csv")
           let congBills = congData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
           billsArray.push(congBills);
         }
-        maxVals.congress = Math.max(...billsArray);
 
         groupedData = _.groupBy(data, bg => bg['major']);
         billsArray = []
@@ -620,7 +624,6 @@ d3.csv("./data/grouped_bills.csv")
           let majorBills = majorData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
           billsArray.push(majorBills);
         }
-        maxVals.major = Math.max(...billsArray);
 
         drawPartyIcons();
         drawPlots(data);
