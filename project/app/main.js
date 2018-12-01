@@ -24,19 +24,58 @@ let maxMinVals = {
 
 let unfilteredData = null;
 
+const congressToYear = {
+    105: '1997',//-1999',
+    106: '1999',//-2001',
+    107: '2001',//-2003',
+    108: '2003',//-2005',
+    109: '2005',//-2007',
+    110: '2007',//-2009',
+    111: '2009',//-2011',
+    112: '2011',//-2013',
+    113: '2013',//-2015',
+    114: '2015',//-2017',
+    115: '2017',//-n2019'
+};
+
+const yearToCongress = {
+    '1997': 105,//-1999'
+    '1999': 106,//-2001'
+    '2001': 107,//-2003'
+    '2003': 108,//-2005'
+    '2005': 109,//-2007'
+    '2007': 110,//-2009'
+    '2009': 111,//-2011'
+    '2011': 112,//-2013'
+    '2013': 113,//-2015'
+    '2015': 114,//-2017'
+    '2017': 115,//-n2019
+};
+
 //////////////////////////////////////////////////////////
 // Initialize filters and define filtering related functions
 //////////////////////////////////////////////////////////
 
 let allValuesFilter = {
-  'congress': [],
-  'party': [],
-  'state': [],
-  'major': []
-}
+  congress: [],
+  party: [],
+  state: [],
+  major: []
+};
 
-let initialFilter = null;
-let filter = initialFilter;
+let initialFilter = {
+    congress: [],
+    state: [],
+    party: [],
+    major: []
+};
+
+let filter = {
+    congress: [],
+    state: [],
+    party: [],
+    major: []
+};
 
 
 // function arrayRemove(array, value) {
@@ -45,8 +84,8 @@ let filter = initialFilter;
 
 function changeFilterField(field, value) {
     if (field == 'congress') {
-        if (value != filter.congress) {
-            filter.congress = value;
+        if (yearToCongress[value] != filter.congress) {
+            filter.congress = yearToCongress[value];
             drawPlots();
         }
     } else {
@@ -58,10 +97,12 @@ function changeFilterField(field, value) {
 }
 
 function resetFilter(field=null) {
-    if (field == null)
+    if (field == null) {
         filter = initialFilter;
-    else
+    }
+    else if (filter[field].length != initialFilter[field].length){
         filter[field] = initialFilter[field];
+    }
     drawPlots();
 }
 
@@ -142,10 +183,7 @@ function rescaleGradients(dataDf) {
     maxMinVals.state.max = dataDf.stat.max('count');
     const maxMinDiff = maxMinVals.state.max - maxMinVals.state.min;
     if (maxMinDiff > 0 && maxMinDiff < 4) {
-        console.log(maxMinVals.state.min);
         maxMinVals.state.min -= 0.5;
-        console.log(maxMinVals.state.min);
-        console.log(maxMinVals.state.max);
     }
 
     if (filter.party.length == 1) 
@@ -171,6 +209,8 @@ function onclickBarPlot(plot, filterField, evt) {
     if (activeBar.length > 0) {
         activeBar = activeBar[0]._model.label;
         changeFilterField(filterField, activeBar);
+    } else if (filterField == "major") {
+        resetFilter(filterField);
     }
 }
 
@@ -208,19 +248,19 @@ function drawCongressPlot(data) {
     allValuesFilter.congress.forEach(congress => {
         const bills = billsPerCongress[congress];
         if (bills != null) {
-            plotData.labels.push(congress);
+            plotData.labels.push(congressToYear[congress]);
             const numberBills = bills.map(bg => bg.count).reduce((a, b) => a + b, 0);
             plotData.datasets[0].data.push(numberBills);
-            const paletteName = filter.congress.includes(congress) ? colorPaletteName : 'none_color';
+            const paletteName = filter.congress == congress ? colorPaletteName : 'none_color';
             plotData.datasets[0].backgroundColor
                 .push(colorPalette[paletteName].barPlot);
         // } else {
-        //     plotData.labels.push(congress);
+        //     plotData.labels.push(congressToYear[congress]);
         //     plotData.datasets[0].data.push(0);
         }
     });
 
-    maxMinVals.congress.max = Math.max(...plotData.datasets[0].data);
+    maxMinVals.congress.max = Math.max(Math.max(...plotData.datasets[0].data), 1);
 
     if (congressPlot == null) {
         let ctx = document.getElementById('evolution_chart');
@@ -229,6 +269,22 @@ function drawCongressPlot(data) {
             type: 'bar',
             data: plotData,
             options: {
+                animation: {
+                    onProgress () {
+                        const ctx = this.chart.ctx;
+                        const meta = this.chart.controller.getDatasetMeta(0);
+
+                        Chart.helpers.each(meta.data.forEach((bar, index) => {
+                            const label = this.data.labels[index];
+                            const labelPositionY = 310;
+                            // ctx.textBaseline = 'middle';
+                            ctx.textAlign = 'center';
+                            ctx.fillStyle = '#333';
+                            // console.log(bar._model.y)
+                            ctx.fillText(yearToCongress[label], bar._model.x, Math.min(bar._model.y, labelPositionY));
+                        }));
+                    }
+                },
                 maintainAspectRatio: false,
                 responsive: true,
                 scales: {
@@ -245,7 +301,7 @@ function drawCongressPlot(data) {
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            // max: maxMinVals.congress.max,
+                            max: maxMinVals.congress.max,
                             // This puts the majors labels on top of bars
                             mirror: false,
                         }
@@ -261,7 +317,7 @@ function drawCongressPlot(data) {
         congressPlot.data.datasets[0].data = plotData.datasets[0].data;
         congressPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
         congressPlot.data.datasets[0].hoverBackgroundColor = colorPalette[colorPaletteName].barPlotHover;
-        // congressPlot.options.scales.yAxes[0].ticks.max = maxMinVals.congress.max;
+        congressPlot.options.scales.yAxes[0].ticks.max = maxMinVals.congress.max;
         congressPlot.update();
     }
 }
@@ -349,7 +405,7 @@ function drawMajorPlot(data) {
                         ticks: {
                             display: false,
                             min: 0,
-                            // max: maxMinVals.major.max,
+                            max: maxMinVals.major.max,
                             // This puts the majors labels on top of bars
                             mirror: true,
                         }
@@ -365,7 +421,7 @@ function drawMajorPlot(data) {
         majorPlot.data.datasets[0].data = plotData.datasets[0].data;
         majorPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
         majorPlot.data.datasets[0].hoverBackgroundColor = colorPalette[colorPaletteName].barPlotHover;
-        // majorPlot.options.scales.yAxes[0].ticks.max = maxMinVals.major.max;
+        majorPlot.options.scales.yAxes[0].ticks.max = maxMinVals.major.max;
         majorPlot.update();
     }
 }
@@ -446,7 +502,7 @@ function drawMajorPlot(data) {
             d3.select("#tooltip").transition().duration(500).style("opacity", 0);
         }
 
-        function mouseclick(d){
+        function onclickMap(d){
             changeFilterField('state', d.id);
             let color = data[d.id].color;
             if(!filter.state.includes(d.id)){
@@ -468,7 +524,7 @@ function drawMajorPlot(data) {
             .style('stroke-width', '1')
             .on("mouseover", mouseover)
             .on("mouseout", mouseout)
-            .on("click", mouseclick);
+            .on("click", onclickMap);
 
         paths.exit().remove();
     }
@@ -600,14 +656,14 @@ d3.csv("./data/grouped_bills.csv")
         allValuesFilter.major = Array.from(new Set(major))//.slice(0,5);
         allValuesFilter.state = Array.from(new Set(state));
 
-        initialFilter= {
-            'congress': allValuesFilter.congress[allValuesFilter.congress.length - 1],
-            'state':  allValuesFilter.state,
-            'party':  allValuesFilter.party,
-            'major':  allValuesFilter.major
-        }
+        Object.keys(allValuesFilter).forEach(key => {
+            initialFilter[key] = allValuesFilter[key];
+        });
+        initialFilter.congress = allValuesFilter.congress[allValuesFilter.congress.length - 1];
 
-        filter = initialFilter;
+        Object.keys(initialFilter).forEach(key => {
+            filter[key] = initialFilter[key];
+        });
 
         let groupedData = _.groupBy(data, bg => bg['congress']);
         let billsArray = []
@@ -624,6 +680,8 @@ d3.csv("./data/grouped_bills.csv")
           let majorBills = majorData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
           billsArray.push(majorBills);
         }
+
+        d3.selectAll('h1').on("click", () => resetFilter('state'));
 
         drawPartyIcons();
         drawPlots(data);
