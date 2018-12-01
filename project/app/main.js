@@ -12,7 +12,10 @@ require("./main.css");
 let maxVals = {
     congress: 0,
     major: 0,
-    state: 1500
+    state: {
+        min: 1,
+        max: 1500
+    }
 }
 
 let unfilteredData = null;
@@ -63,45 +66,39 @@ function resetFilter(field=null) {
 //////////////////////////////////////////////////////////
 let wind = {};
 wind.palette = function (min, max) {
-    let d = (max - min) / 6.0;
-    console.log('palette:');
-    console.log(max);
-    console.log(min);
-    console.log([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+    let d = (Math.log(max) - Math.log(min)) / 6;
+    const logmin = Math.log(min);
+    const logmax = Math.log(max);
     return d3.scaleThreshold()
         .range(['#ffffff','#f2f0f7','#c1badb','#a899c6','#9e7cba','#7e51a3','#661487'])
-        .domain([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+        .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
 }
 
 wind.R_palette = function (min, max) {
-    let d = (max - min) / 6.0;
-    console.log(max);
-    console.log(min);
-    console.log('R_palette:');
-    console.log([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+    let d = (Math.log(max) - Math.log(min)) / 6;
+    const logmin = Math.log(min);
+    const logmax = Math.log(max);
     return d3.scaleThreshold()
         .range(['#ffffff','#fdd6cf','#fc8472','#fb5e4a','#f0372e','#cb181d','#99000d'])
-        .domain([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+        .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
 }
 
 wind.D_palette = function (min, max) {
-    let d = (max - min) / 6.0;
-    console.log(max);
-    console.log('D_palette:');
-    console.log([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+    let d = (Math.log(max) - Math.log(min)) / 6;
+    const logmin = Math.log(min);
+    const logmax = Math.log(max);
     return d3.scaleThreshold()
         .range(['#ffffff','#eff3ff','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'])
-        .domain([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+        .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
 }
 
 wind.I_palette = function I_palette(min, max) {
-    let d = (max - min) * 1.0 / 6.0;
-    console.log(min);
-    console.log('I_palette:');
-    console.log([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+    let d = (Math.log(max) - Math.log(min)) / 6;
+    const logmin = Math.log(min);
+    const logmax = Math.log(max);
     return d3.scaleThreshold()
         .range(['#ffffff','#edf8e9','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'])
-        .domain([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+        .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
 }
 
 let colorPaletteName = 'palette';
@@ -112,24 +109,24 @@ let colorPalette = {
         partyIcon: '#909a99'
     },
     palette: {
-        gradient: wind.palette(1, maxVals.state),
+        gradient: wind.palette(maxVals.state.min, maxVals.state.max),
         barPlot: '#a98fc0',
         barPlotHover: '#b9adc6',
     },
     R_palette: {
-        gradient: wind.R_palette(1, maxVals.state),
+        gradient: wind.R_palette(maxVals.state.min, maxVals.state.max),
         barPlot: '#e28183',
         barPlotHover: '#d5abab',
         partyIcon: '#cb181d'
     },
     D_palette: {
-        gradient: wind.D_palette(1, maxVals.state),
+        gradient: wind.D_palette(maxVals.state.min, maxVals.state.max),
         barPlot: '#6d9ec6',
         barPlotHover: '#a3b6c5',
         partyIcon: '#2171b5'
     },
     I_palette: {
-        gradient: wind.I_palette(1, maxVals.state),
+        gradient: wind.I_palette(maxVals.state.min, maxVals.state.max),
         barPlot: '#78b18a',
         barPlotHover: '#9ebca8',
         partyIcon: '#238b45'
@@ -137,13 +134,20 @@ let colorPalette = {
 };
 
 function rescaleGradients(dataDf) {
-    maxVals.state = dataDf.stat.max('count');
-    console.log(maxVals.state);
-    console.log(dataDf.stat.min('count'));
+    maxVals.state.min = dataDf.stat.min('count');
+    maxVals.state.max = dataDf.stat.max('count');
+    const maxMinDiff = maxVals.state.max - maxVals.state.min;
+    if (maxMinDiff > 0 && maxMinDiff < 4) {
+        console.log(maxVals.state.min);
+        maxVals.state.min -= 0.5;
+        console.log(maxVals.state.min);
+        console.log(maxVals.state.max);
+    }
+
     if (filter.party.length == 1) 
-        colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](dataDf.stat.min('count'), maxVals.state);
+        colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](maxVals.state.min, maxVals.state.max);
     else
-        colorPalette.palette.gradient = wind.palette(dataDf.stat.min('count'), maxVals.state);
+        colorPalette.palette.gradient = wind.palette(maxVals.state.min, maxVals.state.max);
 }
 
 //////////////////////////////////////////////////////////
@@ -490,14 +494,14 @@ function drawMapPlot(dataDf){
     allValuesFilter.state.forEach(function(d){
         plotData[d] = {
             count: 0,
-            color: colorPalette[colorPaletteName].gradient(0)
+            color: colorPalette[colorPaletteName].gradient(-1)
         };
     });
 
     groupedDf.map(function (d){
         plotData[d.get('state')] = {
             count: d.get('count'),
-            color: colorPalette[colorPaletteName].gradient(d.get('count'))
+            color: colorPalette[colorPaletteName].gradient(Math.log(d.get('count')))
         };
     });
 
