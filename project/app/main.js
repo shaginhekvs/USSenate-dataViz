@@ -14,6 +14,7 @@ let maxVals = {
     major: 0,
     state: 1500
 }
+
 let unfilteredData = null;
 
 //////////////////////////////////////////////////////////
@@ -62,31 +63,45 @@ function resetFilter(field=null) {
 //////////////////////////////////////////////////////////
 let wind = {};
 wind.palette = function (min, max) {
-    let d = (max - min) / 6;
+    let d = (max - min) / 6.0;
+    console.log('palette:');
+    console.log(max);
+    console.log(min);
+    console.log([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
     return d3.scaleThreshold()
         .range(['#ffffff','#f2f0f7','#c1badb','#a899c6','#9e7cba','#7e51a3','#661487'])
-        .domain([1, min+1*d ,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+        .domain([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
 }
 
 wind.R_palette = function (min, max) {
-    let d = (max - min) / 6;
+    let d = (max - min) / 6.0;
+    console.log(max);
+    console.log(min);
+    console.log('R_palette:');
+    console.log([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
     return d3.scaleThreshold()
-        .range(['#ffffff','#fee5d9','#fc9272','#fb6a4a','#ef3b2c','#cb181d','#99000d'])
-        .domain([1, min+1*d ,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+        .range(['#ffffff','#fdd6cf','#fc8472','#fb5e4a','#f0372e','#cb181d','#99000d'])
+        .domain([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
 }
 
 wind.D_palette = function (min, max) {
-    let d = (max - min) / 6;
+    let d = (max - min) / 6.0;
+    console.log(max);
+    console.log('D_palette:');
+    console.log([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
     return d3.scaleThreshold()
         .range(['#ffffff','#eff3ff','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'])
-        .domain([1, min+1*d ,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+        .domain([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
 }
 
 wind.I_palette = function I_palette(min, max) {
-    let d = (max - min) / 7;
+    let d = (max - min) * 1.0 / 6.0;
+    console.log(min);
+    console.log('I_palette:');
+    console.log([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
     return d3.scaleThreshold()
         .range(['#ffffff','#edf8e9','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'])
-        .domain([1, min+1*d ,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
+        .domain([1, min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
 }
 
 let colorPaletteName = 'palette';
@@ -97,29 +112,39 @@ let colorPalette = {
         partyIcon: '#909a99'
     },
     palette: {
-        gradient: wind.palette(0, maxVals.state + 1),
+        gradient: wind.palette(1, maxVals.state),
         barPlot: '#a98fc0',
         barPlotHover: '#b9adc6',
     },
     R_palette: {
-        gradient: wind.R_palette(0, maxVals.state + 1),
+        gradient: wind.R_palette(1, maxVals.state),
         barPlot: '#e28183',
         barPlotHover: '#d5abab',
         partyIcon: '#cb181d'
     },
     D_palette: {
-        gradient: wind.D_palette(0, maxVals.state + 1),
+        gradient: wind.D_palette(1, maxVals.state),
         barPlot: '#6d9ec6',
         barPlotHover: '#a3b6c5',
         partyIcon: '#2171b5'
     },
     I_palette: {
-        gradient: wind.I_palette(0, maxVals.state + 1),
+        gradient: wind.I_palette(1, maxVals.state),
         barPlot: '#78b18a',
         barPlotHover: '#9ebca8',
         partyIcon: '#238b45'
     }
 };
+
+function rescaleGradients(dataDf) {
+    maxVals.state = dataDf.stat.max('count');
+    console.log(maxVals.state);
+    console.log(dataDf.stat.min('count'));
+    if (filter.party.length == 1) 
+        colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](dataDf.stat.min('count'), maxVals.state);
+    else
+        colorPalette.palette.gradient = wind.palette(dataDf.stat.min('count'), maxVals.state);
+}
 
 //////////////////////////////////////////////////////////
 // Plot variables
@@ -141,15 +166,6 @@ function onclickBarPlot(plot, filterField, evt) {
     }
 }
 
-// function updateMaxvalGradients(data) {
-//     console.log(data);
-//     maxVals.state = Math.max(...data);
-//     console.log(maxVals.state);
-//     colorPalette.palette.gradient = wind.palette(0, maxVals.state + 1);
-//     colorPalette.R_palette.gradient = wind.R_palette(0, maxVals.state + 1);
-//     colorPalette.D_palette.gradient = wind.D_palette(0, maxVals.state + 1);
-//     colorPalette.I_palette.gradient = wind.I_palette(0, maxVals.state + 1);
-// }
 
 function onclickParty(partyId, onclickColor){
     if (filter.party != [partyId]) {
@@ -190,9 +206,9 @@ function drawCongressPlot(data) {
             const paletteName = filter.congress.includes(congress) ? colorPaletteName : 'none_color';
             plotData.datasets[0].backgroundColor
                 .push(colorPalette[paletteName].barPlot);
-        } else {
-            plotData.labels.push(congress);
-            plotData.datasets[0].data.push(0);
+        // } else {
+        //     plotData.labels.push(congress);
+        //     plotData.datasets[0].data.push(0);
         }
     });
 
@@ -260,9 +276,9 @@ function drawMajorPlot(data) {
             plotData.datasets[0].data.push(numberBills);
             const paletteName = filter.major.includes(major) ? colorPaletteName : 'none_color';
             plotData.datasets[0].backgroundColor.push(colorPalette[paletteName].barPlot);
-        } else {
-            plotData.labels.push(major);
-            plotData.datasets[0].data.push(0);
+        // } else {
+        //     plotData.labels.push(major);
+        //     plotData.datasets[0].data.push(0);
         }
     });
 
@@ -463,11 +479,14 @@ function tooltipHtml2(n, d){    /* function to create html content string in too
         "</table>";
 }
 
-function drawMapPlot(df){
+function drawMapPlot(dataDf){
     let plotData = {};
-    let counts = df.select('count');
-    let groupedDf = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
+    let counts = dataDf.select('count');
+    let groupedDf = dataDf.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
 
+    rescaleGradients(groupedDf)
+
+    // First fill with 0s
     allValuesFilter.state.forEach(function(d){
         plotData[d] = {
             count: 0,
