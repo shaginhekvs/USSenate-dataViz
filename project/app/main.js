@@ -9,8 +9,11 @@ require("./main.css");
 //////////////////////////////////////////////////////////
 // Initial data
 //////////////////////////////////////////////////////////
-let maxPerCongress;
-let maxPerSubject;
+let maxVals = {
+    congress: 0,
+    major: 0,
+    state: 1500
+}
 let unfilteredData = null;
 
 //////////////////////////////////////////////////////////
@@ -33,10 +36,6 @@ let filter = initialFilter;
 // }
 
 function changeFilterField(field, value) {
-    // if (value != filter[field]) {
-    //     filter[field] = value;
-    //     drawPlots();
-    // }
     if (field == 'congress') {
         if (value != filter.congress) {
             filter.congress = value;
@@ -90,7 +89,6 @@ wind.I_palette = function I_palette(min, max) {
         .domain([1, min+1*d ,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d]);
 }
 
-let maxval = 1500;
 let colorPaletteName = 'palette';
 
 let colorPalette = {
@@ -99,24 +97,24 @@ let colorPalette = {
         partyIcon: '#909a99'
     },
     palette: {
-        gradient: wind.palette(0, maxval + 1),
+        gradient: wind.palette(0, maxVals.state + 1),
         barPlot: '#a98fc0',
         barPlotHover: '#b9adc6',
     },
     R_palette: {
-        gradient: wind.R_palette(0, maxval + 1),
+        gradient: wind.R_palette(0, maxVals.state + 1),
         barPlot: '#e28183',
         barPlotHover: '#d5abab',
         partyIcon: '#cb181d'
     },
     D_palette: {
-        gradient: wind.D_palette(0, maxval + 1),
+        gradient: wind.D_palette(0, maxVals.state + 1),
         barPlot: '#6d9ec6',
         barPlotHover: '#a3b6c5',
         partyIcon: '#2171b5'
     },
     I_palette: {
-        gradient: wind.I_palette(0, maxval + 1),
+        gradient: wind.I_palette(0, maxVals.state + 1),
         barPlot: '#78b18a',
         barPlotHover: '#9ebca8',
         partyIcon: '#238b45'
@@ -143,23 +141,25 @@ function onclickBarPlot(plot, filterField, evt) {
     }
 }
 
-function updateMaxvalGradients(data) {
-    console.log(data);
-    maxval = Math.max(...data);
-    console.log(maxval);
-    colorPalette.palette.gradient = wind.palette(0, maxval + 1);
-    colorPalette.R_palette.gradient = wind.R_palette(0, maxval + 1);
-    colorPalette.D_palette.gradient = wind.D_palette(0, maxval + 1);
-    colorPalette.I_palette.gradient = wind.I_palette(0, maxval + 1);
-}
+// function updateMaxvalGradients(data) {
+//     console.log(data);
+//     maxVals.state = Math.max(...data);
+//     console.log(maxVals.state);
+//     colorPalette.palette.gradient = wind.palette(0, maxVals.state + 1);
+//     colorPalette.R_palette.gradient = wind.R_palette(0, maxVals.state + 1);
+//     colorPalette.D_palette.gradient = wind.D_palette(0, maxVals.state + 1);
+//     colorPalette.I_palette.gradient = wind.I_palette(0, maxVals.state + 1);
+// }
 
 function onclickParty(partyId, onclickColor){
     if (filter.party != [partyId]) {
         changeFilterField('party', partyId);
-        d3.select('#svg-' + partyId).select('g').select('path').attr("fill", onclickColor);
+        d3.select('#svg-' + partyId).select('g').select('path')
+            .attr("fill", onclickColor);
         allValuesFilter.party.forEach(p => {
             if (p != partyId) {
-                d3.select('#svg-' + p).select('g').select('path').attr("fill", colorPalette.none_color.partyIcon);
+                d3.select('#svg-' + p).select('g').select('path')
+                    .attr("fill", colorPalette.none_color.partyIcon);
             }
         });
     }
@@ -188,10 +188,11 @@ function drawCongressPlot(data) {
             const numberBills = bills.map(bg => bg.count).reduce((a, b) => a + b, 0);
             plotData.datasets[0].data.push(numberBills);
             const paletteName = filter.congress.includes(congress) ? colorPaletteName : 'none_color';
-            plotData.datasets[0].backgroundColor.push(colorPalette[paletteName].barPlot);
-        // } else {
-        //     plotData[0].push(congress);
-        //     plotData[1].push(0);
+            plotData.datasets[0].backgroundColor
+                .push(colorPalette[paletteName].barPlot);
+        } else {
+            plotData.labels.push(congress);
+            plotData.datasets[0].data.push(0);
         }
     });
 
@@ -218,7 +219,7 @@ function drawCongressPlot(data) {
                     yAxes: [{
                         ticks: {
                             min: 0,
-                            // TODO: add the maxPerSubject value
+                            // TODO: add the maxVals.major value
                             // fix the last interval of the chart
                             max: 14000,
                             // This puts the majors labels on top of bars
@@ -259,12 +260,10 @@ function drawMajorPlot(data) {
             plotData.datasets[0].data.push(numberBills);
             const paletteName = filter.major.includes(major) ? colorPaletteName : 'none_color';
             plotData.datasets[0].backgroundColor.push(colorPalette[paletteName].barPlot);
+        } else {
+            plotData.labels.push(major);
+            plotData.datasets[0].data.push(0);
         }
-        // TODO: Confirm that we don't want to show 0's in this plot
-        // else {
-        //     plotData[0].push(major);
-        //     plotData[1].push(0);
-        // }
     });
 
     let indexes = [];
@@ -326,7 +325,7 @@ function drawMajorPlot(data) {
                         },
                         ticks: {
                             min: 0,
-                            max: maxPerSubject,
+                            max: maxVals.major,
                             // This puts the majors labels on top of bars
                             mirror: true,
                         }
@@ -589,7 +588,7 @@ d3.csv("./data/grouped_bills.csv")
           let congBills = congData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
           billsArray.push(congBills);
         }
-        maxPerCongress = Math.max(...billsArray);
+        maxVals.congress = Math.max(...billsArray);
 
         groupedData = _.groupBy(data, bg => bg['major']);
         billsArray = []
@@ -598,7 +597,7 @@ d3.csv("./data/grouped_bills.csv")
           let majorBills = majorData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
           billsArray.push(majorBills);
         }
-        maxPerSubject = Math.max(...billsArray);
+        maxVals.major = Math.max(...billsArray);
 
         drawPartyIcons();
         drawPlots(data);
