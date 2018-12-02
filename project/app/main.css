@@ -6,21 +6,14 @@ body {
     background-color: #f5f5f5;
 }
 
-h1{
+h1 {
   text-align: center;
 }
 
-canvas{
-
-  width :500px !important;
-  height:800px !important;
-
-}
-
-.bar-plot{
-  width :800px !important;
-  height:400px !important;
-  margin: 100px;
+.bar-plot {
+  /*width :500px !important;*/
+  /*height:300px !important;*/
+  /*margin: 100px;*/
 }
 
 .clear {
@@ -37,8 +30,8 @@ div {
 
 .table-container {
     position: relative;
-    max-width: 1100px;
-    width: 1100px;
+    max-width: 1000px;
+    width: 1000px;
     margin: auto;
 }
 
@@ -49,29 +42,22 @@ table {
 }
 
 .majors-plot {
-    width: 300px;
+    width: 15%;
     height : 800px;
     max-width: 300px;
     max-height: 800px;
 }
 
 #evolution_chart {
-    width: 670px;
+    width: 20%;
     height: 280px;
 }
 
 
 .state{
-    fill: none;
     stroke: #a9a9a9;
-    stroke-width: 1;
 }
-.state:hover{
-    stroke-width: 5;
-}
-.state:click{
-    stroke-width: 10;
-}
+
 .svg-container {
 display: inline-block;
 position: relative;
@@ -80,6 +66,7 @@ padding-bottom: 100%;
 vertical-align: middle;
 overflow: hidden;
 }
+
 .svg-content {
 display: inline-block;
 position: absolute;
@@ -126,7 +113,6 @@ left: 0;
 #tooltip tr td:nth-child(2){
     text-align:center;
 }
-
 .section_map{
     position:relative;
     vertical-align: middle;
