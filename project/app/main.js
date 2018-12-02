@@ -1,3 +1,9 @@
+/* Lucia's TODOs:
+    * Fix the y-axis labels for timeline plot (so that it looks good)
+    * Add map scale
+    * Add a small line when the bar is 0
+*/
+
 import * as d3 from 'd3';
 import * as _ from 'underscore';
 import * as c3 from 'c3';
@@ -110,7 +116,7 @@ function resetFilter(field=null) {
 function formatNumberBillsTick(label) {
     if (label >= 1000) {
         return label/1000+'k';
-    } else {
+    } else if (Math.floor(label) == label){
         return label;
     }
 }
@@ -129,7 +135,7 @@ wind.palette = function (min, max) {
     const logmin = Math.log(min);
     const logmax = Math.log(max);
     return d3.scaleThreshold()
-        .range(['#ffffff','#f2f0f7','#c1badb','#a899c6','#9e7cba','#7e51a3','#661487'])
+        .range(['#ffffff','#e8e5f1','#c1badb','#a899c6','#9374ad','#7e51a3','#661487'])
         .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
 }
 
@@ -147,7 +153,7 @@ wind.D_palette = function (min, max) {
     const logmin = Math.log(min);
     const logmax = Math.log(max);
     return d3.scaleThreshold()
-        .range(['#ffffff','#eff3ff','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'])
+        .range(['#ffffff','#dbebf4','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'])
         .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
 }
 
@@ -165,30 +171,35 @@ let colorPaletteName = 'palette';
 let colorPalette = {
     none_color: {
         barPlot: '#ccd1d0',
-        partyIcon: '#909a99'
+        partyIcon: '#909a99',
+        map: '#ccd1d0'
     },
     palette: {
         gradient: wind.palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#a98fc0',
         barPlotHover: '#b9adc6',
+        map: '#7e51a3'
     },
     R_palette: {
         gradient: wind.R_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#e28183',
         barPlotHover: '#d5abab',
-        partyIcon: '#cb181d'
+        partyIcon: '#cb181d',
+        map: '#cb181d'
     },
     D_palette: {
         gradient: wind.D_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#6d9ec6',
         barPlotHover: '#a3b6c5',
-        partyIcon: '#2171b5'
+        partyIcon: '#2171b5',
+        map: '#2171b5'
     },
     I_palette: {
         gradient: wind.I_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#78b18a',
         barPlotHover: '#9ebca8',
-        partyIcon: '#238b45'
+        partyIcon: '#238b45',
+        map: '#238b45'
     }
 };
 
@@ -265,13 +276,13 @@ function drawCongressPlot(data) {
             plotData.labels.push(congressToYear[congress]);
             const numberBills = bills.map(bg => bg.count).reduce((a, b) => a + b, 0);
             plotData.datasets[0].data.push(numberBills);
-            const paletteName = filter.congress == congress ? colorPaletteName : 'none_color';
-            plotData.datasets[0].backgroundColor
-                .push(colorPalette[paletteName].barPlot);
-        // } else {
-        //     plotData.labels.push(congressToYear[congress]);
-        //     plotData.datasets[0].data.push(0);
+        } else {
+            plotData.labels.push(congressToYear[congress]);
+            plotData.datasets[0].data.push(0);
         }
+        const paletteName = filter.congress == congress ? colorPaletteName : 'none_color';
+        plotData.datasets[0].backgroundColor
+            .push(colorPalette[paletteName].barPlot);
     });
 
     maxMinVals.congress.max = Math.max(Math.max(...plotData.datasets[0].data), 1);
@@ -307,7 +318,7 @@ function drawCongressPlot(data) {
                         },
                         ticks: {
                             min: 0,
-                            beginAtZero: true,
+                            beginAtZero: true
                         },
                         //afterBuildTicks: function(chart) {},
                         scaleLabel: {
@@ -361,12 +372,13 @@ function drawMajorPlot(data) {
             plotData.labels.push(major);
             const numberBills = bills.map(bg => bg.count).reduce((a, b) => a + b, 0);
             plotData.datasets[0].data.push(numberBills);
-            const paletteName = filter.major.includes(major) ? colorPaletteName : 'none_color';
-            plotData.datasets[0].backgroundColor.push(colorPalette[paletteName].barPlot);
-        // } else {
-        //     plotData.labels.push(major);
-        //     plotData.datasets[0].data.push(0);
+        } else {
+            plotData.labels.push(major);
+            plotData.datasets[0].data.push(0);
         }
+        const paletteName = filter.major.includes(major) ? colorPaletteName : 'none_color';
+        plotData.datasets[0].backgroundColor
+            .push(colorPalette[paletteName].barPlot);
     });
 
     let indexes = [];
@@ -535,21 +547,21 @@ function drawMajorPlot(data) {
 
         function onclickMap(d){
             changeFilterField('state', d.id);
-            let color = data[d.id].color;
-            if(filter.state.includes(d.id))
-                color = colorPalette[colorPaletteName].barPlot;
-            else
-                color = colorPalette.none_color.barPlot;
-            d3.select(this)
-                .style('fill', color);
+            // let color = data[d.id].color;
+            // if(filter.state.includes(d.id))
+            //     color = colorPalette[colorPaletteName].barPlot;
+            // else
+            //     color = colorPalette.none_color.barPlot;
+            // d3.select(this)
+            //     .style('fill', color);
         }
 
         let paths = d3.select(id).selectAll(".state").data(Paths);
         paths.enter().append("path").attr("class", "state").attr("d", d => d.d)
             .style("fill", function(d){
-                let color = data[d.id].color;
+                let color = filter.state.length > 1 ? data[d.id].color : colorPalette[colorPaletteName].map;
                 if(!filter.state.includes(d.id)){
-                    color = colorPalette.none_color.barPlot;
+                    color = colorPalette.none_color.map;
                 }
                 return color;
             })
