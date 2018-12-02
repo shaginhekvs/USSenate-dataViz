@@ -2,73 +2,73 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="main.css" rel="stylesheet" />
-  <title>US · Congress Bills</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="main.css" rel="stylesheet" />
+    <title>US · Congress Bills</title>
 </head>
 
 <body>
-  <h1>Bills introduced in US Congress</h1>
-  <table class='table-container'>
-    <tbody>
-      <tr>
-        <td>
-          <div class="party-bills">
-            <div>
-              <p id="reset-parties">Reset parties</p>
-              <svg id="svg-R" width="100" height="100" viewBox="0 0 100 100"></svg> <!-- svg to hold the map. -->
-            </div>
-            <div class="bills-R">
-            </div>
-          </div>
-          <div class="party-bills">
-            <div>
-              <svg id="svg-D" width="100" height="100" viewBox="0 0 268 268"></svg>
-            </div>
-            <div class="bills-D">
-            </div>
-          </div>
-          <div class="party-bills">
-            <div>
-              <svg id="svg-I" width="100" height="100" viewBox="0 0 30 30"></svg> <!-- svg to hold the map. -->
-            </div>
-            <div class="bills-I">
-            </div>
-          </div>
-        </td>
-        <td>
-          <canvas class="bar-plot" id="evolution_chart">
-          </canvas>
-        </td>
-        <td rowspan="2">
-          <canvas class="majors-plot" id="majors-plot">
-          </canvas>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <p id="reset-states">Reset states</p>
-          <div class='section_map'>
+    <h1>Bills introduced in US Congress</h1>
+    <table class='table-container'>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="party-bills">
+                        <div>
+                            <p id="reset-parties">Reset parties</p>
+                            <svg id="svg-R" width="100" height="100" viewBox="0 0 100 100"></svg> <!-- svg to hold the map. -->
+                        </div>
+                        <div class="bills-R">
+                        </div>
+                    </div>
+                    <div class="party-bills">
+                        <div>
+                            <svg id="svg-D" width="100" height="100" viewBox="0 0 268 268"></svg>
+                        </div>
+                        <div class="bills-D">
+                        </div>
+                    </div>
+                    <div class="party-bills">
+                        <div>
+                            <svg id="svg-I" width="100" height="100" viewBox="0 0 30 30"></svg> <!-- svg to hold the map. -->
+                        </div>
+                        <div class="bills-I">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <canvas class="bar-plot" id="evolution_chart">
+                    </canvas>
+                </td>
+                <td rowspan="2">
+                    <canvas class="majors-plot" id="majors-plot">
+                    </canvas>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p id="reset-states">Reset states</p>
+                    <div class='section_map'>
 
-            <svg width="660" height="400"  version="1.1" viewBox="0 0 960 600" id="statesvg"  ></svg> <!-- svg to hold the map. -->
-        </div>
+                        <svg width="660" height="400"  version="1.1" viewBox="0 0 960 600" id="statesvg"  ></svg> <!-- svg to hold the map. -->
+                </div>
 
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <div class='section_barchart'>
-  </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class='section_barchart'>
+    </div>
 
-   <div id="tooltip"></div><!-- div to hold tooltip. -->
-
-
+     <div id="tooltip"></div><!-- div to hold tooltip. -->
 
 
-  <script type="text/javascript" src="bundle.js"></script>
-   <!-- creates uStates. -->
+
+
+    <script type="text/javascript" src="bundle.js"></script>
+     <!-- creates uStates. -->
 <!--<script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="https://cdn.rawgit.com/Gmousse/dataframe-js/master/dist/dataframe.js"></script>
 <script src="uStates.js"></script>
