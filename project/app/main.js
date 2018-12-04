@@ -109,11 +109,13 @@ function resetFilter(field=null) {
         Object.keys(initialFilter).forEach(key => {
             filter[key] = initialFilter[key];
         });
-        d3.select("#div-congress-prev")
-            .append('h3')
-            .text("<<")
-            .attr('id','congress-prev')
-            .on("click", () => shiftCongresses('prev'));
+        if (d3.select("#congress-prev")._groups[0][0] == null) {
+            d3.select("#div-congress-prev")
+                .append('h3')
+                .text("<<")
+                .attr('id','congress-prev')
+                .on("click", () => shiftCongresses('prev'));
+        }
         d3.select("#congress-next").remove();
     }
     else if (filter[field].length != initialFilter[field].length)
