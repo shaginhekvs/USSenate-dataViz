@@ -6,9 +6,9 @@
 
 import * as d3 from 'd3';
 import * as _ from 'underscore';
-import * as c3 from 'c3';
 import DataFrame from 'dataframe-js';
-import Chart from 'chart.js'
+import * as cc from 'd3-svg-legend';
+import * as chartjs from 'chart.js'
 
 require("./main.css");
 
@@ -58,15 +58,17 @@ const yearToCongress = {
     '2017': 115,//-n2019
 };
 
+const numberCongressesDisplayed = 5;
+
 //////////////////////////////////////////////////////////
 // Initialize filters and define filtering related functions
 //////////////////////////////////////////////////////////
 
 let allValuesFilter = {
-  congress: [],
-  party: [],
-  state: [],
-  major: []
+    congress: [],
+    party: [],
+    state: [],
+    major: []
 };
 
 let initialFilter = {
@@ -103,8 +105,17 @@ function changeFilterField(field, value) {
 }
 
 function resetFilter(field=null) {
-    if (field == null)
-        filter = initialFilter;
+    if (field == null) {
+        Object.keys(initialFilter).forEach(key => {
+            filter[key] = initialFilter[key];
+        });
+        d3.select("#div-congress-prev")
+            .append('h3')
+            .text("<<")
+            .attr('id','congress-prev')
+            .on("click", () => shiftCongresses('prev'));
+        d3.select("#congress-next").remove();
+    }
     else if (filter[field].length != initialFilter[field].length)
         filter[field] = initialFilter[field];
 
@@ -114,6 +125,7 @@ function resetFilter(field=null) {
 }
 
 function formatNumberBillsTick(label) {
+    label = Math.ceil(label);
     if (label >= 1000) {
         return label/1000+'k';
     } else if (Math.floor(label) == label){
@@ -122,8 +134,42 @@ function formatNumberBillsTick(label) {
 }
 
 function computeMaximumBarPlot(count) {
+    if (count < 10)
+        return 10;
     const tenPower = Math.pow(10, Math.floor(Math.log10(count)));
-    return tenPower * Math.ceil(count*2/tenPower)/2
+    return tenPower * Math.ceil(count/tenPower)
+}
+
+function formatYear(year) {
+    if (year % 10 == 1) 
+        return year+'st'
+    else if (year % 10 == 2) 
+        return year+'nd'
+    else if (year % 10 == 2) 
+        return year+'rd'
+    else
+        return year+'th'
+}
+
+function formatLegendLabels({
+  i,
+  genLength,
+  generatedLabels,
+  labelDelimiter
+}) {
+    const values = generatedLabels[i].split(labelDelimiter)
+    if (i === 0)
+        return "0"
+    else if (i === genLength - 1)
+        return formatNumberBillsTick(values[0])+" or more"
+    else {
+        const value0 = formatNumberBillsTick(values[0]);
+        const value1 = formatNumberBillsTick(values[1]-1);
+        if (value0 < value1)
+            return value0+" to "+value1
+        else
+            return value0
+    }
 }
 
 //////////////////////////////////////////////////////////
@@ -131,42 +177,76 @@ function computeMaximumBarPlot(count) {
 //////////////////////////////////////////////////////////
 let wind = {};
 wind.palette = function (min, max) {
-    let d = (Math.log(max) - Math.log(min)) / 6;
-    const logmin = Math.log(min);
-    const logmax = Math.log(max);
-    return d3.scaleThreshold()
-        .range(['#ffffff','#e8e5f1','#c1badb','#a899c6','#9374ad','#7e51a3','#661487'])
-        .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#e8e5f1','#c1badb','#a899c6','#9374ad','#7e51a3','#661487'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.color = paletteScale;
+    return paletteScale
+}
+
+wind.gray_palette = function (min, max) {
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#e8e8e8','#adadac','#9b9b9a','#858584','#6a6b69','#494b48'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.gray = paletteScale;
+    return paletteScale
 }
 
 wind.R_palette = function (min, max) {
-    let d = (Math.log(max) - Math.log(min)) / 6;
-    const logmin = Math.log(min);
-    const logmax = Math.log(max);
-    return d3.scaleThreshold()
-        .range(['#ffffff','#fdd6cf','#fc8472','#fb5e4a','#f0372e','#cb181d','#99000d'])
-        .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#fdd6cf','#fc8472','#fb5e4a','#f0372e','#cb181d','#99000d'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.color = paletteScale;
+    return paletteScale
 }
 
 wind.D_palette = function (min, max) {
-    let d = (Math.log(max) - Math.log(min)) / 6;
-    const logmin = Math.log(min);
-    const logmax = Math.log(max);
-    return d3.scaleThreshold()
-        .range(['#ffffff','#dbebf4','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'])
-        .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#dbebf4','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.color = paletteScale;
+    return paletteScale
 }
 
-wind.I_palette = function I_palette(min, max) {
-    let d = (Math.log(max) - Math.log(min)) / 6;
-    const logmin = Math.log(min);
-    const logmax = Math.log(max);
-    return d3.scaleThreshold()
-        .range(['#ffffff','#edf8e9','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'])
-        .domain([0, logmin+1*d,logmin+2*d,logmin+3*d,logmin+4*d,logmin+5*d,logmax]);
+wind.I_palette = function (min, max) {
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#edf8e9','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.color = paletteScale;
+    return paletteScale
 }
 
 let colorPaletteName = 'palette';
+let currentPaletteScale = {};
+
+function computeLogRange(min, max) {
+    min = Math.max(min, 1);
+    const linInc = max - min;
+    if (linInc >= 10) {
+        if (linInc >= 20 && min >=10) {
+            min = 5*Math.floor(min/5);
+            max = 5*Math.ceil(max/5);
+        }
+        const logmin = Math.log(min);
+        const logmax = Math.log(max);
+        const d = (logmax - logmin) / 6;
+        return [Math.round(Math.exp(logmin)), Math.round(Math.exp(logmin+1*d)),Math.round(Math.exp(logmin+2*d)),Math.round(Math.exp(logmin+3*d)),Math.round(Math.exp(logmin+4*d)),Math.round(Math.exp(logmin+5*d)),Math.round(Math.exp(logmax))];
+    } else if (linInc >= 3) {
+        const logmin = Math.log(min);
+        const logmax = Math.log(max);
+        const d = (logmax - logmin) / 3;
+        return [Math.round(Math.exp(logmin)), Math.round(Math.exp(logmin+1*d)),Math.round(Math.exp(logmin+2*d)),Math.round(Math.exp(logmax))];
+    } else if (linInc == 2) {
+        return [min, min, max];
+    } else {
+        return [min, max]
+    }
+}
 
 let colorPalette = {
     none_color: {
@@ -175,27 +255,23 @@ let colorPalette = {
         map: '#ccd1d0'
     },
     palette: {
-        gradient: wind.palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#a98fc0',
         barPlotHover: '#b9adc6',
         map: '#7e51a3'
     },
     R_palette: {
-        gradient: wind.R_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#e28183',
         barPlotHover: '#d5abab',
         partyIcon: '#cb181d',
         map: '#cb181d'
     },
     D_palette: {
-        gradient: wind.D_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#6d9ec6',
         barPlotHover: '#a3b6c5',
         partyIcon: '#2171b5',
         map: '#2171b5'
     },
     I_palette: {
-        gradient: wind.I_palette(maxMinVals.state.min, maxMinVals.state.max),
         barPlot: '#78b18a',
         barPlotHover: '#9ebca8',
         partyIcon: '#238b45',
@@ -204,13 +280,15 @@ let colorPalette = {
 };
 
 function rescaleGradients(dataDf) {
-    maxMinVals.state.min = dataDf.stat.min('count');
-    maxMinVals.state.max = dataDf.stat.max('count');
+    if (dataDf.count() != 0) {
+        maxMinVals.state.min = dataDf.stat.min('count');
+        maxMinVals.state.max = dataDf.stat.max('count');
+    }
     const maxMinDiff = maxMinVals.state.max - maxMinVals.state.min;
     if (maxMinDiff > 0 && maxMinDiff < 4) {
         maxMinVals.state.min -= 0.5;
     }
-
+    colorPalette.none_color.gradient = wind.gray_palette(maxMinVals.state.min, maxMinVals.state.max);
     if (filter.party.length == 1) 
         colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](maxMinVals.state.min, maxMinVals.state.max);
     else
@@ -270,7 +348,8 @@ function drawCongressPlot(data) {
         labels: []
     };
 
-    allValuesFilter.congress.forEach(congress => {
+
+    filter.displayedCongresses.forEach(congress => {
         const bills = billsPerCongress[congress];
         if (bills != null) {
             plotData.labels.push(congressToYear[congress]);
@@ -290,25 +369,25 @@ function drawCongressPlot(data) {
     if (congressPlot == null) {
         let ctx = document.getElementById('evolution_chart');
         ctx.onclick = (evt => onclickBarPlot(congressPlot, 'congress', evt));
-        congressPlot = new Chart(ctx, {
+        congressPlot = new chartjs.Chart(ctx, {
             type: 'bar',
             data: plotData,
             options: {
-                animation: {
-                    onProgress () {
-                        const ctx = this.chart.ctx;
-                        const meta = this.chart.controller.getDatasetMeta(0);
+                // animation: {
+                //     onProgress () {
+                //         const ctx = this.chart.ctx;
+                //         const meta = this.chart.controller.getDatasetMeta(0);
 
-                        Chart.helpers.each(meta.data.forEach((bar, index) => {
-                            const label = this.data.labels[index];
-                            const labelPositionY = 310;
-                            // ctx.textBaseline = 'middle';
-                            ctx.textAlign = 'center';
-                            ctx.fillStyle = '#333';
-                            ctx.fillText(yearToCongress[label], bar._model.x, Math.min(bar._model.y, labelPositionY));
-                        }));
-                    }
-                },
+                //         chartjs.Chart.helpers.each(meta.data.forEach((bar, index) => {
+                //             const label = this.data.labels[index];
+                //             const labelPositionY = 310;
+                //             // ctx.textBaseline = 'middle';
+                //             ctx.textAlign = 'center';
+                //             ctx.fillStyle = '#333';
+                //             ctx.fillText(yearToCongress[label], bar._model.x, Math.min(bar._model.y, labelPositionY));
+                //         }));
+                //     }
+                // },
                 maintainAspectRatio: false,
                 responsive: true,
                 scales: {
@@ -331,8 +410,6 @@ function drawCongressPlot(data) {
                             callback: label => formatNumberBillsTick(label),
                             min: 0,
                             max: computeMaximumBarPlot(maxMinVals.congress.max),
-                            // This puts the majors labels on top of bars
-                            mirror: false,
                         },
                         scaleLabel: {
                             display: true,
@@ -343,6 +420,24 @@ function drawCongressPlot(data) {
                 legend: {
                     display: false
                 },
+                tooltips: {
+                    mode: 'x',
+                    intersect: false,
+                    callbacks: {
+                        title: function(tooltipItems, data) { 
+                            return formatYear(yearToCongress[tooltipItems[0].xLabel]) + " Congress";
+                        },
+                        afterTitle: function(tooltipItems, data) {
+                            const nextYear = parseInt(tooltipItems[0].xLabel) + 2.0;
+                            return tooltipItems[0].xLabel + " - " + nextYear;
+                        },
+                        label: function(tooltipItem, data) { 
+                            const billLabel = (tooltipItem.yLabel != 1 ? " Bills" : " Bill");
+                            return tooltipItem.yLabel + billLabel;
+                        },
+                        
+                    }
+                }
             }
         });
     } else {
@@ -400,7 +495,7 @@ function drawMajorPlot(data) {
     if (majorPlot == null) {
         let ctx = document.getElementById('majors-plot');
         ctx.onclick = (evt => onclickBarPlot(majorPlot, 'major', evt));
-        majorPlot = new Chart(ctx, {
+        majorPlot = new chartjs.Chart(ctx, {
             type: 'horizontalBar',
             data: plotData,
             options: {
@@ -410,7 +505,7 @@ function drawMajorPlot(data) {
                         const ctx = this.chart.ctx;
                         const meta = this.chart.controller.getDatasetMeta(0);
 
-                        Chart.helpers.each(meta.data.forEach((bar, index) => {
+                        chartjs.Chart.helpers.each(meta.data.forEach((bar, index) => {
                             const label = this.data.labels[index];
                             const labelPositionX = 40;
                             const labelWidth = ctx.measureText(label).width + labelPositionX;
@@ -457,6 +552,16 @@ function drawMajorPlot(data) {
                 legend: {
                     display: false
                 },
+                tooltips: {
+                    mode: 'y',
+                    intersect: false,
+                    callbacks: {
+                        label: function(tooltipItem, data) { 
+                            const billLabel = (tooltipItem.xLabel != 1 ? " Bills" : " Bill");
+                            return tooltipItem.xLabel + billLabel;
+                        }
+                    }
+                }
             }
         });
     } else {
@@ -556,12 +661,16 @@ function drawMajorPlot(data) {
             //     .style('fill', color);
         }
 
-        let paths = d3.select(id).selectAll(".state").data(Paths);
+        let paths = d3.select(id)
+            .append("g")
+            .attr("transform", "translate(60,0)")
+            .selectAll(".state")
+            .data(Paths);
         paths.enter().append("path").attr("class", "state").attr("d", d => d.d)
             .style("fill", function(d){
                 let color = filter.state.length > 1 ? data[d.id].color : colorPalette[colorPaletteName].map;
                 if(!filter.state.includes(d.id)){
-                    color = colorPalette.none_color.map;
+                    color = data[d.id].colorGray;
                 }
                 return color;
             })
@@ -583,8 +692,9 @@ function drawMajorPlot(data) {
 })();
 
 function tooltipHtml2(n, d){    /* function to create html content string in tooltip div. */
+    const billLabel = (d.count != 1 ? " Bills" : " Bill");
     return "<h4>" + n + "</h4><table>" +
-        "<tr><td>Count</td><td>" + (d.count) + "</td></tr>"
+        "<tr>" + (d.count) + billLabel + "</tr>"
         "</table>";
 }
 
@@ -598,18 +708,41 @@ function drawMapPlot(dataDf){
     allValuesFilter.state.forEach(function(d){
         plotData[d] = {
             count: 0,
-            color: colorPalette[colorPaletteName].gradient(-1)
+            color: colorPalette[colorPaletteName].gradient(0),
+            colorGray: colorPalette[colorPaletteName].gradient(0)
         };
     });
 
     groupedDf.map(function (d){
         plotData[d.get('state')] = {
             count: d.get('count'),
-            color: colorPalette[colorPaletteName].gradient(Math.log(d.get('count')))
+            color: colorPalette[colorPaletteName].gradient(d.get('count')),
+            colorGray: colorPalette.none_color.gradient(d.get('count'))
         };
     });
 
     uStatesFinal.draw("#statesvg", plotData, tooltipHtml2);
+    drawLegend();
+}
+
+function drawLegend() {
+    let svg = d3.select("#statesvg");
+    svg.append("g")
+      .attr("class", "legendLinear")
+      .attr("transform", "translate(-40,20)");
+
+    const selectedScale = filter.state.length != 1 ? currentPaletteScale.color : currentPaletteScale.gray;
+
+    var legend = cc.legendColor()
+      .shapeWidth(15)
+      .shapeHeight(15)
+      .title("Number of Bills")
+      .orient('vertical')
+      .scale(selectedScale)
+      .labels(formatLegendLabels);
+
+    svg.select(".legendLinear")
+      .call(legend);
 }
 
 export function drawPlots(data = null) {
@@ -628,6 +761,8 @@ export function drawPlots(data = null) {
             colorPaletteName = filter.party[0] + '_palette';
         }
     }
+    // Filter the data for displayed congresses
+    filteredData = _.filter(filteredData, d => filter.displayedCongresses.includes(d.congress));
     // Draw bar plot
     const congressPlotData = _.filter(filteredData, d => filter.major.includes(d.major) && filter.state.includes(d.state));
     drawCongressPlot(congressPlotData);
@@ -677,6 +812,55 @@ function drawPartyIcons(initialize=false){
     }
 }
 
+function shiftCongresses(direction) {
+    if (direction == "prev") {
+        let lastIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[filter.displayedCongresses.length - 1]);
+        if (lastIdx < 0)
+            lastIdx += allValuesFilter.congress.length;
+        lastIdx += 1;
+        const newLastIdx = Math.max(0, lastIdx - numberCongressesDisplayed);
+        const newFirstIdx = Math.max(0, newLastIdx - numberCongressesDisplayed);
+        filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
+        filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
+
+        if (newFirstIdx == 0)
+            d3.select('#congress-prev').remove();
+
+        if (newLastIdx < allValuesFilter.congress.length && d3.select("#congress-next")._groups[0][0] == null) {
+            d3.select("#div-congress-next")
+            .append('h3')
+            .text(">>")
+            .attr('id','congress-next')
+            .on("click", () => shiftCongresses('next'));
+        }
+
+        drawPlots();
+
+    } else {
+        let firstIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[0]);
+        if (firstIdx < 0) {
+            firstIdx += allValuesFilter.congress.length;
+        }
+        const newFirstIdx = Math.min(allValuesFilter.congress.length - 1, firstIdx + numberCongressesDisplayed)
+        const newLastIdx = Math.min(allValuesFilter.congress.length, newFirstIdx + numberCongressesDisplayed)
+        filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
+        filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
+        
+        if (newLastIdx == allValuesFilter.congress.length)
+            d3.select('#congress-next').remove();
+
+        if (newFirstIdx > 0 && d3.select("#congress-prev")._groups[0][0] == null) {
+            d3.select("#div-congress-prev")
+            .append('h3')
+            .text("<<")
+            .attr('id','congress-prev')
+            .on("click", () => shiftCongresses('prev'));
+        }
+
+        drawPlots();
+    }
+}
+
 
 //////////////////////////////////////////////////////////
 // Load data from csv and initialize filters
@@ -707,7 +891,9 @@ d3.csv("./data/grouped_bills.csv")
         Object.keys(allValuesFilter).forEach(key => {
             initialFilter[key] = allValuesFilter[key];
         });
-        initialFilter.congress = allValuesFilter.congress[allValuesFilter.congress.length - 1];
+
+        initialFilter.displayedCongresses = allValuesFilter.congress.slice(-numberCongressesDisplayed);
+        initialFilter.congress = initialFilter.displayedCongresses[initialFilter.displayedCongresses.length - 1];
 
         Object.keys(initialFilter).forEach(key => {
             filter[key] = initialFilter[key];
@@ -716,21 +902,23 @@ d3.csv("./data/grouped_bills.csv")
         let groupedData = _.groupBy(data, bg => bg['congress']);
         let billsArray = []
         for (let cong in groupedData){
-          let congData = groupedData[cong]
-          let congBills = congData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
-          billsArray.push(congBills);
+            let congData = groupedData[cong]
+            let congBills = congData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
+            billsArray.push(congBills);
         }
 
         groupedData = _.groupBy(data, bg => bg['major']);
         billsArray = []
         for (let major in groupedData){
-          let majorData = groupedData[major]
-          let majorBills = majorData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
-          billsArray.push(majorBills);
+            let majorData = groupedData[major]
+            let majorBills = majorData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
+            billsArray.push(majorBills);
         }
 
+        d3.select('#congress-prev').on("click", () => shiftCongresses('prev'));
         d3.select('#reset-parties').on("click", () => resetFilter('party'));
         d3.select('#reset-states').on("click", () => resetFilter('state'));
+        d3.select('#reset-all').on("click", () => resetFilter());
 
         drawPartyIcons(true);
         drawPlots(data);
