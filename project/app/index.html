@@ -10,58 +10,82 @@
 </head>
 
 <body>
-    <h1>Bills introduced in US Congress</h1>
+    
     <table class='table-container'>
         <tbody>
+            <tr bgcolor="gray" class="top-row" margi>
+                <td colspan=5>
+                    <div class="toolbox-party">
+                        <button class="tool-but" id="svg-R">Republican</button>
+                        <button class="tool-but" id="svg-D">Democrats</button>
+                        <button class="tool-but" id="svg-I">Independents</button>
+                    </div>  
+                    <div class="viz_caption">
+                        Bills introduced in US Congress
+                    </div>
+
+                    <div class="toolbox">
+                        <button class="tool-but" id="discover">Discover</button>
+                        <button class="tool-but" id="reset-filter">Reset</button>
+                    </div>
+                    <div class="clear"></div>
+                    <div id="discover_text">
+                        &nbsp;
+                    </div>
+                    <div>
+
+                </td>
+            </tr>
+
+
+
             <tr>
+                <td rowspan="2" >
+                    <div class=label id=major-label>
+                    <h5 class=label>All Subjects Selected</h5>
+                    </div>
+                    <div class='majors-plot'>
+
+                        <canvas class="majors-plot" id="majors-plot">
+                        </canvas>
+                    </div>
+                </td>
+                <td colspan="3">
+
+                    <div class='surround-evolution'>
+                        <canvas class="bar-plot" id="evolution_chart">
+                        </canvas>
+                    </div>
+                </td>
+
                 <td rowspan="2">
-                    <canvas class="majors-plot" id="majors-plot">
-                    </canvas>
-                </td>
-                <td>
-                    <canvas class="bar-plot" id="evolution_chart">
-                    </canvas>
-                </td>
-                <td>
-                    <div class="party-bills">
-                        <div>
-                            <h3 id="reset-parties">Reset parties</h3>
-                            <svg id="svg-R" width="100" height="100" viewBox="0 0 100 100"></svg> <!-- svg to hold the map. -->
-                        </div>
-                        <div class="bills-R">
-                        </div>
+                    <div class=president_label>
+                        <p>
+                        What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+                        </p>
                     </div>
-                    <div class="party-bills">
-                        <div>
-                            <svg id="svg-D" width="100" height="100" viewBox="0 0 268 268"></svg>
-                        </div>
-                        <div class="bills-D">
-                        </div>
-                    </div>
-                    <div class="party-bills">
-                        <div>
-                            <svg id="svg-I" width="100" height="100" viewBox="0 0 30 30"></svg> <!-- svg to hold the map. -->
-                        </div>
-                        <div class="bills-I">
-                        </div>
-                    </div>
+                    
                 </td>
             </tr>
             <tr>
                 <!-- <td></td> -->
-                <td colspan="2">
-                    <h3 id="reset-all">Reset all</h3>
-                    <h3 id="reset-states">Reset states</h3>
-                    <div id="div-congress-prev">
-                        <h3 id="congress-prev"><<</h3>
-                    </div>
-                    <div id="div-congress-next">
+                
+                <td colspan="3">
+                    <div class="label" id="map-label" >
+                        <h5 class=label>All States Selected </h5>
                     </div>
                     <div class='section_map'>
-                        <svg width="700" height="400"  version="1.1" viewBox="0 0 960 600" id="statesvg"  ></svg>
+                        <svg width="800" height="350"  version="1.1" viewBox="150 0 760 600" id="statesvg" margin="0px" ></svg>
                     </div>
                 </td>
+               
             </tr>
+            
         </tbody>
     </table>
     <div class='section_barchart'>

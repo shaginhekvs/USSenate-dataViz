@@ -58,7 +58,7 @@ const yearToCongress = {
     '2017': 115,//-n2019
 };
 
-const numberCongressesDisplayed = 5;
+const numberCongressesDisplayed = 8;
 
 //////////////////////////////////////////////////////////
 // Initialize filters and define filtering related functions
