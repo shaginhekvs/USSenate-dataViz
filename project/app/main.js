@@ -1,270 +1,515 @@
+/* Lucia's TODOs:
+    * Fix the y-axis labels for timeline plot (so that it looks good)
+    * Add map scale
+    * Add a small line when the bar is 0
+*/
+
 import * as d3 from 'd3';
 import * as _ from 'underscore';
-import * as c3 from 'c3';
 import DataFrame from 'dataframe-js';
-import Chart from 'chart.js'
+import * as cc from 'd3-svg-legend';
+import * as chartjs from 'chart.js'
 
 require("./main.css");
 
 //////////////////////////////////////////////////////////
 // Initial data
 //////////////////////////////////////////////////////////
+let maxMinVals = {
+    congress: {
+        max: 14000
+    },
+    major: {
+        max: 14000
+    },
+    state: {
+        min: 1,
+        max: 1500
+    }
+}
+
 let unfilteredData = null;
+
+const congressToYear = {
+    105: '1997',//-1999',
+    106: '1999',//-2001',
+    107: '2001',//-2003',
+    108: '2003',//-2005',
+    109: '2005',//-2007',
+    110: '2007',//-2009',
+    111: '2009',//-2011',
+    112: '2011',//-2013',
+    113: '2013',//-2015',
+    114: '2015',//-2017',
+    115: '2017',//-n2019'
+};
+
+const yearToCongress = {
+    '1997': 105,//-1999'
+    '1999': 106,//-2001'
+    '2001': 107,//-2003'
+    '2003': 108,//-2005'
+    '2005': 109,//-2007'
+    '2007': 110,//-2009'
+    '2009': 111,//-2011'
+    '2011': 112,//-2013'
+    '2013': 113,//-2015'
+    '2015': 114,//-2017'
+    '2017': 115,//-n2019
+};
+
+const numberCongressesDisplayed = 5;
 
 //////////////////////////////////////////////////////////
 // Initialize filters and define filtering related functions
 //////////////////////////////////////////////////////////
+
 let allValuesFilter = {
-  'congress': [],
-  'party': [],
-  'state': [],
-  'major': []
-}
+    congress: [],
+    party: [],
+    state: [],
+    major: []
+};
 
-let initialFilter = null;
+let initialFilter = {
+    congress: [],
+    state: [],
+    party: [],
+    major: []
+};
 
-const rep_color = 'red';
-const demo_color = 'blue';
-const independent_color = 'green';
-const no_selection_color = 'black';
-let filter = initialFilter;
+let filter = {
+    congress: [],
+    state: [],
+    party: [],
+    major: []
+};
 
-function arrayRemove(array, value) {
-    return array.filter(e => (e != value));
-}
 
-function addFilterField(field, value) {
-    // TODO: If no party chosen, both are chosen
+// function arrayRemove(array, value) {
+//     return array.filter(e => (e != value));
+// }
+
+function changeFilterField(field, value) {
     if (field == 'congress') {
-        if (value != filter['congress']) {
-            filter['congress'] = value;
+        if (yearToCongress[value] != filter.congress) {
+            filter.congress = yearToCongress[value];
+            drawPlots();
+        }
+    } else {
+        if (value != filter[field]) {
+            filter[field] = [value];
             drawPlots();
         }
     }
-    else {
-        if (filter[field].includes(value))
-            filter[field] = arrayRemove(filter[field], value);
-        else
-            filter[field].push(value);
-        drawPlots();
+}
+
+function resetFilter(field=null) {
+    if (field == null) {
+        Object.keys(initialFilter).forEach(key => {
+            filter[key] = initialFilter[key];
+        });
+        if (d3.select("#congress-prev")._groups[0][0] == null) {
+            d3.select("#div-congress-prev")
+                .append('h3')
+                .text("<<")
+                .attr('id','congress-prev')
+                .on("click", () => shiftCongresses('prev'));
+        }
+        d3.select("#congress-next").remove();
+    }
+    else if (filter[field].length != initialFilter[field].length)
+        filter[field] = initialFilter[field];
+
+    drawPlots();
+    if (field == null || field == 'party')
+        drawPartyIcons();
+}
+
+function formatNumberBillsTick(label) {
+    label = Math.ceil(label);
+    if (label >= 1000) {
+        return label/1000+'k';
+    } else if (Math.floor(label) == label){
+        return label;
     }
 }
 
-function resetFilter() {
-    filter = initialFilter;
-    drawPlots();
+function computeMaximumBarPlot(count) {
+    if (count < 10)
+        return 10;
+    const tenPower = Math.pow(10, Math.floor(Math.log10(count)));
+    return tenPower * Math.ceil(count/tenPower)
+}
+
+function formatYear(year) {
+    if (year % 10 == 1) 
+        return year+'st'
+    else if (year % 10 == 2) 
+        return year+'nd'
+    else if (year % 10 == 2) 
+        return year+'rd'
+    else
+        return year+'th'
+}
+
+function formatLegendLabels({
+  i,
+  genLength,
+  generatedLabels,
+  labelDelimiter
+}) {
+    const values = generatedLabels[i].split(labelDelimiter)
+    if (i === 0)
+        return "0"
+    else if (i === genLength - 1)
+        return formatNumberBillsTick(values[0])+" or more"
+    else {
+        const value0 = formatNumberBillsTick(values[0]);
+        const value1 = formatNumberBillsTick(values[1]-1);
+        if (value0 < value1)
+            return value0+" to "+value1
+        else
+            return value0
+    }
 }
 
 //////////////////////////////////////////////////////////
-// Size/Resizing functions and definitions... (TODO)
-// TODO:  $(window).on('resize', function() {whatever happens when resizing the window}
-//////////////////////////////////////////////////////////
-
-//////////////////////////////////////////////////////////
-// Define bar colors
+// Define colors
 //////////////////////////////////////////////////////////
 let wind = {};
 wind.palette = function (min, max) {
-let d = (max - min) / 100;
-return d3.scaleThreshold()
-    .range(['#ffffff','#fdfdfd','#fafafa','#f6f6f6','#f4f4f4','#f0f0f0','#ededed','#eaeaea','#e8e8e8','#e4e4e4','#e3e3e3','#dfdfdf','#dcdcdc','#dadada','#d7d7d7','#d3d3d3','#d1d1d1','#cecece','#cccccc','#c8c8c8','#c6c6c6','#c3c3c3','#c0c0c0','#bebebe','#bababa','#b7b7b7','#b6b6b6','#b3b3b3','#afafaf','#adadad','#aaaaaa','#a7a7a7','#a5a5a5','#a3a3a3','#9f9f9f','#9c9c9c','#9b9b9b','#979797','#949494','#929292','#909090','#8d8d8d','#8b8b8b','#888888','#858585','#828282','#7f7f7f','#7e7e7e','#7a7a7a','#787878','#757575','#747474','#717171','#6f6f6f','#6b6b6b','#696969','#676767','#656565','#616161','#606060','#5c5c5c','#5a5a5a','#575757','#555555','#545454','#505050','#4e4e4e','#4c4c4c','#494949','#474747','#454545','#434343','#404040','#3f3f3f','#3c3c3c','#3a3a3a','#373737','#353535','#333333','#313131','#2f2f2f','#2c2c2c','#2b2b2b','#292929','#262626','#242424','#212121','#1f1f1f','#1d1d1d','#1c1c1c','#191919','#181818','#151515','#131313','#101010','#0f0f0f','#0b0b0b','#070707','#040404','#000000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d,min+51*d,min+52*d,min+53*d,min+54*d,min+55*d,min+56*d,min+57*d,min+58*d,min+59*d,min+60*d,min+61*d,min+62*d,min+63*d,min+64*d,min+65*d,min+66*d,min+67*d,min+68*d,min+69*d,min+70*d,min+71*d,min+72*d,min+73*d,min+74*d,min+75*d,min+76*d,min+77*d,min+78*d,min+79*d,min+80*d,min+81*d,min+82*d,min+83*d,min+84*d,min+85*d,min+86*d,min+87*d,min+88*d,min+89*d,min+90*d,min+91*d,min+92*d,min+93*d,min+94*d,min+95*d,min+96*d,min+97*d,min+98*d,min+99*d,min+100*d]);
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#e8e5f1','#c1badb','#a899c6','#9374ad','#7e51a3','#661487'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.color = paletteScale;
+    return paletteScale
+}
+
+wind.gray_palette = function (min, max) {
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#e8e8e8','#adadac','#9b9b9a','#858584','#6a6b69','#494b48'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.gray = paletteScale;
+    return paletteScale
 }
 
 wind.R_palette = function (min, max) {
-let d = (max - min) / 50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fffad6','#fff5cc','#ffefc2','#ffeaba','#ffe5b2','#ffe0ab','#ffdaa3','#ffd59c','#ffd095','#ffca90','#ffc58a','#ffbf85','#ffb880','#ffb27c','#ffad78','#ffa775','#ffa072','#ff9a6e','#ff936b','#fd8d6a','#fb8768','#f98266','#f87c64','#f57762','#f37160','#f06b5f','#ee655d','#eb5f5b','#e85959','#e55457','#e14e55','#de4952','#da4450','#d73e4d','#d3394a','#ce3347','#ca2e43','#c52940','#c1243c','#bc1f38','#b71a34','#b3152f','#ae112a','#a80b24','#a2071f','#9c0418','#970112','#92010b','#8b0000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#fdd6cf','#fc8472','#fb5e4a','#f0372e','#cb181d','#99000d'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.color = paletteScale;
+    return paletteScale
 }
 
 wind.D_palette = function (min, max) {
-let d = (max - min) / 50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fdfae1','#faf5e2','#f7f0e3','#f5ebe4','#f2e7e5','#f0e2e6','#eddde7','#ead9e8','#e7d4e9','#e5d0e9','#e2caea','#dfc5eb','#dcc1ec','#d9bced','#d6b7ed','#d3b2ee','#d0afef','#cdaaf0','#c9a5f0','#c6a1f1','#c39cf2','#bf97f2','#bc92f3','#b88df3','#b489f4','#b184f5','#ad7ff5','#a97bf6','#a676f6','#a171f7','#9d6df7','#9968f8','#9464f8','#8f5ff9','#8b5af9','#8656fa','#8151fa','#7c4bfb','#7646fb','#7041fc','#693cfc','#6337fc','#5c31fd','#542bfd','#4b25fe','#411ffe','#3517fe','#230dff','#0000ff'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#dbebf4','#9ecae1','#6baed6','#4292c6','#2171b5','#084594'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.color = paletteScale;
+    return paletteScale
 }
 
-wind.I_palette = function I_palette(min, max) {
-let d = (max - min) / 50;
-return d3.scaleThreshold()
-    .range(['#ffffe0','#fbfcdc','#f6fad7','#f2f7d3','#edf5ce','#e9f2ca','#e4efc6','#dfedc0','#dceabd','#d7e7b8','#d2e5b4','#cee2b0','#c9e0ab','#c5dda7','#c1dba2','#bcd89d','#b8d69a','#b3d295','#afd192','#aace8d','#a6cb88','#a2c985','#9dc680','#99c37d','#94c078','#90be73','#8bbb70','#86b96b','#83b767','#7db363','#79b15f','#75af5b','#70ac56','#6caa52','#66a74e','#62a44a','#5da145','#589f42','#539c3d','#4e9938','#4a9835','#439430','#3f922c','#389027','#328d21','#2c8a1d','#248816','#1d8611','#108308','#008000'])
-    .domain([min+1*d,min+2*d,min+3*d,min+4*d,min+5*d,min+6*d,min+7*d,min+8*d,min+9*d,min+10*d,min+11*d,min+12*d,min+13*d,min+14*d,min+15*d,min+16*d,min+17*d,min+18*d,min+19*d,min+20*d,min+21*d,min+22*d,min+23*d,min+24*d,min+25*d,min+26*d,min+27*d,min+28*d,min+29*d,min+30*d,min+31*d,min+32*d,min+33*d,min+34*d,min+35*d,min+36*d,min+37*d,min+38*d,min+39*d,min+40*d,min+41*d,min+42*d,min+43*d,min+44*d,min+45*d,min+46*d,min+47*d,min+48*d,min+49*d,min+50*d]);
+wind.I_palette = function (min, max) {
+    const logRange = computeLogRange(min,max);
+    const paletteScale = d3.scaleThreshold()
+        .range(['#ffffff','#edf8e9','#a1d99b','#74c476','#41ab5d','#238b45','#005a32'].slice(0,logRange.length))
+        .domain(logRange);
+    currentPaletteScale.color = paletteScale;
+    return paletteScale
 }
 
-const barColors = wind['palette'](0,9);
+let colorPaletteName = 'palette';
+let currentPaletteScale = {};
+
+function computeLogRange(min, max) {
+    min = Math.max(min, 1);
+    const linInc = max - min;
+    if (linInc >= 10) {
+        if (linInc >= 20 && min >=10) {
+            min = 5*Math.floor(min/5);
+            max = 5*Math.ceil(max/5);
+        }
+        const logmin = Math.log(min);
+        const logmax = Math.log(max);
+        const d = (logmax - logmin) / 6;
+        return [Math.round(Math.exp(logmin)), Math.round(Math.exp(logmin+1*d)),Math.round(Math.exp(logmin+2*d)),Math.round(Math.exp(logmin+3*d)),Math.round(Math.exp(logmin+4*d)),Math.round(Math.exp(logmin+5*d)),Math.round(Math.exp(logmax))];
+    } else if (linInc >= 3) {
+        const logmin = Math.log(min);
+        const logmax = Math.log(max);
+        const d = (logmax - logmin) / 3;
+        return [Math.round(Math.exp(logmin)), Math.round(Math.exp(logmin+1*d)),Math.round(Math.exp(logmin+2*d)),Math.round(Math.exp(logmax))];
+    } else if (linInc == 2) {
+        return [min, min, max];
+    } else {
+        return [min, max]
+    }
+}
+
+let colorPalette = {
+    none_color: {
+        barPlot: '#ccd1d0',
+        partyIcon: '#909a99',
+        map: '#ccd1d0'
+    },
+    palette: {
+        barPlot: '#a98fc0',
+        barPlotHover: '#b9adc6',
+        map: '#7e51a3'
+    },
+    R_palette: {
+        barPlot: '#e28183',
+        barPlotHover: '#d5abab',
+        partyIcon: '#cb181d',
+        map: '#cb181d'
+    },
+    D_palette: {
+        barPlot: '#6d9ec6',
+        barPlotHover: '#a3b6c5',
+        partyIcon: '#2171b5',
+        map: '#2171b5'
+    },
+    I_palette: {
+        barPlot: '#78b18a',
+        barPlotHover: '#9ebca8',
+        partyIcon: '#238b45',
+        map: '#238b45'
+    }
+};
+
+function rescaleGradients(dataDf) {
+    if (dataDf.count() != 0) {
+        maxMinVals.state.min = dataDf.stat.min('count');
+        maxMinVals.state.max = dataDf.stat.max('count');
+    }
+    const maxMinDiff = maxMinVals.state.max - maxMinVals.state.min;
+    if (maxMinDiff > 0 && maxMinDiff < 4) {
+        maxMinVals.state.min -= 0.5;
+    }
+    colorPalette.none_color.gradient = wind.gray_palette(maxMinVals.state.min, maxMinVals.state.max);
+    if (filter.party.length == 1) 
+        colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](maxMinVals.state.min, maxMinVals.state.max);
+    else
+        colorPalette.palette.gradient = wind.palette(maxMinVals.state.min, maxMinVals.state.max);
+}
 
 //////////////////////////////////////////////////////////
 // Plot variables
 //////////////////////////////////////////////////////////
-let barPlot = null;
+
+let congressPlot = null;
 let majorPlot = null;
 let uStatesFinal;
 
 //////////////////////////////////////////////////////////
 // Event handlers
 //////////////////////////////////////////////////////////
-function onclickMajorPlot(evt) {
-    let activeBar = majorPlot.getElementAtEvent(evt);
+
+function onclickBarPlot(plot, filterField, evt) {
+    let activeBar = plot.getElementAtEvent(evt);
     if (activeBar.length > 0) {
-        activeBar = activeBar[0]["_model"]["label"];
-        addFilterField("major", activeBar);
+        activeBar = activeBar[0]._model.label;
+        changeFilterField(filterField, activeBar);
+    } else if (filterField == "major") {
+        resetFilter(filterField);
     }
 }
 
 
-
-function initialize_icon(filename,svg_id,party_id,on_click_color){
-    d3.svg("imgs/"+filename+'.svg').then((svg)=>{
-        const gElement = d3.select(svg).select('g'); 
-        d3.select(svg_id).node().appendChild(gElement.node());
-        if(filter['party'].includes(party_id)){
-            d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
-        }        
-        d3.select(svg_id).on("click",()=>{
-            addFilterField('party',party_id)
-             if(filter['party'].includes(party_id)){
-                    d3.select(svg_id).select('g').select('path').attr("fill",on_click_color);
-             }
-             else{
-                d3.select(svg_id).select('g').select('path').attr("fill",no_selection_color);
-             }
-         });
-    });
-
-}
-
-function drawPartyIcons(data){
-    let dem = d3.select('#svg-D svg')
-        if(dem.empty()){
-            console.log('adding icon')
-            initialize_icon('donkey','#svg-D','D',demo_color);
-            initialize_icon('elephant','#svg-R','R',rep_color);
-            initialize_icon('penguin','#svg-I','I',independent_color);
-            
-        }
-       
+function onclickParty(partyId, onclickColor){
+    if (filter.party != [partyId]) {
+        changeFilterField('party', partyId);
+        d3.select('#svg-' + partyId).select('g').select('path')
+            .attr("fill", onclickColor);
+        allValuesFilter.party.forEach(p => {
+            if (p != partyId) {
+                d3.select('#svg-' + p).select('g').select('path')
+                    .attr("fill", colorPalette.none_color.partyIcon);
+            }
+        });
     }
-
-// Plotting functions (TODO: Save in separate files!)
-
-// function onhoverMajorPlot(evt) {
-//     let activeBar = majorPlot.getElementAtEvent(evt);
-//     if (activeBar.length > 0) {
-//         activeBar = activeBar[0]["_model"]["label"];
-//         // addFilterField("major", activeBar);
-//     }
-// }
+}
 
 //////////////////////////////////////////////////////////
 // Plotting functions (TODO: Move to separate files!)
 //////////////////////////////////////////////////////////
 
 function drawCongressPlot(data) {
-    const billsPerCongress = _.groupBy(data, bg => bg['congress']);
-    // let plotData = [['congress'], ['Number of bills introduced']];
+    const billsPerCongress = _.groupBy(data, bg => bg.congress);
     let plotData = {
         datasets: [{
-            backgroundColor: barColors(3),
-            hoverBackgroundColor: barColors(2),
+            backgroundColor: [],
+            hoverBackgroundColor: colorPalette[colorPaletteName].barPlotHover,
             label: 'Number of bills',
             data: []
         }],
         labels: []
     };
 
-    allValuesFilter['congress'].forEach(congress => {
+
+    filter.displayedCongresses.forEach(congress => {
         const bills = billsPerCongress[congress];
         if (bills != null) {
-            plotData.labels.push(congress);
-            let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
+            plotData.labels.push(congressToYear[congress]);
+            const numberBills = bills.map(bg => bg.count).reduce((a, b) => a + b, 0);
             plotData.datasets[0].data.push(numberBills);
+        } else {
+            plotData.labels.push(congressToYear[congress]);
+            plotData.datasets[0].data.push(0);
         }
+        const paletteName = filter.congress == congress ? colorPaletteName : 'none_color';
+        plotData.datasets[0].backgroundColor
+            .push(colorPalette[paletteName].barPlot);
     });
 
-    if (barPlot == null) {
+    maxMinVals.congress.max = Math.max(Math.max(...plotData.datasets[0].data), 1);
+
+    if (congressPlot == null) {
         let ctx = document.getElementById('evolution_chart');
-        // ctx.onclick = ((evt) => onclickMajorPlot(evt));
-        // ctx.onhover = ((evt, item) => onhoverMajorPlot(evt, item)); //TODO
-        barPlot = new Chart(ctx, {
+        ctx.onclick = (evt => onclickBarPlot(congressPlot, 'congress', evt));
+        congressPlot = new chartjs.Chart(ctx, {
             type: 'bar',
             data: plotData,
             options: {
+                // animation: {
+                //     onProgress () {
+                //         const ctx = this.chart.ctx;
+                //         const meta = this.chart.controller.getDatasetMeta(0);
+
+                //         chartjs.Chart.helpers.each(meta.data.forEach((bar, index) => {
+                //             const label = this.data.labels[index];
+                //             const labelPositionY = 310;
+                //             // ctx.textBaseline = 'middle';
+                //             ctx.textAlign = 'center';
+                //             ctx.fillStyle = '#333';
+                //             ctx.fillText(yearToCongress[label], bar._model.x, Math.min(bar._model.y, labelPositionY));
+                //         }));
+                //     }
+                // },
                 maintainAspectRatio: false,
                 responsive: true,
                 scales: {
                     xAxes: [{
-                      gridLines: {
-                          display: false
-                      },
+                        gridLines: {
+                            display: false
+                        },
                         ticks: {
                             min: 0,
-                            beginAtZero: true,
-                        }//,
-                        //afterBuildTicks: function(chart) {}
+                            beginAtZero: true
+                        },
+                        //afterBuildTicks: function(chart) {},
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Year'
+                        }
                     }],
                     yAxes: [{
                         ticks: {
-                            // This puts the majors labels on top of bars
-                            mirror: false,
+                            callback: label => formatNumberBillsTick(label),
+                            min: 0,
+                            max: computeMaximumBarPlot(maxMinVals.congress.max),
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number of Bills'
                         }
                     }]
                 },
                 legend: {
                     display: false
                 },
+                tooltips: {
+                    mode: 'x',
+                    intersect: false,
+                    callbacks: {
+                        title: function(tooltipItems, data) { 
+                            return formatYear(yearToCongress[tooltipItems[0].xLabel]) + " Congress";
+                        },
+                        afterTitle: function(tooltipItems, data) {
+                            const nextYear = parseInt(tooltipItems[0].xLabel) + 2.0;
+                            return tooltipItems[0].xLabel + " - " + nextYear;
+                        },
+                        label: function(tooltipItem, data) { 
+                            const billLabel = (tooltipItem.yLabel != 1 ? " Bills" : " Bill");
+                            return tooltipItem.yLabel + billLabel;
+                        },
+                        
+                    }
+                }
             }
         });
     } else {
-        barPlot.data.labels = plotData.labels;
-        barPlot.data.datasets[0].data = plotData.datasets[0].data;
-        barPlot.update();
+        congressPlot.data.labels = plotData.labels;
+        congressPlot.data.datasets[0].data = plotData.datasets[0].data;
+        congressPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
+        congressPlot.data.datasets[0].hoverBackgroundColor = colorPalette[colorPaletteName].barPlotHover;
+        congressPlot.options.scales.yAxes[0].ticks.max = computeMaximumBarPlot(maxMinVals.congress.max);
+        congressPlot.update();
     }
 }
 
 function drawMajorPlot(data) {
-    const billsPerMajor = _.groupBy(data, bg => bg['major']);
+    const billsPerMajor = _.groupBy(data, bg => bg.major);
     let plotData = {
         datasets: [{
-            backgroundColor: barColors(3),
-            hoverBackgroundColor: barColors(2),
+            backgroundColor: [],
+            hoverBackgroundColor: colorPalette[colorPaletteName].barPlotHover,
             label: 'Number of bills',
             data: []
         }],
         labels: []
     };
-    allValuesFilter['major'].forEach(major => {
+    allValuesFilter.major.forEach(major => {
         const bills = billsPerMajor[major];
         if (bills != null) {
             plotData.labels.push(major);
-            let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
+            const numberBills = bills.map(bg => bg.count).reduce((a, b) => a + b, 0);
             plotData.datasets[0].data.push(numberBills);
+        } else {
+            plotData.labels.push(major);
+            plotData.datasets[0].data.push(0);
         }
-        // TODO: Confirm that we don't want to show 0's in this plot
-        // else {
-        //     plotData[0].push(major);
-        //     plotData[1].push(0);
-        // }
+        const paletteName = filter.major.includes(major) ? colorPaletteName : 'none_color';
+        plotData.datasets[0].backgroundColor
+            .push(colorPalette[paletteName].barPlot);
     });
+
+    let indexes = [];
+    for(let index in plotData.datasets[0].data){indexes.push(index);}
+    let sorted_indexes = indexes.sort(function(a, b){return plotData.datasets[0].data[b] - plotData.datasets[0].data[a]});
+
+    let sorted_labels = [];
+    let sorted_data = [];
+    let sorted_colors = [];
+    for (let index of sorted_indexes){
+        sorted_data.push(plotData.datasets[0].data[parseInt(index)]);
+        sorted_labels.push(plotData.labels[parseInt(index)]);
+        sorted_colors.push(plotData.datasets[0].backgroundColor[parseInt(index)]);
+    }
+    plotData.datasets[0].data = sorted_data;
+    plotData.labels = sorted_labels;
+    plotData.datasets[0].backgroundColor = sorted_colors;
+
     if (majorPlot == null) {
         let ctx = document.getElementById('majors-plot');
-        ctx.onclick = ((evt) => onclickMajorPlot(evt));
-        // ctx.onhover = ((evt, item) => onhoverMajorPlot(evt, item)); //TODO
-        majorPlot = new Chart(ctx, {
+        ctx.onclick = (evt => onclickBarPlot(majorPlot, 'major', evt));
+        majorPlot = new chartjs.Chart(ctx, {
             type: 'horizontalBar',
             data: plotData,
             options: {
                 // TODO: Find a way to avoid needing this chunk of code to "refloat" labels?
                 animation: {
                     onProgress () {
-                        const chartInstance = this.chart;
-                        const ctx = chartInstance.ctx;
-                        const dataset = this.data.datasets[0];
-                        const meta = chartInstance.controller.getDatasetMeta(0);
+                        const ctx = this.chart.ctx;
+                        const meta = this.chart.controller.getDatasetMeta(0);
 
-                        Chart.helpers.each(meta.data.forEach((bar, index) => {
+                        chartjs.Chart.helpers.each(meta.data.forEach((bar, index) => {
                             const label = this.data.labels[index];
-                            const labelPositionX = 20;
+                            const labelPositionX = 40;
                             const labelWidth = ctx.measureText(label).width + labelPositionX;
 
                             ctx.textBaseline = 'middle';
@@ -281,116 +526,57 @@ function drawMajorPlot(data) {
                         ticks: {
                             min: 0,
                             beginAtZero: true,
-                        }//,
-                        //afterBuildTicks: function(chart) {}
+                            callback: label => formatNumberBillsTick(label)
+                        },
+                        //afterBuildTicks: function(chart) {},
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Number of Bills'
+                        }
                     }],
                     yAxes: [{
                         gridLines: {
                             display: false
                         },
                         ticks: {
+                            display: false,
+                            min: 0,
+                            max: computeMaximumBarPlot(maxMinVals.major.max),
                             // This puts the majors labels on top of bars
                             mirror: true,
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Subject'
                         }
                     }]
                 },
                 legend: {
                     display: false
                 },
+                tooltips: {
+                    mode: 'y',
+                    intersect: false,
+                    callbacks: {
+                        label: function(tooltipItem, data) { 
+                            const billLabel = (tooltipItem.xLabel != 1 ? " Bills" : " Bill");
+                            return tooltipItem.xLabel + billLabel;
+                        }
+                    }
+                }
             }
         });
     } else {
         majorPlot.data.labels = plotData.labels;
         majorPlot.data.datasets[0].data = plotData.datasets[0].data;
+        majorPlot.data.datasets[0].backgroundColor = plotData.datasets[0].backgroundColor;
+        majorPlot.data.datasets[0].hoverBackgroundColor = colorPalette[colorPaletteName].barPlotHover;
+        majorPlot.options.scales.yAxes[0].ticks.max = computeMaximumBarPlot(maxMinVals.major.max);
         majorPlot.update();
     }
 }
 
-function displayPartyRatios(data) {
-    let plotData = [['party'], ['Number of bills introduced'], ['Percentage']];
-    if (filter['party'].length != 1) {
-        // Both parties are selected
-        // We need to groupBy and count separately, and save it in plotData
-        const billsPerParty = _.groupBy(data, bg => bg['party']);
-        allValuesFilter['party'].map(party => {
-            plotData[0].push(party);
-            let bills = billsPerMajor[party];
-            if (bills == null) {
-                plotData[1].push(0);
-                plotData[2].push(0);
-            } else {
-                let numberBills = bills.map(bg => bg['count']).reduce((a,b) => a+b, 0);
-                plotData[1].push(numberBills);
-                plotData[2].push(numberBills); //TODO: Compute percentage instead!
-            }
-        });
-    } else {
-        // Only one party is selected, and data contains bills only for this party
-        for (let party in allValuesFilter['party']) {
-            plotData[0].push(party);
-            if (party == filter['party'][0]) {
-                let numberBills = data.map(bg => bg['count']).reduce((a,b) => a+b, 0);
-                plotData[1].push(numberBills);
-                plotData[2].push(numberBills); //TODO: Compute percentage instead!
-            } else {
-                plotData[1].push(0);
-                plotData[2].push(0);
-            }
-        }
-    }
-
-    d3.select('.bills-D').text(plotData[1][0] + " (" + plotData[2][0]) + "%)";
-    d3.select('.bills-R').text(plotData[1][1] + " (" + plotData[2][1]) + "%)";
-
-    // TODO: Color svgs
-}
-
-export function drawPlots(data = null) {
-    // TODO: Keep track of what changed and what needs to be updated in the plots!
-    if (unfilteredData == null) {
-        unfilteredData = data;
-    }
-
-    // TODO: Don't reset filteredData to unfilteredData every time!
-    let filteredData = unfilteredData;
-    // Filter the data for chosen parties
-    if (filter['party'].length == 1)
-        filteredData = _.filter(filteredData, d => filter['party'].includes(d['party']));
-
-    // Draw bar plot
-    const congressPlotData = _.filter(filteredData, d => filter['major'].includes( d['major']) && filter['state'].includes(d['state']) );
-    drawCongressPlot(congressPlotData);
-
-    // Filter the data for chosen congress
-    filteredData = _.filter(filteredData, d => filter['congress'] == d['congress']);
-
-    // Draw horizontal bar plot
-    const majorPlotData = _.filter( filteredData, d => filter['state'].includes(d['state']) );
-    drawMajorPlot(majorPlotData);
-
-    // Filter the data for chosen majors
-    filteredData = _.filter(filteredData, d => filter['major'].includes(d['major']));
-    //console.log(filteredData);
-
-    // Redraw map
-    uStatesFinal.remove("#statesvg");
-    drawMapPlot(new DataFrame(filteredData));
-
-    // Filter the data for chosen states
-    filteredData = _.filter(filteredData, d => filter['state'].includes(d['state']));
-
-    // Display percentages per party
-    // displayPartyRatios(filteredData);
-
-    // TODO: We need labels depending on info being shown?
-    // showYear()
-    // showMajors()
-    // showTitle()
-
-}
-
-
- (function(){
+(function(){
     const uStatePaths = [
         {id:"HI",n:"Hawaii",d:"M233.08751,519.30948L235.02744,515.75293L237.2907,515.42961L237.61402,516.23791L235.51242,519.30948L233.08751,519.30948ZM243.27217,515.59127L249.4153,518.17784L251.51689,517.85452L253.1335,513.97465L252.48686,510.57977L248.28366,510.09479L244.24213,511.87306L243.27217,515.59127ZM273.9878,525.61427L277.706,531.11074L280.13092,530.78742L281.26255,530.30244L282.7175,531.59573L286.43571,531.43407L287.40568,529.97912L284.49577,528.20085L282.55584,524.48263L280.45424,520.92609L274.63444,523.83599L273.9878,525.61427ZM294.19545,534.50564L295.48874,532.5657L300.17691,533.53566L300.82356,533.05068L306.96668,533.69732L306.64336,534.99062L304.05678,536.44556L299.69193,536.12224L294.19545,534.50564ZM299.53027,539.67879L301.47021,543.55866L304.54176,542.42703L304.86509,540.81041L303.24848,538.70882L299.53027,538.3855L299.53027,539.67879ZM306.4817,538.54716L308.74496,535.63726L313.43313,538.06218L317.79798,539.19381L322.16284,541.94205L322.16284,543.88198L318.6063,545.66026L313.75645,546.63022L311.33154,545.17527L306.4817,538.54716ZM323.13281,554.06663L324.74942,552.77335L328.14431,554.38997L335.74238,557.94651L339.13727,560.0481L340.75387,562.47302L342.69381,566.83787L346.73534,569.42445L346.41202,570.71775L342.53215,573.95097L338.32896,575.40592L336.87401,574.75928L333.80244,576.53754L331.37753,579.77077L329.11427,582.68067L327.33599,582.51901L323.77945,579.93243L323.45613,575.40592L324.10277,572.981L322.48616,567.32286L320.38456,565.54458L320.2229,562.958L322.48616,561.98804L324.58776,558.91648L325.07274,557.94651L323.45613,556.16823L323.13281,554.06663Z"},
         {id:"AK",n:"Alaska",d:"M158.07671,453.67502L157.75339,539.03215L159.36999,540.00211L162.44156,540.16377L163.8965,539.03215L166.48308,539.03215L166.64475,541.94205L173.59618,548.73182L174.08117,551.3184L177.47605,549.37846L178.1227,549.2168L178.44602,546.14524L179.90096,544.52863L181.0326,544.36697L182.97253,542.91201L186.04409,545.01361L186.69074,547.92352L188.63067,549.05514L189.7623,551.48006L193.64218,553.25833L197.03706,559.2398L199.78529,563.11966L202.04855,565.86791L203.50351,569.58611L208.515,571.36439L213.68817,573.46598L214.65813,577.83084L215.14311,580.9024L214.17315,584.29729L212.39487,586.56054L210.77826,585.75224L209.32331,582.68067L206.57507,581.22573L204.7968,580.09409L203.98849,580.9024L205.44344,583.65065L205.6051,587.36885L204.47347,587.85383L202.53354,585.9139L200.43195,584.62061L200.91693,586.23722L202.21021,588.0155L201.40191,588.8238C201.40191,588.8238,200.59361,588.50048,200.10863,587.85383C199.62363,587.20719,198.00703,584.45895,198.00703,584.45895L197.03706,582.19569C197.03706,582.19569,196.71374,583.48898,196.06709,583.16565C195.42044,582.84233,194.7738,581.71071,194.7738,581.71071L196.55207,579.77077L195.09712,578.31582L195.09712,573.30432L194.28882,573.30432L193.48052,576.6992L192.34888,577.1842L191.37892,573.46598L190.73227,569.74777L189.92396,569.26279L190.24729,574.92094L190.24729,576.05256L188.79233,574.75928L185.23579,568.77781L183.13419,568.29283L182.48755,564.57462L180.87094,561.66472L179.25432,560.53308L179.25432,558.26983L181.35592,556.97654L180.87094,556.65322L178.28436,557.29986L174.88947,554.87495L172.30289,551.96504L167.45306,549.37846L163.41152,546.79188L164.70482,543.55866L164.70482,541.94205L162.92654,543.55866L160.01664,544.69029L156.29843,543.55866L150.64028,541.13375L145.14381,541.13375L144.49717,541.61873L138.03072,537.73885L135.92912,537.41553L133.18088,531.59573L129.62433,531.91905L126.06778,533.374L126.55277,537.90052L127.68439,534.99062L128.65437,535.31394L127.19941,539.67879L130.43263,536.93055L131.07928,538.54716L127.19941,542.91201L125.90612,542.58869L125.42114,540.64875L124.12785,539.84045L122.83456,540.97208L120.08632,539.19381L117.01475,541.29541L115.23649,543.397L111.8416,545.4986L107.15342,545.33693L106.66844,543.23534L110.38664,542.58869L110.38664,541.29541L108.12338,540.64875L109.09336,538.22384L111.35661,534.34397L111.35661,532.5657L111.51827,531.75739L115.88313,529.49413L116.85309,530.78742L119.60134,530.78742L118.30805,528.20085L114.58983,527.87752L109.57834,530.62576L107.15342,534.02064L105.37515,536.60723L104.24352,538.87049L100.04033,540.32543L96.96876,542.91201L96.645439,544.52863L98.908696,545.4986L99.717009,547.60018L96.96876,550.83341L90.502321,555.03661L82.742574,559.2398L80.640977,560.37142L75.306159,561.50306L69.971333,563.76631L71.749608,565.0596L70.294654,566.51455L69.809672,567.64618L67.061434,566.67621L63.828214,566.83787L63.019902,569.10113L62.049939,569.10113L62.37326,566.67621L58.816709,567.96951L55.90681,568.93947L52.511924,567.64618L49.602023,569.58611L46.368799,569.58611L44.267202,570.87941L42.65059,571.68771L40.548995,571.36439L37.962415,570.23276L35.699158,570.87941L34.729191,571.84937L33.112578,570.71775L33.112578,568.77781L36.184142,567.48452L42.488929,568.13117L46.853782,566.51455L48.955378,564.41296L51.86528,563.76631L53.643553,562.958L56.391794,563.11966L58.008406,564.41296L58.978369,564.08964L61.241626,561.3414L64.313196,560.37142L67.708076,559.72478L69.00137,559.40146L69.648012,559.88644L70.456324,559.88644L71.749608,556.16823L75.791141,554.71329L77.731077,550.99508L79.994336,546.46856L81.610951,545.01361L81.934272,542.42703L80.317657,543.72032L76.922764,544.36697L76.276122,541.94205L74.982838,541.61873L74.012865,542.58869L73.851205,545.4986L72.39625,545.33693L70.941306,539.51713L69.648012,540.81041L68.516388,540.32543L68.193068,538.3855L64.151535,538.54716L62.049939,539.67879L59.463361,539.35547L60.918305,537.90052L61.403286,535.31394L60.756645,533.374L62.211599,532.40404L63.504883,532.24238L62.858241,530.4641L62.858241,526.09925L61.888278,525.12928L61.079966,526.58423L54.936843,526.58423L53.481892,525.29094L52.835247,521.41108L50.733651,517.85452L50.733651,516.88456L52.835247,516.07625L52.996908,513.97465L54.128536,512.84303L53.320231,512.35805L52.026941,512.84303L50.895313,510.09479L51.86528,505.08328L56.391794,501.85007L58.978369,500.23345L60.918305,496.51525L63.666554,495.22195L66.253132,496.35359L66.576453,498.77851L69.00137,498.45517L72.23459,496.03026L73.851205,496.67691L74.821167,497.32355L76.437782,497.32355L78.701041,496.03026L79.509354,491.6654C79.509354,491.6654,79.832675,488.75551,80.479317,488.27052C81.125959,487.78554,81.44928,487.30056,81.44928,487.30056L80.317657,485.36062L77.731077,486.16893L74.497847,486.97723L72.557911,486.49225L69.00137,484.71397L63.989875,484.55231L60.433324,480.83411L60.918305,476.95424L61.564957,474.52932L59.463361,472.75105L57.523423,469.03283L58.008406,468.22453L64.798177,467.73955L66.899773,467.73955L67.869736,468.70951L68.516388,468.70951L68.354728,467.0929L72.23459,466.44626L74.821167,466.76958L76.276122,467.90121L74.821167,470.00281L74.336186,471.45775L77.084435,473.07437L82.095932,474.85264L83.874208,473.88268L81.610951,469.51783L80.640977,466.2846L81.610951,465.47629L78.21606,463.53636L77.731077,462.40472L78.21606,460.78812L77.407756,456.90825L74.497847,452.22007L72.072929,448.01688L74.982838,446.07694L78.21606,446.07694L79.994336,446.72359L84.197528,446.56193L87.915733,443.00539L89.047366,439.93382L92.765578,437.5089L94.382182,438.47887L97.130421,437.83222L100.84863,435.73062L101.98027,435.56896L102.95023,436.37728L107.47674,436.21561L110.22498,433.14405L111.35661,433.14405L114.91316,435.56896L116.85309,437.67056L116.36811,438.80219L117.01475,439.93382L118.63137,438.31721L122.51124,438.64053L122.83456,442.35873L124.7745,443.81369L131.88759,444.46033L138.19238,448.66352L139.64732,447.69356L144.82049,450.28014L146.92208,449.6335L148.86202,448.82518L153.71185,450.76512L158.07671,453.67502ZM42.973913,482.61238L45.075509,487.9472L44.913847,488.91717L42.003945,488.59384L40.225672,484.55231L38.447399,483.09737L36.02248,483.09737L35.86082,480.51078L37.639093,478.08586L38.770722,480.51078L40.225672,481.96573L42.973913,482.61238ZM40.387333,516.07625L44.105542,516.88456L47.823749,517.85452L48.632056,518.8245L47.015444,522.5427L43.94388,522.38104L40.548995,518.8245L40.387333,516.07625ZM19.694697,502.01173L20.826327,504.5983L21.957955,506.21492L20.826327,507.02322L18.72473,503.95166L18.72473,502.01173L19.694697,502.01173ZM5.9534943,575.0826L9.3483796,572.81934L12.743265,571.84937L15.329845,572.17269L15.814828,573.7893L17.754763,574.27429L19.694697,572.33436L19.371375,570.71775L22.119616,570.0711L25.029518,572.65768L23.897889,574.43595L19.533037,575.56758L16.784795,575.0826L13.066588,573.95097L8.7017347,575.40592L7.0851227,575.72924L5.9534943,575.0826ZM54.936843,570.55609L56.553455,572.49602L58.655048,570.87941L57.2001,569.58611L54.936843,570.55609ZM57.846745,573.62764L58.978369,571.36439L61.079966,571.68771L60.271663,573.62764L57.846745,573.62764ZM81.44928,571.68771L82.904234,573.46598L83.874208,572.33436L83.065895,570.39442L81.44928,571.68771ZM90.17899,559.2398L91.310623,565.0596L94.220522,565.86791L99.232017,562.958L103.59687,560.37142L101.98027,557.94651L102.46525,555.52159L100.36365,556.81488L97.453752,556.00657L99.070357,554.87495L101.01029,555.68325L104.89016,553.90497L105.37515,552.45003L102.95023,551.64172L103.75853,549.70178L101.01029,551.64172L96.322118,555.19827L91.472284,558.10817L90.17899,559.2398ZM132.53423,539.35547L134.95915,537.90052L133.98918,536.12224L132.21091,537.09221L132.53423,539.35547Z"},
@@ -422,7 +608,7 @@ export function drawPlots(data = null) {
         {id:"SC",n:"South Carolina",d:"M764.94328,408.16488L763.16622,409.13438L760.57965,407.84109L759.93301,405.7395L758.63973,402.18297L756.37647,400.08137L753.7899,399.43473L752.1733,394.58492L749.42506,388.60347L745.22189,386.66353L743.12029,384.72361L741.82701,382.13704L739.72542,380.1971L737.46217,378.90382L735.19892,375.99393L732.12737,373.73069L727.60086,371.95241L727.11588,370.49747L724.69098,367.58758L724.20599,366.13262L720.81111,360.95949L717.41624,361.12115L713.37472,358.69623L712.08144,357.40295L711.75812,355.62468L712.56642,353.68476L714.82967,352.71478L714.31885,350.4257L720.08695,348.08913L729.20245,343.50013L736.97718,342.69182L753.09158,342.26934L755.72983,344.14677L757.40893,347.50499L761.71128,346.89501L774.32081,345.44005L777.2307,346.24836L789.84024,353.84642L799.94832,361.9681L794.52715,367.42644L791.94058,373.56954L791.4556,379.8743L789.839,380.6826L788.70737,383.43083L786.28247,384.07747L784.18088,387.634L781.43265,390.38223L779.16941,393.7771L777.5528,394.5854L773.99627,397.98027L771.08638,398.14193L772.05635,401.37514L767.04487,406.8716L764.94328,408.16488Z"},
         {id:"KY",n:"Kentucky",d:"M725.9944,295.2707L723.70108,297.67238L720.12289,301.66642L715.19834,307.13109L713.98257,308.84686L713.92007,310.94844L709.54021,313.11253L703.88209,316.50741L696.65022,318.30626L644.78233,323.20512L629.02277,324.98338L624.40157,325.49609L620.53322,325.46837L620.30627,329.68865L612.12686,329.83321L605.17545,330.47985L597.18797,330.41963L598.39575,329.09955L600.89529,327.5587L601.12392,324.35797L602.03841,322.52899L600.43159,319.99009L601.23342,318.08328L603.49668,316.30502L605.59826,315.65837L608.34649,316.95166L611.90303,318.24494L613.03466,317.92162L613.19632,315.65837L611.90303,313.23346L612.22635,310.97021L614.16628,309.51527L616.75286,308.86862L618.36946,308.22198L617.56116,306.44371L616.91452,304.50378L618.42114,303.50798C618.42442,303.47086,619.6751,299.98569,619.65943,299.85017L622.71265,298.37149L628.03244,297.40153L632.52648,296.91655L633.91892,298.54398L635.44719,299.41478L637.03796,296.30657L640.22504,295.02395L642.43013,296.50798L642.84069,297.50702L644.01421,297.24301L643.85254,294.29008L646.98341,292.54089L649.1315,291.46741L650.66086,293.12822L653.97901,293.08402L654.56634,291.51277L654.19883,289.24953L656.79936,285.25103L661.57591,281.81313L662.28186,276.97727L665.20688,276.52136L668.99834,274.87568L671.44166,273.16744L671.24333,271.60251L670.10088,270.14757L670.6667,267.15266L674.85155,267.03516L677.15146,266.28936L680.49885,267.71846L682.55296,272.0833L687.68525,272.09412L689.73626,274.30231L691.35171,274.15461L693.9534,272.87644L699.19046,273.44981L701.76538,273.66732L703.45296,271.61108L706.07091,270.1852L707.95269,269.4781L708.59933,272.31473L710.64276,273.37307L713.28552,275.45556L713.40299,281.1288L714.21129,282.70121L716.80101,284.25749L717.57265,286.552L721.73254,289.98894L723.53785,293.61218L725.9944,295.2707Z"},
         {id:"AL",n:"Alabama",d:"M631.30647,460.41572L629.81587,446.09422L627.06763,427.34158L627.22929,413.27709L628.03759,382.23824L627.87593,365.58718L628.04102,359.16812L672.5255,355.54867L672.3777,357.73109L672.53936,359.83269L673.18601,363.22756L676.58089,371.14893L679.00579,381.01024L680.46074,387.15335L682.07734,392.00317L683.5323,398.95458L685.63388,405.25934L688.22045,408.65423L688.70543,412.04909L690.64537,412.8574L690.80703,414.95899L689.02875,419.80881L688.54377,423.04203L688.38211,424.98195L689.99873,429.3468L690.32205,434.68159L689.51373,437.10651L690.16039,437.91481L691.61533,438.72311L691.94347,441.61193L686.34581,441.25838L679.55606,441.90503L654.01366,444.81491L643.6021,446.22168L643.38072,449.09908L645.15899,450.87735L647.74556,452.81727L648.32642,460.75271L642.78436,463.32561L640.03614,463.00229L642.78436,461.06236L642.78436,460.0924L639.71282,454.11096L637.44957,453.46432L635.99462,457.82915L634.70134,460.57738L634.0547,460.41572L631.30647,460.41572Z"},
-        {id:"LS",n:"Louisiana",d:"M607.96706,459.16125L604.68245,455.99511L605.69236,450.49488L605.03101,449.6018L595.76934,450.60836L570.74102,451.06728L570.05683,448.6726L570.96964,440.2169L574.28552,434.27105L579.31688,425.58003L578.74281,423.18201L579.9994,422.50116L580.45833,420.54867L578.17209,418.49274L578.0603,416.55029L576.22964,412.20478L576.08259,405.86618L520.6088,406.79015L520.63737,416.36372L521.32324,425.73725L522.00911,429.62383L524.52396,433.73904L525.43845,438.76875L529.78228,444.25568L530.0109,447.4564L530.69677,448.14227L530.0109,456.60131L527.03881,461.631L528.63917,463.68861L527.95329,466.20345L527.26743,473.51938L525.89569,476.72009L526.01815,480.33654L530.70463,478.81639L542.81798,479.0234L553.16425,482.57993L559.63067,483.71156L563.34886,482.25661L566.58207,483.38824L569.81528,484.3582L570.62358,482.25661L567.39037,481.12499L564.8038,481.60997L562.05557,479.99337C562.05557,479.99337,562.21724,478.70008,562.86388,478.53842C563.51052,478.37676,565.93543,477.56846,565.93543,477.56846L567.71369,479.0234L569.49196,478.05344L572.72517,478.70008L574.18011,481.12499L574.50343,483.38824L579.02992,483.71156L580.80819,485.48982L579.99989,487.10643L578.7066,487.91473L580.32321,489.53133L588.72955,493.08786L592.28608,491.79458L593.25605,489.36967L595.84261,488.72303L597.62088,487.26809L598.91416,488.23805L599.72246,491.14794L597.45922,491.95624L598.10586,492.60288L601.50073,491.3096L603.76398,487.91473L604.57228,487.42975L602.47069,487.10643L603.27899,485.48982L603.11733,484.03488L605.21892,483.5499L606.35054,482.25661L606.99718,483.06491C606.99718,483.06491,606.83552,486.13646,607.64383,486.13646C608.45213,486.13646,611.847,486.78311,611.847,486.78311L615.88851,488.72303L616.85847,490.17798L619.76836,490.17798L620.89999,491.14794L623.16323,488.07639L623.16323,486.62144L621.86995,486.62144L618.47508,483.87322L612.6553,483.06491L609.42209,480.80167L610.55372,478.05344L612.81696,478.37676L612.97862,477.73012L611.20036,476.76016L611.20036,476.27517L614.43357,476.27517L616.21183,473.20363L614.91855,471.2637L614.59523,468.51547L613.14028,468.67713L611.20036,470.77872L610.55372,473.36529L607.48217,472.71864L606.5122,470.94038L608.29047,469.00045L610.1938,465.55485L609.1327,463.14258L607.96706,459.16125Z"},
+        {id:"LA",n:"Louisiana",d:"M607.96706,459.16125L604.68245,455.99511L605.69236,450.49488L605.03101,449.6018L595.76934,450.60836L570.74102,451.06728L570.05683,448.6726L570.96964,440.2169L574.28552,434.27105L579.31688,425.58003L578.74281,423.18201L579.9994,422.50116L580.45833,420.54867L578.17209,418.49274L578.0603,416.55029L576.22964,412.20478L576.08259,405.86618L520.6088,406.79015L520.63737,416.36372L521.32324,425.73725L522.00911,429.62383L524.52396,433.73904L525.43845,438.76875L529.78228,444.25568L530.0109,447.4564L530.69677,448.14227L530.0109,456.60131L527.03881,461.631L528.63917,463.68861L527.95329,466.20345L527.26743,473.51938L525.89569,476.72009L526.01815,480.33654L530.70463,478.81639L542.81798,479.0234L553.16425,482.57993L559.63067,483.71156L563.34886,482.25661L566.58207,483.38824L569.81528,484.3582L570.62358,482.25661L567.39037,481.12499L564.8038,481.60997L562.05557,479.99337C562.05557,479.99337,562.21724,478.70008,562.86388,478.53842C563.51052,478.37676,565.93543,477.56846,565.93543,477.56846L567.71369,479.0234L569.49196,478.05344L572.72517,478.70008L574.18011,481.12499L574.50343,483.38824L579.02992,483.71156L580.80819,485.48982L579.99989,487.10643L578.7066,487.91473L580.32321,489.53133L588.72955,493.08786L592.28608,491.79458L593.25605,489.36967L595.84261,488.72303L597.62088,487.26809L598.91416,488.23805L599.72246,491.14794L597.45922,491.95624L598.10586,492.60288L601.50073,491.3096L603.76398,487.91473L604.57228,487.42975L602.47069,487.10643L603.27899,485.48982L603.11733,484.03488L605.21892,483.5499L606.35054,482.25661L606.99718,483.06491C606.99718,483.06491,606.83552,486.13646,607.64383,486.13646C608.45213,486.13646,611.847,486.78311,611.847,486.78311L615.88851,488.72303L616.85847,490.17798L619.76836,490.17798L620.89999,491.14794L623.16323,488.07639L623.16323,486.62144L621.86995,486.62144L618.47508,483.87322L612.6553,483.06491L609.42209,480.80167L610.55372,478.05344L612.81696,478.37676L612.97862,477.73012L611.20036,476.76016L611.20036,476.27517L614.43357,476.27517L616.21183,473.20363L614.91855,471.2637L614.59523,468.51547L613.14028,468.67713L611.20036,470.77872L610.55372,473.36529L607.48217,472.71864L606.5122,470.94038L608.29047,469.00045L610.1938,465.55485L609.1327,463.14258L607.96706,459.16125Z"},
         {id:"MS",n:"Mississippi",d:"M631.55882,459.34458L631.30456,460.60073L626.13142,460.60073L624.67648,459.79243L622.57489,459.46911L615.78515,461.40903L614.00689,460.60073L611.42032,464.8039L610.31778,465.58192L609.19395,463.09394L608.05083,459.20735L604.6215,456.00664L605.7646,450.46209L605.07874,449.5476L603.24976,449.77622L595.33184,450.64959L570.78534,451.02296L570.0156,448.7976L570.88897,440.4208L574.00581,434.74799L579.23288,425.60309L578.78714,423.17049L580.024,422.51424L580.45987,420.59477L578.14239,418.51579L578.02727,416.37431L576.19155,412.25322L576.08255,406.29045L577.41008,403.80948L577.18678,400.39373L575.41729,397.31114L576.94371,395.82893L575.3731,393.32939L575.83035,391.67718L577.40775,385.15081L579.8937,383.11446L579.25203,380.74749L582.91,375.44496L585.74186,374.08854L585.52089,372.41338L585.23276,370.73228L588.10882,365.16461L590.45454,363.9331L590.60617,363.04009L627.94965,359.15892L628.13451,365.44225L628.29617,382.09331L627.48787,413.13216L627.32621,427.19665L630.07445,445.94929L631.55882,459.34458Z"},
         {id:"IA",n:"Iowa",d:"M569.19154,199.5843L569.45592,202.3705L571.67964,202.94776L572.63358,204.17309L573.13359,206.02845L576.92643,209.3871L577.6123,211.7786L576.93796,215.20307L575.35565,218.43505L574.55631,221.17684L572.38356,222.77888L570.66805,223.35128L565.08903,225.21148L563.69757,229.06017L564.42621,230.43191L566.26672,232.1145L565.98379,236.15079L564.22064,237.68865L563.44923,239.33179L563.57645,242.10811L561.69014,242.56535L560.06469,243.67026L559.7859,245.02289L560.06469,247.13781L558.51367,248.25388L556.04314,245.1206L554.78057,242.67073L489.04475,245.18558L488.12672,245.35102L486.07432,240.83506L485.8457,234.20499L484.24534,230.08978L483.55948,224.83147L481.27325,221.1735L480.35877,216.37243L477.61529,208.82788L476.47218,203.45524L475.10044,201.28333L473.50008,198.53987L475.45406,193.69604L476.8258,187.98047L474.08233,185.92286L473.62508,183.17939L474.53958,180.66454L476.25425,180.66454L558.90825,179.39506L559.74251,183.57818L561.99469,185.13915L562.2514,186.56224L560.22186,189.95155L560.41227,193.15707L562.92713,196.95527L565.45392,198.24889L568.5332,198.75194L569.19154,199.5843Z"},
         {id:"MN",n:"Minnesota",d:"M475.23781,128.82439L474.78056,120.36535L472.95158,113.04943L471.1226,99.560705L470.66535,89.729927L468.83637,86.300584L467.23601,81.270889L467.23601,70.982869L467.92187,67.096282L466.10094,61.644615L496.23336,61.679886L496.55668,53.435202L497.20332,53.273541L499.46657,53.758523L501.40649,54.566825L502.21479,60.063281L503.66974,66.206379L505.28634,67.822984L510.13616,67.822984L510.45948,69.277928L516.76424,69.601249L516.76424,71.702835L521.61405,71.702835L521.93737,70.409551L523.06899,69.277928L525.33224,68.631286L526.62552,69.601249L529.53541,69.601249L533.41526,72.187816L538.75006,74.612723L541.17497,75.097705L541.65995,74.127742L543.11489,73.64276L543.59987,76.552649L546.18644,77.845933L546.67142,77.360951L547.96471,77.522612L547.96471,79.624198L550.55127,80.594161L553.62282,80.594161L555.23943,79.785858L558.47264,76.552649L561.0592,76.067668L561.86751,77.845933L562.35249,79.139216L563.32245,79.139216L564.29241,78.330914L573.18374,78.007593L574.962,81.079142L575.60865,81.079142L576.32226,79.994863L580.76217,79.624198L580.15007,81.903657L576.21135,83.740782L566.96557,87.80191L562.19083,89.808807L559.11928,92.395375L556.69437,95.951905L554.43113,99.831756L552.65286,100.64006L548.12637,105.65153L546.83308,105.81319L542.5053,108.57031L540.04242,111.77542L539.8138,114.96681L539.90816,123.01016L538.53212,124.69891L533.45058,128.45888L531.2205,134.44129L534.09225,136.675L534.77214,139.90198L532.9169,143.14091L533.08769,146.88893L533.45655,153.61933L536.4848,156.62132L539.8138,156.62132L541.70491,159.75392L545.08408,160.25719L548.94324,165.92866L556.03053,170.04541L558.17368,172.92053L558.84483,179.36004L477.63333,180.50483L477.29541,144.82798L476.83817,141.85589L472.72296,138.42655L471.57984,136.59757L471.57984,134.9972L473.63744,133.39685L475.00918,132.02511L475.23781,128.82439Z"},
@@ -435,7 +621,7 @@ export function drawPlots(data = null) {
         {id:"ND",n:"North Dakota",d:"M475.30528,128.91846L474.69037,120.48479L473.01342,113.66887L471.12193,100.64465L470.66469,89.657624L468.92523,86.580482L467.16862,81.386086L467.19987,70.941816L467.82323,67.117729L465.98913,61.649968L437.34688,61.085941L418.75593,60.439299L392.24361,59.146015L369.29727,57.012146L362.30403,124.18898L417.23627,127.53263L475.30528,128.91846Z"},
         {id:"WY",n:"Wyoming",d:"M360.37668,143.27587L253.63408,129.81881L239.5506,218.27684L352.81521,231.86233L360.37668,143.27587Z"},
         {id:"MT",n:"Montana",d:"M369.20952,56.969133L338.5352,54.1613L309.27465,50.60477L280.01411,46.563258L247.68201,41.228463L229.25272,37.833593L196.52907,30.900857L192.05005,52.248389L195.47939,59.79293L194.10765,64.365382L195.93663,68.937833L199.13736,70.309572L203.75818,81.079025L206.45328,84.255548L206.91052,85.398666L210.33986,86.541784L210.79711,88.599377L203.70981,106.20333L203.70981,108.71818L206.22466,111.91889L207.13914,111.91889L211.94021,108.9468L212.62609,107.80368L214.22645,108.48955L213.99782,113.74787L216.7413,126.32212L219.71339,128.83696L220.62787,129.52283L222.45686,131.80905L221.99961,135.2384L222.68548,138.66773L223.8286,139.58223L226.11482,137.296L228.85829,137.296L232.05901,138.89636L234.57386,137.98187L238.68907,137.98187L242.34702,139.58223L245.0905,139.12498L245.54774,136.15288L248.51983,135.46702L249.89157,136.83876L250.34882,140.03947L251.77469,140.87411L253.66164,129.83937L360.40731,143.26829L369.20952,56.969133Z"},
-        {id:"CO",n:"Colarado",d:"M380.03242,320.96457L384.93566,234.63961L271.5471,221.99565L259.33328,309.93481L380.03242,320.96457Z"},
+        {id:"CO",n:"Colorado",d:"M380.03242,320.96457L384.93566,234.63961L271.5471,221.99565L259.33328,309.93481L380.03242,320.96457Z"},
         {id:"ID",n:"Idaho",d:"M148.47881,176.48395L157.24968,141.26323L158.62142,137.03371L161.13626,131.08953L159.87884,128.8033L157.36398,128.91761L156.56381,127.88881L157.02106,126.7457L157.36398,123.65929L161.82213,118.17234L163.65111,117.7151L164.79422,116.57199L165.36578,113.37127L166.28026,112.68541L170.16685,106.85553L174.05344,102.5117L174.28206,98.739432L170.85272,96.110269L169.31717,91.709286L182.94208,28.367595L196.45967,30.895706L192.05159,52.278719L195.61194,59.764071L194.03083,64.424911L196.00068,69.066144L199.1389,70.321335L202.97424,79.877923L206.48693,84.315077L206.99418,85.458195L210.33513,86.601313L210.70398,88.698388L203.73297,106.07448L203.56779,108.64041L206.19891,111.96211L207.10399,111.91321L212.01528,108.88761L212.6927,107.79264L214.25501,108.4515L213.97657,113.80522L216.71582,126.38793L220.63365,129.56584L222.31483,131.73129L221.59822,135.81515L222.66444,138.62256L223.72607,139.71384L226.20536,137.36242L229.05352,137.41131L231.97277,138.74651L234.75279,138.06458L238.54705,137.9041L242.52595,139.50446L245.26943,139.2077L245.76617,136.17039L248.69876,135.40556L249.95893,136.92147L250.39986,139.86643L251.8242,141.07964L243.4382,194.6883C243.4382,194.6883,155.47221,177.98769,148.47881,176.48395Z"},
         {id:"UT",n:"Utah",d:"M259.49836,310.10509L175.74933,298.23284L196.33694,185.69149L243.11725,194.43663L241.63245,205.06705L239.32083,218.23971L247.12852,219.16808L263.53504,220.97287L271.74601,221.82851L259.49836,310.10509Z"},
         {id:"AZ",n:"Arizona",d:"M144.9112,382.62909L142.28419,384.78742L141.96087,386.24237L142.44585,387.21233L161.36012,397.88192L173.48466,405.47996L188.19576,414.04797L205.00845,424.07092L217.29465,426.49583L242.24581,429.20074L259.50142,310.07367L175.76579,298.15642L172.6734,314.56888L171.06711,314.58419L169.35244,317.21335L166.83759,317.09903L165.58017,314.35556L162.8367,314.01263L161.9222,312.86952L161.00772,312.86952L160.09322,313.44108L158.14993,314.46988L158.03563,321.44286L157.80699,323.15753L157.23545,335.73177L155.7494,337.90368L155.17784,341.21871L157.92131,346.1341L159.17873,351.96398L159.97892,352.99278L161.00772,353.56434L160.8934,355.85056L159.29305,357.22229L155.86371,358.93696L153.92042,360.88026L152.43437,364.53821L151.86281,369.4536L149.00503,372.19707L146.94743,372.88294L147.08312,373.71282L146.62587,375.42749L147.08312,376.22767L150.74108,376.79921L150.16952,379.54269L148.68347,381.7146L144.9112,382.62909Z"},
@@ -444,13 +630,15 @@ export function drawPlots(data = null) {
         {id:"WA",n:"Washington",d:"M102.07324,7.6117734L106.43807,9.0667177L116.1377,11.814946L124.7057,13.754871L144.7516,19.412988L167.70739,25.071104L182.93051,28.278277L169.29815,91.864088L156.85315,88.33877L141.34514,84.768091L126.11585,84.801329L125.66028,83.45663L120.06106,85.635923L115.46563,84.899179L113.31866,83.315125L112.00545,83.973101L107.26979,83.832858L105.57143,82.483225L100.30839,80.370922L99.573419,80.51784L95.184297,78.993392L93.290999,80.810771L87.025093,80.512038L81.099395,76.386336L81.878352,75.453573L81.999575,67.776121L79.717576,63.93642L75.602368,63.32938L74.924958,60.818764L72.649446,60.361832L69.094498,61.592408L66.831251,58.373161L67.154572,55.463272L69.9028,55.139951L71.519405,51.09844L68.932837,49.966816L69.094498,46.248625L73.459331,45.601984L70.711103,42.853756L69.256158,35.740695L69.9028,32.830807L69.9028,24.909444L68.124535,21.676234L70.387782,12.299927L72.489368,12.784908L74.914275,15.694797L77.662503,18.281364L80.895712,20.22129L85.422205,22.322876L88.493756,22.969518L91.403645,24.424462L94.798518,25.394425L97.061764,25.232765L97.061764,22.807857L98.355048,21.676234L100.45663,20.38295L100.77996,21.514574L101.10328,23.292839L98.840029,23.77782L98.516708,25.879406L100.29497,27.334351L101.4266,29.759258L102.07324,31.699183L103.52818,31.537523L103.68984,30.244239L102.71988,28.950955L102.2349,25.717746L103.0432,23.939481L102.39656,22.484537L102.39656,20.22129L104.17483,16.66476L103.0432,14.078192L100.61829,9.2283781L100.94162,8.4200758L102.07324,7.6117734ZM92.616548,13.590738L94.637312,13.429078L95.122294,14.803197L96.658073,13.186582L99.002155,13.186582L99.810458,14.722361L98.274678,16.419801L98.92133,17.228114L98.193853,19.248875L96.819734,19.653021C96.819734,19.653021,95.930596,19.733857,95.930596,19.410536C95.930596,19.087215,97.385551,16.823958,97.385551,16.823958L95.688111,16.258141L95.36479,17.713095L94.637312,18.359737L93.10153,16.09648L92.616548,13.590738Z"},
         {id:"CA",n:"California",d:"M144.69443,382.19813L148.63451,381.70951L150.12055,379.69807L150.66509,376.75698L147.11357,376.16686L146.5994,375.49864L147.0769,373.46633L146.91762,372.87666L148.84019,372.25707L151.88297,369.42439L152.46453,364.42929L153.84443,361.02718L155.78772,358.86092L159.30659,357.27125L160.96098,355.66642L161.02971,353.55758L160.03638,352.97757L159.01323,351.90484L157.85801,346.05639L155.17281,341.2263L155.73862,337.7213L153.31904,336.69199L84.257718,232.51359L103.15983,164.9121L36.079967,149.21414L34.573071,153.94738L34.41141,161.38376L29.238275,173.18497L26.166727,175.77154L25.843406,176.90316L24.06514,177.71147L22.610196,181.91464L21.801894,185.14785L24.550122,189.35102L26.166727,193.55419L27.29835,197.11072L26.975029,203.57714L25.196764,206.64869L24.550122,212.46847L23.580159,216.18666L25.358424,220.06651L28.106652,224.593L30.369899,229.44282L31.663182,233.48433L31.339862,236.71754L31.016541,237.20252L31.016541,239.3041L36.674657,245.60886L36.189676,248.03377L35.543034,250.29702L34.896392,252.23694L35.058052,260.48163L37.159638,264.19982L39.099564,266.78638L41.847792,267.27137L42.817755,270.01959L41.686132,273.57612L39.584545,275.19273L38.452922,275.19273L37.64462,279.07258L38.129601,281.98247L41.362811,286.3473L42.979415,291.6821L44.434359,296.37025L45.727643,299.4418L49.122513,305.26158L50.577457,307.84814L51.062439,310.75803L52.679043,311.72799L52.679043,314.1529L51.870741,316.09283L50.092476,323.20589L49.607494,325.14581L52.032402,327.89404L56.235574,328.37902L60.762067,330.15729L64.641918,332.25887L67.551807,332.25887L70.461695,335.33042L73.048262,340.18024L74.179886,342.44348L78.059737,344.54507L82.909551,345.35337L84.364495,347.45496L85.011137,350.68817L83.556193,351.33481L83.879514,352.30477L87.112725,353.11307L89.860953,353.27474L93.020842,351.58789L96.900696,355.79106L97.708998,358.05431L100.29557,362.25748L100.61889,365.49069L100.61889,374.867L101.10387,376.64526L111.12682,378.10021L130.84939,380.84843L144.69443,382.19813ZM56.559218,338.48145L57.852506,340.01723L57.690846,341.31052L54.457625,341.22969L53.891811,340.01723L53.245167,338.56228L56.559218,338.48145ZM58.49915,338.48145L59.711608,337.83481L63.268151,339.9364L66.339711,341.14885L65.450575,341.79551L60.924066,341.55301L59.307456,339.9364L58.49915,338.48145ZM79.191764,358.28493L80.970029,360.62901L81.778342,361.59898L83.314121,362.16479L83.879928,360.70984L82.909965,358.93157L80.242562,356.91081L79.191764,357.07247L79.191764,358.28493ZM77.736809,366.93379L79.515085,370.08618L80.727543,372.02612L79.272589,372.2686L77.979305,371.05615C77.979305,371.05615,77.251828,369.6012,77.251828,369.19704C77.251828,368.7929,77.251828,367.01462,77.251828,367.01462L77.736809,366.93379Z"}
     ];
+
     let uStates = {};
     let Paths = [];
     let toolTip;
+
     uStates.draw = function(id, data, toolTip){
         Paths = uStatePaths;
         this.toolTip = toolTip;
-        function mouseOver(d){
+        function mouseover(d){
             let coordinates= d3.mouse(this);
             let x = coordinates[0];
             let y = coordinates[1];
@@ -460,86 +648,221 @@ export function drawPlots(data = null) {
                 .style("top", (d3.event.pageY - 28) + "px");
         }
 
-        function mouseOut(){
+        function mouseout(){
             d3.select("#tooltip").transition().duration(500).style("opacity", 0);
         }
 
-        function mouseclick(d){
-            addFilterField('state', d.id);
-            let width = '1';
-            if(filter['state'].includes(d.id)){
-                width = '10';
-            }
-            d3.select(this)
-                .style('stroke-width', width);
+        function onclickMap(d){
+            changeFilterField('state', d.id);
+            // let color = data[d.id].color;
+            // if(filter.state.includes(d.id))
+            //     color = colorPalette[colorPaletteName].barPlot;
+            // else
+            //     color = colorPalette.none_color.barPlot;
+            // d3.select(this)
+            //     .style('fill', color);
         }
 
-        let paths = d3.select(id).selectAll(".state")
-            .data(Paths)
-            paths.enter().append("path").attr("class","state").attr("d",function(d){ return d.d;})
-
-            .style("fill",function(d){ return data[d.id].color; }).style('stroke-width',function(d){ 
-
-                let width = '1';
-                if(filter['state'].includes(d.id)){width = '10';}
-                return width;})
-            .on("mouseover", mouseOver).on("mouseout", mouseOut).on("click",mouseclick);
+        let paths = d3.select(id)
+            .append("g")
+            .attr("transform", "translate(60,0)")
+            .selectAll(".state")
+            .data(Paths);
+        paths.enter().append("path").attr("class", "state").attr("d", d => d.d)
+            .style("fill", function(d){
+                let color = filter.state.length > 1 ? data[d.id].color : colorPalette[colorPaletteName].map;
+                if(!filter.state.includes(d.id)){
+                    color = data[d.id].colorGray;
+                }
+                return color;
+            })
+            .style('stroke-width', '1')
+            .on("mouseover", mouseover)
+            .on("mouseout", mouseout)
+            .on("click", onclickMap);
 
         paths.exit().remove();
     }
 
     uStates.remove = function(id){
-        Paths=[]
+        Paths = [];
         d3.select(id).selectAll(".state")
             .data(Paths).exit().remove();
     }
 
-    uStatesFinal=uStates;
+    uStatesFinal = uStates;
 })();
 
-let color_scale;
-
-/* draw states on id #statesvg */
-//uStates.draw("#statesvg", sampleData, tooltipHtml);
-
 function tooltipHtml2(n, d){    /* function to create html content string in tooltip div. */
-    return "<h4>"+n+"</h4><table>"+
-        "<tr><td>Count</td><td>"+(d.count)+"</td></tr>"
+    const billLabel = (d.count != 1 ? " Bills" : " Bill");
+    return "<h4>" + n + "</h4><table>" +
+        "<tr>" + (d.count) + billLabel + "</tr>"
         "</table>";
 }
 
-function drawMapPlot(df){
-    let data_dict = {}
-    let counts = df.select('count')
-    let df_new = df.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
-    let color = 'palette'
-    let parties= df.unique('party').toArray()
-    if(parties.length == 1){
-        color = parties[0]+'_'+color;
-    }
-    let maxval = 0
-    if(df_new.count()>0) {
-        maxval = df_new.stat.max('count');
-    }
-    color_scale = wind[color](0,maxval+1)
-    let array1 = [
-        "HI", "AK", "FL", "SC", "GA", "AL", "NC", "TN", "RI", "CT", "MA",
-        "ME", "NH", "VT", "NY", "NJ", "PA", "DE", "MD", "WV", "KY", "OH",
-        "MI", "WY", "MT", "ID", "WA", "DC", "TX", "CA", "AZ", "NV", "UT",
-        "CO", "NM", "OR", "ND", "SD", "NE", "IA", "MS", "IN", "IL", "MN",
-        "WI", "MO", "AR", "OK", "KS", "LS", "VA"
-    ];
+function drawMapPlot(dataDf){
+    let plotData = {};
+    let counts = dataDf.select('count');
+    let groupedDf = dataDf.groupBy('state').aggregate(group => group.stat.sum('count')).rename('aggregation','count');
+    rescaleGradients(groupedDf);
 
-    array1.forEach(function(d){
-        data_dict[d]={count:0,color:color_scale(0)}
+    // First fill with 0s
+    allValuesFilter.state.forEach(function(d){
+        plotData[d] = {
+            count: 0,
+            color: colorPalette[colorPaletteName].gradient(0),
+            colorGray: colorPalette[colorPaletteName].gradient(0)
+        };
     });
 
-    df_new.map(function (d){
-        data_dict [d.get('state')]={count:d.get('count'),color:color_scale(d.get('count'))}
+    groupedDf.map(function (d){
+        plotData[d.get('state')] = {
+            count: d.get('count'),
+            color: colorPalette[colorPaletteName].gradient(d.get('count')),
+            colorGray: colorPalette.none_color.gradient(d.get('count'))
+        };
     });
 
-    uStatesFinal.draw("#statesvg", data_dict, tooltipHtml2);
+    uStatesFinal.draw("#statesvg", plotData, tooltipHtml2);
+    drawLegend();
 }
+
+function drawLegend() {
+    let svg = d3.select("#statesvg");
+    svg.append("g")
+      .attr("class", "legendLinear")
+      .attr("transform", "translate(-40,20)");
+
+    const selectedScale = filter.state.length != 1 ? currentPaletteScale.color : currentPaletteScale.gray;
+
+    var legend = cc.legendColor()
+      .shapeWidth(15)
+      .shapeHeight(15)
+      .title("Number of Bills")
+      .orient('vertical')
+      .scale(selectedScale)
+      .labels(formatLegendLabels);
+
+    svg.select(".legendLinear")
+      .call(legend);
+}
+
+export function drawPlots(data = null) {
+    if (unfilteredData == null)
+        // The first time we call the function, we save the original unfiltered data
+        unfilteredData = data;
+
+    // Define the default values
+    colorPaletteName = 'palette';
+    let filteredData = unfilteredData;
+
+    // Filter the data for the chosen parties
+    if (filter.party.length != allValuesFilter.party.length){
+        filteredData = _.filter(filteredData, d => filter.party.includes(d.party));
+        if(filter.party.length == 1){
+            colorPaletteName = filter.party[0] + '_palette';
+        }
+    }
+    // Filter the data for displayed congresses
+    filteredData = _.filter(filteredData, d => filter.displayedCongresses.includes(d.congress));
+    // Draw bar plot
+    const congressPlotData = _.filter(filteredData, d => filter.major.includes(d.major) && filter.state.includes(d.state));
+    drawCongressPlot(congressPlotData);
+
+    // Filter the data for chosen congress
+    filteredData = _.filter(filteredData, d => filter.congress == d.congress);
+
+    // Draw horizontal bar plot
+    const majorPlotData = _.filter(filteredData, d => filter.state.includes(d.state));
+    drawMajorPlot(majorPlotData);
+
+    // Filter the data for chosen majors
+    filteredData = _.filter(filteredData, d => filter.major.includes(d.major));
+
+    // Redraw map
+    uStatesFinal.remove("#statesvg");
+    drawMapPlot(new DataFrame(filteredData));
+
+    // Filter the data for chosen states
+    filteredData = _.filter(filteredData, d => filter.state.includes(d.state));
+}
+
+
+function initializeIcon(filename, partyId, onclickColor){
+    d3.svg("img/"+filename+'.svg').then(svg => {
+        const gElement = d3.select(svg).select('g');
+        const svgId = '#svg-'+partyId;
+        d3.select(svgId).node().appendChild(gElement.node());
+        // Define color based on the initial filter
+        const color = filter.party.includes(partyId) ? onclickColor : colorPalette.none_color.partyIcon;
+        d3.select(svgId).select('path').attr("fill", color);
+        d3.select(svgId).on("click", () => onclickParty(partyId, onclickColor));
+    });
+}
+
+function drawPartyIcons(initialize=false){
+    let dem = d3.select('#svg-D svg');
+    if(initialize){
+        initializeIcon('donkey', 'D', colorPalette.D_palette.partyIcon);
+        initializeIcon('elephant', 'R', colorPalette.R_palette.partyIcon);
+        initializeIcon('penguin', 'I', colorPalette.I_palette.partyIcon);
+    } else {
+        // only recolor
+        d3.select('#svg-D').select('path').attr("fill", colorPalette.D_palette.partyIcon);
+        d3.select('#svg-R').select('path').attr("fill", colorPalette.R_palette.partyIcon);
+        d3.select('#svg-I').select('path').attr("fill", colorPalette.I_palette.partyIcon);
+    }
+}
+
+function shiftCongresses(direction) {
+    if (direction == "prev") {
+        let lastIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[filter.displayedCongresses.length - 1]);
+        if (lastIdx < 0)
+            lastIdx += allValuesFilter.congress.length;
+        lastIdx += 1;
+        const newLastIdx = Math.max(0, lastIdx - numberCongressesDisplayed);
+        const newFirstIdx = Math.max(0, newLastIdx - numberCongressesDisplayed);
+        filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
+        filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
+
+        if (newFirstIdx == 0)
+            d3.select('#congress-prev').remove();
+
+        if (newLastIdx < allValuesFilter.congress.length && d3.select("#congress-next")._groups[0][0] == null) {
+            d3.select("#div-congress-next")
+            .append('h3')
+            .text(">>")
+            .attr('id','congress-next')
+            .on("click", () => shiftCongresses('next'));
+        }
+
+        drawPlots();
+
+    } else {
+        let firstIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[0]);
+        if (firstIdx < 0) {
+            firstIdx += allValuesFilter.congress.length;
+        }
+        const newFirstIdx = Math.min(allValuesFilter.congress.length - 1, firstIdx + numberCongressesDisplayed)
+        const newLastIdx = Math.min(allValuesFilter.congress.length, newFirstIdx + numberCongressesDisplayed)
+        filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
+        filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
+        
+        if (newLastIdx == allValuesFilter.congress.length)
+            d3.select('#congress-next').remove();
+
+        if (newFirstIdx > 0 && d3.select("#congress-prev")._groups[0][0] == null) {
+            d3.select("#div-congress-prev")
+            .append('h3')
+            .text("<<")
+            .attr('id','congress-prev')
+            .on("click", () => shiftCongresses('prev'));
+        }
+
+        drawPlots();
+    }
+}
+
 
 //////////////////////////////////////////////////////////
 // Load data from csv and initialize filters
@@ -564,20 +887,41 @@ d3.csv("./data/grouped_bills.csv")
         // Set filters
         allValuesFilter.congress = Array.from(new Set(congress)).slice(-10);
         allValuesFilter.party = Array.from(new Set(party));
-        allValuesFilter.major = Array.from(new Set(major));
+        allValuesFilter.major = Array.from(new Set(major))//.slice(0,5);
         allValuesFilter.state = Array.from(new Set(state));
 
-        initialFilter= {
-            'congress': allValuesFilter.congress[allValuesFilter.congress.length - 1],
-            'state':  allValuesFilter.state,
-            'party':  allValuesFilter.party,
-            'major':  allValuesFilter.major
+        Object.keys(allValuesFilter).forEach(key => {
+            initialFilter[key] = allValuesFilter[key];
+        });
+
+        initialFilter.displayedCongresses = allValuesFilter.congress.slice(-numberCongressesDisplayed);
+        initialFilter.congress = initialFilter.displayedCongresses[initialFilter.displayedCongresses.length - 1];
+
+        Object.keys(initialFilter).forEach(key => {
+            filter[key] = initialFilter[key];
+        });
+
+        let groupedData = _.groupBy(data, bg => bg['congress']);
+        let billsArray = []
+        for (let cong in groupedData){
+            let congData = groupedData[cong]
+            let congBills = congData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
+            billsArray.push(congBills);
         }
 
-        filter = initialFilter;
-        drawPartyIcons();
-        // Draw plots
+        groupedData = _.groupBy(data, bg => bg['major']);
+        billsArray = []
+        for (let major in groupedData){
+            let majorData = groupedData[major]
+            let majorBills = majorData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
+            billsArray.push(majorBills);
+        }
+
+        d3.select('#congress-prev').on("click", () => shiftCongresses('prev'));
+        d3.select('#reset-parties').on("click", () => resetFilter('party'));
+        d3.select('#reset-states').on("click", () => resetFilter('state'));
+        d3.select('#reset-all').on("click", () => resetFilter());
+
+        drawPartyIcons(true);
         drawPlots(data);
-
     });
-
