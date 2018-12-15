@@ -29,7 +29,7 @@ let multSelectedText = {
 
 let statesIDsToNames = {};
 let unfilteredData = null;
-
+let congressData ;
 const congressToYear = {
     93: '1973-1975',
     94: '1975-1977',
@@ -832,6 +832,7 @@ export function drawPlots(data = null) {
 
     drawList(new DataFrame(filteredData));
     changeText();
+    showPresident();
 }
 
 function changeText(){
@@ -853,6 +854,60 @@ function changeText(){
         d3.select('#major-label')
             .text( filter['major'][0]+' selected' );
     }
+}
+
+function showPresident(){
+    let div = d3.select("#president_image")
+    div.selectAll("*").remove();
+    console.log(congressData.find(row => row.get('congress') ==  filter['congress']))
+    let path = congressData.find(row => row.get('congress') ==  filter['congress']).get('photo_president')
+    var myimage = div.append('img')
+    .attr('src', './img/'+path+'.jpg')
+
+    let name = congressData.find(row => row.get('congress') ==  filter['congress']).get('pname') 
+    div = d3.select("#president_name")
+    div.selectAll("*").remove();
+    let text = div.append('h4')
+    .text(name)
+
+    let pparty = president_party
+    let party = congressData.find(row => row.get('congress') ==  filter['congress']).get('pparty') 
+    if(party=='R')party='Republican'
+    if(party=='D')party='Democrat'
+    party += ' President'
+    div = d3.select("#president_party")
+    div.selectAll("*").remove();
+    let p = div.append('h4')
+    .text(party)
+
+    div = d3.select('#house_info')
+    party = congressData.find(row => row.get('congress') ==  filter['congress']).get('hmajorityparty') 
+    
+    let num = congressData.find(row => row.get('congress') ==  filter['congress']).get('hmajoritypercentage') 
+    if(party=='R')party='Republican'
+    if(party=='D')party='Democrat'
+    div.text("HOUSE : "+party+" ( "+num+"% )")
+
+    div = d3.select('#senate_info')
+    num = congressData.find(row => row.get('congress') ==  filter['congress']).get('smajoritypercentage') 
+    party = congressData.find(row => row.get('congress') ==  filter['congress']).get('smajorityparty') 
+    if(party=='R')party='Republican'
+    if(party=='D')party='Democrat'
+    div.text("SENATE : "+party+" ( "+num+"% )")
+
+
+
+}
+function initializeIcon(filename, partyId, onclickColor){
+    d3.svg("img/"+filename+'.svg').then(svg => {
+        const gElement = d3.select(svg).select('g');
+        const svgId = '#svg-'+partyId;
+        d3.select(svgId).node().appendChild(gElement.node());
+        // Define color based on the initial filter
+        const color = filter.party.includes(partyId) ? onclickColor : colorPalette.none_color.partyIcon;
+        d3.select(svgId).select('path').attr("fill", color);
+        d3.select(svgId).on("click", () => onclickParty(partyId, onclickColor));
+    });
 }
 
 function processJoinedArray(array1){
@@ -915,6 +970,7 @@ function drawPartyLinks(){
 //////////////////////////////////////////////////////////
 // Load data from csv and initialize filters
 //////////////////////////////////////////////////////////
+DataFrame.fromCSV("data/congress_info.csv").then(df => {df.show(); congressData=df;})
 d3.csv("./data/grouped_bills.csv")
     .then(data => {
         // Declare arrays to store unique read values per variable
@@ -989,4 +1045,6 @@ d3.csv("./data/grouped_bills.csv")
     });
 
 
+
 document.addEventListener("touchstart", function(){}, true)
+

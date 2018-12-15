@@ -1,37 +1,36 @@
-@font-face {
-  font-family: 'BarlowSemiCondensed';
-  src: url('./fonts/BarlowSemiCondensed-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
+.html
+/* Loading fonts */
 
 @font-face {
-  font-family: 'BarlowSemiCondensed';
-  src: url('./fonts/BarlowSemiCondensed-SemiBold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
+    font-family: 'BarlowSemiCondensed';
+    src: url('./fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'BarlowSemiCondensed';
+    src: url('./fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-SemiBold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
 }
 
 @font-face {
-  font-family: 'BarlowSemiCondensed';
-  src: url('./fonts/BarlowSemiCondensed-Light.ttf') format('truetype');
-  font-weight: lighter;
-  font-style: normal;
+    font-family: 'BarlowSemiCondensed';
+    src: url('./fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Light.ttf') format('truetype');
+    font-weight: lighter;
+    font-style: normal;
 }
 
-/* General css */
-.discover_text{
-  font-weight: bold;
-}
 
 body {
-  font-family: 'BarlowSemiCondensed';
-  position: absolute;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #f5f5f5;
+    font-family: 'BarlowSemiCondensed';
+    position: absolute;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #f5f5f5;
 }
 
 h1 {
@@ -53,6 +52,13 @@ table {
   width: 100%;
 }
 
+img {
+  margin-left: 50px; 
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width : 80px;
+  height: 100px;
+}
 
 element.style {
   position: relative;
@@ -64,8 +70,8 @@ div {
 
 ul {
   position: absolute;
-  height: 60%;
-  left: 0;
+  height: 70%;
+  left: 0px;
   right: 20px;
   overflow-y: scroll;
   margin: 0;
@@ -91,6 +97,25 @@ li:hover {
   opacity: 0.9;
 }
 
+h4{
+    margin: 0px;
+    margin-top: 0px;
+    text-align: left;
+}
+
+hr { 
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 0px;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  width: 200px;
+  align: "left";
+  align-content: left;
+}
+
 
 /*.bar-plot {
   width :500px !important;
@@ -98,6 +123,28 @@ li:hover {
   margin: 100px;
 }*/
 
+.first_element{
+    margin-top: 5px;
+    margin-bottom: 0px; 
+}
+.table_right{
+    margin: 0px;
+}
+.heading_right{
+    margin: 10px;
+}
+.president_label{
+    width: 420px;
+    margin: 0px;
+}
+.congress_info{
+    margin: 0px;
+    margin-top: 0px;
+    text-align: left;
+}
+#senate_info{
+    margin-top: 10px;
+}
 .clear {
   clear: both;
 }
@@ -342,3 +389,11 @@ button.green:focus{
   width: 100%;
   margin: 0;
 }
+
+#president_image {
+    width: 100px;
+    height: 100px;
+}
+
+
+
