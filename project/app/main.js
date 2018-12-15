@@ -809,6 +809,8 @@ export function drawPlots(data = null) {
 
     // Filter the data for chosen states
     filteredData = _.filter(filteredData, d => filter.state.includes(d.state));
+
+    drawList(new DataFrame(filteredData));
 }
 
 
@@ -824,6 +826,30 @@ function initializeIcon(filename, partyId, onclickColor){
     });
 }
 
+function processJoinedArray(array1){
+    let array_new = []
+    array1.forEach(function(element) {
+        array_new.push.apply(array_new, element.split(';'));
+    });
+    console.log(array_new);
+    return array_new;
+    }
+
+function drawList(df){
+    let ids_joined = df.toArray("id_list");
+    var ids = processJoinedArray(ids_joined)
+    let titles = df.toArray("title_list");
+    let urls = df.toArray("url_list");
+
+    let x = d3.select('#list-bills').selectAll("*").remove();
+    let ul = d3.select('#list-bills').append('ul');
+    ul.selectAll('li')
+    .data(ids)
+    .enter()
+    .append('li')
+    .html(String);
+
+}
 function drawPartyIcons(initialize=false){
     let dem = d3.select('#svg-D svg');
     if(initialize){
@@ -898,7 +924,10 @@ d3.csv("./data/grouped_bills.csv")
         let party = [];
         let major = [];
         let state = [];
-
+        let status = [];
+        let ids = [];
+        let urls = [];
+        let titles = [];
         // Iterate through the data
         data.forEach(d => {
             d['count'] = +d['count'];
@@ -906,6 +935,10 @@ d3.csv("./data/grouped_bills.csv")
             party.push(d["party"]);
             major.push(d["major"]);
             state.push(d["state"]);
+            status.push(d["status"]);
+            ids.push(d["id_list"]);
+            urls.push(d["url_list"]);
+            titles.push(d["title_list"]);
         });
 
         // Set filters
@@ -927,6 +960,9 @@ d3.csv("./data/grouped_bills.csv")
 
         let groupedData = _.groupBy(data, bg => bg['congress']);
         let billsArray = []
+        let idsArray = []
+        let urlsArray = []
+        let titlesArray = []
         for (let cong in groupedData){
             let congData = groupedData[cong]
             let congBills = congData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
@@ -937,7 +973,7 @@ d3.csv("./data/grouped_bills.csv")
         billsArray = []
         for (let major in groupedData){
             let majorData = groupedData[major]
-            let majorBills = majorData.map(bg => bg['count']).reduce((a,b) => a+b, 0);
+            let majorBills = majorData.map(bg => bg['count']).reduce((a,b) => a+b);
             billsArray.push(majorBills);
         }
 
@@ -949,3 +985,6 @@ d3.csv("./data/grouped_bills.csv")
         drawPartyIcons(true);
         drawPlots(data);
     });
+
+
+document.addEventListener("touchstart", function(){}, true)

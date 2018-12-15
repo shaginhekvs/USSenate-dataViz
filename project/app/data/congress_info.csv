@@ -1,23 +1,23 @@
 congress,pname,pyears,pparty,smajorityparty,hmajorityparty,smajoritypercentage,hmajoritypercentage,photo_president
-115,"Donald Trump",2017-present,R,R,R,51,54.5,photo_trump
-114,"Barack Obama",2009-2017,D,R,R,54,56.8,photo_obama
-113,"Barack Obama",2009-2017,D,D,R,55,53.8,photo_obama
-112,"Barack Obama",2009-2017,D,D,R,53,55.7,photo_obama
-111,"Barack Obama",2009-2017,D,D,D,58,58.8,photo_obama
-110,"George W. Bush",2001-2009,R,D,D,50.5,54.3,photo_wbush
-109,"George W. Bush",2001-2009,R,R,R,55,53,photo_wbush
-108,"George W. Bush",2001-2009,R,R,R,51,52,photo_wbush
-107,"George W. Bush",2001-2009,R,R,R,50,51.5,photo_wbush
-106,"Bill Clinton",1993-2001,D,R,R,54,51.2,photo_clinton
-105,"Bill Clinton",1993-2001,D,R,R,55,52.4,photo_clinton
-104,"Bill Clinton",1993-2001,D,R,R,53,54,photo_clinton
-103,"Bill Clinton",1993-2001,D,D,D,53,59.2,photo_clinton
-102,"George H. W. Bush",1989-1993,R,D,D,58,62.1,photo_hwbush
-101,"George H. W. Bush",1989-1993,R,D,D,55,57.7,photo_hwbush
-100,"Ronald Reagan",1981-1989,R,D,D,54.5,58.8,photo_reagan
-99,"Ronald Reagan",1981-1989,R,R,D,53,58.2,photo_reagan
-98,"Ronald Reagan",1981-1989,R,R,D,54,62.5,photo_reagan
-97,"Ronald Reagan",1981-1989,R,R,D,53,56.1,photo_reagan
-96,"Jimmy Carter",1977-1981,D,D,D,55,63.7,photo_carter
-95,"Jimmy Carter",pyears,pparty,D,D,58,66.3,photo_carter
-94,"Gerald Ford",1974-1977,R,D,D,62,66.9,photo_ford
+115,Donald Trump,2017-present,R,R,R,51,54.5,photo_trump
+114,Barack Obama,2009-2017,D,R,R,54,56.8,photo_obama
+113,Barack Obama,2009-2017,D,D,R,55,53.8,photo_obama
+112,Barack Obama,2009-2017,D,D,R,53,55.7,photo_obama
+111,Barack Obama,2009-2017,D,D,D,58,58.8,photo_obama
+110,George W. Bush,2001-2009,R,D,D,50.5,54.3,photo_wbush
+109,George W. Bush,2001-2009,R,R,R,55,53,photo_wbush
+108,George W. Bush,2001-2009,R,R,R,51,52,photo_wbush
+107,George W. Bush,2001-2009,R,R,R,50,51.5,photo_wbush
+106,Bill Clinton,1993-2001,D,R,R,54,51.2,photo_clinton
+105,Bill Clinton,1993-2001,D,R,R,55,52.4,photo_clinton
+104,Bill Clinton,1993-2001,D,R,R,53,54,photo_clinton
+103,Bill Clinton,1993-2001,D,D,D,53,59.2,photo_clinton
+102,George H. W. Bush,1989-1993,R,D,D,58,62.1,photo_hwbush
+101,George H. W. Bush,1989-1993,R,D,D,55,57.7,photo_hwbush
+100,Ronald Reagan,1981-1989,R,D,D,54.5,58.8,photo_reagan
+99,Ronald Reagan,1981-1989,R,R,D,53,58.2,photo_reagan
+98,Ronald Reagan,1981-1989,R,R,D,54,62.5,photo_reagan
+97,Ronald Reagan,1981-1989,R,R,D,53,56.1,photo_reagan
+96,Jimmy Carter,1977-1981,D,D,D,55,63.7,photo_carter
+95,Jimmy Carter,1977-1981,D,D,D,58,66.3,photo_carter
+94,Gerald Ford,1974-1977,R,D,D,62,66.9,photo_ford

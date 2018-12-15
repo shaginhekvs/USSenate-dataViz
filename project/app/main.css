@@ -36,6 +36,39 @@ div {
     display: block;
 }
 
+ul {
+  position: absolute;
+  height: 60%;
+  left: 20px;
+  right: 20px;
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+  
+  border: 2px solid #ccc;
+  
+
+  
+  // Again, this is where the magic happens
+  -webkit-overflow-scrolling: touch;
+}
+
+li {
+  padding: 10px 20px;
+  
+  border-bottom: 1px solid #ccc;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &:nth-child(even) {
+    background: #f8f8f8;
+  }
+}
+
+
+
 .bar-plot {
   /*width :500px !important;*/
   /*height:300px !important;*/
