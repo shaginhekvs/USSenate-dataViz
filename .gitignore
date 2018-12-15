@@ -4,6 +4,7 @@ api_key.txt
 data/
 project/app/test.js
 .ipynb_checkpoints/
+webpack-dev-server
 
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node
