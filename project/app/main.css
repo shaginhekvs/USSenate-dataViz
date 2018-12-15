@@ -67,6 +67,10 @@ li {
   }
 }
 
+li:hover {
+    opacity: 0.9;
+}
+
 
 
 .bar-plot {

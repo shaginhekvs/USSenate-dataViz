@@ -853,18 +853,46 @@ function processJoinedArray(array1){
     return array_new;
     }
 
-function drawList(df){
-    let ids_joined = df.toArray("id_list");
-    var ids = processJoinedArray(ids_joined)
-    let titles = df.toArray("title_list");
-    let urls = df.toArray("url_list");
 
+function drawList(df){
+    df.show();
+    let ids_joined = df.toArray("id_list");
+    let ids = processJoinedArray(ids_joined)
+    let titles_joined = df.toArray("title_list");
+    var titles = processJoinedArray(titles_joined)
+    let urls_joined = df.toArray("url_list");
+    var urls = processJoinedArray(urls_joined);
     let x = d3.select('#list-bills').selectAll("*").remove();
     let ul = d3.select('#list-bills').append('ul');
+    console.log((ids.length))
+    console.log((titles.length))
+    console.log((urls.length))
+    function onClickList(d,i){
+    console.log(d)
+    console.log(urls[i])
+    let alt_url = "https://www.congress.gov/search?q=%7B%22source%22%3A%22legislation%22%2C%22search%22%3A%22"+titles[i]+"%22%7D&searchResultViewType=expanded"
+    if(urls[i])window.open(urls[i], alt_url);
+    else{
+        console.log(ids[i])
+        window.open(alt_url);
+    }
+    }
     ul.selectAll('li')
-    .data(ids)
+    .data(titles)
     .enter()
     .append('li')
+    .on("click", onClickList)
+    .on("mouseover", function(d){
+    d3.select(this).style("background-color", function() {
+        return colorPalette[colorPaletteName].barPlotHover;
+        });
+    })
+    .on("mouseout", function(d){
+    d3.select(this).style("background-color", function() {
+        return "#f9f9f9";
+        });
+    })
+
     .html(String);
 
 }
