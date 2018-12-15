@@ -1,315 +1,344 @@
-.html
-
-
 @font-face {
-    font-family: 'BarlowSemiCondensed';
-    src: url('./fonts/BarlowSemiCondensed-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'BarlowSemiCondensed';
+  src: url('./fonts/BarlowSemiCondensed-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 
 @font-face {
-    font-family: 'BarlowSemiCondensed';
-    src: url('./fonts/BarlowSemiCondensed-SemiBold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
+  font-family: 'BarlowSemiCondensed';
+  src: url('./fonts/BarlowSemiCondensed-SemiBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'BarlowSemiCondensed';
-    src: url('./fonts/BarlowSemiCondensed-Light.ttf') format('truetype');
-    font-weight: lighter;
-    font-style: normal;
+  font-family: 'BarlowSemiCondensed';
+  src: url('./fonts/BarlowSemiCondensed-Light.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: normal;
 }
 
 /* General css */
 .discover_text{
-    font-weight: bold;
+  font-weight: bold;
 }
+
 body {
-    font-family: 'BarlowSemiCondensed';
-    position: absolute;
-    margin: 0px;
-    height: 100%;
-    width: 100%;
-    background-color: #f5f5f5;
+  font-family: 'BarlowSemiCondensed';
+  position: absolute;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #f5f5f5;
 }
 
 h1 {
   text-align: center;
 }
-h3{
-    text-align: center;
+
+h3 {
+  text-align: center;
 }
 
 td {
-    vertical-align: top;
-    position: relative;
-    /*border:1px solid #000;*/
+  vertical-align: top;
+  position: relative;
 }
 
 table {
-    table-layout: auto;
-    border-collapse: collapse;
-    width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
+  width: 100%;
 }
-
-
 
 
 element.style {
-    position: relative;
+  position: relative;
 }
 
 div {
-    display: block;
+  display: block;
 }
 
 ul {
   position: absolute;
   height: 60%;
-  left: 0px;
+  left: 0;
   right: 20px;
   overflow-y: scroll;
   margin: 0;
   padding: 0;
-  
   border: 2px solid #ccc;
-  
-
-  
-  // Again, this is where the magic happens
   -webkit-overflow-scrolling: touch;
 }
 
 li {
   padding: 10px 20px;
-  
   border-bottom: 1px solid #ccc;
   
-  &:last-child {
+/*  &:last-child {
     border-bottom: none;
-  }
+  }*/
   
-  &:nth-child(even) {
+/*  &:nth-child(even) {
     background: #f8f8f8;
-  }
+  }*/
 }
 
 li:hover {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
 
-
-.bar-plot {
-  /*width :500px !important;*/
-  /*height:300px !important;*/
-  /*margin: 100px;*/
-}
+/*.bar-plot {
+  width :500px !important;
+  height:300px !important;
+  margin: 100px;
+}*/
 
 .clear {
-    clear: both;
+  clear: both;
 }
 
 .table-container {
-    position: relative;
-    max-width: 800px;
-    width: 800px;
-    margin: auto;
+  position: relative;
+  max-width: 800px;
+  width: 800px;
+  margin: auto;
 }
 
-
 .majors-plot {
-    width: 800px;
-    height : 600px;
-    max-width: 300px;
-    max-height: 600px;
+  width: 800px;
+  height: 600px;
+  max-width: 300px;
+  max-height: 600px;
 }
 
 .surround-evolution {
-    margin-top: 0px;
-    width: 700px;
-    height : 250px;
-    max-width: 700px;
-    max-height: 250px;
-    float: left;
-    padding-left: 30px;
+  margin-top: 20px;
+  width: 700px;
+  height : 250px;
+  max-width: 700px;
+  max-height: 250px;
+  float: left;
+  padding-left: 30px;
 }
 
-
 .state{
-    stroke: #333333;
+  stroke: #333333;
 }
 
 .svg-container {
-display: inline-block;
-position: relative;
-width: 100%;
-padding-bottom: 100%;
-vertical-align: middle;
-float: left;
-overflow: hidden;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  vertical-align: middle;
+  float: left;
+  overflow: hidden;
 }
 
 .svg-content {
-display: inline-block;
-position: absolute;
-top: 0;
-left: 0;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #evolution_chart {
-    margin-top: 0px;
-    width: 280px;
-    height: 1600px;
+  width: 280px;
+  height: 1600px;
 }
-
-
 
 #tooltip {
-    position: absolute;
-    text-align: center;
-    padding: 20px;
-    margin: 10px;
-    font: 12px sans-serif;
-    background: lightsteelblue;
-    border: 1px;
-    border-radius: 2px;
-    pointer-events: none;
-    z-index: 1;
+  position: absolute;
+  text-align: center;
+  padding: 20px;
+  margin: 10px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 1px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
 }
+
 #tooltip h4{
-    margin:0;
-    font-size:14px;
+  margin: 0;
+  font-size: 14px;
 }
+
 #tooltip{
-    background:rgba(0,0,0,0.9);
-    border:1px orange;
-    border-radius:5px;
-    font-size:12px;
-    width: 80px;
-    padding:4px;
-    color:white;
-    opacity:0;
+  background: rgba(0,0,0,0.9);
+  border: 1px orange;
+  border-radius: 5px;
+  font-size: 12px;
+  width: 80px;
+  padding: 4px;
+  color: white;
+  opacity: 0;
 }
+
 #tooltip table{
-    table-layout:fixed;
+  table-layout: fixed;
 }
+
 #tooltip tr td{
-    padding:0;
-    margin:0;
+  padding: 0;
+  margin: 0;
 }
+
 #tooltip tr td:nth-child(1){
-    width:50px;
+  width:50px;
 }
+
 #tooltip tr td:nth-child(2){
-    text-align:center;
+  text-align:center;
 }
+
 .section_map{
-    position:relative;
-    vertical-align: left;
-    margin: 0px;
-    z-index: 0;
-    float: left;
+  position:relative;
+  vertical-align: left;
+  margin: 0;
+  z-index: 0;
+  float: left;
 }
+
 .top_row{
-    margin:0;
+  margin:0;
 }
 
 /* Caption + Toolbox*/
 
-.viz_caption {
-    position: relative;
-    float: left;
-    text-align: center;
-    font-size: 20pt;
-    font-weight: bold;
-    padding-left: 300px;
+.viz-caption {
+  position: relative;
+  float: left;
+  text-align: center;
+  font-size: 20pt;
+  font-weight: bold;
+  padding-left: 300px;
+  color: white;
 }
 
 .toolbox {
-    position: relative;
-    float: right;
+  position: relative;
+  float: right;
 }
 .toolbox-party {
-    position: relative;
-    float: left;
+  position: relative;
+  float: left;
 }
 
 .tool-but {
-    position: relative;
-    float: left;
-    color: #FFF;
-    border: none;
-    background-color: #D80027;
-    outline: none;
-    margin-right: 5px;
-    height: 20pt;
-    margin-top: 2px;
-    padding-right: 15px;
-    padding-left: 15px;
-    border-radius: 0px
+  position: relative;
+  float: left;
+  color: #FFF;
+  border: none;
+  background-color: #D80027;
+  outline: none;
+  margin-right: 5px;
+  height: 20pt;
+  margin-top: 2px;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-radius: 0
 }
 
-.tool-but:hover {
-    opacity: 0.9;
+.top-row{
+  background-color: #222;
+  border-color: #080808;
 }
+button.left{
+  background-color: #222;
+  outline: none;
+}
+
+button.red{
+  color: #cb181d;
+}
+
+button.blue{
+  color: #2171b5;
+}
+
+button.green{
+  color: #238b45;
+}
+
+button.red:hover{
+  background-color: #cb181d;
+  color: white;
+}
+
+button.blue:hover {
+  background-color: #2171b5;
+  color: white;
+}
+
+button.green:hover{
+  background-color: #238b45;
+  color: white;
+}
+/*
+button.red:focus{
+  background-color: #cb181d;
+  color: white;
+}
+
+button.blue:focus{
+  background-color: #2171b5;
+  color: white;
+}
+
+button.green:focus{
+  background-color: #238b45;
+  color: white;
+}*/
 
 .label{
-    margin-top: 2px;
-    margin-right: 1px;
-    margin-bottom: 0px;
-    height:30px;
-    position: relative;
-    text-align: center;
+  text-align: center;
+  margin-top: 2px;
+  margin-right: 1px;
+  height:30px;
+  position: relative;
 }
-#congress-label{
-    text-align: left;
 
+#major-label{
+  text-align: center;
 }
 
 #evolution-label{
-    margin-top: 10px;
-    margin-bottom: 0px;
-    text-align: center;
+  margin-top: 10px;
+  margin-bottom: 0;
+  text-align: center;
 }
 
 #map-label{
-    margin-top: 10px;
-    margin-bottom: 0px;
-    text-align: center;
-}
-.arrow{
-    width:90px;
-}
-#congress-next{
-    text-align: left;
-
+  margin-top: 10px;
+  margin-bottom: 0;
+  text-align: center;
 }
 
 #story-image{
-    width: 90%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  width: 90%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #congress-prev{
-    text-align: right;
+  text-align: right;
 }
 /* Table container */
 
 .table-container {
-    position: absolute;
-    max-width: 100%;
-    min-width: 100%;
-    width: 100%;
-    margin: 0px;
+  position: absolute;
+  max-width: 100%;
+  min-width: 100%;
+  width: 100%;
+  margin: 0;
 }
-
-
-

@@ -1,9 +1,3 @@
-/* Lucia's TODOs:
-    * Fix the y-axis labels for timeline plot (so that it looks good)
-    * Add map scale
-    * Add a small line when the bar is 0
-*/
-
 import * as d3 from 'd3';
 import * as _ from 'underscore';
 import DataFrame from 'dataframe-js';
@@ -29,8 +23,8 @@ let maxMinVals = {
 }
 
 let multSelectedText = {
-    major: 'All Policy Areas Selected',
-    state: 'All States Selected'
+    major: 'All policy areas selected',
+    state: 'All states selected'
 }
 
 let statesIDsToNames = {};
@@ -133,10 +127,6 @@ let storyFilters = {
 
 let discoverStoryNumber = 0;
 
-// function arrayRemove(array, value) {
-//     return array.filter(e => (e != value));
-// }
-
 function changeFilterField(field, value) {
     if (field == 'congress') {
         if (yearToCongress[value] != filter.congress) {
@@ -157,14 +147,6 @@ function resetFilter(field=null) {
             filter[key] = initialFilter[key];
         });
         d3.select('#toggle-passed').text("Showing all bills");
-        // if (d3.select("#congress-prev")._groups[0][0] == null) {
-        //     d3.select("#div-congress-prev")
-        //         .append('h3')
-        //         .text("<<")
-        //         .attr('id','congress-prev')
-        //         .on("click", () => shiftCongresses('prev'));
-        // }
-        // d3.select("#congress-next").remove();
     }
     else if (filter[field].length != initialFilter[field].length) {
         filter[field] = initialFilter[field];
@@ -172,10 +154,10 @@ function resetFilter(field=null) {
 
     if (field == 'status')
         d3.select('#toggle-passed').text("Showing all bills");
-
     drawPlots();
+
     if (field == null || field == 'party')
-        drawPartyIcons();
+        drawPartyLinks();
 }
 
 function togglePassed() {
@@ -208,21 +190,21 @@ function computeMaximumBarPlot(count) {
 }
 
 function formatYear(number) {
-    if (number % 10 == 1 && number % 100 != 11) 
-        return number+'st'
-    else if (number % 10 == 2 && number % 100 != 12) 
-        return number+'nd'
-    else if (number % 10 == 3 && number % 100 != 13) 
-        return number+'rd'
+    if (number % 10 == 1 && number % 100 != 11)
+        return number+'st';
+    else if (number % 10 == 2 && number % 100 != 12)
+        return number+'nd';
+    else if (number % 10 == 3 && number % 100 != 13)
+        return number+'rd';
     else
-        return number+'th'
+        return number+'th';
 }
 
 function formatLegendLabels({
-  i,
-  genLength,
-  generatedLabels,
-  labelDelimiter
+    i,
+    genLength,
+    generatedLabels,
+    labelDelimiter
 }) {
     const values = generatedLabels[i].split(labelDelimiter)
     if (i === 0)
@@ -356,7 +338,7 @@ function rescaleGradients(dataDf) {
         maxMinVals.state.min -= 0.5;
     }
     colorPalette.none_color.gradient = wind.gray_palette(maxMinVals.state.min, maxMinVals.state.max);
-    if (filter.party.length == 1) 
+    if (filter.party.length == 1)
         colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](maxMinVals.state.min, maxMinVals.state.max);
     else
         colorPalette.palette.gradient = wind.palette(maxMinVals.state.min, maxMinVals.state.max);
@@ -384,21 +366,20 @@ function onclickBarPlot(plot, filterField, evt) {
     }
 }
 
+function onclickPartyLink(partyId, onclickColor) {
+    console.log('afafs')
+    changeFilterField('party', partyId);
+    document.getElementById('party-' + partyId).style.color = 'white';
+    document.getElementById('party-' + partyId).style.backgroundColor = onclickColor;
 
-function onclickParty(partyId, onclickColor){
-    if (filter.party != [partyId]) {
-        changeFilterField('party', partyId);
-        d3.select('#svg-' + partyId).select('g').select('path')
-            .attr("fill", onclickColor);
-        allValuesFilter.party.forEach(p => {
-            if (p != partyId) {
-                d3.select('#svg-' + p).select('g').select('path')
-                    .attr("fill", colorPalette.none_color.partyIcon);
-            }
-        });
-    }
+    allValuesFilter.party.forEach(p => {
+        if (p != partyId) {
+            let otherParty = document.getElementById('party-' + p);
+            otherParty.style.color = colorPalette.none_color.partyIcon;
+            otherParty.style.backgroundColor = '';
+        }
+    });
 }
-
 
 function discover() {
     Object.keys(filter).forEach(key => {
@@ -461,21 +442,6 @@ function drawCongressPlot(data) {
             type: 'bar',
             data: plotData,
             options: {
-                // animation: {
-                //     onProgress () {
-                //         const ctx = this.chart.ctx;
-                //         const meta = this.chart.controller.getDatasetMeta(0);
-
-                //         chartjs.Chart.helpers.each(meta.data.forEach((bar, index) => {
-                //             const label = this.data.labels[index];
-                //             const labelPositionY = 310;
-                //             // ctx.textBaseline = 'middle';
-                //             ctx.textAlign = 'center';
-                //             ctx.fillStyle = '#333';
-                //             ctx.fillText(yearToCongress[label], bar._model.x, Math.min(bar._model.y, labelPositionY));
-                //         }));
-                //     }
-                // },
                 maintainAspectRatio: false,
                 responsive: true,
                 scales: {
@@ -487,7 +453,6 @@ function drawCongressPlot(data) {
                             min: 0,
                             beginAtZero: true
                         },
-                        //afterBuildTicks: function(chart) {},
                         scaleLabel: {
                             display: true,
                             labelString: 'Year'
@@ -512,18 +477,14 @@ function drawCongressPlot(data) {
                     mode: 'x',
                     intersect: false,
                     callbacks: {
-                        title: function(tooltipItems, data) { 
+                        title: function(tooltipItems, data) {
                             return formatYear(yearToCongress[tooltipItems[0].xLabel]) + " Congress";
                         },
-                        // afterTitle: function(tooltipItems, data) {
-                        //     const nextYear = parseInt(tooltipItems[0].xLabel) + 2.0;
-                        //     return tooltipItems[0].xLabel + " - " + nextYear;
-                        // },
-                        label: function(tooltipItem, data) { 
+                        label: function(tooltipItem, data) {
                             const billLabel = (tooltipItem.yLabel != 1 ? " Bills" : " Bill");
                             return tooltipItem.yLabel + billLabel;
                         },
-                        
+
                     }
                 }
             }
@@ -614,7 +575,6 @@ function drawMajorPlot(data) {
                             beginAtZero: true,
                             callback: label => formatNumberBillsTick(label)
                         },
-                        //afterBuildTicks: function(chart) {},
                         scaleLabel: {
                             display: true,
                             labelString: 'Number of Bills'
@@ -644,7 +604,7 @@ function drawMajorPlot(data) {
                     mode: 'y',
                     intersect: false,
                     callbacks: {
-                        label: function(tooltipItem, data) { 
+                        label: function(tooltipItem, data) {
                             const billLabel = (tooltipItem.xLabel != 1 ? " Bills" : " Bill");
                             return tooltipItem.xLabel + billLabel;
                         }
@@ -739,13 +699,6 @@ const uStatePaths = [
 
         function onclickMap(d){
             changeFilterField('state', d.id);
-            // let color = data[d.id].color;
-            // if(filter.state.includes(d.id))
-            //     color = colorPalette[colorPaletteName].barPlot;
-            // else
-            //     color = colorPalette.none_color.barPlot;
-            // d3.select(this)
-            //     .style('fill', color);
         }
 
         let paths = d3.select(id)
@@ -883,35 +836,23 @@ export function drawPlots(data = null) {
 
 function changeText(){
     d3.select('#evolution-label')
-        .text( formatYear(filter['congress'])+' congress is selected.');
+        .text( formatYear(filter['congress'])+' Congress selected');
 
     if(filter['state'].length>1){
         d3.select('#map-label')
             .text( multSelectedText['state']);
     } else {
         d3.select('#map-label')
-            .text( statesIDsToNames[filter['state'][0]] + ' is selected on map.' );
+            .text( statesIDsToNames[filter['state'][0]] + ' selected' );
     }
     
     if(filter['major'].length > 1){
         d3.select('#major-label')
-            .text( multSelectedText['major']);
+            .text(multSelectedText['major']);
     } else {
         d3.select('#major-label')
-            .text( filter['major'][0]+' is selected.' );
+            .text( filter['major'][0]+' selected' );
     }
-}
-
-function initializeIcon(filename, partyId, onclickColor){
-    d3.svg("img/"+filename+'.svg').then(svg => {
-        const gElement = d3.select(svg).select('g');
-        const svgId = '#svg-'+partyId;
-        d3.select(svgId).node().appendChild(gElement.node());
-        // Define color based on the initial filter
-        const color = filter.party.includes(partyId) ? onclickColor : colorPalette.none_color.partyIcon;
-        d3.select(svgId).select('path').attr("fill", color);
-        d3.select(svgId).on("click", () => onclickParty(partyId, onclickColor));
-    });
 }
 
 function processJoinedArray(array1){
@@ -933,94 +874,42 @@ function drawList(df){
     let x = d3.select('#list-bills').selectAll("*").remove();
     let ul = d3.select('#list-bills').append('ul');
     function onClickList(d,i){
-    let alt_url = "https://www.congress.gov/search?q=%7B%22source%22%3A%22legislation%22%2C%22search%22%3A%22"+titles[i]+"%22%7D&searchResultViewType=expanded"
-    if(urls[i])window.open(urls[i], alt_url);
-    else{
-        window.open(alt_url);
-    }
+        let alt_url = "https://www.congress.gov/search?q=%7B%22source%22%3A%22legislation%22%2C%22search%22%3A%22"+titles[i]+"%22%7D&searchResultViewType=expanded"
+        if(urls[i])window.open(urls[i], alt_url);
+        else{
+            window.open(alt_url);
+        }
     }
     ul.selectAll('li')
-    .data(titles)
-    .enter()
-    .append('li')
-    .on("click", onClickList)
-    .on("mouseover", function(d){
-    d3.select(this).style("background-color", function() {
-        return colorPalette[colorPaletteName].barPlotHover;
-        });
-    })
-    .on("mouseout", function(d){
-    d3.select(this).style("background-color", function() {
-        return "#f9f9f9";
-        });
-    })
-
-    .html(String);
-
-}
-function drawPartyIcons(initialize=false){
-    let dem = d3.select('#svg-D svg');
-    if(initialize){
-        initializeIcon('donkey', 'D', colorPalette.D_palette.partyIcon);
-        initializeIcon('elephant', 'R', colorPalette.R_palette.partyIcon);
-        initializeIcon('penguin', 'I', colorPalette.I_palette.partyIcon);
-    } else {
-        // only recolor
-        d3.select('#svg-D').select('path').attr("fill", colorPalette.D_palette.partyIcon);
-        d3.select('#svg-R').select('path').attr("fill", colorPalette.R_palette.partyIcon);
-        d3.select('#svg-I').select('path').attr("fill", colorPalette.I_palette.partyIcon);
-    }
+        .data(titles)
+        .enter()
+        .append('li')
+        .on("click", onClickList)
+        .on("mouseover", function(d){
+            d3.select(this).style("background-color", function() {
+                return colorPalette[colorPaletteName].barPlotHover;
+            });
+        }).on("mouseout", function(d){
+            d3.select(this).style("background-color", function() {
+                return "#f9f9f9";
+                });
+            }).html(String);
 }
 
-// function shiftCongresses(direction) {
-//     if (direction == "prev") {
-//         let lastIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[filter.displayedCongresses.length - 1]);
-//         if (lastIdx < 0)
-//             lastIdx += allValuesFilter.congress.length;
-//         lastIdx += 1;
-//         const newLastIdx = Math.max(0, lastIdx - numberCongressesDisplayed);
-//         const newFirstIdx = Math.max(0, newLastIdx - numberCongressesDisplayed);
-//         filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
-//         filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
-
-//         if (newFirstIdx == 0)
-//             d3.select('#congress-prev').remove();
-
-//         if (newLastIdx < allValuesFilter.congress.length && d3.select("#congress-next")._groups[0][0] == null) {
-//             d3.select("#div-congress-next")
-//             .append('h3')
-//             .text(">>")
-//             .attr('id','congress-next')
-//             .on("click", () => shiftCongresses('next'));
-//         }
-
-//         drawPlots();
-
-//     } else {
-//         let firstIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[0]);
-//         if (firstIdx < 0) {
-//             firstIdx += allValuesFilter.congress.length;
-//         }
-//         const newFirstIdx = Math.min(allValuesFilter.congress.length - 1, firstIdx + numberCongressesDisplayed)
-//         const newLastIdx = Math.min(allValuesFilter.congress.length, newFirstIdx + numberCongressesDisplayed)
-//         filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
-//         filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
-        
-//         if (newLastIdx == allValuesFilter.congress.length)
-//             d3.select('#congress-next').remove();
-
-//         if (newFirstIdx > 0 && d3.select("#congress-prev")._groups[0][0] == null) {
-//             d3.select("#div-congress-prev")
-//             .append('h3')
-//             .text("<<")
-//             .attr('id','congress-prev')
-//             .on("click", () => shiftCongresses('prev'));
-//         }
-
-//         drawPlots();
-//     }
-// }
-
+function drawPartyLinks(){
+    d3.select('#party-D')
+        .on("click", () => onclickPartyLink('D', colorPalette.D_palette.partyIcon))
+        .style("color", colorPalette.D_palette.partyIcon)
+        .style("backgroundColor", "");
+    d3.select('#party-R')
+        .on("click", () => onclickPartyLink('R', colorPalette.R_palette.partyIcon))
+        .style("color", colorPalette.R_palette.partyIcon)
+        .style("backgroundColor", "");
+    d3.select('#party-I')
+        .on("click", () => onclickPartyLink('I', colorPalette.I_palette.partyIcon))
+        .style("color", colorPalette.I_palette.partyIcon)
+        .style("backgroundColor", "");
+}
 
 
 //////////////////////////////////////////////////////////
@@ -1087,7 +976,6 @@ d3.csv("./data/grouped_bills.csv")
             billsArray.push(majorBills);
         }
 
-        // d3.select('#congress-prev').on("click", () => shiftCongresses('prev'));
         d3.select('#toggle-passed').on("click", () => togglePassed());
         d3.select('#reset-parties').on("click", () => resetFilter('party'));
         d3.select('#reset-states').on("click", () => resetFilter('state'));
@@ -1096,8 +984,8 @@ d3.csv("./data/grouped_bills.csv")
         uStatePaths.forEach(function(element) {
             statesIDsToNames[element['id']] = element['n']
         });
-        drawPartyIcons(true);
         drawPlots(data);
+        drawPartyLinks();
     });
 
 

@@ -10,17 +10,18 @@
 </head>
 
 <body>
-    
+
     <table class='table-container'>
         <tbody>
-            <tr bgcolor="gray" class="top-row" margi>
+            <tr class="top-row" margi>
                 <td colspan=3>
                     <div class="toolbox-party">
-                        <button class="tool-but" id="svg-R">Republican</button>
-                        <button class="tool-but" id="svg-D">Democrats</button>
-                        <button class="tool-but" id="svg-I">Independents</button>
-                    </div>  
-                    <div class="viz_caption">
+                        <button class="tool-but red left" id="party-R">Republican</button>
+                        <button class="tool-but blue left" id="party-D">Democrats</button>
+                        <button class="tool-but green left" id="party-I">Independent</button>
+                    </div>
+
+                    <div class="viz-caption">
                         Bills introduced in US Congress
                     </div>
 
@@ -29,6 +30,8 @@
                         <button class="tool-but" id="discover">Discover</button>
                         <button class="tool-but" id="reset-all">Reset</button>
                     </div>
+
+
                 </td>
             </tr>
 
@@ -37,7 +40,7 @@
             <tr>
                 <td rowspan="2" >
                     <div class=label>
-                    <h5 class=label id=major-label>All Subjects Selected</h5>
+                        <h5 id=major-label class=label>All policy areas selected</h5>
                     </div>
                     <div class='majors-plot'>
 
@@ -45,10 +48,9 @@
                         </canvas>
                     </div>
                 </td>
-
                 <td colspan="1">
                     <div class=label>
-                    <h5 class=label id=evolution-label>Congress Selected</h5>
+                        <h5 class=label id=evolution-label>Congress selected</h5>
                     </div>
                     <div class='surround-evolution'>
                         <canvas class="bar-plot" id="evolution_chart">
@@ -58,11 +60,10 @@
 
                 <td rowspan="3">
                     <div class="president_label" >
-                        <h3 id="discover-title" class=""></h3>
+                        <h3 id="discover-title"></h3>
                         <p id="discover-text"></p>
                         <p>
                             Remember: You can click on the "Discover" button in the toolbar to see a story. You can then undo the selections and go back to the exploratory mode by using the "Reset" button.
-
                             <!-- Either house of the congress can introduce a bill, hence the number of bills introduced depend greatly on the congress members. However, both congress houses and the president play important roles in order for a bill to be passed. -->
                         </p>
                     </div>
@@ -70,24 +71,24 @@
                     <div id="list-bills" >
 
                     </div>
-                    
+
                 </td>
             </tr>
             <tr>
                 <!-- <td></td> -->
-                
+
                 <td colspan="1">
                     <div class="label">
-                        <h5 class=label id="map-label">All States Selected </h5>
+                        <h5 class=label id="map-label">All states selected </h5>
                     </div>
                     <div class='section_map'>
                         <svg width="800" height="350"  version="1.1" viewBox="150 0 760 600" id="statesvg" margin="0px" ></svg>
                     </div>
                 </td>
- 
-               
+
+
             </tr>
-            
+
         </tbody>
     </table>
     <div class='section_barchart'>
