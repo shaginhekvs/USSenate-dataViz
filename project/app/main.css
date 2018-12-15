@@ -55,7 +55,13 @@ table {
     width: 100%;
 }
 
-
+img {
+  margin-left: 50px; 
+  margin-top: 0px;
+  margin-bottom: 0px;
+  width : 80px;
+  height: 100px;
+}
 
 
 element.style {
@@ -68,7 +74,7 @@ div {
 
 ul {
   position: absolute;
-  height: 60%;
+  height: 70%;
   left: 0px;
   right: 20px;
   overflow-y: scroll;
@@ -102,6 +108,25 @@ li:hover {
 }
 
 
+h4{
+    margin: 0px;
+    margin-top: 0px;
+    text-align: left;
+}
+
+hr { 
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 0px;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  width: 200px;
+  align: "left";
+  align-content: left;
+}
+
 
 .bar-plot {
   /*width :500px !important;*/
@@ -109,6 +134,28 @@ li:hover {
   /*margin: 100px;*/
 }
 
+.first_element{
+    margin-top: 5px;
+    margin-bottom: 0px; 
+}
+.table_right{
+    margin: 0px;
+}
+.heading_right{
+    margin: 10px;
+}
+.president_label{
+    width: 420px;
+    margin: 0px;
+}
+.congress_info{
+    margin: 0px;
+    margin-top: 0px;
+    text-align: left;
+}
+#senate_info{
+    margin-top: 10px;
+}
 .clear {
     clear: both;
 }
@@ -301,5 +348,9 @@ left: 0;
     margin: 0px;
 }
 
+#president_image {
+    width: 100px;
+    height: 100px;
+}
 
 
