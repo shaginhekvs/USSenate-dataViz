@@ -167,11 +167,11 @@ function computeMaximumBarPlot(count) {
 }
 
 function formatYear(year) {
-    if (year % 10 == 1) 
+    if (year % 10 == 1 && year % 100 != 11) 
         return year+'st'
-    else if (year % 10 == 2) 
+    else if (year % 10 == 2 && year % 100 != 12) 
         return year+'nd'
-    else if (year % 10 == 2) 
+    else if (year % 10 == 3 && year % 100 != 13) 
         return year+'rd'
     else
         return year+'th'
@@ -453,10 +453,10 @@ function drawCongressPlot(data) {
                         title: function(tooltipItems, data) { 
                             return formatYear(yearToCongress[tooltipItems[0].xLabel]) + " Congress";
                         },
-                        afterTitle: function(tooltipItems, data) {
-                            const nextYear = parseInt(tooltipItems[0].xLabel) + 2.0;
-                            return tooltipItems[0].xLabel + " - " + nextYear;
-                        },
+                        // afterTitle: function(tooltipItems, data) {
+                        //     const nextYear = parseInt(tooltipItems[0].xLabel) + 2.0;
+                        //     return tooltipItems[0].xLabel + " - " + nextYear;
+                        // },
                         label: function(tooltipItem, data) { 
                             const billLabel = (tooltipItem.yLabel != 1 ? " Bills" : " Bill");
                             return tooltipItem.yLabel + billLabel;
