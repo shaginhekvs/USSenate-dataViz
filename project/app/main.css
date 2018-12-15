@@ -1,9 +1,9 @@
 .html
-
+/* Loading fonts */
 
 @font-face {
     font-family: 'BarlowSemiCondensed';
-    src: url('./fonts/BarlowSemiCondensed-Regular.ttf') format('truetype');
+    src: url('./fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -11,22 +11,19 @@
 
 @font-face {
     font-family: 'BarlowSemiCondensed';
-    src: url('./fonts/BarlowSemiCondensed-SemiBold.ttf') format('truetype');
+    src: url('./fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-SemiBold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'BarlowSemiCondensed';
-    src: url('./fonts/BarlowSemiCondensed-Light.ttf') format('truetype');
+    src: url('./fonts/Barlow_Semi_Condensed/BarlowSemiCondensed-Light.ttf') format('truetype');
     font-weight: lighter;
     font-style: normal;
 }
 
-/* General css */
-.discover_text{
-    font-weight: bold;
-}
+
 body {
     font-family: 'BarlowSemiCondensed';
     position: absolute;
@@ -77,34 +74,30 @@ ul {
   height: 70%;
   left: 0px;
   right: 20px;
-  overflow-y: scroll;
+  overflow: scroll;
   margin: 0;
   padding: 0;
-  
-  border: 2px solid #ccc;
-  
 
-  
+  border: 2px solid #ccc;
+
+
+
   // Again, this is where the magic happens
   -webkit-overflow-scrolling: touch;
 }
 
 li {
   padding: 10px 20px;
-  
+
   border-bottom: 1px solid #ccc;
-  
+
   &:last-child {
     border-bottom: none;
   }
-  
+
   &:nth-child(even) {
     background: #f8f8f8;
   }
-}
-
-li:hover {
-    opacity: 0.9;
 }
 
 
@@ -176,7 +169,7 @@ hr {
 }
 
 .surround-evolution {
-    margin-top: 0px;
+    margin-top: 20px;
     width: 700px;
     height : 250px;
     max-width: 700px;
@@ -208,7 +201,6 @@ left: 0;
 }
 
 #evolution_chart {
-    margin-top: 0px;
     width: 280px;
     height: 1600px;
 }
@@ -300,14 +292,70 @@ left: 0;
     border-radius: 0px
 }
 
-.tool-but:hover {
-    opacity: 0.9;
+.top-row{
+  background-color:#222;
+  border-color:#080808;
 }
+button.left{
+  background-color:#222;
+  outline: none;
+}
+
+button.red{
+  color: #cb181d;
+}
+
+button.blue{
+  color: #2171b5;
+}
+
+button.green{
+  color: #238b45;
+}
+
+button.red:hover{
+    background-color:  #cb181d;
+    color: white;
+}
+
+button.blue:hover {
+    background-color:  #2171b5;
+    color: white;
+}
+
+button.green:hover{
+    background-color: #238b45;
+    color: white;
+}
+
+button.red:focus{
+  background-color:  #cb181d;
+  color: white;
+}
+
+button.blue:focus{
+  background-color:  #2171b5;
+  color: white;
+}
+
+button.green:focus{
+  background-color:  #238b45;
+  color: white;
+}
+
+.viz_caption{
+  color: white;
+}
+
+background-color:#222;border-color:#080808
+
+/* .tool-but:hover {
+    opacity: 0.9;
+} */
 
 .label{
     margin-top: 2px;
     margin-right: 1px;
-    margin-bottom: 0px;
     height:30px;
     position: relative;
     text-align: center;
@@ -315,18 +363,6 @@ left: 0;
 #congress-label{
     text-align: left;
 
-}
-
-#evolution-label{
-    margin-top: 10px;
-    margin-bottom: 0px;
-    text-align: center;
-}
-
-#map-label{
-    margin-top: 10px;
-    margin-bottom: 0px;
-    text-align: center;
 }
 .arrow{
     width:90px;
@@ -352,5 +388,6 @@ left: 0;
     width: 100px;
     height: 100px;
 }
+
 
 

@@ -10,25 +10,27 @@
 </head>
 
 <body>
-    
+
     <table class='table-container'>
         <tbody>
-            <tr bgcolor="gray" class="top-row" margi>
-                <td colspan=3>
+            <tr class="top-row" margi>
+                <td colspan=5>
                     <div class="toolbox-party">
-                        <button class="tool-but" id="svg-R">Republican</button>
-                        <button class="tool-but" id="svg-D">Democrats</button>
-                        <button class="tool-but" id="svg-I">Independents</button>
-                    </div>  
+                        <button class="tool-but red left" id="svg-R">Republican</button>
+                        <button class="tool-but blue left" id="svg-D">Democrats</button>
+                        <button class="tool-but green left" id="svg-I">Independents</button>
+                    </div>
+
                     <div class="viz_caption">
                         Bills introduced in US Congress
                     </div>
 
                     <div class="toolbox">
-                        <button class="tool-but" id="toggle-passed">Showing all bills</button>
                         <button class="tool-but" id="discover">Discover</button>
-                        <button class="tool-but" id="reset-all">Reset</button>
+                        <button class="tool-but" id="reset-filter">Reset</button>
                     </div>
+
+
                 </td>
             </tr>
 
@@ -36,8 +38,8 @@
 
             <tr>
                 <td rowspan="2" >
-                    <div class=label>
-                    <h5 class=label id=major-label>All Subjects Selected</h5>
+                    <div class=label id=major-label>
+                    <h5 class=label>All Subjects Selected</h5>
                     </div>
                     <div class='majors-plot'>
 
@@ -45,11 +47,8 @@
                         </canvas>
                     </div>
                 </td>
+                <td colspan="3">
 
-                <td colspan="1">
-                    <div class=label>
-                    <h5 class=label id=evolution-label>Congress Selected</h5>
-                    </div>
                     <div class='surround-evolution'>
                         <canvas class="bar-plot" id="evolution_chart">
                         </canvas>
@@ -57,6 +56,7 @@
                 </td>
 
                 <td rowspan="3">
+
                     <div class="president_label" width="900" >
                         <h3 class='heading_right'>Selected Congress Information</h3>
                         <table class='table_right'>
@@ -96,28 +96,29 @@
                     </div>
                     <div>
                         <h3 class='heading_right'>Bills Currently Selected</h3>
+
                     </div>
                      <div id="list-bills" >
 
                     </div>
-                    
+
                 </td>
             </tr>
             <tr>
                 <!-- <td></td> -->
-                
-                <td colspan="1">
-                    <div class="label">
-                        <h5 class=label id="map-label">All States Selected </h5>
+
+                <td colspan="3">
+                    <div class="label" id="map-label" >
+                        <h5 class=label>All States Selected </h5>
                     </div>
                     <div class='section_map'>
                         <svg width="800" height="350"  version="1.1" viewBox="150 0 760 600" id="statesvg" margin="0px" ></svg>
                     </div>
                 </td>
- 
-               
+
+
             </tr>
-            
+
         </tbody>
     </table>
     <div class='section_barchart'>
