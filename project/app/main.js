@@ -382,6 +382,7 @@ function onclickPartyLink(partyId, onclickColor) {
 }
 
 function discover() {
+    discover_function()
     Object.keys(filter).forEach(key => {
         if (storyFilters[key][discoverStoryNumber] != null) {
             filter[key] = storyFilters[key][discoverStoryNumber];
@@ -399,7 +400,7 @@ function discover() {
     d3.select('#list-bills').selectAll("*").remove();
     discoverStoryNumber += 1;
     discoverStoryNumber = discoverStoryNumber % storyFilters.titles.length;
-}
+}   
 
 //////////////////////////////////////////////////////////
 // Plotting functions (TODO: Move to separate files!)
@@ -970,10 +971,11 @@ function drawPartyLinks(){
 //////////////////////////////////////////////////////////
 // Load data from csv and initialize filters
 //////////////////////////////////////////////////////////
-DataFrame.fromCSV("data/congress_info.csv").then(df => {df.show(); congressData=df;})
+DataFrame.fromCSV("data/congress_info.csv").then(df => {discover_function(false);df.show(); congressData=df;})
 d3.csv("./data/grouped_bills.csv")
     .then(data => {
         // Declare arrays to store unique read values per variable
+        
         let congress = [];
         let party = [];
         let major = [];
@@ -1042,9 +1044,228 @@ d3.csv("./data/grouped_bills.csv")
         });
         drawPlots(data);
         drawPartyLinks();
+        //display the home page
+        //discover_function(false);
+        
     });
 
 
 
 document.addEventListener("touchstart", function(){}, true)
 
+
+
+let discover_index = 0;
+
+let highlight = [];
+
+const text_discover = [
+    "The number of bills introduced about topics related to Defense had been decreasing from 1991 but it started increasing again after 2001.", "This period was when the September 11 attacks took place in 2001, and two years later in 2003 the Iraq War started. This increasing tendency continued until 2009.",
+    "In 2007 both congress houses changed from Republican to Democratic, resulting in an increase of bills introduced by the Democrats.", "This was especially important for Health bills, as the Affordable Care Act ('Obamacare') was signed in 2010. In 2011 the House of Representatives became majorily Republican, decreasing the number of Democratic bills.",
+    'Welcome to US Senators Visualization'
+]
+
+let dict_key_div = {
+    'majors':'#majors-plot',
+    'evolution':'#evolution_chart',
+    'map': '.section_map',
+    'map_text':'#map-label',
+    'evolution_text':'#evolution-label',
+    'majors_text':'#major-label',
+    'list-bills':'#list-bills',
+    'right_table':'.table_right',
+    'heading_right':'.heading_right',
+    'discover_text':'.president_label'
+
+}
+
+const highlights_discover = [
+    ['evolution','majors'],
+    ['evolution','majors']
+]
+
+
+// Determines which text to display in the popups near the highlighted components
+const description_popups = [
+    [true,true],
+    [false,true]
+]
+
+// Filters for each insight 
+const filters_discover = [{
+        congress: '110',
+        state: null,
+        party: null,
+        major: ['Defense'],
+        status: null,
+        displayedCongresses: ["105","106","107","108","109","110"]        
+        },
+        {
+        congress: '110',
+        state: null,
+        party: ['D'],
+        major: ['Health'],
+        status: null,
+        displayedCongresses: ["108","109","110","111","112","113"] 
+
+        }]
+
+
+/*************************************************Functions*********************************************************/
+
+function update_discover(highlight_, text, filters) {
+    // Function triggered when the discover button is clicked. apply the 'filters' passed in parameter,
+    // stores the divs 'highlight_'to be highlithed in 'highlight' and display the text in 'text' inside in the discover-text div
+    if (highlight_) {
+        highlight = highlight_;
+    }
+    // update the slider 
+
+    if (text) {
+        // display the insight
+
+        d3.select("#discover_text").style('opacity', "0")
+            .html('<b>' + text + "</b>").classed("shadow_apply", true)
+            .transition().duration(1000).style('opacity', "1")
+
+    }
+
+    // update the map and the charts
+    // update filters
+    changeFilterField(filters)
+}
+function discover_function(show_insight = true) {
+    // Function triggered when the discover button is clicked
+
+    let index = text_discover.length - 1;
+
+
+    // stores the last blurred component
+    let selection;
+
+    // reset the visualization if this is not the loading page
+
+    if (show_insight) {
+        resetFilter()
+        //select an insight and increment its index so we won't have the same one when we click on discover next time
+        index = discover_index
+        discover_index = (discover_index + 1) % (filters_discover.length)
+    }
+
+
+    // subfunction that adds popups near the components that we want to highlight 
+    let add_popups = () => {
+
+        highlight.forEach(function(element, sub_index) {
+
+            // get dimensions of one of the highlithed divs
+            let node_element = d3.select(dict_key_div[element]).node().getBoundingClientRect()
+            let x = 0
+            let y = 0
+
+            // Define the text inside the popup.
+            // This text values depends on wheter we want our user to interact with the highlighted component or not
+            let text = description_popups[index][sub_index] ? 'Play with this component for further insights!' : 'See insights here'
+
+            // Compute the coordinates of the popups depending the highlighted div
+            let popup_node = d3.select('body').append('div')
+                .classed('popup', true)
+                .style('opacity', '0')
+                .text(text)
+
+
+            let pop_w = popup_node.node().getBoundingClientRect().width
+
+            if (element == 'evolution') {
+                // popup position if the highlighted div is the timechart
+                x += node_element.x + node_element.width / 2 - pop_w / 2
+                y += node_element.y
+            } else if (element == 'major') {
+                // popup position if the highlighted div is the one related to the gender or the which represent the distribution
+                // of Bachelor/master/CMS/exchange students
+                popup_node.style('max-width', d3.select('.table-container').node().getBoundingClientRect().x - 10 + 'px')
+                pop_w = popup_node.node().getBoundingClientRect().width
+                x += node_element.x - pop_w
+                y += node_element.y + ((element == 'major') ? node_element.height / 2 : 0)
+            } else {
+                pop_w = popup_node.node().getBoundingClientRect().width
+                x += node_element.x + pop_w
+                y += node_element.y + node_element.height / 2
+            }
+
+            // hide the popups after 8s or when the user click on them  
+            popup_node.style('top', y + 'px')
+                .style('left', x + 'px')
+                .style('opacity', '0.0')
+                .on('click', function(e) { d3.select(this).remove() })
+                .transition().duration(1000)
+                .style('opacity', '1')
+                .transition().delay(8000)
+                .transition().duration(1000).style('opacity', 0)
+                .each('end', function(e) { d3.select(this).remove() })
+        });
+    }
+
+
+
+    // Blurs all visualization components
+    Object.keys(dict_key_div).forEach((v) => {
+        selection = d3.selectAll(dict_key_div[v])
+            .style('filter', 'blur(10px)')
+            .transition()
+            .duration(1000)
+            .style('opacity', '0.45')
+            .style('pointer-events', 'none')
+    })
+
+    // get the dimension of the HTML table containing our visualization components 
+
+    let table_contained_node = d3.select('.table-container').node().getBoundingClientRect()
+    let x = table_contained_node.x + table_contained_node.width / 2
+    let y = table_contained_node.y + table_contained_node.height / 2
+
+    // create the popup containing the insight and center it on the screen
+    let popup_div = d3.select('body').append('div')
+        .classed('popup', true).style('top', y + 'px').style('color', '#000')
+        .style('background', 'transparent')
+        .style('font-size', '20pt')
+        .style('width', '100%')
+        .style('text-align', 'center')
+        .style('margin-top', '-100px')
+        .style('padding', '0px')
+
+
+    // Add the insight text and a comment
+    let text_spaced = text_discover[index].split(".");
+    // if (show_insight)
+    text_spaced = text_spaced.join("<br>")
+    // else
+    //     text_spaced = text_spaced[0] + text_spaced.slice(1).join("<br>")
+    popup_div.append('div').html(text_spaced).classed('discover-text', 'true')
+
+    popup_div.append('div')
+        .text(show_insight ? 'Click anywhere to explore these insights!' : 'Click anywhere to start exploring!')
+    popup_div.append('div').transition().duration(1000).style('opacity', 1)
+
+
+    // Step triggered when the blurring transition ends for all components
+    selection.on('end', () => {
+        // Define an OnClick event on our HTML so that the user can disable the blur when he clicks on the screen
+        d3.select('body').on('click', function(e) {
+            Object.keys(dict_key_div).forEach((v) => {
+                d3.selectAll('.popup').remove()
+                d3.selectAll(dict_key_div[v])
+                    .style('filter', 'none')
+                    .style('opacity', '1')
+                    .style('pointer-events', 'auto')
+                if (show_insight)
+                    update_discover(highlights_discover[index], text_discover[index], filters_discover[index])
+                // reset the onClick function for the HTML body
+                d3.select(this).on('click', () => false)
+            })
+
+            if (show_insight)
+                add_popups();
+        })
+    })
+}

@@ -70,7 +70,7 @@ div {
 
 ul {
   position: absolute;
-  height: 70%;
+  height: 60%;
   left: 0px;
   right: 20px;
   overflow-y: scroll;
@@ -173,6 +173,24 @@ hr {
   padding-left: 30px;
 }
 
+/*CSS popups*/
+
+.popup{
+    position:absolute;
+    background:rgba(0,0,0,0.5);
+    border-radius: 5px;
+    color:#FFF;
+    padding:5px;
+    cursor: default;
+    z-index:9999;
+}
+.popup:hover{
+    opacity:0.5;
+}
+
+.discover-text{
+    font-weight: bold;
+}
 .state{
   stroke: #333333;
 }
