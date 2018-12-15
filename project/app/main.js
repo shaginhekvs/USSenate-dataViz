@@ -112,6 +112,17 @@ let filter = {
     status: [],
 };
 
+let storyFilters = {
+    congress: ["110"],
+    displayedCongresses: [["105","106","107","108","109","110"]],
+    state: [null],
+    party: [null],
+    major: [["Defense"]],
+    status: [null],
+    texts: ["The number of bills introduced about topics related to Defense had been decreasing from 1991, and started increasing after 2001. This period was when the September 11 attacks took place in 2001, and two years later in 2003 the Iraq War started. This increasing tendency continued until 2009."]
+};
+
+let discoverStoryNumber = 0;
 
 // function arrayRemove(array, value) {
 //     return array.filter(e => (e != value));
@@ -136,6 +147,7 @@ function resetFilter(field=null) {
         Object.keys(initialFilter).forEach(key => {
             filter[key] = initialFilter[key];
         });
+        d3.select('#toggle-passed').text("Showing all bills");
         // if (d3.select("#congress-prev")._groups[0][0] == null) {
         //     d3.select("#div-congress-prev")
         //         .append('h3')
@@ -145,8 +157,12 @@ function resetFilter(field=null) {
         // }
         // d3.select("#congress-next").remove();
     }
-    else if (filter[field].length != initialFilter[field].length)
+    else if (filter[field].length != initialFilter[field].length) {
         filter[field] = initialFilter[field];
+    }
+
+    if (field == 'status')
+        d3.select('#toggle-passed').text("Showing all bills");
 
     drawPlots();
     if (field == null || field == 'party')
@@ -372,6 +388,21 @@ function onclickParty(partyId, onclickColor){
             }
         });
     }
+}
+
+
+function discover() {
+    Object.keys(filter).forEach(key => {
+        console.log(key)
+        console.log(filter[key])
+        if (storyFilters[key][discoverStoryNumber] != null) {
+            filter[key] = storyFilters[key][discoverStoryNumber];
+        } else {
+            filter[key] = initialFilter[key];
+        }
+        console.log(filter[key])
+    });
+    drawPlots();
 }
 
 //////////////////////////////////////////////////////////
@@ -855,7 +886,6 @@ function processJoinedArray(array1){
 
 
 function drawList(df){
-    df.show();
     let ids_joined = df.toArray("id_list");
     let ids = processJoinedArray(ids_joined)
     let titles_joined = df.toArray("title_list");
@@ -864,16 +894,10 @@ function drawList(df){
     var urls = processJoinedArray(urls_joined);
     let x = d3.select('#list-bills').selectAll("*").remove();
     let ul = d3.select('#list-bills').append('ul');
-    console.log((ids.length))
-    console.log((titles.length))
-    console.log((urls.length))
     function onClickList(d,i){
-    console.log(d)
-    console.log(urls[i])
     let alt_url = "https://www.congress.gov/search?q=%7B%22source%22%3A%22legislation%22%2C%22search%22%3A%22"+titles[i]+"%22%7D&searchResultViewType=expanded"
     if(urls[i])window.open(urls[i], alt_url);
     else{
-        console.log(ids[i])
         window.open(alt_url);
     }
     }
@@ -1029,6 +1053,7 @@ d3.csv("./data/grouped_bills.csv")
         d3.select('#reset-parties').on("click", () => resetFilter('party'));
         d3.select('#reset-states').on("click", () => resetFilter('state'));
         d3.select('#reset-all').on("click", () => resetFilter());
+        d3.select('#discover').on("click", () => discover());
 
         drawPartyIcons(true);
         drawPlots(data);
