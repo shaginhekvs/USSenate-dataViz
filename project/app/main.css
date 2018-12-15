@@ -69,9 +69,9 @@ div {
 ul {
   position: absolute;
   height: 60%;
-  left: 20px;
+  left: 0px;
   right: 20px;
-  overflow: scroll;
+  overflow-y: scroll;
   margin: 0;
   padding: 0;
   

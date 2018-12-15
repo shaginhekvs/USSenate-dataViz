@@ -97,21 +97,24 @@ let allValuesFilter = {
     congress: [],
     party: [],
     state: [],
-    major: []
+    major: [],
+    status: [],
 };
 
 let initialFilter = {
     congress: [],
     state: [],
     party: [],
-    major: []
+    major: [],
+    status: [],
 };
 
 let filter = {
     congress: [],
     state: [],
     party: [],
-    major: []
+    major: [],
+    status: [],
 };
 
 
@@ -138,14 +141,14 @@ function resetFilter(field=null) {
         Object.keys(initialFilter).forEach(key => {
             filter[key] = initialFilter[key];
         });
-        if (d3.select("#congress-prev")._groups[0][0] == null) {
-            d3.select("#div-congress-prev")
-                .append('h3')
-                .text("<<")
-                .attr('id','congress-prev')
-                .on("click", () => shiftCongresses('prev'));
-        }
-        d3.select("#congress-next").remove();
+        // if (d3.select("#congress-prev")._groups[0][0] == null) {
+        //     d3.select("#div-congress-prev")
+        //         .append('h3')
+        //         .text("<<")
+        //         .attr('id','congress-prev')
+        //         .on("click", () => shiftCongresses('prev'));
+        // }
+        // d3.select("#congress-next").remove();
     }
     else if (filter[field].length != initialFilter[field].length)
         filter[field] = initialFilter[field];
@@ -153,6 +156,19 @@ function resetFilter(field=null) {
     drawPlots();
     if (field == null || field == 'party')
         drawPartyIcons();
+}
+
+function togglePassed() {
+    if (filter.status.length == 1) {
+        filter.status = allValuesFilter.status;
+        d3.select('#toggle-passed').text("Showing all bills");
+        drawPlots();
+    }
+    else {
+        filter.status = ['passed'];
+        d3.select('#toggle-passed').text("Showing passed bills");
+        drawPlots();
+    }
 }
 
 function formatNumberBillsTick(label) {
@@ -172,11 +188,11 @@ function computeMaximumBarPlot(count) {
 }
 
 function formatYear(year) {
-    if (year % 10 == 1) 
+    if (year % 10 == 1 && year % 100 != 11) 
         return year+'st'
-    else if (year % 10 == 2) 
+    else if (year % 10 == 2 && year % 100 != 12) 
         return year+'nd'
-    else if (year % 10 == 2) 
+    else if (year % 10 == 3 && year % 100 != 13) 
         return year+'rd'
     else
         return year+'th'
@@ -458,10 +474,10 @@ function drawCongressPlot(data) {
                         title: function(tooltipItems, data) { 
                             return formatYear(yearToCongress[tooltipItems[0].xLabel]) + " Congress";
                         },
-                        afterTitle: function(tooltipItems, data) {
-                            const nextYear = parseInt(tooltipItems[0].xLabel) + 2.0;
-                            return tooltipItems[0].xLabel + " - " + nextYear;
-                        },
+                        // afterTitle: function(tooltipItems, data) {
+                        //     const nextYear = parseInt(tooltipItems[0].xLabel) + 2.0;
+                        //     return tooltipItems[0].xLabel + " - " + nextYear;
+                        // },
                         label: function(tooltipItem, data) { 
                             const billLabel = (tooltipItem.yLabel != 1 ? " Bills" : " Bill");
                             return tooltipItem.yLabel + billLabel;
@@ -784,6 +800,9 @@ export function drawPlots(data = null) {
     colorPaletteName = 'palette';
     let filteredData = unfilteredData;
 
+    // If we are showing only the passed bills, then filter them
+    filteredData = _.filter(filteredData, d => filter.status.includes(d.status));
+
     // Filter the data for the chosen parties
     if (filter.party.length != allValuesFilter.party.length){
         filteredData = _.filter(filteredData, d => filter.party.includes(d.party));
@@ -859,7 +878,6 @@ function processJoinedArray(array1){
     array1.forEach(function(element) {
         array_new.push.apply(array_new, element.split(';'));
     });
-    console.log(array_new);
     return array_new;
     }
 
@@ -920,54 +938,54 @@ function drawPartyIcons(initialize=false){
     }
 }
 
-function shiftCongresses(direction) {
-    if (direction == "prev") {
-        let lastIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[filter.displayedCongresses.length - 1]);
-        if (lastIdx < 0)
-            lastIdx += allValuesFilter.congress.length;
-        lastIdx += 1;
-        const newLastIdx = Math.max(0, lastIdx - numberCongressesDisplayed);
-        const newFirstIdx = Math.max(0, newLastIdx - numberCongressesDisplayed);
-        filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
-        filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
+// function shiftCongresses(direction) {
+//     if (direction == "prev") {
+//         let lastIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[filter.displayedCongresses.length - 1]);
+//         if (lastIdx < 0)
+//             lastIdx += allValuesFilter.congress.length;
+//         lastIdx += 1;
+//         const newLastIdx = Math.max(0, lastIdx - numberCongressesDisplayed);
+//         const newFirstIdx = Math.max(0, newLastIdx - numberCongressesDisplayed);
+//         filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
+//         filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
 
-        if (newFirstIdx == 0)
-            d3.select('#congress-prev').remove();
+//         if (newFirstIdx == 0)
+//             d3.select('#congress-prev').remove();
 
-        if (newLastIdx < allValuesFilter.congress.length && d3.select("#congress-next")._groups[0][0] == null) {
-            d3.select("#div-congress-next")
-            .append('h3')
-            .text(">>")
-            .attr('id','congress-next')
-            .on("click", () => shiftCongresses('next'));
-        }
+//         if (newLastIdx < allValuesFilter.congress.length && d3.select("#congress-next")._groups[0][0] == null) {
+//             d3.select("#div-congress-next")
+//             .append('h3')
+//             .text(">>")
+//             .attr('id','congress-next')
+//             .on("click", () => shiftCongresses('next'));
+//         }
 
-        drawPlots();
+//         drawPlots();
 
-    } else {
-        let firstIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[0]);
-        if (firstIdx < 0) {
-            firstIdx += allValuesFilter.congress.length;
-        }
-        const newFirstIdx = Math.min(allValuesFilter.congress.length - 1, firstIdx + numberCongressesDisplayed)
-        const newLastIdx = Math.min(allValuesFilter.congress.length, newFirstIdx + numberCongressesDisplayed)
-        filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
-        filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
+//     } else {
+//         let firstIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[0]);
+//         if (firstIdx < 0) {
+//             firstIdx += allValuesFilter.congress.length;
+//         }
+//         const newFirstIdx = Math.min(allValuesFilter.congress.length - 1, firstIdx + numberCongressesDisplayed)
+//         const newLastIdx = Math.min(allValuesFilter.congress.length, newFirstIdx + numberCongressesDisplayed)
+//         filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
+//         filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
         
-        if (newLastIdx == allValuesFilter.congress.length)
-            d3.select('#congress-next').remove();
+//         if (newLastIdx == allValuesFilter.congress.length)
+//             d3.select('#congress-next').remove();
 
-        if (newFirstIdx > 0 && d3.select("#congress-prev")._groups[0][0] == null) {
-            d3.select("#div-congress-prev")
-            .append('h3')
-            .text("<<")
-            .attr('id','congress-prev')
-            .on("click", () => shiftCongresses('prev'));
-        }
+//         if (newFirstIdx > 0 && d3.select("#congress-prev")._groups[0][0] == null) {
+//             d3.select("#div-congress-prev")
+//             .append('h3')
+//             .text("<<")
+//             .attr('id','congress-prev')
+//             .on("click", () => shiftCongresses('prev'));
+//         }
 
-        drawPlots();
-    }
-}
+//         drawPlots();
+//     }
+// }
 
 
 
@@ -1003,6 +1021,7 @@ d3.csv("./data/grouped_bills.csv")
         allValuesFilter.party = Array.from(new Set(party));
         allValuesFilter.major = Array.from(new Set(major));
         allValuesFilter.state = Array.from(new Set(state));
+        allValuesFilter.status = Array.from(new Set(status));
 
         Object.keys(allValuesFilter).forEach(key => {
             initialFilter[key] = allValuesFilter[key];
@@ -1034,7 +1053,8 @@ d3.csv("./data/grouped_bills.csv")
             billsArray.push(majorBills);
         }
 
-        d3.select('#congress-prev').on("click", () => shiftCongresses('prev'));
+        // d3.select('#congress-prev').on("click", () => shiftCongresses('prev'));
+        d3.select('#toggle-passed').on("click", () => togglePassed());
         d3.select('#reset-parties').on("click", () => resetFilter('party'));
         d3.select('#reset-states').on("click", () => resetFilter('state'));
         d3.select('#reset-all').on("click", () => resetFilter());
