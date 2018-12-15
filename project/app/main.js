@@ -156,6 +156,7 @@ function resetFilter(field=null) {
     drawPlots();
     if (field == null || field == 'party')
         drawPartyIcons();
+        drawPartyLinks();
 }
 
 function togglePassed() {
@@ -188,11 +189,11 @@ function computeMaximumBarPlot(count) {
 }
 
 function formatYear(year) {
-    if (year % 10 == 1 && year % 100 != 11) 
+    if (year % 10 == 1 && year % 100 != 11)
         return year+'st'
-    else if (year % 10 == 2 && year % 100 != 12) 
+    else if (year % 10 == 2 && year % 100 != 12)
         return year+'nd'
-    else if (year % 10 == 3 && year % 100 != 13) 
+    else if (year % 10 == 3 && year % 100 != 13)
         return year+'rd'
     else
         return year+'th'
@@ -336,7 +337,7 @@ function rescaleGradients(dataDf) {
         maxMinVals.state.min -= 0.5;
     }
     colorPalette.none_color.gradient = wind.gray_palette(maxMinVals.state.min, maxMinVals.state.max);
-    if (filter.party.length == 1) 
+    if (filter.party.length == 1)
         colorPalette[filter.party[0]+'_palette'].gradient = wind[filter.party[0]+'_palette'](maxMinVals.state.min, maxMinVals.state.max);
     else
         colorPalette.palette.gradient = wind.palette(maxMinVals.state.min, maxMinVals.state.max);
@@ -362,6 +363,32 @@ function onclickBarPlot(plot, filterField, evt) {
     } else if (filterField == "major") {
         resetFilter(filterField);
     }
+}
+
+function onclickPartyLink(partyId, onclickColor) {
+  if (filter.party != [partyId]) {
+      // let activeLink = document.getElementAtEvent(evt);
+      // console.log(activeLink.id);
+      if (document.getElementById('party-' + partyId).style.color == 'white'){
+          resetFilter('party');
+      } else {
+
+        changeFilterField('party', partyId);
+        document.getElementById('party-' + partyId).style.color = 'white';
+        document.getElementById('party-' + partyId).style.backgroundColor = onclickColor;
+
+        allValuesFilter.party.forEach(p => {
+            if (p != partyId) {
+                let otherParty = document.getElementById('party-' + p);
+                otherParty.style.color = colorPalette.none_color.partyIcon;
+                otherParty.style.backgroundColor = '';
+
+            }
+        });
+
+      }
+
+  }
 }
 
 
@@ -471,18 +498,18 @@ function drawCongressPlot(data) {
                     mode: 'x',
                     intersect: false,
                     callbacks: {
-                        title: function(tooltipItems, data) { 
+                        title: function(tooltipItems, data) {
                             return formatYear(yearToCongress[tooltipItems[0].xLabel]) + " Congress";
                         },
                         // afterTitle: function(tooltipItems, data) {
                         //     const nextYear = parseInt(tooltipItems[0].xLabel) + 2.0;
                         //     return tooltipItems[0].xLabel + " - " + nextYear;
                         // },
-                        label: function(tooltipItem, data) { 
+                        label: function(tooltipItem, data) {
                             const billLabel = (tooltipItem.yLabel != 1 ? " Bills" : " Bill");
                             return tooltipItem.yLabel + billLabel;
                         },
-                        
+
                     }
                 }
             }
@@ -603,7 +630,7 @@ function drawMajorPlot(data) {
                     mode: 'y',
                     intersect: false,
                     callbacks: {
-                        label: function(tooltipItem, data) { 
+                        label: function(tooltipItem, data) {
                             const billLabel = (tooltipItem.xLabel != 1 ? " Bills" : " Bill");
                             return tooltipItem.xLabel + billLabel;
                         }
@@ -938,6 +965,23 @@ function drawPartyIcons(initialize=false){
     }
 }
 
+function drawPartyLinks(){
+  // TODO: reduce lines -> getElementAtEvent?
+  let partyD = document.getElementById('party-D');
+  let partyR = document.getElementById('party-R');
+  let partyI = document.getElementById('party-I');
+  partyD.style.color = colorPalette.D_palette.partyIcon;
+  partyD.style.backgroundColor = '';
+  partyR.style.color = colorPalette.R_palette.partyIcon;
+  partyR.style.backgroundColor = '';
+  partyI.style.color = colorPalette.I_palette.partyIcon;
+  partyI.style.backgroundColor = '';
+
+  partyD.onclick = (evt => onclickPartyLink('D', colorPalette.D_palette.partyIcon));
+  partyR.onclick = (evt => onclickPartyLink('R', colorPalette.R_palette.partyIcon));
+  partyI.onclick = (evt => onclickPartyLink('I', colorPalette.I_palette.partyIcon));
+}
+
 // function shiftCongresses(direction) {
 //     if (direction == "prev") {
 //         let lastIdx = allValuesFilter.congress.indexOf(filter.displayedCongresses[filter.displayedCongresses.length - 1]);
@@ -971,7 +1015,7 @@ function drawPartyIcons(initialize=false){
 //         const newLastIdx = Math.min(allValuesFilter.congress.length, newFirstIdx + numberCongressesDisplayed)
 //         filter.displayedCongresses = allValuesFilter.congress.slice(newFirstIdx, newLastIdx);
 //         filter.congress = filter.displayedCongresses[filter.displayedCongresses.length - 1];
-        
+
 //         if (newLastIdx == allValuesFilter.congress.length)
 //             d3.select('#congress-next').remove();
 
@@ -1063,6 +1107,7 @@ d3.csv("./data/grouped_bills.csv")
         });
         drawPartyIcons(true);
         drawPlots(data);
+        drawPartyLinks();
     });
 
 
