@@ -369,38 +369,19 @@ function onclickBarPlot(plot, filterField, evt) {
 function onclickPartyLink(partyId, onclickColor) {
     console.log('afafs')
     changeFilterField('party', partyId);
-    document.getElementById('party-' + partyId).style.color = 'white';
     document.getElementById('party-' + partyId).style.backgroundColor = onclickColor;
+    document.getElementById('party-' + partyId).style.color = 'black';
 
     allValuesFilter.party.forEach(p => {
         if (p != partyId) {
             let otherParty = document.getElementById('party-' + p);
-            otherParty.style.color = colorPalette.none_color.partyIcon;
+            //otherParty.style.color = ;
             otherParty.style.backgroundColor = '';
         }
     });
 }
 
-function discover() {
-    discover_function()
-    Object.keys(filter).forEach(key => {
-        if (storyFilters[key][discoverStoryNumber] != null) {
-            filter[key] = storyFilters[key][discoverStoryNumber];
-        } else {
-            filter[key] = initialFilter[key];
-        }
-    });
-    drawPlots();
-    d3.select("#discover-text").text(storyFilters.texts[discoverStoryNumber][0])
-        .append("p").text(storyFilters.texts[discoverStoryNumber][1])
-        .append("img")
-        .attr("src", "./img/story_"+discoverStoryNumber+".jpg")
-        .attr("id", "story-image")
-    d3.select("#discover-title").text(storyFilters.titles[discoverStoryNumber]);
-    d3.select('#list-bills').selectAll("*").remove();
-    discoverStoryNumber += 1;
-    discoverStoryNumber = discoverStoryNumber % storyFilters.titles.length;
-}   
+
 
 //////////////////////////////////////////////////////////
 // Plotting functions (TODO: Move to separate files!)
@@ -456,7 +437,8 @@ function drawCongressPlot(data) {
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Year'
+                            labelString: 'Year',
+                            fontStyle : 'bold'
                         }
                     }],
                     yAxes: [{
@@ -467,7 +449,8 @@ function drawCongressPlot(data) {
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Number of Bills'
+                            labelString: 'Number of Bills',
+                            fontStyle : 'bold'
                         }
                     }]
                 },
@@ -578,7 +561,8 @@ function drawMajorPlot(data) {
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Number of Bills'
+                            labelString: 'Number of Bills',
+                            fontStyle : 'bold'
                         }
                     }],
                     yAxes: [{
@@ -594,7 +578,8 @@ function drawMajorPlot(data) {
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: 'Subject'
+                            labelString: 'Subject',
+                            fontStyle : 'bold'
                         }
                     }]
                 },
@@ -929,12 +914,14 @@ function drawList(df){
     var urls = processJoinedArray(urls_joined);
     let x = d3.select('#list-bills').selectAll("*").remove();
     let ul = d3.select('#list-bills').append('ul');
+    d3.select('#bills_list_heading').text('Bills Currently Selected');
     function onClickList(d,i){
         let alt_url = "https://www.congress.gov/search?q=%7B%22source%22%3A%22legislation%22%2C%22search%22%3A%22"+titles[i]+"%22%7D&searchResultViewType=expanded"
         if(urls[i])window.open(urls[i], alt_url);
         else{
             window.open(alt_url);
         }
+
     }
     ul.selectAll('li')
         .data(titles)
@@ -943,11 +930,14 @@ function drawList(df){
         .on("click", onClickList)
         .on("mouseover", function(d){
             d3.select(this).style("background-color", function() {
+
                 return colorPalette[colorPaletteName].barPlotHover;
             });
-        }).on("mouseout", function(d){
+        }).on("mouseout", function(d,i){
+            let color = "#f5f5f5"
+            if(i%2==0)color = "#dcdcdc"
             d3.select(this).style("background-color", function() {
-                return "#f9f9f9";
+                return color;
                 });
             }).html(String);
 }
@@ -955,15 +945,15 @@ function drawList(df){
 function drawPartyLinks(){
     d3.select('#party-D')
         .on("click", () => onclickPartyLink('D', colorPalette.D_palette.partyIcon))
-        .style("color", colorPalette.D_palette.partyIcon)
+        //.style("color", 'black')
         .style("backgroundColor", "");
     d3.select('#party-R')
         .on("click", () => onclickPartyLink('R', colorPalette.R_palette.partyIcon))
-        .style("color", colorPalette.R_palette.partyIcon)
+        //.style("color", colorPalette.R_palette.partyIcon)
         .style("backgroundColor", "");
     d3.select('#party-I')
         .on("click", () => onclickPartyLink('I', colorPalette.I_palette.partyIcon))
-        .style("color", colorPalette.I_palette.partyIcon)
+        //.style("color", colorPalette.I_palette.partyIcon)
         .style("backgroundColor", "");
 }
 
@@ -1038,7 +1028,7 @@ d3.csv("./data/grouped_bills.csv")
         d3.select('#reset-parties').on("click", () => resetFilter('party'));
         d3.select('#reset-states').on("click", () => resetFilter('state'));
         d3.select('#reset-all').on("click", () => resetFilter());
-        d3.select('#discover').on("click", () => discover());
+        d3.select('#discover').on("click", () => discover_function(true));
         uStatePaths.forEach(function(element) {
             statesIDsToNames[element['id']] = element['n']
         });
@@ -1124,9 +1114,28 @@ function update_discover(highlight_, text, filters) {
     if (text) {
         // display the insight
 
-        d3.select("#discover_text").style('opacity', "0")
-            .html('<b>' + text + "</b>").classed("shadow_apply", true)
-            .transition().duration(1000).style('opacity', "1")
+        //d3.select("#discover_text").style('opacity', "0")
+          //  .html('<b>' + text + "</b>").classed("shadow_apply", true)
+            //.transition().duration(1000).style('opacity', "1")
+
+    Object.keys(filter).forEach(key => {
+        if (storyFilters[key][discoverStoryNumber] != null) {
+            filter[key] = storyFilters[key][discoverStoryNumber];
+        } else {
+            filter[key] = initialFilter[key];
+        }
+    });
+    drawPlots();
+    d3.select("#discover-text").text(storyFilters.texts[discoverStoryNumber][0])
+        .append("p").text(storyFilters.texts[discoverStoryNumber][1])
+        .append("img")
+        .attr("src", "./img/story_"+discoverStoryNumber+".jpg")
+        .attr("id", "story-image")
+    d3.select("#discover-title").text(storyFilters.titles[discoverStoryNumber]);
+    d3.select('#list-bills').selectAll("*").remove();
+    d3.select('#bills_list_heading').text('');
+    discoverStoryNumber += 1;
+    discoverStoryNumber = discoverStoryNumber % storyFilters.titles.length;
 
     }
 
@@ -1202,7 +1211,7 @@ function discover_function(show_insight = true) {
                 .style('opacity', '1')
                 .transition().delay(8000)
                 .transition().duration(1000).style('opacity', 0)
-                .each('end', function(e) { d3.select(this).remove() })
+                .on('end', function(e) { d3.select(this).remove() })
         });
     }
 
