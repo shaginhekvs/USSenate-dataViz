@@ -161,9 +161,9 @@ hr {
 .majors-plot {
   margin-left: 5px;
   width: 300px;
-  height: 800px;
+  height: 600px;
   max-width: 400px;
-  min-height: 800px;
+  min-height: 600px;
   font-weight: bold;
 }
 
@@ -347,19 +347,19 @@ button.green{
 
 button.red:hover{
   background-color: #cb181d;
-  color: black;
+  color: white !important;
   font-weight: bold;
 }
 
 button.blue:hover {
   background-color: #2171b5;
-  color: black;
+  color: white !important;
   font-weight: bold;
 }
 
 button.green:hover{
   background-color: #238b45;
-  color: black;
+  color: white !important;
   font-weight: bold;
 }
 /*

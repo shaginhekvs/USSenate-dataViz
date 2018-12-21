@@ -177,7 +177,7 @@ export function discover_function(showInsight=true, initialFilter) {
                 .on('click', function(e) { d3.select(this).remove() })
                 .transition().duration(1000)
                 .style('opacity', '1')
-                .transition().delay(8000)
+                .transition().delay(3000)
                 .transition().duration(1000).style('opacity', 0)
                 .on('end', function(e) { d3.select(this).remove() });
         });
