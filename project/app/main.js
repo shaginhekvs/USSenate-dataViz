@@ -112,18 +112,29 @@ let filter = {
     status: [],
 };
 
-let storyFilters = {
-    congress: ["110","110"],
-    displayedCongresses: [["105","106","107","108","109","110"],
-                          ["108","109","110","111","112","113"]],
-    state: [null, null],
-    party: [null, ["D"]],
-    major: [["Defense"],["Health"]],
-    status: [null, null],
-    titles: ["Defense bills after September 11", "Health related bills introduced by the Democratic Party"],
-    texts: [["The number of bills introduced about topics related to Defense had been decreasing from 1991 but it started increasing again after 2001.", "This period was when the September 11 attacks took place in 2001, and two years later in 2003 the Iraq War started. This increasing tendency continued until 2009."],
-            ["In 2007 both congress houses changed from Republican to Democratic, resulting in an increase of bills introduced by the Democrats.", "This was especially important for Health bills, as the Affordable Care Act ('Obamacare') was signed in 2010. In 2011 the House of Representatives became majorily Republican, decreasing the number of Democratic bills."]]
+const storyFilters = {
+    congress: ["110","110","113"],
+    displayedCongresses: [
+        ["105","106","107","108","109","110"],
+        ["108","109","110","111","112","113"],
+        ["108","109","110","111","112","113"]
+    ],
+    state: [null, null, ['Alaska']],
+    party: [null, ["D"], null],
+    major: [["Defense"],["Health"],["Public Lands", "Energy", "Environment"]],
+    status: [null, null, null],
+    titles: [
+        "Defense bills after September 11",
+        "Health related bills introduced by the Democratic Party",
+        "Public land bills in Alaska"
+    ],
+    texts: [
+        ["The number of bills introduced about topics related to Defense had been decreasing from 1991 but it started increasing again after 2001.", "This period was when the September 11 attacks took place in 2001, and two years later in 2003 the Iraq War started. This increasing tendency continued until 2009."],
+        ["In 2007 both congress houses changed from Republican to Democratic, resulting in an increase of bills introduced by the Democrats.", "This was especially important for Health bills, as the Affordable Care Act ('Obamacare') was signed in 2010. In 2011 the House of Representatives became majorily Republican, decreasing the number of Democratic bills."],
+        ["Policy areas related with Public Lands, Energy and Environment have consistently been in the top five policy areas that congress members representing Alaska have contributed to."], ["There is a large area available in Alaska to be managed and that allow to build energy centrals. There are also many native tribes, and bills related with native settlements are included in the Public Lands policy area."]
+    ]
 };
+
 
 let discoverStoryNumber = 0;
 
@@ -1089,16 +1100,24 @@ const filters_discover = [{
         major: ['Defense'],
         status: null,
         displayedCongresses: ["105","106","107","108","109","110"]        
-        },
-        {
+    },
+    {
         congress: '110',
         state: null,
         party: ['D'],
         major: ['Health'],
         status: null,
         displayedCongresses: ["108","109","110","111","112","113"] 
-
-        }]
+    },
+    {
+        congress: "113",
+        party: null,
+        state: ['Alaska'],
+        major: ["Public Lands", "Energy", "Environment"],
+        status: null,
+        displayedCongresses: ["108","109","110","111","112","113"],        
+    }
+];
 
 
 /*************************************************Functions*********************************************************/
