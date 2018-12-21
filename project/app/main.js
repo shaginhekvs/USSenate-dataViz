@@ -320,7 +320,7 @@ d3.csv("./data/grouped_bills.csv")
         d3.select('#toggle-passed').on("click", () => togglePassed());
         d3.select('#reset-parties').on("click", () => resetFilter('party'));
         d3.select('#reset-states').on("click", () => resetFilter('state'));
-        d3.select('#reset-all').on("click", () => resetFilter());
+        d3.select('#reset-all').on("click", () => {reset_buttons(allValuesFilter,colorPalette),resetFilter()});
         d3.select('#discover').on("click", () => {reset_buttons(allValuesFilter,colorPalette),discover_function(true, initialFilter)});
         uStatePaths.forEach(function(element) {
             statesIDsToNames[element['id']] = element['n']
