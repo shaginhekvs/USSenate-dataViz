@@ -141,7 +141,12 @@ const storyFilters = {
 
 let discoverStoryNumber = 0;
 
-function changeFilterField(field, value) {
+function changeFilterField(field, value,reset=false) {
+    if(reset){
+        filter[field] = initialFilter[field];
+        drawPlots();
+        return;
+    }
     if (field == 'congress') {
         if (yearToCongress[value] != filter.congress) {
             filter.congress = yearToCongress[value];
@@ -699,7 +704,10 @@ const uStatePaths = [
 
         function onclickMap(d){
             changeFilterField('state', d.id);
+            d3.event.stopPropagation();
         }
+
+        d3.select(id).on("click",()=>{changeFilterField('state', 'none',true)})
 
         let paths = d3.select(id)
             .append("g")
