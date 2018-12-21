@@ -44,6 +44,7 @@ function onclickPartyLink(partyId, onclickColor, allValuesFilter) {
         document.getElementById('party-' + partyId).style.color = 'white';
         allValuesFilter.party.forEach(p => {
         if (p != partyId) {
+            buttonStatus[p]=false;
             let otherParty = document.getElementById('party-' + p);
             otherParty.style.color = text_colors[p];
             otherParty.style.backgroundColor = '';
