@@ -405,7 +405,8 @@ button.green:focus{
 }
 
 #story-image{
-  width: 90%;
+  width: 80%;
+  height: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
