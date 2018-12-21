@@ -879,29 +879,30 @@ function showPresident(){
     .text(name)
 
     let pparty = president_party
-    let party = congressData.find(row => row.get('congress') ==  filter['congress']).get('pparty') 
-    if(party=='R')party='Republican'
-    if(party=='D')party='Democrat'
-    party += ' President'
+    let party = congressData.find(row => row.get('congress') ==  filter['congress']).get('pparty');
+    const partyNames = {'R': 'Republican', 'D': 'Democrat'};
+    let partyText = partyNames[party];
+    partyText += ' President'
     div = d3.select("#president_party")
     div.selectAll("*").remove();
     let p = div.append('h4')
-    .text(party)
+        .text(partyText)
+        .style("color", colorPalette[party+"_palette"].partyIcon);
 
     div = d3.select('#house_info')
     party = congressData.find(row => row.get('congress') ==  filter['congress']).get('hmajorityparty') 
     
     let num = congressData.find(row => row.get('congress') ==  filter['congress']).get('hmajoritypercentage') 
-    if(party=='R')party='Republican'
-    if(party=='D')party='Democrat'
-    div.text("HOUSE : "+party+" ( "+num+"% )")
+    partyText = partyNames[party];
+    div.text("HOUSE: "+num+"% "+partyText)
+        .style("color", colorPalette[party+"_palette"].partyIcon);
 
     div = d3.select('#senate_info')
     num = congressData.find(row => row.get('congress') ==  filter['congress']).get('smajoritypercentage') 
     party = congressData.find(row => row.get('congress') ==  filter['congress']).get('smajorityparty') 
-    if(party=='R')party='Republican'
-    if(party=='D')party='Democrat'
-    div.text("SENATE : "+party+" ( "+num+"% )")
+    partyText = partyNames[party];
+    div.text("SENATE: "+num+"% "+partyText)
+        .style("color", colorPalette[party+"_palette"].partyIcon);
 
 
 
