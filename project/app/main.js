@@ -113,7 +113,7 @@ let filter = {
 };
 
 const storyFilters = {
-    congress: ["110","110","113","113"],
+    congress: ["110","110","109","113"],
     displayedCongresses: [
         ["105","106","107","108","109","110"],
         ["108","109","110","111","112","113"],
@@ -389,7 +389,7 @@ function onclickPartyLink(partyId, onclickColor) {
     console.log('afafs')
     changeFilterField('party', partyId);
     document.getElementById('party-' + partyId).style.backgroundColor = onclickColor;
-    document.getElementById('party-' + partyId).style.color = 'black';
+    document.getElementById('party-' + partyId).style.color = 'white';
 
     allValuesFilter.party.forEach(p => {
         if (p != partyId) {
@@ -1303,7 +1303,16 @@ function discover_function(show_insight = true) {
     popup_div.append('div').html(text_spaced).classed('discover-text', 'true')
 
     popup_div.append('div')
+        .text(show_insight ? "Click on Discover for a new fact" : "Use the buttons to show only passed bills or to discover interesting facts")
+        .append('div')
+        .text("Modify the filtering criteria by clicking on the plots")
+        .append('div')
+        .text(show_insight ? "Use the Reset button to go back to the start" : "Click on a bill on the right to learn more about it")
+        .append('div')
+        .text("-")
+        .append('div')
         .text(show_insight ? 'Click anywhere to explore these insights!' : 'Click anywhere to start exploring!')
+   
     popup_div.append('div').transition().duration(1000).style('opacity', 1)
 
 
