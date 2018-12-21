@@ -161,9 +161,9 @@ hr {
 .majors-plot {
   margin-left: 5px;
   width: 300px;
-  height: 100%;
-  max-width: 300px;
-  max-height: 600px;
+  height: 800px;
+  max-width: 400px;
+  min-height: 800px;
   font-weight: bold;
 }
 

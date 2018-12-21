@@ -113,25 +113,28 @@ let filter = {
 };
 
 const storyFilters = {
-    congress: ["110","110","113"],
+    congress: ["110","110","113","113"],
     displayedCongresses: [
         ["105","106","107","108","109","110"],
         ["108","109","110","111","112","113"],
-        ["108","109","110","111","112","113"]
+        ["108","109","110","111","112","113"],
+        ["108","109","110","111","112","113","114","115"]
     ],
-    state: [null, null, ['Alaska']],
-    party: [null, ["D"], null],
-    major: [["Defense"],["Health"],["Public Lands", "Energy", "Environment"]],
-    status: [null, null, null],
+    state: [null, null, ['AK'],null],
+    party: [null, ["D"], null,null],
+    major: [["Defense"],["Health"],["Public Lands", "Energy", "Environment"],["Immigration"]],
+    status: [null, null, null,null],
     titles: [
         "Defense bills after September 11",
         "Health related bills introduced by the Democratic Party",
-        "Public land bills in Alaska"
+        "Public land bills in Alaska",
+        "Immigration bills influx since 2013"
     ],
     texts: [
         ["The number of bills introduced about topics related to Defense had been decreasing from 1991 but it started increasing again after 2001.", "This period was when the September 11 attacks took place in 2001, and two years later in 2003 the Iraq War started. This increasing tendency continued until 2009."],
         ["In 2007 both congress houses changed from Republican to Democratic, resulting in an increase of bills introduced by the Democrats.", "This was especially important for Health bills, as the Affordable Care Act ('Obamacare') was signed in 2010. In 2011 the House of Representatives became majorily Republican, decreasing the number of Democratic bills."],
-        ["Policy areas related with Public Lands, Energy and Environment have consistently been in the top five policy areas that congress members representing Alaska have contributed to."], ["There is a large area available in Alaska to be managed and that allow to build energy centrals. There are also many native tribes, and bills related with native settlements are included in the Public Lands policy area."]
+        ["Policy areas related with Public Lands, Energy and Environment have consistently been in the top five policy areas that congress members representing Alaska have contributed to.","There is a large area available in Alaska to be managed and that allow to build energy centrals. There are also many native tribes, and bills related with native settlements are included in the Public Lands policy area."],
+        ["Immigration bills influx happened since 2013.", "Before 2013 no new bills were introduced to revise immigration policy of US. On June 27, 2013, the United States Senate approved S.744, known as the Border Security, Economic Opportunity, and Immigration Modernization Act of 2013 in a historic 68-to-32 vote."]
     ]
 };
 
@@ -1061,9 +1064,11 @@ let discover_index = 0;
 let highlight = [];
 
 const text_discover = [
-    "The number of bills introduced about topics related to Defense had been decreasing from 1991 but it started increasing again after 2001.", "This period was when the September 11 attacks took place in 2001, and two years later in 2003 the Iraq War started. This increasing tendency continued until 2009.",
-    "In 2007 both congress houses changed from Republican to Democratic, resulting in an increase of bills introduced by the Democrats.", "This was especially important for Health bills, as the Affordable Care Act ('Obamacare') was signed in 2010. In 2011 the House of Representatives became majorily Republican, decreasing the number of Democratic bills.",
-    'Welcome to US Senators Visualization'
+    "Defense Insight.",
+    "HealthCare Insight ",
+    "Alaska Insight",
+    "Immigration Laws Insights",
+    'Welcome to Visualization of Bills in US Congress'
 ]
 
 let dict_key_div = {
@@ -1081,15 +1086,19 @@ let dict_key_div = {
 }
 
 const highlights_discover = [
-    ['evolution','majors'],
-    ['evolution','majors']
+    ['evolution','majors','discover_text'],
+    ['evolution','majors','discover_text'],
+    ['evolution','map','discover_text'],
+    ['evolution','majors','discover_text']
 ]
 
 
 // Determines which text to display in the popups near the highlighted components
 const description_popups = [
-    [true,true],
-    [false,true]
+    [true,true,false],
+    [false,true,false],
+    [true,true,false],
+    [false,false,false]
 ]
 
 // Filters for each insight 
@@ -1112,10 +1121,18 @@ const filters_discover = [{
     {
         congress: "113",
         party: null,
-        state: ['Alaska'],
+        state: ['AK'],
         major: ["Public Lands", "Energy", "Environment"],
         status: null,
         displayedCongresses: ["108","109","110","111","112","113"],        
+    },
+    {
+        congress: "113",
+        party: null,
+        state: null,
+        major: ['Immigration'],
+        status: null,
+        displayedCongresses: ["108","109","110","111","112","113","114","115"],        
     }
 ];
 
@@ -1178,6 +1195,7 @@ function discover_function(show_insight = true) {
         //select an insight and increment its index so we won't have the same one when we click on discover next time
         index = discover_index
         discover_index = (discover_index + 1) % (filters_discover.length)
+        update_discover(highlights_discover[index], text_discover[index], filters_discover[index])
     }
 
 
@@ -1215,7 +1233,12 @@ function discover_function(show_insight = true) {
                 pop_w = popup_node.node().getBoundingClientRect().width
                 x += node_element.x - pop_w
                 y += node_element.y + ((element == 'major') ? node_element.height / 2 : 0)
-            } else {
+            } else if (element == 'discover_text') {
+                pop_w = popup_node.node().getBoundingClientRect().width
+                x += node_element.x - pop_w
+                y += node_element.y + node_element.height / 2
+            }
+            else {
                 pop_w = popup_node.node().getBoundingClientRect().width
                 x += node_element.x + pop_w
                 y += node_element.y + node_element.height / 2
@@ -1286,8 +1309,8 @@ function discover_function(show_insight = true) {
                     .style('filter', 'none')
                     .style('opacity', '1')
                     .style('pointer-events', 'auto')
-                if (show_insight)
-                    update_discover(highlights_discover[index], text_discover[index], filters_discover[index])
+
+                    
                 // reset the onClick function for the HTML body
                 d3.select(this).on('click', () => false)
             })
